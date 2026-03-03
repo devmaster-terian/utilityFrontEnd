@@ -787,7 +787,16 @@ Ext.define('damProspect.view.contMain', {
             console.log('Failure: Prospecto fallo el grado');
         };
 
-        var url = jsTerian.getUrl('prospect/create');
+
+        var endPoint = 'prospect/create';
+        var httpVerb = 'POST';
+
+        if(jsTerian.readElementValue('tfMail') === jsTerian.getDataObjSS('UTM_PROSPECT','email')){
+            var endPoint = 'prospect/update/' + jsTerian.getDataObjSS('UTM_PROSPECT','id_prospect');
+            var httpVerb = 'PUT';
+        }
+
+        var url = jsTerian.getUrl(endPoint);
 
         // Informacion a enviar
         var jsonData = JSON.stringify({
@@ -799,10 +808,11 @@ Ext.define('damProspect.view.contMain', {
             'notes'    : jsTerian.readElementValue('taNote')
         });
 
-        console.info('jsonData:',jsonData);
-        console.info('url:',url);
+        console.info('prospectDave_jsonData:',jsonData);
+        console.info('prospectDave_httpVerb:',httpVerb);
+        console.info('prospectDave_url:',url);
 
-        jsTerian.makeRequest('POST',url, jsonData, fnSuccess, fnFailure, true);
+        jsTerian.makeRequest(httpVerb,url, jsonData, fnSuccess, fnFailure, true);
 
     },
 
@@ -958,8 +968,6 @@ Ext.define('damProspect.view.contMain', {
             'id_prospect'     : pIdProspect
         });
 
-        console.info('jsonData:',jsonData);
-        console.info('url:',url);
 
         jsTerian.makeRequest('GET',url, jsonData, fnSuccess, fnFailure, true);
 
@@ -971,7 +979,7 @@ Ext.define('damProspect.view.contMain', {
         if(id_prospect){
             Ext.getCmp('contMain').prospectDetail(id_prospect);
 
-            Ext.getCmp('btnSaveProspect').hide();
+            //Ext.getCmp('btnSaveProspect').hide();
             Ext.getCmp('btnResetProspect').show();
             Ext.getCmp('btnSendMail').show();
         }
