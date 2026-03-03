@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_dls30kjs",
+        "includeInBundle": true,
+        "url": "../../../../framework/resourcesJS/jsDam.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js2",
+    "designerId": "66b5ef63-68b6-4cd0-9183-2eb8880be640"
+}

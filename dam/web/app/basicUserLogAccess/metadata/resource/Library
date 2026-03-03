@@ -1,0 +1,19 @@
+{
+    "type": "libraryresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "basePath": "../../../../framework/extjs-7.1-modern/build/",
+        "designer|userClassName": "Library"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "libraryRequires": "typedarray",
+        "basePath": "uri"
+    },
+    "name": "Library",
+    "designerId": "bffaa4a9-ee55-4148-b56a-f1f90fb8b216"
+}

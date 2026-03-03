@@ -1,0 +1,221 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "id": "contMain",
+        "itemId": "contMain",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "mixins": "object"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "Ext.Toolbar",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "docked": "top",
+                "id": "toolbarMain",
+                "itemId": "toolbarMain"
+            },
+            "configAlternates": {
+                "docked": "string",
+                "id": "string",
+                "itemId": "string"
+            },
+            "name": "MyToolbar",
+            "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "iconCls": "fas fa-download",
+                        "itemId": "mybutton",
+                        "text": "MyButton"
+                    },
+                    "configAlternates": {
+                        "itemId": "string",
+                        "text": "string",
+                        "iconCls": "string"
+                    },
+                    "name": "MyButton",
+                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onMybuttonTap",
+                                "implHandler": [
+                                    "Ext.Msg.alert(releaseActiva(), 'El mensaje que quieres mostrar', function() {",
+                                    "    console.log('El usuario cerró la alerta');",
+                                    "});"
+                                ],
+                                "name": "tap"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string"
+                            },
+                            "name": "onMybuttonTap",
+                            "designerId": "da1b1c5c-6a2d-424c-b17f-46e6e5c93553"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MySpacer",
+                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "text": "MyButton2"
+                    },
+                    "configAlternates": {
+                        "text": "string"
+                    },
+                    "name": "MyButton2",
+                    "designerId": "5c507b47-a624-4bc1-b56d-545be13cf970"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "name": "MyContainer",
+            "designerId": "cc59ed63-ec4f-4553-a0c4-7a78cc91d01e"
+        },
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "My Form"
+            },
+            "configAlternates": {
+                "title": "string"
+            },
+            "name": "MyFormPanel",
+            "designerId": "7120c5d1-8548-4029-8e74-7b780d912288"
+        }
+    ]
+}
