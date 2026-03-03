@@ -1,0 +1,1087 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "fullscreen": true,
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "hbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "mixins": "object",
+        "fullscreen": "boolean",
+        "layout": "string"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "contPanel",
+                "itemId": "contPanel",
+                "layout": "hbox",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer2",
+            "designerId": "45fb7982-6b9d-456c-b29f-b187c9aa4f11",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contUser",
+                        "itemId": "contUser",
+                        "layout": "card",
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyContainer3",
+                    "designerId": "c8245e9e-42c2-4afb-861d-6e04fd6f6497",
+                    "cn": [
+                        {
+                            "type": "Ext.Toolbar",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": "top",
+                                "id": "toolbarMain",
+                                "itemId": "toolbarMain"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyToolbar",
+                            "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "confirm",
+                                        "iconCls": "fas fa-plus",
+                                        "id": "btnCreate",
+                                        "itemId": "btnCreate",
+                                        "text": "Agregar",
+                                        "ui": "confirm"
+                                    },
+                                    "configAlternates": {
+                                        "itemId": "string",
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    ""
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|params": "typedarray",
+                                                "fn": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "handler",
+                                            "designerId": "d69be8b6-adca-408f-b2ee-26460801e11a"
+                                        },
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnCreateTap",
+                                                "implHandler": [
+                                                    "/*",
+                                                    "// Buscas el contenedor padre",
+                                                    "var contUser    = Ext.getCmp('contUser'); // Asegúrate de tener reference='contResource'",
+                                                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                                                    "",
+                                                    "// Cambias a la vista del formulario (que es el item 1)",
+                                                    "// La animación 'slide' hará que parezca que entras a una nueva página",
+                                                    "contUser.setActiveItem(1);",
+                                                    "toolbarMain.hide();",
+                                                    "*/",
+                                                    "var form = Ext.getCmp(\"formUser\");",
+                                                    "form.isCreate = true;",
+                                                    "",
+                                                    "this.showForm();"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnCreateTap",
+                                            "designerId": "4a2df9c0-3254-4653-9d05-6fa860fa817d"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "decline",
+                                        "iconCls": "fas fa-trash",
+                                        "id": "btnDelete",
+                                        "itemId": "btnDelete",
+                                        "text": "Eliminar",
+                                        "ui": "decline"
+                                    },
+                                    "configAlternates": {
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton2",
+                                    "designerId": "5c507b47-a624-4bc1-b56d-545be13cf970",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    ""
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|params": "typedarray",
+                                                "fn": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "handler",
+                                            "designerId": "2fd5c927-a7a0-4e91-8b38-497c2dd2b2a6"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MySpacer",
+                                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "contListUser",
+                                "itemId": "contListUser",
+                                "scrollable": true
+                            },
+                            "configAlternates": {
+                                "id": "string",
+                                "itemId": "string",
+                                "scrollable": "auto"
+                            },
+                            "name": "MyContainer",
+                            "designerId": "cc59ed63-ec4f-4553-a0c4-7a78cc91d01e",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "html": "<div class=\"resource-row header-style\">         <div class=\"col-desc\">USUARIO</div>    <div class=\"col-code\">CÓDIGO</div>  <div class=\"col-actions\">ACCIONES</div> </div>",
+                                        "id": "contHeaderUser",
+                                        "itemId": "contHeaderUser"
+                                    },
+                                    "configAlternates": {
+                                        "html": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer1",
+                                    "designerId": "4a30f364-50f2-4ba3-b981-edf264738e90"
+                                },
+                                {
+                                    "type": "Ext.dataview.DataView",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "dataViewUser",
+                                        "itemId": "dataViewUser",
+                                        "store": "storeUser"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "store": "store"
+                                    },
+                                    "name": "MyDataView",
+                                    "designerId": "4c461bb6-7a1d-42ee-a892-f8f2158b9661",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.XTemplate",
+                                            "reference": {
+                                                "name": "itemTpl",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": "itemTpl",
+                                                "implHandler": [
+                                                    "<div class=\"resource-row {[values.is_active ? '' : 'user-inactive']}\">",
+                                                    "    ",
+                                                    "    <div class=\"col-desc\">",
+                                                    "        <div class=\"main-text text-bold\">",
+                                                    "            <span class=\" status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                    "            {first_name} {paternal_last_name} {maternal_last_name}",
+                                                    "        </div>",
+                                                    "        <div class=\"sub-text\">",
+                                                    "            <i class=\"x-fa fas fa-envelope tiny-icon\"></i> {email} <br>",
+                                                    "            <i class=\"x-fa fas fa-phone tiny-icon\"></i> {phone}",
+                                                    "        </div>",
+                                                    "    </div>",
+                                                    "    <div class=\"col-code\">",
+                                                    "        <div class=\"text-bold\">{cat_role.role_name}</div>",
+                                                    "        <div class=\"role-badge\">UserId: {id_user}</div>",
+                                                    "    </div>",
+                                                    "    ",
+                                                    "",
+                                                    "    <div class=\"col-actions\">",
+                                                    "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
+                                                    "            <i class=\"x-fa fas fa-eye\"></i>",
+                                                    "        </div>",
+                                                    "        ",
+                                                    "        <div class=\"action-btn edit\" data-action=\"edit\" title=\"Editar Usuario\">",
+                                                    "            <i class=\"x-fa fas fa-pen\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <!--",
+                                                    "        <div class=\"action-btn email\" data-action=\"email\" title=\"Enviar Correo\">",
+                                                    "            <i class=\"x-fa fas fa-envelope\"></i>",
+                                                    "        </div>",
+                                                    "        -->",
+                                                    "",
+                                                    "        <!--",
+                                                    "        <div class=\"action-btn whatsapp\" data-action=\"whatsapp\" title=\"Contactar por WhatsApp\">",
+                                                    "            <i class=\"x-fa fas fa-whatsapp\"></i>",
+                                                    "        </div>",
+                                                    "        -->",
+                                                    "        ",
+                                                    "",
+                                                    "        <div class=\"action-btn delete\" data-action=\"delete\" title=\"Desactivar/Borrar\">",
+                                                    "            <i class=\"x-fa fas fa-trash\"></i>",
+                                                    "        </div>",
+                                                    "    </div>",
+                                                    "</div>"
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|displayName": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "itemTpl",
+                                            "designerId": "a0bebdcd-8217-417f-8ed7-fd00ebd20e06"
+                                        },
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onDataViewUserChildtap",
+                                                "implHandler": [
+                                                    "// 1. Detectar si el toque fue en un botón de acción",
+                                                    "    // Buscamos la clase '.action-btn' en el elemento tocado o sus padres",
+                                                    "    var btn = location.event.getTarget('.action-btn');",
+                                                    "",
+                                                    "    if (btn) {",
+                                                    "        // 2. Extraer la acción y el registro",
+                                                    "        var action = btn.getAttribute('data-action');",
+                                                    "        var record = location.record.data;",
+                                                    "",
+                                                    "        // Detenemos la propagación para que no seleccione la fila al tocar el botón",
+                                                    "        location.event.stopEvent();",
+                                                    "",
+                                                    "        // 3. Switch Maestro de Acciones",
+                                                    "        switch (action) {",
+                                                    "            case 'view':",
+                                                    "                console.warn('Tap: view');",
+                                                    "                var form = Ext.getCmp(\"formUser\");",
+                                                    "                form.isCreate = false;",
+                                                    "                form.userRecord = record;",
+                                                    "                this.showForm();",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'edit':",
+                                                    "                console.warn('Tap: view');",
+                                                    "                var form = Ext.getCmp(\"formUser\");",
+                                                    "                form.isCreate = false;",
+                                                    "                form.userRecord = record;",
+                                                    "                this.showForm();",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'download':",
+                                                    "                console.warn('Tap: download');",
+                                                    "                this.downloadFile(record);",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'email':",
+                                                    "                console.warn('Tap: email');",
+                                                    "                this.sendByEmail(record);",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'whatsapp':",
+                                                    "                console.warn('Tap: whatsapp');",
+                                                    "                this.sendToWhatsApp(record);",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'attach':",
+                                                    "                console.warn('Tap: attach');",
+                                                    "                this.copyLinkToClipboard(record);",
+                                                    "                break;",
+                                                    "            case 'delete':",
+                                                    "                var idUser = record.id_user;",
+                                                    "                appLocal.deleteUser(record);",
+                                                    "                break;",
+                                                    "",
+                                                    "            default:",
+                                                    "                console.info('Action not identified');",
+                                                    "",
+                                                    "        }",
+                                                    "    }"
+                                                ],
+                                                "name": "childtap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onDataViewUserChildtap",
+                                            "designerId": "4cf44224-a443-4e25-98a3-debcd3df726a"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "formUser",
+                                "isCreate": true,
+                                "itemId": "formUser",
+                                "title": "Crear  Usuario"
+                            },
+                            "configAlternates": {
+                                "title": "string",
+                                "isCreate": "boolean",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyFormPanel",
+                            "designerId": "7120c5d1-8548-4029-8e74-7b780d912288",
+                            "customConfigs": [
+                                {
+                                    "group": "(Custom Properties)",
+                                    "name": "isCreate",
+                                    "type": "string"
+                                }
+                            ],
+                            "cn": [
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ftUserEmail",
+                                        "itemId": "ftUserEmail",
+                                        "label": "Email",
+                                        "margin": 8
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField",
+                                    "designerId": "75b1fd2f-3a01-4f76-b91f-f91ccc532bad"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ftUserPassword",
+                                        "inputType": "password",
+                                        "itemId": "ftUserPassword",
+                                        "label": "Password",
+                                        "margin": 8
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "inputType": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField1",
+                                    "designerId": "96e43bbb-b9bf-4761-9c16-2429db2f2a24"
+                                },
+                                {
+                                    "type": "Ext.field.ComboBox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "displayField": "name",
+                                        "editable": false,
+                                        "id": "cboUserRole",
+                                        "itemId": "cboUserRole",
+                                        "label": "Role",
+                                        "margin": 8,
+                                        "store": "storeRole",
+                                        "valueField": "code"
+                                    },
+                                    "configAlternates": {
+                                        "displayField": "datafield",
+                                        "editable": "boolean",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto",
+                                        "store": "store",
+                                        "valueField": "datafield"
+                                    },
+                                    "name": "MyComboBox",
+                                    "designerId": "7e28ae8d-2af4-419e-8f81-cdbce316828c"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ftUserFirstName",
+                                        "itemId": "ftUserFirstName",
+                                        "label": "Nombre",
+                                        "margin": 8
+                                    },
+                                    "configAlternates": {
+                                        "label": "string",
+                                        "margin": "auto",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyTextField2",
+                                    "designerId": "e35b76c1-5809-4cf4-80e3-daaf8ebd0b09"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ftUserPLastName",
+                                        "itemId": "ftUserPLastName",
+                                        "label": "Ape. Paterno",
+                                        "margin": 8
+                                    },
+                                    "configAlternates": {
+                                        "label": "string",
+                                        "margin": "auto",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyTextField3",
+                                    "designerId": "fb28e7c7-0172-46b6-879d-b232c0ebdf48"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ftUserMLastName",
+                                        "itemId": "ftUserMLastName",
+                                        "label": "Ape. Materno",
+                                        "margin": 8
+                                    },
+                                    "configAlternates": {
+                                        "label": "string",
+                                        "margin": "auto",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyTextField4",
+                                    "designerId": "dc7fa868-cba7-4d2a-bfc1-46680ba540ab"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ftUserPhone",
+                                        "itemId": "ftUserPhone",
+                                        "label": "Telefono",
+                                        "margin": 8
+                                    },
+                                    "configAlternates": {
+                                        "label": "string",
+                                        "margin": "auto",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyTextField5",
+                                    "designerId": "30ba0cc9-d262-4022-a1dd-dd29ec2f4a4d"
+                                },
+                                {
+                                    "type": "Ext.Toolbar",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "docked": "top"
+                                    },
+                                    "configAlternates": {
+                                        "docked": "string"
+                                    },
+                                    "name": "MyToolbar1",
+                                    "designerId": "735aab8a-fe40-4a3d-bf9f-44cfaa2a6874",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "confirm",
+                                                "id": "btnConfirm",
+                                                "itemId": "btnConfirm",
+                                                "text": "Confirmar",
+                                                "ui": "confirm"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton3",
+                                            "designerId": "e48bb92c-889d-409d-bc96-b50bfa63437d",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnConfirmTap",
+                                                        "implHandler": [
+                                                            "var email = jsTerian.readElementValue(\"ftUserEmail\");",
+                                                            "var contMain = Ext.getCmp('contMain');",
+                                                            "",
+                                                            "var payload = contMain.buildPayload();",
+                                                            "",
+                                                            "appLocal.createUser(payload);"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnConfirmTap",
+                                                    "designerId": "250c4940-322e-4eb4-a7b7-b8138a5238f8"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.Spacer",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "name": "MySpacer1",
+                                            "designerId": "b0648872-49eb-46fa-9b32-02f417dd3266"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "decline",
+                                                "id": "btnCancel",
+                                                "itemId": "btnCancel",
+                                                "text": "Cancelar",
+                                                "ui": "decline"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton4",
+                                            "designerId": "355980be-3499-40fe-aa98-b19074caf8da",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnCancelTap",
+                                                        "implHandler": [
+                                                            "var contUser    = Ext.getCmp('contUser');",
+                                                            "var toolbarMain = Ext.getCmp('toolbarMain');",
+                                                            "",
+                                                            "contUser.setActiveItem(0);",
+                                                            "toolbarMain.show();",
+                                                            "",
+                                                            "this.cleanForm();"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnCancelTap",
+                                                    "designerId": "e9fa8669-1fff-437f-8f0e-a5439f3cc298"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainBeforeShow",
+                "implHandler": [
+                    "jsTerian.loadStore('storeUser');",
+                    "jsTerian.loadStore('storeRole');"
+                ],
+                "name": "beforeshow"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainBeforeShow",
+            "designerId": "679799e3-69ad-437c-a9ad-12a6220ab572"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "buildPayload",
+                "implHandler": [
+                    "var form = Ext.getCmp('formUser');",
+                    "var record = form.userRecord;",
+                    "",
+                    "console.log('record-user:',record);",
+                    "",
+                    "if (record){",
+                    "    id_user = record.id_user;",
+                    "}",
+                    "else{",
+                    "    id_user = null;",
+                    "}",
+                    "",
+                    "// Genera un 'diccionario' para enviar los datos del user",
+                    "const payload = {",
+                    "    id_user           : id_user || null,",
+                    "    email             : jsTerian.readElementValue(\"ftUserEmail\"),",
+                    "    password          : jsTerian.readElementValue(\"ftUserPassword\"),",
+                    "    role_code         : jsTerian.readElementValue(\"cboUserRole\"),",
+                    "    first_name        : jsTerian.readElementValue(\"ftUserFirstName\"),",
+                    "    paternal_last_name: jsTerian.readElementValue(\"ftUserPLastName\"),",
+                    "    maternal_last_name: jsTerian.readElementValue(\"ftUserMLastName\"),",
+                    "    phone             : jsTerian.readElementValue(\"ftUserPhone\"),",
+                    "};",
+                    "",
+                    "if (payload.password === null || String(payload.password).trim() === '') {",
+                    "    delete payload.password;",
+                    "}",
+                    "",
+                    "return payload;"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "buildPayload",
+            "designerId": "5b952bf0-222b-47fa-8c20-eda66349ac87"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "record"
+                ],
+                "fn": "showUser",
+                "implHandler": [
+                    "console.log(record);",
+                    "",
+                    "// Suspender los eventos del formulario para traer toda la información",
+                    "try {",
+                    "    // Proceso para mapear los datos",
+                    "    const mapping = {",
+                    "        ftUserEmail    : record.email,",
+                    "        //ftUserPassword : record.id_so_status,",
+                    "        cboUserRole    : record.role_code,",
+                    "        ftUserFirstName: record.first_name,",
+                    "        ftUserPLastName: record.paternal_last_name,",
+                    "        ftUserMLastName: record.maternal_last_name,",
+                    "        ftUserPhone    : record.phone,",
+                    "        //ftSOCreated           : `${d.created_by} - ${dateOnly(d.created_at)}`,",
+                    "        //ftSOUpdated           : `${d.updated_by || ''} - ${dateOnly(d.updated_at)}`",
+                    "    };",
+                    "    Ext.Object.each(mapping, function(field, value){",
+                    "        jsTerian.assignElementValue(field, value);",
+                    "    });",
+                    "",
+                    "    // Punto para cargar el store",
+                    "}",
+                    "finally {",
+                    "",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "showUser",
+            "designerId": "fff9b89d-f4e6-4e5a-aad5-2777fc0da559"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showForm",
+                "implHandler": [
+                    "var contUser    = Ext.getCmp('contUser');",
+                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "",
+                    "// Obtener el form y la propiedad isCreate",
+                    "var form = Ext.getCmp(\"formUser\");",
+                    "var isCreate = form.isCreate;",
+                    "var record = form.userRecord;",
+                    "",
+                    "contUser.setActiveItem(1);",
+                    "toolbarMain.hide();",
+                    "",
+                    "if (isCreate) {",
+                    "    console.log('create');",
+                    "    Ext.getCmp('ftUserPassword').setHidden(false);",
+                    "} else {",
+                    "    Ext.getCmp('ftUserPassword').setHidden(true);",
+                    "    console.log('update');",
+                    "    this.showUser(record);",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "showForm",
+            "designerId": "8baa90d4-bc16-45de-8d38-97e296d32bf8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showDataView",
+                "implHandler": [
+                    "var contUser    = Ext.getCmp('contUser');",
+                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "",
+                    "contUser.setActiveItem(0);",
+                    "toolbarMain.show();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "showDataView",
+            "designerId": "9b5daa93-699f-4f27-af06-5119517d6d8c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "cleanForm",
+                "implHandler": [
+                    "try {",
+                    "    // Proceso para mapear los datos",
+                    "    const mapping = {",
+                    "        ftUserEmail    : '',",
+                    "        ftUserPassword : '',",
+                    "        cboUserRole    : '',",
+                    "        ftUserFirstName: '',",
+                    "        ftUserPLastName: '',",
+                    "        ftUserMLastName: '',",
+                    "        ftUserPhone    : '',",
+                    "        //ftSOCreated           : `${d.created_by} - ${dateOnly(d.created_at)}`,",
+                    "        //ftSOUpdated           : `${d.updated_by || ''} - ${dateOnly(d.updated_at)}`",
+                    "    };",
+                    "    Ext.Object.each(mapping, function(field, value){",
+                    "        jsTerian.assignElementValue(field, value);",
+                    "    });",
+                    "",
+                    "    // Punto para cargar el store",
+                    "}",
+                    "finally {",
+                    "    var form = Ext.getCmp(\"formUser\");",
+                    "    form.isCreate = true;",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "cleanForm",
+            "designerId": "8a23f7bd-0172-4f39-9cdb-7bddb5926cc9"
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+
+"D:\WebServerCpx\webapps\copamex\framework\recursosCSS\formatoForm.css "
+"D:\WebServerCpx\webapps\copamex\framework\recursosCSS\formatoImg.css "
+"D:\WebServerCpx\webapps\copamex\framework\recursosCSS\list.txt"

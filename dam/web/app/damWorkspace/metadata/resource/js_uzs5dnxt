@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_uzs5dnxt",
+        "includeInBundle": true,
+        "url": "ext-locale-es.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js4",
+    "designerId": "7ed86e8f-852f-452d-89ca-549acc8577bd"
+}

@@ -1,0 +1,13 @@
+.btn-Agregar {
+    background: #EDD70C !important;
+    border-color: #EDD70C !important;
+}
+
+
+.btn-Agregar .x-btn-inner {
+    color:#ff0000 !important;
+}
+
+.btn-Agregar .x-btn-inner:hover {
+    color:#070707 !important;
+}

@@ -1,0 +1,210 @@
+[
+  {
+    "text": "SISTEMA",
+    "iconCls": "fa-solid fa-cube",
+    "expanded": false,
+    "leaf": false,
+    "children": [
+      {
+        "text": "Rol de Usuario",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "sistema-roles",
+        "appUrl": ""
+      },
+      {
+        "text": "Usuario",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "sistema-usuarios",
+        "appUrl": "../basicUser/"
+      },
+      {
+        "text": "Menú",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "sistema-menu",
+        "appUrl": ""
+      },
+      {
+        "text": "Coleccion",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "sistema-coleccion",
+        "appUrl": ""
+      }
+    ]
+  },
+  {
+    "text": "CAPITAL HUMANO",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "capitalhumano-main",
+    "appUrl": ""
+  },
+  {
+    "text": "COMERCIAL",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "comercial-main",
+    "appUrl": ""
+  },
+  {
+    "text": "CONTABILIDAD",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "contabilidad-main",
+    "appUrl": ""
+  },
+  {
+    "text": "CREDITO Y COBRANZA",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "credito-main",
+    "appUrl": ""
+  },
+  {
+    "text": "INVENTARIO",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "inventario-main",
+    "appUrl": ""
+  },
+  {
+    "text": "LEGAL",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "legal-main",
+    "appUrl": ""
+  },
+  {
+    "text": "LOGISTICA",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "logistica-main",
+    "appUrl": ""
+  },
+  {
+    "text": "MARKETING",
+    "iconCls": "fa-solid fa-cube",
+    "expanded": true,
+    "leaf": false,
+    "children": [
+      {
+        "text": "DIGITAL",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "marketing-digital",
+        "appUrl": ""
+      },
+      {
+        "text": "LOGOS",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "marketing-logos",
+        "appUrl": ""
+      },
+      {
+        "text": "MARKET SHARE",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "marketing-share",
+        "appUrl": ""
+      },
+      {
+        "text": "PRODUCTOS",
+        "iconCls": "fa-solid fa-layer-group",
+        "expanded": false,
+        "leaf": false,
+        "children": [
+          {
+            "text": "CAJA REFRIGERADA",
+            "iconCls": "fa-solid fa-file",
+            "leaf": true,
+            "viewType": "marketing-share",
+            "appUrl": "../damResource/"
+          },
+          {
+            "text": "CAJA SECA",
+            "iconCls": "fa-solid fa-file",
+            "expanded": false,
+            "leaf": false,
+            "children": [
+              {
+                "text": "IMAGENES",
+                "iconCls": "fa-solid fa-file",
+                "leaf": true,
+                "viewType": "seca-imagenes",
+                "appUrl": ""
+              },
+              {
+                "text": "TBR",
+                "iconCls": "fa-solid fa-file",
+                "leaf": true,
+                "viewType": "seca-tbr",
+                "appUrl": ""
+              },
+              {
+                "text": "VIDEOS",
+                "iconCls": "fa-solid fa-file",
+                "leaf": true,
+                "viewType": "seca-videos",
+                "appUrl": ""
+              }
+            ]
+          },
+          {
+            "text": "CARGOBULLS",
+            "iconCls": "fa-solid fa-file",
+            "leaf": true,
+            "viewType": "cargobull-main",
+            "appUrl": "../basicTemplate/"
+          },
+          {
+            "text": "SEMINUEVAS",
+            "expanded": false,
+            "iconCls": "fa-solid fa-file",
+            "leaf": false,
+            "children": [
+              {
+                "text": "2016",
+                "iconCls": "fa-solid fa-file",
+                "leaf": true,
+                "viewType": "semi-2016",
+                "appUrl": ""
+              },
+              {
+                "text": "2017",
+                "iconCls": "fa-solid fa-file",
+                "leaf": true,
+                "viewType": "semi-2017",
+                "appUrl": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "text": "TEMPLATES",
+        "iconCls": "fa-solid fa-layer-group",
+        "leaf": true,
+        "viewType": "marketing-templates",
+        "appUrl": ""
+      }
+    ]
+  },
+  {
+    "text": "POLITICAS",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "politicas-view",
+    "appUrl": ""
+  },
+  {
+    "text": "SALESFORCE",
+    "iconCls": "fa-solid fa-cube",
+    "leaf": true,
+    "viewType": "salesforce-view",
+    "appUrl": ""
+  }
+]

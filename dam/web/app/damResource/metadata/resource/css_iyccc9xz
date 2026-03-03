@@ -1,0 +1,20 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_iyccc9xz",
+        "id": "fontawesome-free-7.1.0-web",
+        "url": "../../../../framework/plugins/fontawesome-free-7.1.0-web/css/all.min.css"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "id": "string",
+        "url": "uri"
+    },
+    "name": "css1",
+    "designerId": "c83f5619-e093-4e4b-a6a9-dd2d6f4f861a"
+}

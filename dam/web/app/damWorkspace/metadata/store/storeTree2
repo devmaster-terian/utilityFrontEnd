@@ -1,0 +1,136 @@
+{
+    "type": "Ext.data.TreeStore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "defaultRootText": "root",
+        "designer|userClassName": "storeTree2",
+        "root": [
+            "{",
+            "    id: 'root',",
+            "    text: 'ROOT',",
+            "    expanded: true",
+            "}"
+        ],
+        "storeId": "storeTree2"
+    },
+    "configAlternates": {
+        "defaultRootText": "string",
+        "designer|userClassName": "string",
+        "root": "object",
+        "storeId": "string"
+    },
+    "name": "MyTreeStore",
+    "designerId": "ce00830e-0b4e-42dc-b638-2caa03398207",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy1",
+            "designerId": "b0131d8f-bc53-49b5-8086-9dd5894a9f70",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "children"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader1",
+                    "designerId": "09c26873-dab3-4017-9cd1-9658cad6c607"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLoad",
+                "implHandler": [
+                    "if(!operation){",
+                    "    return;",
+                    "}",
+                    "",
+                    "// Obtener el nodo",
+                    "var node = operation.node;",
+                    "",
+                    "// Obtener el id",
+                    "var id = node ? node.id : 'root';",
+                    "",
+                    "var url = (id === 'root') ? jsTerian.getUrl('tree/root') : jsTerian.getUrl('tree/children') + '/' + encodeURIComponent(id);",
+                    "",
+                    "store.getProxy().setUrl(url);",
+                    "jsTerian.addAuthorizationHeader(store);"
+                ],
+                "name": "beforeload"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "5810ff6f-6463-4d68-9a04-08a039ef0946"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTreeStoreLoad",
+                "implHandler": [
+                    "// Solo ejecutamos si la carga fue exitosa",
+                    "    if (successful) {",
+                    "        var root = treestore.getRoot();",
+                    "        ",
+                    "        if (root) {",
+                    "            // OPCIÓN A: Expandir TODO el árbol (recursivo)",
+                    "            // Útil si el menú no es gigante.",
+                    "            /*",
+                    "            root.cascadeBy(function(node) {",
+                    "                // expand() marca el nodo como expanded:true y notifica a la vista",
+                    "                node.expand(); ",
+                    "            });",
+                    "            */",
+                    "",
+                    "            // OPCIÓN B: Expandir solo el PRIMER nivel (Hijos directos de la raíz)",
+                    "            // Descomenta esto si prefieres la Opción B y comenta la A",
+                    "            root.expand(); // Expande la raíz invisible para mostrar los primeros hijos",
+                    "            root.eachChild(function(node) {",
+                    "                node.expand(); // Expande los hijos de primer nivel",
+                    "            });",
+                    "        }",
+                    "    }"
+                ],
+                "name": "load"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onTreeStoreLoad",
+            "designerId": "56cfb081-f7e9-465c-bebf-3a45cfd42f02"
+        }
+    ]
+}

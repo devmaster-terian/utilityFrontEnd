@@ -1,0 +1,1698 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "vbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "mixins": "object",
+        "layout": "string"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|animation": "slide",
+                "container|animation.duration": 150,
+                "id": "contProspect",
+                "itemId": "contProspect",
+                "layout": "card",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "container|animation": "auto",
+                "container|animation.duration": "number",
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer",
+            "designerId": "cc59ed63-ec4f-4553-a0c4-7a78cc91d01e",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contProspectData"
+                    },
+                    "configAlternates": {
+                        "id": "string"
+                    },
+                    "name": "MyContainer4",
+                    "designerId": "b9db8200-2dc7-4c05-a61e-6868f940b9c7",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "formProspect",
+                                "itemId": "formProspect"
+                            },
+                            "configAlternates": {
+                                "title": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyFormPanel",
+                            "designerId": "7120c5d1-8548-4029-8e74-7b780d912288",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "contName",
+                                        "itemId": "contName",
+                                        "layout": "hbox"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "layout": "string"
+                                    },
+                                    "name": "MyContainer3",
+                                    "designerId": "a50b532f-661f-4644-acc9-166c46f37837",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "tfName",
+                                                "itemId": "tfName",
+                                                "label": "Nombre",
+                                                "layout|flex": 1,
+                                                "margin": "7 7 0 7"
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "layout|flex": "number",
+                                                "margin": "auto"
+                                            },
+                                            "name": "MyTextField",
+                                            "designerId": "840f735e-564a-403e-8bf2-997a97a6b079"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "action",
+                                                "iconCls": "fas fa-search",
+                                                "id": "btnSearch",
+                                                "itemId": "btnSearch",
+                                                "margin": "7 7 0 7",
+                                                "ui": "action"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "iconCls": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "margin": "auto",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton1",
+                                            "designerId": "b921dbcc-cb26-4559-9862-97bdd8b2cd87",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnSearchTap",
+                                                        "implHandler": [
+                                                            "// 1. Buscamos al contenedor padre (el que tiene el layout card)",
+                                                            "// Usamos .up() que busca hacia arriba en el árbol de componentes",
+                                                            "var contenedorPadre = button.up('#contProspect');",
+                                                            "",
+                                                            "// 2. Le ordenamos al padre que cambie la \"tarjeta\" activa al contenedor 2",
+                                                            "contenedorPadre.setActiveItem('#contProspectSearch');",
+                                                            "jsTerian.loadStore('storeProspect');"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnSearchTap",
+                                                    "designerId": "68cdb30e-2de8-4cfe-b73d-f6cac9e394c3"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tfJobTitle",
+                                        "itemId": "tfJobTitle",
+                                        "label": "Cargo",
+                                        "margin": "7 7 0 7"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField4",
+                                    "designerId": "38965fe5-d368-4df8-b29c-d4f287568272"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tfCompany",
+                                        "itemId": "tfCompany",
+                                        "label": "Empresa",
+                                        "margin": "7 7 0 7"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField1",
+                                    "designerId": "3c0cffd0-03bc-4173-a717-4315beaac960"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tfMail",
+                                        "itemId": "tfMail",
+                                        "label": "Correo",
+                                        "margin": "7 7 0 7"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField2",
+                                    "designerId": "f03bacb6-0704-4b04-baba-e78b49cab353"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tfTelephone",
+                                        "itemId": "tfTelephone",
+                                        "label": "Telefono",
+                                        "margin": "7 7 0 7"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextField3",
+                                    "designerId": "e2be32d3-b7cc-420e-9394-c57df3ec0173"
+                                },
+                                {
+                                    "type": "Ext.field.TextArea",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "taNote",
+                                        "itemId": "taNote",
+                                        "label": "Mensaje",
+                                        "margin": "7 7 7 7"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyTextArea",
+                                    "designerId": "8ec38695-3e38-4441-830e-d1990c145a65"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "contFiles",
+                                "itemId": "contFiles",
+                                "layout": "vbox",
+                                "margin": "7 0 0 0"
+                            },
+                            "configAlternates": {
+                                "id": "string",
+                                "itemId": "string",
+                                "layout": "string",
+                                "margin": "auto"
+                            },
+                            "name": "MyContainer1",
+                            "designerId": "3c66aa82-d392-4aad-b953-4b5bc7e7b82e",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "html": "<div class=\"resource-row header-style\"> <div class=\"col-asset-name\">ARCHIVO</div> <div class=\"col-asset-data\">TIPO</div> <div class=\"col-actions\">ACCIONES</div> </div>",
+                                        "id": "contFilesHeader",
+                                        "itemId": "contFilesHeader"
+                                    },
+                                    "configAlternates": {
+                                        "html": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer2",
+                                    "designerId": "892f5db2-741c-466d-8c2d-4f2e1a07ce76"
+                                },
+                                {
+                                    "type": "Ext.dataview.DataView",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "dataViewAssets",
+                                        "itemId": "dataViewAssets",
+                                        "layout|flex": 1,
+                                        "store": "storeAsset"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "store": "store",
+                                        "layout|flex": "number"
+                                    },
+                                    "name": "MyDataView",
+                                    "designerId": "1872aa7d-c96b-4771-83b7-49d78d66c46a",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.XTemplate",
+                                            "reference": {
+                                                "name": "itemTpl",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": "itemTpl",
+                                                "implHandler": [
+                                                    "<div class=\"resource-row {[values.is_active ? '' : 'asset-inactive']}\">",
+                                                    "",
+                                                    "    <div class=\"col-asset-name\">",
+                                                    "        <div class=\"role-badge\">{original_filename}</div>",
+                                                    "        <div class=\"col-badge\">{file_size}</div>",
+                                                    "    </div>",
+                                                    "",
+                                                    "",
+                                                    "    ",
+                                                    "    <div class=\"col-asset-data\">",
+                                                    "        <div class=\"role-badge\">{file_type}</div>",
+                                                    "    </div>",
+                                                    "    ",
+                                                    "",
+                                                    "    <div class=\"col-actions\">",
+                                                    "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
+                                                    "            <i class=\"x-fa fas fa-eye\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"action-btn delete\" data-action=\"delete\" title=\"Desactivar/Borrar\">",
+                                                    "            <i class=\"x-fa fas fa-trash\"></i>",
+                                                    "        </div>",
+                                                    "        ",
+                                                    "        <!--",
+                                                    "",
+                                                    "        <div class=\"action-btn download\" data-action=\"download\" title=\"Descargar\">",
+                                                    "            <i class=\"x-fa fas fa-download\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "",
+                                                    "        <div class=\"action-btn edit\" data-action=\"edit\" title=\"Editar Usuario\">",
+                                                    "            <i class=\"x-fa fas fa-pen\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"action-btn email\" data-action=\"email\" title=\"Enviar Correo\">",
+                                                    "            <i class=\"x-fa fas fa-envelope\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"action-btn whatsapp\" data-action=\"whatsapp\" title=\"Contactar por WhatsApp\">",
+                                                    "            <i class=\"x-fa fab fa-whatsapp\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        -->",
+                                                    "",
+                                                    "    </div>",
+                                                    "</div>"
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|displayName": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "itemTpl",
+                                            "designerId": "3a5a3b40-ef3e-4d87-93e4-f199b351c484"
+                                        },
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onDataViewAssetsChildtap",
+                                                "implHandler": [
+                                                    "// 1. Detectar si el toque fue en un botón de acción",
+                                                    "// Buscamos la clase '.action-btn' en el elemento tocado o sus padres",
+                                                    "var btn = location.event.getTarget('.action-btn');",
+                                                    "",
+                                                    "if (btn) {",
+                                                    "    // 2. Extraer la acción y el registro",
+                                                    "    var action = btn.getAttribute('data-action');",
+                                                    "    var record = location.record;",
+                                                    "",
+                                                    "    // Detenemos la propagación para que no seleccione la fila al tocar el botón",
+                                                    "    location.event.stopEvent();",
+                                                    "",
+                                                    "    // 3. Switch Maestro de Acciones",
+                                                    "    switch (action) {",
+                                                    "        case 'view':",
+                                                    "",
+                                                    "            var url = jsTerian.makeUrl('asset/download',record.data.id_asset);",
+                                                    "            var objConfig = {",
+                                                    "                title  : record.data.name};",
+                                                    "            jsDam.previewFileFromURL(",
+                                                    "                url,",
+                                                    "                objConfig",
+                                                    "            );",
+                                                    "",
+                                                    "            break;",
+                                                    "",
+                                                    "        case 'edit':",
+                                                    "            console.warn('Tap: view');",
+                                                    "            var form = Ext.getCmp(\"formRecord\");",
+                                                    "            form.isCreate = false;",
+                                                    "            form.userRecord = record;",
+                                                    "            this.showForm();",
+                                                    "            break;",
+                                                    "",
+                                                    "        case 'download':",
+                                                    "            console.warn('Tap: download');",
+                                                    "            var url = jsTerian.makeUrl('asset/download',record.data.id_asset);",
+                                                    "            appLocal.downloadFileFromUrl(",
+                                                    "              url + '?download=true',",
+                                                    "              {",
+                                                    "                  filename: record.data.original_filename",
+                                                    "              }",
+                                                    "            );",
+                                                    "",
+                                                    "            break;",
+                                                    "",
+                                                    "        case 'email':",
+                                                    "            console.warn('Tap: email');",
+                                                    "            this.sendByEmail(record);",
+                                                    "            break;",
+                                                    "",
+                                                    "        case 'whatsapp':",
+                                                    "            console.warn('Tap: whatsapp');",
+                                                    "            jsTerian.sendToWhatsApp(record);",
+                                                    "            break;",
+                                                    "",
+                                                    "        case 'attach':",
+                                                    "            console.warn('Tap: attach');",
+                                                    "            jsTerian.copyLinkToClipboard(record);",
+                                                    "            break;",
+                                                    "",
+                                                    "        case 'delete':",
+                                                    "",
+                                                    "            var information = '¿Realmente deseas eliminar este registro?</br>' +",
+                                                    "                              record.data.original_filename + '</br></br>' +",
+                                                    "                              'Esta acción no se puede deshacer.';",
+                                                    "",
+                                                    "            Ext.Msg.show({",
+                                                    "                title: 'Eliminar Registro',",
+                                                    "                message: information,",
+                                                    "                width: 300, // Opcional",
+                                                    "                closable: false,",
+                                                    "                icon: Ext.Msg.QUESTION,",
+                                                    "                buttons: [",
+                                                    "                    {",
+                                                    "                        text: 'No',",
+                                                    "                        itemId: 'no'",
+                                                    "                    },",
+                                                    "                    {",
+                                                    "                        text: 'Sí, borrar',",
+                                                    "                        itemId: 'yes',",
+                                                    "                        ui: 'action-decline' // En Modern, esto suele poner el botón en rojo",
+                                                    "                    }",
+                                                    "                ],",
+                                                    "                fn: function (buttonId) {",
+                                                    "                    if (buttonId === 'yes') {",
+                                                    "                        // Lógica de borrado",
+                                                    "",
+                                                    "",
+                                                    "",
+                                                    "                        //var idRole = record.id_role;",
+                                                    "                        //appLocal.deleteRole(idRole);",
+                                                    "",
+                                                    "                        Ext.getCmp('contFiles').deleteAsset(record);",
+                                                    "",
+                                                    "                        console.log('Registro eliminado');",
+                                                    "                        console.log('record:',record);",
+                                                    "                    }",
+                                                    "                }",
+                                                    "            });",
+                                                    "            break;",
+                                                    "",
+                                                    "        default:",
+                                                    "            console.log('Evento no definido');",
+                                                    "    }",
+                                                    "}"
+                                                ],
+                                                "name": "childtap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onDataViewAssetsChildtap",
+                                            "designerId": "a6a4c140-c266-4560-8796-bc3326a3e0ae"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basicfunction",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|params": [
+                                            "record"
+                                        ],
+                                        "fn": "deleteAsset",
+                                        "implHandler": [
+                                            "var id_prospect = jsTerian.getDataObjSS('UTM_PROSPECT','id_prospect');",
+                                            "var id_asset    = record.data.id_asset;",
+                                            "",
+                                            "var fnSuccess = function(pResponse){",
+                                            "    console.log('Success: Prospecto Asignado');",
+                                            "",
+                                            "    var msg;",
+                                            "    try {",
+                                            "        msg = Ext.decode(pResponse.responseText);",
+                                            "    }",
+                                            "    catch(e){",
+                                            "        msg = { success:true, message:'Success', data:{} };",
+                                            "    }",
+                                            "",
+                                            "    console.log('msg: ', msg);",
+                                            "",
+                                            "    // Elige el primero que esta disponible",
+                                            "    var data = msg.data || {};",
+                                            "",
+                                            "    console.log('data:',data);",
+                                            "",
+                                            "    Ext.getCmp('contMain').prospectDetail(id_prospect);",
+                                            "    //Ext.getCmp('contMain').prospectStatus();",
+                                            "};",
+                                            "",
+                                            "var fnFailure = function(pResponse){",
+                                            "    console.log('Failure: Prospecto fallo el grado');",
+                                            "};",
+                                            "",
+                                            "",
+                                            "var endPoint = 'prospect/'+ id_prospect + '/assets/' + id_asset;",
+                                            "var url = jsTerian.getUrl(endPoint);",
+                                            "",
+                                            "// Informacion a enviar",
+                                            "var jsonData = JSON.stringify({",
+                                            "    'id_prospect' : id_prospect,",
+                                            "    'id_asset'    : id_asset",
+                                            "});",
+                                            "",
+                                            "console.info('jsonData:',jsonData);",
+                                            "console.info('url:',url);",
+                                            "",
+                                            "jsTerian.makeRequest('DELETE',url, jsonData, fnSuccess, fnFailure, true);"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "designer|params": "typedarray",
+                                        "fn": "string",
+                                        "implHandler": "code"
+                                    },
+                                    "name": "deleteAsset",
+                                    "designerId": "1eabf6f6-1db0-4635-9890-76141909f413"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.Toolbar",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": "bottom",
+                                "id": "toolbarMain",
+                                "itemId": "toolbarMain"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyToolbar",
+                            "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "confirm",
+                                        "iconCls": "fas fa-check",
+                                        "id": "btnSaveProspect",
+                                        "itemId": "btnSaveProspect",
+                                        "text": "Confirmar",
+                                        "textAlign": "left",
+                                        "ui": "confirm",
+                                        "width": 120
+                                    },
+                                    "configAlternates": {
+                                        "itemId": "string",
+                                        "text": "string",
+                                        "iconCls": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "id": "string",
+                                        "textAlign": "string",
+                                        "ui": "string",
+                                        "width": "auto"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnSaveProspectTap",
+                                                "implHandler": [
+                                                    "Ext.getCmp('contMain').prospectSave();"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnSaveProspectTap",
+                                            "designerId": "4478dc93-ae20-430a-8556-97ee44104c70"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "decline",
+                                        "iconCls": "fas fa-arrows-rotate",
+                                        "id": "btnResetProspect",
+                                        "itemId": "btnResetProspect",
+                                        "text": "Reestablecer",
+                                        "textAlign": "left",
+                                        "ui": "decline"
+                                    },
+                                    "configAlternates": {
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "text": "string",
+                                        "textAlign": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton3",
+                                    "designerId": "6a7ab579-9924-4456-ad9a-3cb625c5d117",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnResetProspectTap",
+                                                "implHandler": [
+                                                    "Ext.getCmp('formProspect').reset();",
+                                                    "sessionStorage.removeItem('UTM_PROSPECT');",
+                                                    "Ext.getStore('storeAsset').setData({});",
+                                                    "",
+                                                    "var tfName = Ext.getCmp('tfName');",
+                                                    "",
+                                                    "if (tfName) {",
+                                                    "    // Esperamos 50 milisegundos antes de poner el foco",
+                                                    "    Ext.defer(function() {",
+                                                    "            console.log('focus');",
+                                                    "        tfName.focus();",
+                                                    "    }, 50);",
+                                                    "}",
+                                                    "",
+                                                    "Ext.getCmp('contMain').prospectStatus();"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnResetProspectTap",
+                                            "designerId": "63f4bf9a-923a-4fca-9cb7-31b96ff02d60"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MySpacer",
+                                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "confirm",
+                                        "iconCls": "fas fa-envelope",
+                                        "id": "btnSendMail",
+                                        "itemId": "btnSendMail",
+                                        "text": "Mail",
+                                        "textAlign": "left",
+                                        "ui": "confirm",
+                                        "width": 120
+                                    },
+                                    "configAlternates": {
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "textAlign": "string",
+                                        "ui": "string",
+                                        "width": "auto"
+                                    },
+                                    "name": "MyButton2",
+                                    "designerId": "5c507b47-a624-4bc1-b56d-545be13cf970",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnSendMailTap",
+                                                "implHandler": [
+                                                    "Ext.getCmp('contProspectData').sendMailProspect();"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "name": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "onBtnSendMailTap",
+                                            "designerId": "7c3451a3-574f-4b62-a882-ce08fe64dbee"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "basicfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "sendMailProspect",
+                                "implHandler": [
+                                    "console.info('sendMailProspect');",
+                                    "",
+                                    "var dataAssets = Ext.getStore('storeAsset').getData();",
+                                    "var idProspect = jsTerian.getDataObjSS('UTM_PROSPECT','id_prospect');",
+                                    "var nameProspect = jsTerian.getDataObjSS('UTM_PROSPECT','name');",
+                                    "var emailProspect = jsTerian.getDataObjSS('UTM_PROSPECT','email');",
+                                    "",
+                                    "console.log('dataAssets');",
+                                    "console.log(dataAssets);",
+                                    "",
+                                    "var assetIds = dataAssets.items.map(function(item) {",
+                                    "    return item.data.id_asset;",
+                                    "});",
+                                    "",
+                                    "",
+                                    "console.log('assetIds:',assetIds);",
+                                    "",
+                                    "var fnSuccess = function(pResponse){",
+                                    "    console.log('Success: Correo Enviado');",
+                                    "",
+                                    "    var msg;",
+                                    "    try {",
+                                    "        msg = Ext.decode(pResponse.responseText);",
+                                    "    }",
+                                    "    catch(e){",
+                                    "        msg = { success:true, message:'Success', data:{} };",
+                                    "    }",
+                                    "",
+                                    "    console.log('msg: ', msg);",
+                                    "",
+                                    "    // Elige el primero que esta disponible",
+                                    "    var data = msg.data || {};",
+                                    "",
+                                    "    console.log('data:',data);",
+                                    "",
+                                    "",
+                                    "    Ext.Viewport.unmask();",
+                                    "",
+                                    "    var objMessage = {",
+                                    "        type: 'success',",
+                                    "        title: 'Enviado',",
+                                    "        message: 'Se ha enviado el Correo a ' + nameProspect + ' (' + emailProspect + ')',",
+                                    "        icon: 'fas fa-envelope'",
+                                    "    };",
+                                    "",
+                                    "    jsDam.toast(objMessage);",
+                                    "    Ext.getCmp('btnResetProspect').fireEvent('tap');",
+                                    "};",
+                                    "",
+                                    "var fnFailure = function(pResponse){",
+                                    "    console.log('Failure: User Prospecto fallo la asigancion');",
+                                    "    Ext.Viewport.unmask();",
+                                    "};",
+                                    "",
+                                    "",
+                                    "var endPoint   = 'prospect/' + idProspect + '/send-email';",
+                                    "var url        = jsTerian.getUrl(endPoint);",
+                                    "",
+                                    "// Informacion a enviar",
+                                    "var jsonData = JSON.stringify({",
+                                    "    'asset_ids'     : assetIds",
+                                    "});",
+                                    "",
+                                    "console.info('jsonData:',jsonData);",
+                                    "console.info('url:',url);",
+                                    "",
+                                    "Ext.Viewport.mask({",
+                                    "    xtype: 'loadmask',",
+                                    "    indicator: false, // 1. Ocultamos el spinner feo por defecto",
+                                    "    style: 'background: rgba(0,0,0,0.6);', // 2. Fondo un poco más oscuro",
+                                    "    // 3. Inyectamos HTML: Icono girando + Texto",
+                                    "    message: '<div style=\"text-align:center;\">' +",
+                                    "    '<i class=\"fas fa-circle-notch fa-spin\" style=\"font-size: 3em; color: white;\"></i>' +",
+                                    "    '<div style=\"margin-top:15px; font-size: 1.2em; color: white; font-weight:300;\">Enviando Mail...</div>' +",
+                                    "    '</div>'",
+                                    "});",
+                                    "",
+                                    "jsTerian.makeRequest('POST',url, jsonData, fnSuccess, fnFailure, true);"
+                                ]
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "sendMailProspect",
+                            "designerId": "9d9f9c2e-4f91-41c5-8e5f-cca238dd331e"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "docked": null,
+                        "hidden": true,
+                        "id": "contProspectSearch",
+                        "itemId": "contProspectSearch",
+                        "layout": "vbox"
+                    },
+                    "configAlternates": {
+                        "docked": "string",
+                        "hidden": "boolean",
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string"
+                    },
+                    "name": "MyContainer5",
+                    "designerId": "2d67dd6d-9901-4aa4-9b12-b64b5a783ca7",
+                    "cn": [
+                        {
+                            "type": "Ext.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "html": "<div class=\"resource-row header-style\"> <div class=\"col-prospect-name\">PROSPECTO</div> <div class=\"col-prospect-data\">CONTACTO</div> <div class=\"col-actions\">ACCION</div></div>",
+                                "id": "contProspectHeader",
+                                "itemId": "contProspectHeader"
+                            },
+                            "configAlternates": {
+                                "html": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyContainer6",
+                            "designerId": "3400694d-c96a-4203-a5b4-960c1b537e9c"
+                        },
+                        {
+                            "type": "Ext.dataview.DataView",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "dataViewProspect",
+                                "itemId": "dataViewProspect",
+                                "layout|flex": 1,
+                                "store": "storeProspect"
+                            },
+                            "configAlternates": {
+                                "id": "string",
+                                "itemId": "string",
+                                "layout|flex": "number",
+                                "store": "store"
+                            },
+                            "name": "MyDataView1",
+                            "designerId": "67e9b444-4fd4-4f74-b598-4af5f7a15144",
+                            "cn": [
+                                {
+                                    "type": "Ext.XTemplate",
+                                    "reference": {
+                                        "name": "itemTpl",
+                                        "type": "object"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "itemTpl",
+                                        "implHandler": [
+                                            "<div class=\"resource-row {[values.is_active ? '' : 'prospect-inactive']}\">",
+                                            "",
+                                            "    <div class=\"col-prospect-name\">",
+                                            "        <div class=\"text-bold\">{name}</div>",
+                                            "        <div class=\"role-badge\">{company}</div>",
+                                            "    </div>",
+                                            "",
+                                            "    <div class=\"col-prospect-data\">",
+                                            "        <div class=\"text-bold\">{email}</div>",
+                                            "        <div class=\"role-badge\">{telephone}</div>",
+                                            "    </div>",
+                                            "",
+                                            "    <div class=\"col-actions\">",
+                                            "        <div class=\"action-btn view\" data-action=\"check\" title=\"Ver Detalles\">",
+                                            "            <i class=\"x-fa fas fa-check\"></i>",
+                                            "        </div>",
+                                            "",
+                                            "        <!--",
+                                            "        <div class=\"action-btn email\" data-action=\"email\" title=\"Enviar Correo\">",
+                                            "            <i class=\"x-fa fas fa-envelope\"></i>",
+                                            "        </div>",
+                                            "        ",
+                                            "",
+                                            "        <div class=\"action-btn whatsapp\" data-action=\"whatsapp\" title=\"Contactar por WhatsApp\">",
+                                            "            <i class=\"x-fa fab fa-whatsapp\"></i>",
+                                            "        </div>",
+                                            "        -->",
+                                            "",
+                                            "        <div class=\"action-btn delete\" data-action=\"delete\" title=\"Desactivar/Borrar\">",
+                                            "            <i class=\"x-fa fas fa-trash\"></i>",
+                                            "        </div>",
+                                            "    </div>",
+                                            "</div>"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "designer|displayName": "string",
+                                        "implHandler": "code"
+                                    },
+                                    "name": "itemTpl",
+                                    "designerId": "66d11014-a3a5-46ff-855e-b812548f1bf9"
+                                },
+                                {
+                                    "type": "basiceventbinding",
+                                    "reference": {
+                                        "name": "listeners",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "fn": "onDataViewProspectChildtap",
+                                        "implHandler": [
+                                            "// 1. Detectar si el toque fue en un botón de acción",
+                                            "// Buscamos la clase '.action-btn' en el elemento tocado o sus padres",
+                                            "var btn = location.event.getTarget('.action-btn');",
+                                            "",
+                                            "if (btn) {",
+                                            "    // 2. Extraer la acción y el registro",
+                                            "    var action = btn.getAttribute('data-action');",
+                                            "    var record = location.record;",
+                                            "",
+                                            "    var prospectData = record.data;",
+                                            "",
+                                            "    // Detenemos la propagación para que no seleccione la fila al tocar el botón",
+                                            "    location.event.stopEvent();",
+                                            "",
+                                            "    console.log('record:',record);",
+                                            "",
+                                            "    // 3. Switch Maestro de Acciones",
+                                            "    switch (action) {",
+                                            "        case 'check':",
+                                            "            console.warn('Tap: check');",
+                                            "            Ext.getCmp('formProspect').reset();",
+                                            "            sessionStorage.removeItem('UTM_PROSPECT');",
+                                            "",
+                                            "            Ext.defer(function() {",
+                                            "                console.log('focus');",
+                                            "                Ext.getCmp('contMain').prospectSetActive(prospectData);",
+                                            "                Ext.getCmp('contMain').prospectStatus();",
+                                            "            }, 50);",
+                                            "",
+                                            "            break;",
+                                            "        case 'delete':",
+                                            "            Ext.Msg.show({",
+                                            "                title: 'Eliminar Registro',",
+                                            "                message: '¿Realmente deseas eliminar este registro? </br><b>' + prospectData.name + ' ' + prospectData.email + '</b></br></br>Esta acción no se puede deshacer.',",
+                                            "                width: 300, // Opcional",
+                                            "                closable: false,",
+                                            "                icon: Ext.Msg.QUESTION,",
+                                            "                buttons: [",
+                                            "                    {",
+                                            "                        text: 'No',",
+                                            "                        itemId: 'no'",
+                                            "                    },",
+                                            "                    {",
+                                            "                        text: 'Sí, borrar',",
+                                            "                        itemId: 'yes',",
+                                            "                        ui: 'action-decline' // En Modern, esto suele poner el botón en rojo",
+                                            "                    }",
+                                            "                ],",
+                                            "                fn: function (buttonId) {",
+                                            "                    if (buttonId === 'yes') {",
+                                            "                        Ext.getCmp('contProspectSearch').deleteProspect(record);",
+                                            "                        console.log('Registro eliminado prospectData..>',prospectData);",
+                                            "                    }",
+                                            "                }",
+                                            "            });",
+                                            "            break;",
+                                            "",
+                                            "        default:",
+                                            "            console.log('Evento no definido');",
+                                            "    }",
+                                            "}"
+                                        ],
+                                        "name": "childtap"
+                                    },
+                                    "configAlternates": {
+                                        "fn": "string",
+                                        "implHandler": "code",
+                                        "name": "string"
+                                    },
+                                    "name": "onDataViewProspectChildtap",
+                                    "designerId": "e688f32f-a0f8-4f86-8364-fd38867274dd"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.Toolbar",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": "bottom",
+                                "id": "toolbarSearch",
+                                "itemId": "toolbarSearch"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyToolbar1",
+                            "designerId": "a3d96fa8-97f2-41f5-9bbb-10f27dd1ee63",
+                            "cn": [
+                                {
+                                    "type": "Ext.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MySpacer1",
+                                    "designerId": "77b475ae-2324-4b06-ad2f-2465cd588cae"
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "decline",
+                                        "iconCls": "fas fa-close",
+                                        "id": "btnCloseSearch",
+                                        "itemId": "btnCloseSearch",
+                                        "minWidth": 120,
+                                        "text": "Cerrar",
+                                        "ui": "decline"
+                                    },
+                                    "configAlternates": {
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "minWidth": "auto",
+                                        "text": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton4",
+                                    "designerId": "f7809cc1-2749-4b37-a869-7adb520b2aa0",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnCloseSearchTap",
+                                                "implHandler": [
+                                                    "var contenedorPadre = button.up('#contProspect');",
+                                                    "",
+                                                    "// Lo regresamos a la vista de datos",
+                                                    "contenedorPadre.setActiveItem('#contProspectData');"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnCloseSearchTap",
+                                            "designerId": "85050426-d686-438d-b3d0-ecd3eaeb04e8"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "basicfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|params": [
+                                    "record"
+                                ],
+                                "fn": "deleteProspect",
+                                "implHandler": [
+                                    "console.log('deleteProspect:',record);",
+                                    "",
+                                    "var id_prospect = record.data.id_prospect;",
+                                    "",
+                                    "var fnSuccess = function(pResponse){",
+                                    "    console.log('Success: Prospecto Eliminado');",
+                                    "",
+                                    "    var msg;",
+                                    "    try {",
+                                    "        msg = Ext.decode(pResponse.responseText);",
+                                    "    }",
+                                    "    catch(e){",
+                                    "        msg = { success:true, message:'Success', data:{} };",
+                                    "    }",
+                                    "",
+                                    "    console.log('msg: ', msg);",
+                                    "",
+                                    "    // Elige el primero que esta disponible",
+                                    "    var data = msg.data || {};",
+                                    "",
+                                    "    console.log('data:',data);",
+                                    "",
+                                    "    jsTerian.loadStore('storeProspect');",
+                                    "    //Ext.getCmp('contMain').prospectStatus();",
+                                    "};",
+                                    "",
+                                    "var fnFailure = function(pResponse){",
+                                    "    console.log('Failure: Prospecto fallo el grado');",
+                                    "};",
+                                    "",
+                                    "",
+                                    "var endPoint = 'prospect/delete/' + id_prospect;",
+                                    "var url = jsTerian.getUrl(endPoint);",
+                                    "",
+                                    "// Informacion a enviar",
+                                    "var jsonData = JSON.stringify({",
+                                    "    'id_prospect' : id_prospect",
+                                    "});",
+                                    "",
+                                    "console.info('jsonData:',jsonData);",
+                                    "console.info('url:',url);",
+                                    "",
+                                    "jsTerian.makeRequest('DELETE',url, jsonData, fnSuccess, fnFailure, true);"
+                                ]
+                            },
+                            "configAlternates": {
+                                "designer|params": "typedarray",
+                                "fn": "string",
+                                "implHandler": "code"
+                            },
+                            "name": "deleteProspect",
+                            "designerId": "39430bcf-b0c3-40d0-9357-a25a0e7a36de"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "prospectSave",
+                "implHandler": [
+                    "var fnSuccess = function(pResponse){",
+                    "    console.log('Success: Prospecto Asignado');",
+                    "",
+                    "    var msg;",
+                    "    try {",
+                    "        msg = Ext.decode(pResponse.responseText);",
+                    "    }",
+                    "    catch(e){",
+                    "        msg = { success:true, message:'Success', data:{} };",
+                    "    }",
+                    "",
+                    "    console.log('msg: ', msg);",
+                    "",
+                    "    // Elige el primero que esta disponible",
+                    "    var data = msg.data || {};",
+                    "",
+                    "    console.log('data:',data);",
+                    "",
+                    "    Ext.getCmp('contMain').prospectUserSave(jsTerian.getDataObjSS('TMP_SESSION','id_user'),data.id_prospect);",
+                    "    Ext.getCmp('contMain').prospectSetActive(data);",
+                    "    Ext.getCmp('contMain').prospectStatus();",
+                    "",
+                    "",
+                    "",
+                    "};",
+                    "",
+                    "var fnFailure = function(pResponse){",
+                    "    console.log('Failure: Prospecto fallo el grado');",
+                    "};",
+                    "",
+                    "var url = jsTerian.getUrl('prospect/create');",
+                    "",
+                    "// Informacion a enviar",
+                    "var jsonData = JSON.stringify({",
+                    "    'name'     : jsTerian.readElementValue('tfName'),",
+                    "    'job_title': jsTerian.readElementValue('tfJobTitle'),",
+                    "    'company'  : jsTerian.readElementValue('tfCompany'),",
+                    "    'email'    : jsTerian.readElementValue('tfMail'),",
+                    "    'telephone': jsTerian.readElementValue('tfTelephone'),",
+                    "    'notes'    : jsTerian.readElementValue('taNote')",
+                    "});",
+                    "",
+                    "console.info('jsonData:',jsonData);",
+                    "console.info('url:',url);",
+                    "",
+                    "jsTerian.makeRequest('POST',url, jsonData, fnSuccess, fnFailure, true);",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "prospectSave",
+            "designerId": "24a5a8ec-a7d8-4501-a868-a3d016113648"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "pIdUser",
+                    "pIdProspect"
+                ],
+                "fn": "prospectUserSave",
+                "implHandler": [
+                    "var fnSuccess = function(pResponse){",
+                    "    console.log('Success: User Prospecto Asignado');",
+                    "",
+                    "    var msg;",
+                    "    try {",
+                    "        msg = Ext.decode(pResponse.responseText);",
+                    "    }",
+                    "    catch(e){",
+                    "        msg = { success:true, message:'Success', data:{} };",
+                    "    }",
+                    "",
+                    "    console.log('msg: ', msg);",
+                    "",
+                    "    // Elige el primero que esta disponible",
+                    "    var data = msg.data || {};",
+                    "",
+                    "    console.log('data:',data);",
+                    "",
+                    "",
+                    "",
+                    "};",
+                    "",
+                    "var fnFailure = function(pResponse){",
+                    "    console.log('Failure: User Prospecto fallo la asigancion');",
+                    "};",
+                    "",
+                    "var endPoint = 'prospect/' + pIdProspect + '/assign-users';",
+                    "var url = jsTerian.getUrl(endPoint);",
+                    "",
+                    "var userIds = [];",
+                    "userIds.push(pIdUser);",
+                    "",
+                    "// Informacion a enviar",
+                    "var jsonData = JSON.stringify({",
+                    "    'user_ids'     : userIds",
+                    "});",
+                    "",
+                    "console.info('jsonData:',jsonData);",
+                    "console.info('url:',url);",
+                    "",
+                    "jsTerian.makeRequest('POST',url, jsonData, fnSuccess, fnFailure, true);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "prospectUserSave",
+            "designerId": "7b48ea12-8776-4d5e-a041-5d41de0d9e05"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "pIdProspect"
+                ],
+                "fn": "prospectDetail",
+                "implHandler": [
+                    "// Función para formatear el tamaño (Bytes a KB, MB, etc.)",
+                    "const formatBytes = (bytes, decimals = 2) => {",
+                    "    if (!bytes || bytes === 0) return '0 Bytes';",
+                    "    const k = 1024;",
+                    "    const dm = decimals < 0 ? 0 : decimals;",
+                    "    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];",
+                    "    const i = Math.floor(Math.log(bytes) / Math.log(k));",
+                    "    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];",
+                    "};",
+                    "",
+                    "// Función para obtener la extensión",
+                    "const getExt = (name) => {",
+                    "    if (!name) return '';",
+                    "    return name.slice(((name.lastIndexOf(\".\") - 1) >>> 0) + 2).toUpperCase();",
+                    "};",
+                    "",
+                    "",
+                    "const getFileTypeCategory = (extension) => {",
+                    "    // 1. Validar que la extensión exista (que no sea null o indefinida)",
+                    "    if (!extension) {",
+                    "        return 'ARCHIVO';",
+                    "    }",
+                    "",
+                    "    // 2. Limpiar el texto: minúsculas, sin espacios y sin el punto inicial",
+                    "    const ext = extension.toLowerCase().trim().replace('.', '');",
+                    "",
+                    "    // 3. Definir los grupos (puedes agregar más si lo necesitas)",
+                    "    const images = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'tiff'];",
+                    "    const videos = ['mp4', 'mov', 'webm', 'avi', 'mkv', 'wmv'];",
+                    "    const office = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];",
+                    "",
+                    "    // 4. Evaluar a qué grupo pertenece",
+                    "    if (images.includes(ext)) {",
+                    "        return 'IMAGEN';",
+                    "    }",
+                    "",
+                    "    if (videos.includes(ext)) {",
+                    "        return 'VIDEO';",
+                    "    }",
+                    "",
+                    "    if (ext === 'pdf') {",
+                    "        return 'PDF';",
+                    "    }",
+                    "",
+                    "    if (office.includes(ext)) {",
+                    "        return 'OFFICE';",
+                    "    }",
+                    "",
+                    "    // 5. Si no coincide con nada de lo anterior, es un archivo genérico",
+                    "    return 'ARCHIVO';",
+                    "};",
+                    "",
+                    "var fnSuccess = function(pResponse){",
+                    "    console.log('Success: Prospecto Asignado');",
+                    "",
+                    "    var msg;",
+                    "    try {",
+                    "        msg = Ext.decode(pResponse.responseText);",
+                    "    }",
+                    "    catch(e){",
+                    "        msg = { success:true, message:'Success', data:{} };",
+                    "    }",
+                    "",
+                    "    console.log('msg: ', msg);",
+                    "",
+                    "    // Elige el primero que esta disponible",
+                    "    var dataProspect = msg.prospect || {};",
+                    "",
+                    "    console.log('dataProspect:',dataProspect);",
+                    "",
+                    "    jsTerian.assignElementValue('tfName'      ,dataProspect.name);",
+                    "    jsTerian.assignElementValue('tfJobTitle'  ,dataProspect.job_title);",
+                    "    jsTerian.assignElementValue('tfCompany'   ,dataProspect.company);",
+                    "    jsTerian.assignElementValue('tfMail'      ,dataProspect.email);",
+                    "    jsTerian.assignElementValue('tfTelephone' ,dataProspect.telephone);",
+                    "    jsTerian.assignElementValue('taNote'      ,dataProspect.notes);",
+                    "",
+                    "",
+                    "    dataProspect.assets.forEach(record => {",
+                    "        const filename = record.original_filename; // Extraído de la data",
+                    "        const bytes = record.size_bytes;           // Extraído de la data",
+                    "",
+                    "",
+                    "        record.file_extension = getExt(filename);",
+                    "        record.file_size      = formatBytes(bytes);",
+                    "        record.file_type      = getFileTypeCategory(record.file_extension);",
+                    "",
+                    "    });",
+                    "",
+                    "    ",
+                    "    jsTerian.saveDataObjSS('UTM_PROSPECT','num_assets',dataProspect.assets.length);",
+                    "    Ext.getStore('storeAsset').setData(dataProspect.assets);",
+                    "",
+                    "};",
+                    "",
+                    "var fnFailure = function(pResponse){",
+                    "    console.log('Failure: Prospecto fallo el grado');",
+                    "};",
+                    "",
+                    "var endPoint = 'prospect/detail/' + pIdProspect + '?include_users=true&include_assets=true';",
+                    "var url = jsTerian.getUrl(endPoint);",
+                    "",
+                    "// Informacion a enviar",
+                    "var jsonData = JSON.stringify({",
+                    "    'id_prospect'     : pIdProspect",
+                    "});",
+                    "",
+                    "console.info('jsonData:',jsonData);",
+                    "console.info('url:',url);",
+                    "",
+                    "jsTerian.makeRequest('GET',url, jsonData, fnSuccess, fnFailure, true);",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "prospectDetail",
+            "designerId": "af55c9cf-f768-41d1-bcde-60ff136500cb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "prospectStatus",
+                "implHandler": [
+                    "var id_prospect = jsTerian.getDataObjSS('UTM_PROSPECT','id_prospect');",
+                    "",
+                    "if(id_prospect){",
+                    "    Ext.getCmp('contMain').prospectDetail(id_prospect);",
+                    "",
+                    "    Ext.getCmp('btnSaveProspect').hide();",
+                    "    Ext.getCmp('btnResetProspect').show();",
+                    "    Ext.getCmp('btnSendMail').show();",
+                    "}",
+                    "else{",
+                    "    Ext.getCmp('btnSaveProspect').show();",
+                    "    Ext.getCmp('btnResetProspect').hide();",
+                    "    Ext.getCmp('btnSendMail').hide();",
+                    "",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "prospectStatus",
+            "designerId": "cb52c26a-0601-4cb0-af4e-26ee08ddf623"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "pData"
+                ],
+                "fn": "prospectSetActive",
+                "implHandler": [
+                    "jsTerian.saveDataObjSS('UTM_PROSPECT','id_prospect',pData.id_prospect);",
+                    "jsTerian.saveDataObjSS('UTM_PROSPECT','name'       ,pData.name);",
+                    "jsTerian.saveDataObjSS('UTM_PROSPECT','company'    ,pData.company);",
+                    "jsTerian.saveDataObjSS('UTM_PROSPECT','email'      ,pData.email);",
+                    "",
+                    "console.log('propsctSetActive:',pData);",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "prospectSetActive",
+            "designerId": "02e7c839-d4dc-474b-a226-1b03aa063851"
+        }
+    ]
+}

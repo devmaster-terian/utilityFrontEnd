@@ -1,0 +1,18 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_qk5mi123",
+        "url": "../../../../framework/resourcesCSS/custom-fixes.css"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "url": "uri"
+    },
+    "name": "css2",
+    "designerId": "1b24ba4e-76e4-4a85-bcb8-5d27419d3e22"
+}

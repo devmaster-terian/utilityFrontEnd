@@ -1,0 +1,18 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_4lmrd2o8",
+        "url": "local-fixes.css"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "url": "uri"
+    },
+    "name": "css2",
+    "designerId": "a5703ab7-c8bb-4dd9-ab3b-e233b0ffb016"
+}

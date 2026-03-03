@@ -1,0 +1,2 @@
+@echo off
+forfiles /S /M *.* /C "cmd /c if @fsize EQU 0 (if @isdir EQU FALSE echo @path)" > list.txt

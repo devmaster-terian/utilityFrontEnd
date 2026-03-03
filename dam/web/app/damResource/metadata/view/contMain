@@ -1,0 +1,826 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "hbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "layout": "string",
+        "mixins": "object"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "contPanel",
+                "itemId": "contPanel",
+                "layout": "hbox",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "layout": "string",
+                "layout|flex": "number",
+                "id": "string",
+                "itemId": "string"
+            },
+            "name": "MyContainer",
+            "designerId": "df1d305c-2523-4a44-9adf-cc6b3dddaa12",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contResource",
+                        "itemId": "contResource",
+                        "layout": "card",
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "id": "string",
+                        "itemId": "string"
+                    },
+                    "name": "MyContainer1",
+                    "designerId": "037f353b-fdc8-47c5-9747-e41bc230a907",
+                    "cn": [
+                        {
+                            "type": "Ext.Toolbar",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": "top",
+                                "id": "toolbarResource",
+                                "itemId": "toolbarResource"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyToolbar1",
+                            "designerId": "0de1d3fc-6045-4edf-bf13-e75fdd94af9b",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "confirm",
+                                        "iconCls": "fa-solid fa-plus",
+                                        "id": "btnCreate",
+                                        "itemId": "btnCreate",
+                                        "text": "Agregar",
+                                        "ui": "confirm"
+                                    },
+                                    "configAlternates": {
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "ui": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyButton2",
+                                    "designerId": "5c507b47-a624-4bc1-b56d-545be13cf970",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnCreateTap",
+                                                "implHandler": [
+                                                    "// Buscas el contenedor padre",
+                                                    "var contResource = Ext.getCmp('contResource'); // Asegúrate de tener reference='contResource'",
+                                                    "var toolbarResource = Ext.getCmp('toolbarResource');",
+                                                    "",
+                                                    "// Cambias a la vista del formulario (que es el item 1)",
+                                                    "// La animación 'slide' hará que parezca que entras a una nueva página",
+                                                    "contResource.setActiveItem(1);",
+                                                    "toolbarResource.hide();",
+                                                    ""
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnCreateTap",
+                                            "designerId": "b9a8df53-f2da-4647-9803-9dacedf34fde"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "iconCls": "fa-solid fa-pen-to-square",
+                                        "id": "btnUpdate",
+                                        "itemId": "btnUpdate",
+                                        "text": "Actualizar"
+                                    },
+                                    "configAlternates": {
+                                        "itemId": "string",
+                                        "text": "string",
+                                        "iconCls": "string",
+                                        "id": "string"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onMybuttonTap",
+                                                "implHandler": [
+                                                    "Ext.Msg.alert(releaseActiva(), 'El mensaje que quieres mostrar', function() {",
+                                                    "    console.log('El usuario cerró la alerta');",
+                                                    "});"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onMybuttonTap",
+                                            "designerId": "da1b1c5c-6a2d-424c-b17f-46e6e5c93553"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "decline",
+                                        "iconCls": "fa-solid fa-trash-can",
+                                        "id": "btnDelete",
+                                        "itemId": "btnDelete",
+                                        "text": "Eliminar",
+                                        "ui": "decline"
+                                    },
+                                    "configAlternates": {
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "ui": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyButton1",
+                                    "designerId": "60757d61-9c16-4ffa-b40d-c0f16506b71e"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.tab.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "tabPanelResource",
+                                "itemId": "tabPanelResource"
+                            },
+                            "configAlternates": {
+                                "layout|flex": "number",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyTabPanel",
+                            "designerId": "4b7f4b9b-98f3-4654-9146-207b4ae7cfa8",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tabVideo",
+                                        "itemId": "tabVideo",
+                                        "layout": "fit",
+                                        "scrollable": true,
+                                        "title": "Videos"
+                                    },
+                                    "configAlternates": {
+                                        "layout": "string",
+                                        "scrollable": "auto",
+                                        "title": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer2",
+                                    "designerId": "d934eecd-4c1d-4973-bb21-fe2ea9217038",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.dataview.DataView",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "cls": [
+                                                    "assets-grid-view"
+                                                ],
+                                                "id": "dataViewResources",
+                                                "inline": true,
+                                                "itemId": "dataViewResources",
+                                                "store": "storeResource"
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "inline": "boolean",
+                                                "itemId": "string",
+                                                "layout": "string",
+                                                "store": "store",
+                                                "cls": "typedarray"
+                                            },
+                                            "name": "MyDataView",
+                                            "designerId": "d523b554-4e19-4c3b-a90f-859dfac21ac9",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.XTemplate",
+                                                    "reference": {
+                                                        "name": "itemTpl",
+                                                        "type": "object"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "designer|displayName": "itemTpl",
+                                                        "implHandler": [
+                                                            "<div class=\"asset-card\">",
+                                                            "    <div class=\"card-thumb\">",
+                                                            "        <img src=\"{thumbnail_url}\" onerror=\"this.src='resources/images/placeholder.png'\">",
+                                                            "        <div class=\"file-type-badge\">{file_type}</div>",
+                                                            "    </div>",
+                                                            "",
+                                                            "    <div class=\"card-body\">",
+                                                            "        <div class=\"asset-title\">{name}</div>",
+                                                            "        <div class=\"asset-date\">Subido por: {date_uploaded}</div>",
+                                                            "    </div>",
+                                                            "",
+                                                            "    <div class=\"card-actions\">",
+                                                            "        <div class=\"action-btn\" data-action=\"view\"><i class=\"fa-solid fa-eye\"></i></div>",
+                                                            "        <div class=\"action-btn\" data-action=\"download\"><i class=\"fa-solid fa-download\"></i></div>",
+                                                            "        <div class=\"action-btn\" data-action=\"email\"><i class=\"fa-solid fa-envelope\"></i></div>",
+                                                            "        ",
+                                                            "        <tpl if=\"file_type !== 'mov'\">",
+                                                            "            <div class=\"action-btn\" data-action=\"whatsapp\"><i class=\"fa-brands fa-whatsapp\"></i></div>",
+                                                            "        </tpl>",
+                                                            "        ",
+                                                            "        <div class=\"action-btn\" data-action=\"attach\"><i class=\"fa-solid fa-paperclip\"></i></div>",
+                                                            "    </div>",
+                                                            "</div>"
+                                                        ]
+                                                    },
+                                                    "configAlternates": {
+                                                        "designer|displayName": "string",
+                                                        "implHandler": "code"
+                                                    },
+                                                    "name": "itemTpl",
+                                                    "designerId": "486f84c4-213b-48ca-b4da-dc827e36419a"
+                                                },
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onDataViewResourcesChildtap",
+                                                        "implHandler": [
+                                                            "console.log('Tapeado - dataview');",
+                                                            "console.log(dataview);",
+                                                            "",
+                                                            "console.log('Tapeado - location');",
+                                                            "console.log(location);",
+                                                            "",
+                                                            "        var record = location.record;",
+                                                            "",
+                                                            "",
+                                                            "",
+                                                            "",
+                                                            "// 1. Detectar si el clic fue en un elemento con la clase 'action-btn'",
+                                                            "    // El método getTarget busca hacia arriba en el DOM desde donde se hizo clic",
+                                                            "    var btn = location.event.getTarget('.action-btn');",
+                                                            "",
+                                                            "    if (btn) {",
+                                                            "        // 2. Leer el atributo data-action que definimos en el itemTpl",
+                                                            "        var action = btn.getAttribute('data-action');",
+                                                            "",
+                                                            "",
+                                                            "",
+                                                            "        // 4. Actuar según el botón",
+                                                            "        switch (action) {",
+                                                            "            case 'view':",
+                                                            "                console.warn('Abrir Archivo');",
+                                                            "                //this.previewAsset(record);",
+                                                            "                break;",
+                                                            "            case 'download':",
+                                                            "                console.warn('Descargando: ' + record.get('name'));",
+                                                            "                break;",
+                                                            "            case 'whatsapp':",
+                                                            "                //this.sendToWhatsApp(record);",
+                                                            "                console.warn('Whatsappenado');",
+                                                            "                break;",
+                                                            "            case 'email':",
+                                                            "                console.warn('Enviando Emiliio');",
+                                                            "                //this.sendByEmail(record);",
+                                                            "                break;",
+                                                            "            case 'attach':",
+                                                            "                console.warn('Adjuntado Archivo');",
+                                                            "                //this.sendByEmail(record);",
+                                                            "                break;",
+                                                            "            default:",
+                                                            "                console.warn('Acción no definida:', action);",
+                                                            "        }",
+                                                            "    }",
+                                                            "",
+                                                            "appLocal.previewAsset(record);"
+                                                        ],
+                                                        "name": "childtap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "name": "string",
+                                                        "implHandler": "code"
+                                                    },
+                                                    "name": "onDataViewResourcesChildtap",
+                                                    "designerId": "529f40e7-9e74-4e35-8c03-efed2bcabac2"
+                                                },
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onDataViewResourcesAdded",
+                                                        "implHandler": [
+                                                            "console.log('Asset Added...');"
+                                                        ],
+                                                        "name": "added"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onDataViewResourcesAdded",
+                                                    "designerId": "d55308b9-1c77-45d4-8bad-8369fea26de0"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tabImage",
+                                        "itemId": "tabImage",
+                                        "title": "Imagenes"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer3",
+                                    "designerId": "bb203a53-91a7-419a-9717-41abed49b9c3",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "itemId": "mybutton3",
+                                                "text": "MyButton3"
+                                            },
+                                            "configAlternates": {
+                                                "itemId": "string",
+                                                "text": "string"
+                                            },
+                                            "name": "MyButton3",
+                                            "designerId": "89228860-33cf-4bf2-92c2-df169d67ca81",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onMybutton3Tap",
+                                                        "implHandler": [
+                                                            "console.log('Cargando la Aplicacion');",
+                                                            "Ext.getStore('storeResource').load();"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onMybutton3Tap",
+                                                    "designerId": "1e150553-802c-40a0-8f69-84a5345bd166"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "Documentos"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyContainer4",
+                                    "designerId": "749c3f71-1f43-4418-9f12-36a1e485bee7"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": null,
+                                "id": "formResourceRecord",
+                                "itemId": "formResourceRecord",
+                                "padding": 20,
+                                "title": "Recurso"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string",
+                                "padding": "auto",
+                                "title": "string"
+                            },
+                            "name": "MyFormPanel",
+                            "designerId": "a27d4e50-0460-4fc3-b50c-340d29530d3f",
+                            "cn": [
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tfNombre",
+                                        "itemId": "tfNombre",
+                                        "label": "Field"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string"
+                                    },
+                                    "name": "MyTextField",
+                                    "designerId": "459eedc3-249e-4052-a1fb-5a42fd23d70e"
+                                },
+                                {
+                                    "type": "Ext.field.ComboBox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "cbTipo",
+                                        "itemId": "cbTipo",
+                                        "label": "Field"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string"
+                                    },
+                                    "name": "MyComboBox",
+                                    "designerId": "1ead9a19-9fbb-41e7-a87c-91b844a415ca"
+                                },
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "label": "Field"
+                                    },
+                                    "configAlternates": {
+                                        "label": "string"
+                                    },
+                                    "name": "MyTextField1",
+                                    "designerId": "a9bbd992-55c8-4c1c-8af3-507effe9bd2c"
+                                },
+                                {
+                                    "type": "Ext.field.File",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "ffFileLoad",
+                                        "itemId": "ffFileLoad",
+                                        "label": "Field"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string"
+                                    },
+                                    "name": "MyFileField",
+                                    "designerId": "48499770-7577-4228-b1bf-cee7fbfecf9a"
+                                },
+                                {
+                                    "type": "Ext.Toolbar",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "docked": "top",
+                                        "id": "toolbarResourceRecord",
+                                        "itemId": "toolbarResourceRecord"
+                                    },
+                                    "configAlternates": {
+                                        "docked": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyToolbar",
+                                    "designerId": "a81af9f3-0d64-4b84-b9ca-8ab5d32206cc",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "confirm",
+                                                "id": "btnConfirm",
+                                                "itemId": "btnConfirm",
+                                                "text": "Confirmar",
+                                                "ui": "confirm"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton4",
+                                            "designerId": "f0c05d14-0730-4358-a46e-6b34f922936f",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnConfirmTap",
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnConfirmTap",
+                                                    "designerId": "bfc09053-d569-4dc5-bc13-9800cf8247a5"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.Spacer",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "name": "MySpacer",
+                                            "designerId": "36dd205d-9ad6-40c2-8b16-556b22d7cc97"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "decline",
+                                                "id": "btnCancel",
+                                                "itemId": "btnCancel",
+                                                "text": "Cancelar",
+                                                "ui": "decline"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton5",
+                                            "designerId": "ccafcd76-9298-4566-aa3c-4e895320611c",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnCancelTap",
+                                                        "implHandler": [
+                                                            "var contResource = Ext.getCmp('contResource'); // Asegúrate de tener reference='contResource'",
+                                                            "var toolbarResource = Ext.getCmp('toolbarResource');",
+                                                            "",
+                                                            "contResource.setActiveItem(0);",
+                                                            "toolbarResource.show();",
+                                                            ""
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnCancelTap",
+                                                    "designerId": "7ddfd407-ed06-4bab-86fa-303260d897f2"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

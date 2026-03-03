@@ -1,0 +1,260 @@
+/*----------------------------------------------------------------------------------------------------------------------------------\
+| CORPORATIVO COPAMEX SA DE CV             |                              COORDINACION DE SISTEMAS                                  |
+|-----------------------------------------------------------------------------------------------------------------------------------|
+| Programa: cpxestilo.css                                                                                                           |
+| Objetivo: Hoja de Estilo para Notificaciones de Correo.                                                                           |
+|    Autor: Erick Christian Rosales Cruz (ECRC)                                                                                     |    
+|    Fecha: Enero del 210                                                                                                           |   
+|  Sistema: EMS 2.06b Progress OpenEdge 10.01A                                                                                      |
+|-----------------------------------------------------------------------------------------------------------------------------------|
+|                                     H I S T O R I A L   D E   M O D I F I C A C I O N E S                                         |
+|-----------------------------------------------------------------------------------------------------------------------------------|
+| RESPONSABLE              | TAREA    | FECHA        | DESCRIPCION                                                                  |
+|-----------------------------------------------------------------------------------------------------------------------------------|
+| Erick Rosales (ECRC)    |  007943  |  04/01/2021  |  Actualización del Formato HTML de Salida.                                    |
+\----------------------------------------------------------------------------------------------------------------------------------*/
+@charset "utf-8";
+/* CSS Document */
+A:visited  {
+	color: #600;
+	text-decoration: none
+}
+
+A:link  {
+	color: #000;
+	text-decoration: none
+}
+
+A:active  {
+	color: #600;
+	text-decoration: none
+}
+
+A:hover   {
+	color: #600;
+	text-decoration: none
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.TablaDatos {
+  border: 0px solid black;
+  margin: 20px 20px;
+}
+
+
+.Titulo {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: capitalize;
+	color: #3F81C3;
+}
+
+.TituloCorreo {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 14pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: capitalize;
+	color: #001689;
+}
+
+.TituloFecha {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 8pt;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #001689;
+}
+.Encabezado {
+	font-family: Geneva, "Courier New", Courier, monospace;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #004080;
+	text-align: left;
+}
+
+.EncabezadoBlanco {
+	font-family: Geneva, "Courier New", Courier, monospace;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFF;
+	text-align: right;
+}
+
+.EncabezadoMedioBlanco {
+	font-family: Geneva, "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFF;
+	text-align: right;
+}
+
+.TextoBlanco {
+	font-family: Geneva, "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight:normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFF;
+	text-align: right;
+}
+
+
+.Parrafo {
+	letter-spacing: normal;
+	text-align: justify;
+	vertical-align: baseline;
+	word-spacing: normal;
+	white-space: normal;
+}
+
+.ParrafoTexto {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #000000;
+}
+
+.Tarea {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: uppercase;
+	color: #000000;
+}
+
+.CeldaEncabezadoDoc {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	color: #D6CFC7;
+	background-color: #03254C;
+	height: 20px;
+	text-align: right;
+	padding: 3 3 3 3;
+}
+
+.CeldaDetalleDoc {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: uppercase;
+	color: #3E424B;
+	background-color: #FFFFFF;
+	height: 20px;
+	text-align: left !important;
+	padding: 3 3 3 3;
+}
+
+.CeldaEncabezado {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	background-color: #3F81C3;
+	height: 35px !important;
+	text-align: center;
+	margin: 3 3 3 3;
+}
+
+.CeldaDetalle {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: uppercase;
+	color: #000000;
+	background-color: #FFFFFF;
+	height: 35px !important;
+	text-align: right !important;
+}
+
+.CeldaDestinatarioTit {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF !important;
+	background-color: #03254C;
+	height: 25px;
+	text-align: right;
+	margin:  3 3 3 0 !important;
+}
+
+.CeldaDestinatarioDet {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #FFFFFF !important;
+	background-color: #d0efff;
+	height: 25px;
+	text-align: left;
+	margin:  3 3 3 0 !important;
+}
+
+.PiePagina {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 9px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #666666;
+	text-align: right;
+}

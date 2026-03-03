@@ -1,0 +1,64 @@
+{
+    "name": "damSearch",
+    "settings": {
+        "cmd": {
+            "license": "",
+            "cmdVersion": "",
+            "frameworkVersion": ""
+        },
+        "urlPrefixTemplate": "http://localhost:{port}/{path}",
+        "urlPrefix": "http://localhost:57645/",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Microsoft Surface",
+                "builtIn": true,
+                "height": 1366,
+                "width": 768
+            },
+            "viewportOrientation": "landscape"
+        },
+        "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/damSearch",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": false,
+        "generateArchitectVersion": true,
+        "installStatus": "Not Installed"
+    },
+    "xdsVersion": "4.2.7",
+    "xdsBuild": 430,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "modern71",
+    "viewOrderMap": {
+        "view": [
+            "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+            "b777bc78-ac1b-4c89-beec-997c780710ac",
+            "8c7f70fa-6861-490f-b55e-d26dd1e5d660"
+        ],
+        "store": [
+            "9f533325-9a3b-4df6-9849-267e8571c9e5"
+        ],
+        "controller": [],
+        "model": [
+            "4a2f07cc-4f3c-43ee-8b89-47dc252cef29"
+        ],
+        "resource": [
+            "1f8c0367-ccd5-49b7-9e04-758abb52a55c",
+            "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
+            "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
+            "a5449007-881d-4a2a-a9ab-d2488318b8cc",
+            "47d04085-020e-412d-b41a-61b2f460ab9c",
+            "b0cb232f-a444-4b5e-8682-939e77dc2bbc",
+            "68a88525-7ff8-4e1f-bbfe-ad160190cfba",
+            "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
+            "e5346b91-c26f-4b84-9545-73fcb3f44295",
+            "1a4830a5-c8dd-4983-80ee-7e50d88836a5"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

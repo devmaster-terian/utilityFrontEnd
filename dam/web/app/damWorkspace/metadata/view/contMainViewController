@@ -1,0 +1,320 @@
+{
+    "type": "Ext.app.ViewController",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userAlias": "contmain",
+        "designer|userClassName": "contMainViewController",
+        "inactivityTime": 900000,
+        "timer": 0
+    },
+    "configAlternates": {
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "config": "object",
+        "inactivityTime": "number",
+        "timer": "number"
+    },
+    "designerId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "inactivityTime",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "timer",
+            "type": "string"
+        }
+    ],
+    "cn": [
+        {
+            "type": "processcfgfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "config"
+                ],
+                "fn": "processContMainViewController",
+                "implHandler": [
+                    "return config;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "processContMainViewController",
+            "designerId": "6c181daf-70a8-4056-9111-2c0711ab1ae6"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "init",
+                "implHandler": [
+                    "this.startInactivityMonitor();",
+                    "this.startClock();",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "console.log('init...');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "init",
+            "designerId": "b2eb164c-1400-415e-9dfc-2abc5c7a0f4d"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "startInactivityMonitor",
+                "implHandler": [
+                    "var me = this;",
+                    "",
+                    "// Obtenemos el elemento DOM del Viewport",
+                    "var el = Ext.getBody();",
+                    "",
+                    "// Escuchamos eventos que indiquen actividad del usuario",
+                    "// 'touchstart' es vital para móviles/tablets en Modern Toolkit",
+                    "el.on({",
+                    "    touchstart: me.resetTimer,",
+                    "    mousedown: me.resetTimer,",
+                    "    keydown: me.resetTimer,",
+                    "    //mousemove: me.resetTimer, // Opcional: puede ser costoso en rendimiento",
+                    "    scope: me",
+                    "});",
+                    "",
+                    "// Iniciamos el temporizador por primera vez",
+                    "me.resetTimer();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "startInactivityMonitor",
+            "designerId": "075fb9a2-3d9b-44de-94b1-c2222a2cac76"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "resetTimer",
+                "implHandler": [
+                    "console.info('resetTimer');",
+                    "",
+                    "var me = this;",
+                    "",
+                    "// Si ya existe un timer pendiente, lo limpiamos",
+                    "if (me.getTimer()) {",
+                    "    clearTimeout(me.getTimer());",
+                    "}",
+                    "",
+                    "// Creamos un nuevo timer",
+                    "var newTimer = setTimeout(function() {",
+                    "    me.handleSessionTimeout();",
+                    "    console.log('Corriendo timer');",
+                    "}, me.getInactivityTime());",
+                    "",
+                    "",
+                    "// Guardamos la referencia",
+                    "me.setTimer(newTimer);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "resetTimer",
+            "designerId": "dcc678b6-f184-45e2-9664-c48f7447dfba"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "handleSessionTimeout",
+                "implHandler": [
+                    "var me = this;",
+                    "",
+                    "// 1. Detener listeners para evitar errores o bucles",
+                    "var el = Ext.getBody();",
+                    "el.un({",
+                    "    touchstart: me.resetTimer,",
+                    "    mousedown: me.resetTimer,",
+                    "    keydown: me.resetTimer,",
+                    "    mousemove: me.resetTimer,",
+                    "    scope: me",
+                    "});",
+                    "",
+                    "// 2. Mostrar mensaje o cerrar sesión directamente",
+                    "Ext.Msg.alert(",
+                    "    'Sesión Expirada',",
+                    "    'Tu sesión se ha cerrado por inactividad.',",
+                    "    function() {",
+                    "        me.doLogout();",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "handleSessionTimeout",
+            "designerId": "b25e9c9b-0823-43b6-af90-680aaebe834e"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "doLogout",
+                "implHandler": [
+                    "// Aquí pones tu lógica:",
+                    "// - Destruir la vista principal",
+                    "// - Limpiar localStorage",
+                    "// - Redirigir al Login",
+                    "",
+                    "// Ejemplo:",
+                    "this.getView().destroy();",
+                    "sessionStorage.clear();",
+                    "window.location.href = \"../basicAccess/index.html\";",
+                    "",
+                    "console.log('Usuario desconectado por inactividad');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "doLogout",
+            "designerId": "70cfbe7f-d884-4295-846c-7486e194d8f0"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "startClock",
+                "implHandler": [
+                    "var me = this;",
+                    "",
+                    "        // 1. Ejecutamos la actualización una vez inmediatamente para no esperar 1 segundo en blanco",
+                    "        me.updateClock();",
+                    "",
+                    "        // 2. Configuramos el setInterval para que se repita cada 1000 milisegundos (1 segundo)",
+                    "        me.relojInterval = setInterval(function() {",
+                    "            me.updateClock();",
+                    "        }, 500);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "startClock",
+            "designerId": "496bbb15-b624-43ae-b42b-0e21fa49f79c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "updateClock",
+                "implHandler": [
+                    "// Obtenemos la hora actual en formato legible (ej: \"21:29:36\")",
+                    "var horaActual = new Date().toLocaleTimeString();",
+                    "var idProspect = jsTerian.getDataObjSS('UTM_PROSPECT','id_prospect');",
+                    "var email = jsTerian.getDataObjSS('UTM_PROSPECT','email');",
+                    "",
+                    "if(idProspect){",
+                    "    if(Ext.getCmp('btnProspect').getText() !== email){",
+                    "        Ext.getCmp('btnHome').fireEvent('tap');",
+                    "        Ext.getCmp('btnProspect').setText(email);",
+                    "",
+                    "        Ext.getCmp('contMain').prospectDetail(idProspect);",
+                    "    }",
+                    "}",
+                    "else{",
+                    "    Ext.getCmp('btnProspect').setText('Prospecto');",
+                    "}",
+                    "",
+                    "var numAssets = jsTerian.getDataObjSS('UTM_PROSPECT','num_assets');",
+                    "",
+                    "Ext.getCmp('btnProspect').setBadgeText(numAssets);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "updateClock",
+            "designerId": "cae3a9a3-f001-4e21-b750-6abf4426146e"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "destroy",
+                "implHandler": [
+                    "if (this.relojInterval) {",
+                    "            clearInterval(this.relojInterval);",
+                    "        }",
+                    "        ",
+                    "        this.callParent(); // Llamada obligatoria a la clase padre en ExtJS"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "destroy",
+            "designerId": "933aa0de-d559-4e0e-9e73-e141c267c70a"
+        }
+    ]
+}

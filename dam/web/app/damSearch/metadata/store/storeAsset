@@ -1,0 +1,163 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "storeAsset",
+        "model": "modelAsset",
+        "storeId": "storeAsset"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyJsonStore",
+    "designerId": "9f533325-9a3b-4df6-9849-267e8571c9e5",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "ajaxProxyAsset"
+            },
+            "configAlternates": {
+                "designer|displayName": "string"
+            },
+            "name": "MyAjaxProxy",
+            "designerId": "1b636a04-1e93-4b8d-a7a4-f04606c5ca3d",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "jsonReaderAsset",
+                        "rootProperty": "assets"
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "972645c6-cb87-466e-bace-66d59467312c"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "jsonstore"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "// Función para formatear el tamaño (Bytes a KB, MB, etc.)",
+                    "const formatBytes = (bytes, decimals = 2) => {",
+                    "    if (!bytes || bytes === 0) return '0 Bytes';",
+                    "    const k = 1024;",
+                    "    const dm = decimals < 0 ? 0 : decimals;",
+                    "    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];",
+                    "    const i = Math.floor(Math.log(bytes) / Math.log(k));",
+                    "    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];",
+                    "};",
+                    "",
+                    "// Función para obtener la extensión",
+                    "const getExt = (name) => {",
+                    "    if (!name) return '';",
+                    "    return name.slice(((name.lastIndexOf(\".\") - 1) >>> 0) + 2).toUpperCase();",
+                    "};",
+                    "",
+                    "// Petición para traer los projectos",
+                    "var url = jsTerian.getUrl('asset/search');",
+                    "",
+                    "console.log('url:',url);",
+                    "",
+                    "// Obtén el proxy del store",
+                    "const proxy = jsonstore.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Obtener la pageSize y definir el currentPage en la primer página",
+                    "var pageSize = jsonstore.pageSize || 10;",
+                    "jsonstore.currentPage = 1;",
+                    "",
+                    "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
+                    "const params = {};",
+                    "params.per_page = pageSize;",
+                    "params.q = jsTerian.readElementValue('tfAssetSearch');",
+                    "",
+                    "// Asigna los parámetros al proxy",
+                    "proxy.setExtraParams(params);",
+                    "",
+                    "// Agrega el encabezado de autorización",
+                    "jsTerian.addAuthorizationHeader(jsonstore);",
+                    "",
+                    "jsonstore.load({",
+                    "    callback: function(records, operation, success) {",
+                    "        if (success) {",
+                    "            if (records.length === 0) {",
+                    "                console.info('No hay Registros');",
+                    "            }",
+                    "            else{",
+                    "                records.forEach(record => {",
+                    "                    const filename = record.get('original_filename'); // Extraído de la data",
+                    "                    const bytes = record.get('size_bytes');           // Extraído de la data",
+                    "",
+                    "                    record.set({",
+                    "                        file_extension: getExt(filename),",
+                    "                        file_size: formatBytes(bytes)",
+                    "                    });",
+                    "                });                ",
+                    "            }",
+                    "        } else {",
+                    "            const response = operation.getError().response;",
+                    "            const status = response.status;",
+                    "",
+                    "            if (status >= 500) {",
+                    "                let msg = \"Error en el servidor (\" + status + \")\";",
+                    "",
+                    "                try {",
+                    "                    const json = Ext.decode(response.responseText);",
+                    "                    if (json.error) {",
+                    "                        msg = json.error;",
+                    "                    }",
+                    "                } catch (e) {",
+                    "                    console.warn('No se pudo parsear el error');",
+                    "                }",
+                    "",
+                    "                jsTerian.toastAlert(msg, 'error');",
+                    "            }",
+                    "",
+                    "            jsonstore.removeAll();",
+                    "        }",
+                    "    }",
+                    "});"
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "d8f3ca78-ba73-43a9-a41d-0bbebaebf2ce"
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "type": "Ext.data.TreeStore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "designer|userClassName": "storeMenuTree",
+        "model": "modelMenuTree",
+        "root": [
+            "expanded: true"
+        ],
+        "storeId": "storeMenuTree"
+    },
+    "configAlternates": {
+        "autoLoad": "boolean",
+        "designer|userClassName": "string",
+        "model": "model",
+        "root": "object",
+        "storeId": "string"
+    },
+    "name": "MyTreeStore",
+    "designerId": "110fde45-4afa-4f16-b475-4daaddfd6aec",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "resources/data/menu.json"
+            },
+            "configAlternates": {
+                "url": "string"
+            },
+            "name": "MyAjaxProxy",
+            "designerId": "e57040c5-21f5-4e8d-abd3-f6f500fa97ff",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "name": "MyJsonReader",
+                    "designerId": "322b7da9-00fe-4ccc-9a08-749d5601827c"
+                }
+            ]
+        }
+    ]
+}

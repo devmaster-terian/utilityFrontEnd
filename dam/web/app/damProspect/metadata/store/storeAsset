@@ -1,0 +1,50 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "storeAsset",
+        "model": "modelAsset",
+        "storeId": "storeAsset"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyStore",
+    "designerId": "b4460bff-ef98-435e-a494-a372d85d8aa9",
+    "cn": [
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onStoreLoad",
+                "implHandler": [
+                    "console.log('cargadop');",
+                    "",
+                    "",
+                    "",
+                    "console.log('store - records >>>',records);",
+                    "",
+                    ""
+                ],
+                "name": "load"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onStoreLoad",
+            "designerId": "6f42244d-8cbd-4968-b78d-d8088ee82e2d"
+        }
+    ]
+}

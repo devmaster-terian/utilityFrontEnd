@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Demostración Caja Refrigerada 2026",
+      "date_uploaded": "2026-01-20",
+      "thumbnail_url": "https://placehold.jp/24/336699/ffffff/300x160.png?text=Video+Refrigerada+1",
+      "file_type": "mp4",
+      "duration": "02:15"
+    },
+    {
+      "id": 2,
+      "name": "Pruebas de Temperatura en Ruta",
+      "date_uploaded": "2026-01-21",
+      "thumbnail_url": "https://placehold.jp/24/336699/ffffff/300x160.png?text=Video+Refrigerada+2",
+      "file_type": "mp4",
+      "duration": "01:45"
+    },
+    {
+      "id": 3,
+      "name": "Caja Seca 53ft - Tour Interior",
+      "date_uploaded": "2026-01-15",
+      "thumbnail_url": "https://placehold.jp/24/2c3e50/ffffff/300x160.png?text=Video+Caja+Seca+1",
+      "file_type": "mov",
+      "duration": "03:20"
+    },
+    {
+      "id": 4,
+      "name": "Mantenimiento Preventivo Frenos",
+      "date_uploaded": "2026-01-22",
+      "thumbnail_url": "https://placehold.jp/24/2c3e50/ffffff/300x160.png?text=Video+Mantenimiento",
+      "file_type": "mp4",
+      "duration": "05:10"
+    },
+    {
+      "id": 5,
+      "name": "Seminuevas 2017: Inspección Física",
+      "date_uploaded": "2026-01-18",
+      "thumbnail_url": "https://placehold.jp/24/e67e22/ffffff/300x160.png?text=Video+Seminuevas+2017",
+      "file_type": "mp4",
+      "duration": "04:00"
+    },
+    {
+      "id": 6,
+      "name": "Cargobull: Innovación Alemana",
+      "date_uploaded": "2026-01-10",
+      "thumbnail_url": "https://placehold.jp/24/27ae60/ffffff/300x160.png?text=Video+Cargobull",
+      "file_type": "mp4",
+      "duration": "01:30"
+    },
+    {
+      "id": 7,
+      "name": "Lanzamiento Línea Terian 2026",
+      "date_uploaded": "2026-01-05",
+      "thumbnail_url": "https://placehold.jp/24/c0392b/ffffff/300x160.png?text=Video+Lanzamiento",
+      "file_type": "mp4",
+      "duration": "02:00"
+    },
+    {
+      "id": 8,
+      "name": "Instalación de Thermo King",
+      "date_uploaded": "2026-01-12",
+      "thumbnail_url": "https://placehold.jp/24/336699/ffffff/300x160.png?text=Video+Instalacion",
+      "file_type": "mp4",
+      "duration": "06:45"
+    },
+    {
+      "id": 9,
+      "name": "Casos de Éxito: Logística Nacional",
+      "date_uploaded": "2026-01-23",
+      "thumbnail_url": "https://placehold.jp/24/8e44ad/ffffff/300x160.png?text=Video+Casos+Exito",
+      "file_type": "mp4",
+      "duration": "03:15"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_tppaeveq",
+        "includeInBundle": true,
+        "url": "../../../../framework/plugins/iziToast-master/dist/js/iziToast.min.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js3",
+    "designerId": "49742157-7ac6-425d-99e0-5bc1ec75c5f2"
+}

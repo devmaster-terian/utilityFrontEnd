@@ -1,0 +1,523 @@
+.labelBlue {
+    color: #4E85AF !important;
+    font-weight: 100 !important;
+}
+
+.labelSimpleBlue {
+    color: #4E85AF !important;
+}
+
+.labelBold {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-weight: bold !important;
+}
+ 
+.fontMetrosBuenos {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-size: 400% !important;
+    font-weight: normal !important;
+    color: darkgreen !important;
+    text-align: right !important;
+}
+
+.fontToneladasBuenas {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-size: 200% !important;
+    font-weight: normal !important;
+    color: orangered !important;
+    text-align: right !important;
+}
+
+.fontMetrosProducir {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-size: 400% !important;
+    font-weight: normal !important;
+    color: #1e767a !important;
+    text-align: right !important;
+}
+
+.fontToneladasProducir {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-size: 200% !important;
+    font-weight: normal !important;
+    color: #348387 !important;
+    text-align: right !important;
+}
+
+
+.fontProduccionDia {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-size: 200% !important;
+    font-weight: normal !important;
+    color: #734861 !important;
+    text-align: right !important;
+}
+
+.fontMetrosScrap {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-size: 200% !important;
+    font-weight: normal !important;
+    color: orangered !important;
+    text-align: right !important;
+}
+
+.fontVelocidadActual {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-weight: normal !important;
+    font-size: 300% !important;
+    color: darkgreen !important;
+    text-align: right !important;
+}
+
+.fontVelocidadPromedio {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-weight: normal !important;
+    font-size: 260% !important;
+    color: darkorange !important;
+    text-align: right !important;
+}
+
+.fontVelocidadMaxima {
+    font-family: 'ubunturegular', Arial, sans-serif !important;
+    font-weight: normal !important;
+    font-size: 260% !important;
+    color: darkred !important;
+    text-align: right !important;
+}
+
+.fondoCentroTrabajo{
+    background-image: url(../../framework/recursosIMG/acp/acpNoIdentificado.png) !important;
+    background-color: #054062 !important; 
+}
+
+.fondoPctAvance{
+    background-color: black !important; 
+}
+
+
+.fuenteACPFieldSetCorto
+{
+    font-weight: bold !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:90% !important;
+    color: rgb(25,25,112) !important;
+    border: 1px !important;
+  border-color: #38678C !important;
+  border-style: solid !important;
+}
+
+.fuenteACPFieldSet
+{
+    font-weight: bold !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:120% !important;
+    color: rgb(25,25,112) !important;
+}
+
+.fuenteACPRemarca
+{
+    font-weight: bold !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #008000 !important;
+}
+
+.fuenteACPField
+{
+    margin: 0 0 15 0 !important;
+    font-weight: bold !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #000000 !important;
+}
+
+.fuenteACPFieldEmpty
+{
+    font-weight: normal !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:20% !important;
+}
+
+.fuenteACPFieldContentRedRight
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #8B0000 !important;
+    text-align: right;
+}
+
+
+.fuenteACPFieldContentRed
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #8B0000 !important;
+}
+
+.fuenteACPFieldContentGreen
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #006600 !important;
+}
+
+
+.fuenteACPFieldContent
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #24282B !important;
+}
+
+.fuenteACPFieldContentRight
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:115% !important;
+    color: #24282B !important;
+    text-align: right !important;
+}
+
+.fuenteACPFieldLargeContentRight
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:150% !important;
+    color: #24282B !important;
+    text-align: right !important;
+}
+
+.fuenteACPFieldXLargeContentRight
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:160% !important;
+    color: #24282B !important;
+    text-align: right !important;
+}
+
+.fuenteACPFieldHeaderRightGreen
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:120% !important;
+    color: #006600 !important;
+    text-align: right !important;
+}
+
+.fuenteACPFieldHeaderRightOrange
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:130% !important;
+    color: #cc3300 !important;
+    /*text-shadow: 0px 0px 2px  #ff9900 !important;*/
+    text-align: right !important;
+}
+
+.fuenteACPFieldHeaderRightBlue
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:120% !important;
+    color: #003366 !important;
+    text-align: right !important;
+}
+
+.fuenteACPFieldXLargeContentRight
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:200% !important;
+    color: #24282B !important;
+    text-align: right !important;
+}
+
+
+.fuenteACPFieldMidContent
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:120% !important;
+    color: #004C99 !important;
+    text-align: right !important;
+}
+
+.fuenteACPFieldContentAlt
+{
+    margin: 5 0 0 0 !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:400% !important;
+    color: #24282B !important;
+}
+
+
+.fuenteNotificacion
+{
+    font-weight: bold !important; 
+    font-family: 'ubunturegular' !important; 
+    font-size:250% !important;
+    border: 1px !important;
+    color: #014965;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    text-align: center !important;
+}
+
+.fontCentroTrabajo{
+    font-weight : bold !important; 
+    font-family : 'ubunturegular' !important; 
+    font-size   : 200% !important;
+    color       : #FFFFFF;
+    border      : 1px !important;
+    text-shadow : -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+.fontPctAvanceEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 200% !important;
+    color: #265D84 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontPctAvance {
+    font-family: 'ubunturegular' !important;
+    font-size: 900% !important;
+    color: #265D84 !important;
+    text-align: right !important;
+}
+
+
+.fontVelocidadActualEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 95% !important;
+    color: #008000 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontTiempoParoEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 95% !important;
+    color: #990000 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontTiempoParo {
+    font-family: 'ubunturegular' !important;
+    font-size: 300% !important;
+    color: #990000 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontTiempoParada {
+    font-family: 'ubunturegular' !important;
+    font-size: 400% !important;
+    font-weight: bold !important;
+    color: #990000 !important;
+    text-align: center !important;
+}
+
+.fontMedidorProgramaEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #00514f !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorPrograma {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #00514f !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+
+.fontMedidorProgramaMaxEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #196260 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+
+.fontMedidorProduccionEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #152736 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorProduccion {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #23415a !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorMaquinaEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #b26b00 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorMaquina {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #FF9A00 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontToneladasSeleccionadas {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #009BC4 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontToneladasMaximas {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #D60101 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontToneladasDisponibles {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #00C303 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontToneladasAcomuladasPrograma {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #026400 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontToneladasProgramadas {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #0C8F19 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontToneladasProgDiaSiguiente {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #F05500 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+
+.fontMedidorProduccionAprobadaEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #005900 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorProduccionAprobada {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #007300 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorProduccionProducidaEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #315b7d !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorProduccionProducida {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #3f75a2 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorProduccionMermaEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #6f0000 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorProduccionMerma {
+    font-family: 'ubunturegular' !important;
+    font-size: 280% !important;
+    color: #8b0000 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+
+.fontMedidorTurnoMaxEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #006600 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorObjetivoMaxEtiqueta {
+    font-family: 'ubunturegular' !important;
+    font-size: 90% !important;
+    color: #cc7b00 !important;
+    text-align: left !important;
+    font-weight: bold !important;
+}
+
+
+.fontMedidorProgramaMax {
+    font-family: 'ubunturegular' !important;
+    font-size: 430% !important;
+    color: #196260 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorTurnoMax {
+    font-family: 'ubunturegular' !important;
+    font-size: 430% !important;
+    color: #008000 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}
+
+.fontMedidorObjetivoMax {
+    font-family: 'ubunturegular' !important;
+    font-size: 430% !important;
+    color: #ff9a00 !important;
+    text-align: right !important;
+    font-weight: bold !important;
+}

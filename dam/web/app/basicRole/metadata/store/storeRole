@@ -1,0 +1,123 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "storeRole",
+        "storeId": "storeRole"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "storeId": "string"
+    },
+    "name": "MyJsonStore",
+    "designerId": "6c6a206d-db83-4675-b883-143e5d3d9138",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy2",
+            "designerId": "0f53dec2-1ced-47c3-ad89-1ca30561ecd8",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "roles"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader2",
+                    "designerId": "7e134c72-a42e-4968-9fcb-4095bc9aee1b"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "jsonstore"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "// Petición para traer los projectos",
+                    "var url = jsTerian.getUrl('role/read');",
+                    "",
+                    "// Obtén el proxy del store",
+                    "const proxy = jsonstore.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Obtener la pageSize y definir el currentPage en la primer página",
+                    "var pageSize = jsonstore.pageSize || 10;",
+                    "jsonstore.currentPage = 1;",
+                    "",
+                    "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
+                    "const params = {};",
+                    "params.per_page = pageSize;",
+                    "",
+                    "// Asigna los parámetros al proxy",
+                    "proxy.setExtraParams(params);",
+                    "",
+                    "// Agrega el encabezado de autorización",
+                    "jsTerian.addAuthorizationHeader(jsonstore);",
+                    "",
+                    "jsonstore.load({",
+                    "    callback: function(records, operation, success) {",
+                    "        if (success) {",
+                    "            if (records.length === 0) {",
+                    "                console.info('No hay usuarios');",
+                    "            }",
+                    "        } else {",
+                    "            const response = operation.getError().response;",
+                    "            const status = response.status;",
+                    "",
+                    "            if (status >= 500) {",
+                    "                let msg = \"Error en el servidor (\" + status + \")\";",
+                    "",
+                    "                try {",
+                    "                    const json = Ext.decode(response.responseText);",
+                    "                    if (json.error) {",
+                    "                        msg = json.error;",
+                    "                    }",
+                    "                } catch (e) {",
+                    "                    console.warn('No se pudo parsear el error');",
+                    "                }",
+                    "",
+                    "                jsTerian.toastAlert(msg, 'error');",
+                    "            }",
+                    "",
+                    "            jsonstore.removeAll();",
+                    "        }",
+                    "    }",
+                    "});"
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "1f303c18-1b56-4c5f-8574-4f3b1d2ff9ed"
+        }
+    ]
+}

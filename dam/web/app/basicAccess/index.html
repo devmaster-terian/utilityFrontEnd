@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<!-- Auto Generated with Sencha Architect -->
+<!-- Modifications to this file will be overwritten. ECRC -->
+<html>
+<head>
+    <link rel="manifest" href="/manifest.json">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>basicAccess</title>
+<script>
+    console.log('Probando registro desde HTML...');
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('¡Logrado!', reg))
+            .catch(err => console.error('Falló:', err));
+    }
+</script>    
+    <script>
+        var Ext = Ext || {};
+        Ext.theme = {
+            name: "Triton"
+        };
+    </script>
+    <script src="../../../../framework/extjs-7.1-modern/build/ext-modern-all.js"></script>
+    <link rel="stylesheet" href="../../../../framework/extjs-7.1-modern/build/modern/theme-triton/resources/theme-triton-all.css">
+    <script src="configRelease.js"></script>
+    <script src="../configSystem.js"></script>
+    <script src="../../../../framework/recursosJS/jsTerian.js"></script>
+    <script src="../../../../framework/resourcesJS/jsDam.js"></script>
+    <script src="../../../../framework/plugins/iziToast-master/dist/js/iziToast.min.js"></script>
+    <link rel="stylesheet" href="../../../../framework/plugins/iziToast-master/dist/css/iziToast.min.css">
+    <link rel="stylesheet" href="../../../../framework/plugins/fontawesome-free-7.1.0-web/css/all.min.css" id="fontawesome-free-7.1.0-web">
+    <link rel="stylesheet" href="../../../../framework/recursosCSS/formatoForm.css">
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body></body>
+</html>

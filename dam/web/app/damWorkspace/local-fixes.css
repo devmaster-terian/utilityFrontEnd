@@ -1,0 +1,303 @@
+/* --- 1. EL GRID (El contenedor general) --- */
+/* Esto obliga al DataView a comportarse como una rejilla flexible */
+.assets-grid-view .x-dataview-inner,
+.assets-grid-view .x-dataview-body-el, 
+.assets-grid-view .x-scroll-view {
+    display: flex !important;
+    flex-wrap: wrap !important;     /* Permite que bajen a la siguiente línea */
+    justify-content: center !important; /* CENTRADO HORIZONTAL */
+    align-content: flex-start !important;
+    
+    /*background-color: #f5f7fa !important; /* Color gris claro */
+    width: 100% !important;
+    padding: 20px !important;
+    gap: 20px !important;
+}
+
+.assets-grid-view .x-dataview-item {
+    /* Reset total para quitar el comportamiento de lista vertical */
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: none !important;  /* Evita que se estire o encoja */
+    
+    display: block !important; /* Comportamiento normal de bloque */
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* --- 2. LA TARJETA (El estilo visual) --- */
+.asset-card {
+    width: 380px;
+    height: auto; /* Asegúrate de mantener esto en 'auto' como hicimos antes */
+    background: #22313f; /* CAMBIO: Fondo oscuro (gris azulado) en lugar de blanco */
+    border-radius: 8px;
+    border: 1px solid #34495e; /* CAMBIO: Borde más oscuro para que coincida con el tema */
+    box-shadow: 0 4px 7px rgba(0,0,0,0.4); /* CAMBIO: Sombra más oscura y pronunciada para el contraste */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+
+}
+
+.asset-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.6);
+
+}
+
+/* --- 3. IMAGEN Y TEXTO --- */
+.card-thumb {
+    position: relative;
+    height: 165px;
+    background-color: #34495e;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita que la imagen se deforme */
+}
+
+.file-type-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(39, 174, 96, 0.8); /* OPCIONAL: Un verde un poco más vibrante para resaltar */
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.card-body {
+    padding: 10px;
+    flex: 1; /* Empuja la botonera hacia abajo si falta texto */
+}
+
+.asset-title {
+    font-weight: 700;
+   color: #ecf0f1;
+    font-size: 12px;
+    margin-bottom: 4px;
+    /* Trunca el texto si es muy largo */
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.asset-date {
+    margin-right: auto;
+    font-size: 11px;
+    color: #bdc3c7;
+}
+
+/* --- 4. LOS CUADRITOS (Botonera) --- */
+.card-actions {
+    display: flex;
+    align-items: center;
+    /*justify-content: flex-end; /* Distribuye los cuadros a la derecha */
+    /*
+     justify-content: space-between; /* Distribuye los cuadros uniformemente 
+    */
+
+    padding: 5px 7px;
+    border-top: 1px solid #34495e; /* CAMBIO: Borde superior oscuro */
+    background-color: #1a252f; /* CAMBIO: Fondo de la botonera más oscuro que la tarjeta */
+    
+    gap: 6px;
+}
+
+.action-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #34495e; /* Borde gris del cuadrito */
+    border-radius: 7px;
+    background: trasnparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ecf0f1;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #3498db; /* Azul Terian al pasar el mouse */
+    color: white;
+    border-color: #3498db;
+}
+
+.action-btn i {
+    color: #ecf0f1; /* Asegura que los iconos sean claros. Puedes añadir un :hover para un color de acento */
+}
+.action-btn:hover i {
+    color: #3498db; /* Ejemplo: Azul claro al pasar el mouse sobre el icono */
+}
+
+
+.action-btn[data-action="delete"] {
+    background-color: #dc3545 !important; /* Rojo alerta */
+    color: #ffffff !important;            /* Ícono blanco */
+    border-color: #dc3545 !important;
+}
+
+/* Efecto al tocarlo */
+.action-btn[data-action="delete"]:active {
+    background-color: #c82333 !important;
+}
+
+/* 1. Configuración base (Pantallas normales/angostas) */
+
+.workspace-base {
+    background-color: #f0f0f0 !important;
+    
+    padding: 0 !important;
+    
+    /* Centrar la imagen siempre */
+    background-position: center center !important;
+    /* No repetir tipo mosaico */
+    background-repeat: no-repeat !important;
+    
+    /* 'cover' llena todo el espacio. Puede recortar un poco los bordes,
+       pero al cambiar de imagen según el ancho, el recorte será mínimo. 
+       Si usas 'contain', no se recorta nada pero quedarán espacios vacíos. */
+    background-size: cover !important;
+    
+    /* Color de fondo por si la imagen tarda en cargar */
+    background-color: #ecf0f1; 
+    
+    border:0 !important;
+}
+
+.workspace-bg {
+    /* Supongamos que tu imagen normal se llama así */
+    background-image: url('resources/images/bg_workspace.jpg') !important;
+    
+    padding: 0 !important;
+    
+    /* Centrar la imagen siempre */
+    background-position: center center !important;
+    /* No repetir tipo mosaico */
+    background-repeat: no-repeat !important;
+    
+    /* 'cover' llena todo el espacio. Puede recortar un poco los bordes,
+       pero al cambiar de imagen según el ancho, el recorte será mínimo. 
+       Si usas 'contain', no se recorta nada pero quedarán espacios vacíos. */
+    background-size: cover !important;
+    
+    /* Color de fondo por si la imagen tarda en cargar */
+    background-color: #ecf0f1; 
+    
+    border:0 !important;
+}
+
+/* 2. Regla para pantallas Widescreen */
+/* Cuando el ancho de la pantalla sea de 1200px o más... */
+@media (min-width: 1200px) {
+    .workspace-bg {
+        /* ...cambiamos SOLO la URL de la imagen por la versión ancha */
+        background-image: url('resources/images/bg_workspace_wd.jpg') !important;
+    }
+}
+
+/* ==========================================================================
+   MENÚ UTILITY GO - COMPACTO 32px (SIN ICONOS)
+   ========================================================================== */
+
+/* 1. Fondo principal y dimensiones de fila */
+.x-treelist {
+    background-color: #1b2a4e !important;
+}
+
+.x-treelist {
+    background-color: #1b2a4e !important;
+}
+
+.x-treelist-row {
+    min-height: 32px !important; /* Altura reducida a 32px */
+    height: 32px !important;
+    background-color: #1b2a4e !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* Agrupa todo a la izquierda */
+    border-left: 4px solid transparent !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.panel-degradado {
+  /* 'to bottom' indica que el degradado empieza arriba y termina abajo */
+  background: linear-gradient(to bottom, #0a1128, #1b2a4e);
+  
+  /* Añadimos estilos extra para que el panel se vea bien */
+  /*border-radius: 8px;*/
+  /*padding: 20px;*/
+  color: #ffffff; /* Texto blanco para asegurar legibilidad */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Un borde sutil */
+}
+
+/* 2. ELIMINAR ESPACIO DE ICONOS */
+/* Al no usar iconos, ocultamos el contenedor para que el texto se pegue a la izquierda */
+.x-treelist-item-icon {
+    display: none !important; 
+}
+
+/* 3. TEXTO DEL MENÚ */
+.x-treelist-item-text {
+    font-size: 13px !important; /* Un poco más pequeño para 32px */
+    color: #d1d9e6 !important;
+    line-height: 32px !important; /* Centrado vertical */
+    flex: 0 1 auto !important;    /* Solo ocupa lo que mide el texto */
+    padding-left: 18px !important; /* Margen desde el borde izquierdo */
+    padding-right: 16px !important;  /* Espacio pegadito a la flecha */
+    margin: 0 !important;
+}
+
+/* 4. EXPANDER (LA FLECHITA) */
+.x-treelist-item-expander {
+    flex: none !important;
+    width: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.x-treelist-item-expander::after {
+    font-family: "Font Awesome 7 Free", sans-serif !important;
+    font-weight: 900 !important;
+    content: "\f054" !important; 
+    font-size: 10px !important; /* Flecha más discreta */
+    line-height: 32px !important;
+    color: #94a3b8 !important;
+}
+
+/* 5. EFECTOS HOVER Y SELECCIONADO */
+.x-treelist-item:not(.x-treelist-item-selected) > .x-treelist-row:hover {
+    background-color: #243b6b !important;
+    border-left-color: #336699 !important;
+}
+
+.x-treelist-item-selected > .x-treelist-row {
+    background-color: #14203d !important;
+    border-left-color: #5dade2 !important;
+}
+
+.x-treelist-item-selected .x-treelist-item-text {
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+.x-treelist-item-selected .x-treelist-item-expander::after {
+    color: #5dade2 !important;
+}
+
+/* Rotación de flecha cuando está expandido */
+.x-treelist-item-expanded > .x-treelist-row > .x-treelist-item-expander::after {
+    content: "\f078" !important; /* fa-chevron-down */
+}
+

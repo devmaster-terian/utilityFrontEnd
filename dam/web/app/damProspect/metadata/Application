@@ -1,0 +1,56 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "modelProspect",
+            "modelAsset"
+        ],
+        "name": "damProspect",
+        "stores": [
+            "storeProspect",
+            "storeAsset"
+        ],
+        "views": [
+            "contMain"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "Ext.getCmp('contMain').prospectStatus();",
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "2fb7254c-2a79-4d6e-ade2-e831b5badbc3"
+        }
+    ]
+}

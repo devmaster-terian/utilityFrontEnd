@@ -1,0 +1,141 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "modelResource"
+        ],
+        "name": "damResource",
+        "stores": [
+            "storeResource"
+        ],
+        "views": [
+            "contMain"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "appLocal = this.getApplication();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "3a531434-c7a4-441c-99ae-94549f89c52c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "record"
+                ],
+                "fn": "previewAsset",
+                "implHandler": [
+                    "var me = this,",
+                    "    type = record.get('file_type').toLowerCase(),",
+                    "    url = record.get('url'), // Asegúrate de tener la URL real del archivo",
+                    "    nombre = record.get('name'),",
+                    "    contentItem;",
+                    "",
+                    "console.log('previewAsset - type',type);",
+                    "",
+                    "// 1. Determinar qué componente usar según el tipo",
+                    "switch (type) {",
+                    "    case 'mp4':",
+                    "    case 'mov':",
+                    "    case 'video':",
+                    "        contentItem = {",
+                    "            xtype: 'video',",
+                    "            url: url,",
+                    "            posterUrl: record.get('thumbnail_url'), // Imagen previa",
+                    "            autoResume: true",
+                    "        };",
+                    "        break;",
+                    "",
+                    "    case 'jpg':",
+                    "    case 'png':",
+                    "    case 'image':",
+                    "        contentItem = {",
+                    "            xtype: 'image',",
+                    "            src: url,",
+                    "            mode: 'img', // Para que mantenga proporciones",
+                    "            style: 'background-size: contain;'",
+                    "        };",
+                    "        break;",
+                    "",
+                    "    case 'pdf':",
+                    "        // Los PDF se ven mejor en un iframe",
+                    "        contentItem = {",
+                    "            xtype: 'container',",
+                    "            html: '<iframe src=\"' + url + '\" width=\"100%\" height=\"100%\" style=\"border: none;\"></iframe>'",
+                    "        };",
+                    "        break;",
+                    "",
+                    "    case 'docx':",
+                    "    case 'xlsx':",
+                    "    case 'pptx':",
+                    "        // Para Office usamos el visor oficial de Microsoft (gratuito para web)",
+                    "        var officeUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(url);",
+                    "        contentItem = {",
+                    "            xtype: 'container',",
+                    "            html: '<iframe src=\"' + officeUrl + '\" width=\"100%\" height=\"100%\" style=\"border: none;\"></iframe>'",
+                    "        };",
+                    "        break;",
+                    "",
+                    "    default:",
+                    "        Ext.Msg.alert('Aviso', 'No hay vista previa disponible para este tipo de archivo.');",
+                    "        return;",
+                    "}",
+                    "",
+                    "// 2. Crear y mostrar el Diálogo (Modal)",
+                    "var dialog = Ext.create('Ext.Dialog', {",
+                    "    title: nombre,",
+                    "    closable: true,",
+                    "    maximizable: true,",
+                    "    width: '90%',",
+                    "    height: '90%',",
+                    "    layout: 'fit', // El contenido ocupará todo el modal",
+                    "    items: [contentItem]",
+                    "});",
+                    "",
+                    "dialog.show();"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "previewAsset",
+            "designerId": "124c4e8f-17f9-4162-a6d1-421be9791d6f"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<empresa>
+	<sistema nombreSistema="AHORROMAX">
+			<tipoAmbiente>PRUEBAS</tipoAmbiente>
+			<openLinkServidor>10.11.21.14</openLinkServidor>
+			<openLinkServicio>OPENLINK_WS_PRUEBAS</openLinkServicio>
+			<openLinkPrograma>openLink.html</openLinkPrograma>
+			<codEmpresa>AMX</codEmpresa>
+			<codSistema>AHORROMAX</codSistema>
+			<tipoSalida>json</tipoSalida>
+	</sistema>
+</empresa>

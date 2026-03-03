@@ -1,0 +1,137 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "designer|userClassName": "storeUser",
+        "model": "modelUser",
+        "storeId": "storeUser"
+    },
+    "configAlternates": {
+        "autoLoad": "boolean",
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyJsonStore",
+    "designerId": "ae45e663-3d56-4643-8552-cdfcd2441d45",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "ajaxProxyUser",
+                "url": "resources/data/users.json"
+            },
+            "configAlternates": {
+                "designer|displayName": "string",
+                "url": "string"
+            },
+            "name": "MyAjaxProxy",
+            "designerId": "aa17d84c-edbd-4fb8-be39-9ef534066d74",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "jsonReaderUser",
+                        "rootProperty": "users"
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "cac797d1-000e-4f6e-b040-83425bee1eac"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "jsonstore"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "// Petición para traer los projectos",
+                    "var url = jsTerian.getUrl('user/read');",
+                    "",
+                    "// Obtén el proxy del store",
+                    "const proxy = jsonstore.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Obtener la pageSize y definir el currentPage en la primer página",
+                    "var pageSize = jsonstore.pageSize || 10;",
+                    "jsonstore.currentPage = 1;",
+                    "",
+                    "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
+                    "const params = {};",
+                    "params.per_page = pageSize;",
+                    "",
+                    "// Asigna los parámetros al proxy",
+                    "proxy.setExtraParams(params);",
+                    "",
+                    "// Agrega el encabezado de autorización",
+                    "jsTerian.addAuthorizationHeader(jsonstore);",
+                    "",
+                    "jsonstore.load({",
+                    "    callback: function(records, operation, success) {",
+                    "        if (success) {",
+                    "            if (records.length === 0) {",
+                    "                console.info('No hay usuarios');",
+                    "            }",
+                    "        } else {",
+                    "            const response = operation.getError().response;",
+                    "            const status = response.status;",
+                    "",
+                    "            if (status >= 500) {",
+                    "                let msg = \"Error en el servidor (\" + status + \")\";",
+                    "",
+                    "                try {",
+                    "                    const json = Ext.decode(response.responseText);",
+                    "                    if (json.error) {",
+                    "                        msg = json.error;",
+                    "                    }",
+                    "                } catch (e) {",
+                    "                    console.warn('No se pudo parsear el error');",
+                    "                }",
+                    "",
+                    "                jsTerian.toastAlert(msg, 'error');",
+                    "            }",
+                    "",
+                    "            jsonstore.removeAll();",
+                    "        }",
+                    "    }",
+                    "});"
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "f2839e07-6143-41bf-80a4-f6b3bf47d6a5"
+        }
+    ]
+}

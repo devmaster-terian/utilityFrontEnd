@@ -1,0 +1,520 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "cls": [
+            "colorFormLite"
+        ],
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "fullscreen": true,
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "vbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ],
+        "style": [
+            "border: 1px dashed #999;"
+        ]
+    },
+    "configAlternates": {
+        "style": "object",
+        "cls": "typedarray",
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "fullscreen": "boolean",
+        "id": "string",
+        "itemId": "string",
+        "layout": "string",
+        "responsiveConfig": "object",
+        "mixins": "object"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "updateLayoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "imagenAmbiente"
+                ],
+                "height": 212,
+                "id": "contHeader",
+                "itemId": "contHeader"
+            },
+            "configAlternates": {
+                "cls": "typedarray",
+                "height": "auto",
+                "id": "string",
+                "itemId": "string"
+            },
+            "name": "MyContainer",
+            "designerId": "43d2cda0-d401-487b-8aa7-0d06e6ccdfda"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "contLogin",
+                "itemId": "contLogin",
+                "layout": "hbox",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer1",
+            "designerId": "fb06c020-4353-4db6-817a-b1adfadd04b8",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|pack": "center",
+                        "id": "contLogo",
+                        "itemId": "contLogo",
+                        "layout": "vbox",
+                        "layout|flex": 1,
+                        "margin": "7 0 7 0",
+                        "style": [
+                            "border: 0px dashed #fc036b;"
+                        ]
+                    },
+                    "configAlternates": {
+                        "style": "object",
+                        "container|pack": "string",
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "width": "auto",
+                        "layout|flex": "number",
+                        "margin": "auto"
+                    },
+                    "name": "MyContainer3",
+                    "designerId": "8d5ce067-5f7a-4bbf-8ade-ae23ab761fe5",
+                    "cn": [
+                        {
+                            "type": "Ext.Img",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 144,
+                                "id": "imgLogo",
+                                "itemId": "imgLogo",
+                                "src": "../../../../framework/ambiente/utmLogoDAM.png"
+                            },
+                            "configAlternates": {
+                                "height": "auto",
+                                "id": "string",
+                                "itemId": "string",
+                                "src": "uri"
+                            },
+                            "name": "MyImg",
+                            "designerId": "0936c997-f25f-4741-a179-9bff86cdbbcc"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "center",
+                        "container|pack": "center",
+                        "id": "contInput",
+                        "itemId": "contInput",
+                        "layout": "hbox",
+                        "layout|flex": 1,
+                        "margin": "7 0 7 0",
+                        "style": [
+                            "border: 0px dashed #999;"
+                        ]
+                    },
+                    "configAlternates": {
+                        "style": "object",
+                        "container|align": "string",
+                        "container|pack": "string",
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number",
+                        "margin": "auto"
+                    },
+                    "name": "MyContainer4",
+                    "designerId": "e47a2322-c10d-406d-9499-09a6478ea795",
+                    "cn": [
+                        {
+                            "type": "Ext.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "contGroup",
+                                "itemId": "contGroup",
+                                "minWidth": 350
+                            },
+                            "configAlternates": {
+                                "title": "string",
+                                "id": "string",
+                                "itemId": "string",
+                                "minWidth": "auto"
+                            },
+                            "name": "MyContainer8",
+                            "designerId": "71b5d2fc-4012-406b-bcd6-daaffe851f50",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "contInputTf",
+                                        "itemId": "contInputTf"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer7",
+                                    "designerId": "99b7256a-8611-4ed6-ae2f-d5e0294d695d",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "tfUser",
+                                                "itemId": "tfUser",
+                                                "label": "Usuario"
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string"
+                                            },
+                                            "name": "MyTextField",
+                                            "designerId": "9a79dca4-6623-4269-86c0-301d9d3762e4"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "tfPassword",
+                                                "inputType": "password",
+                                                "itemId": "tfPassword",
+                                                "label": "Password"
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "inputType": "string"
+                                            },
+                                            "name": "MyTextField1",
+                                            "designerId": "667b90d7-b226-44e9-9716-651f57ea82e1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "container|align": "center",
+                                        "container|pack": "center",
+                                        "id": "contInputAction",
+                                        "itemId": "contInputAction",
+                                        "layout": "box",
+                                        "padding": 15,
+                                        "style": [
+                                            "background: transparent; border: none; box-shadow: none;"
+                                        ]
+                                    },
+                                    "configAlternates": {
+                                        "title": "string",
+                                        "style": "object",
+                                        "container|align": "string",
+                                        "container|pack": "string",
+                                        "layout": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "padding": "auto"
+                                    },
+                                    "name": "MyContainer6",
+                                    "designerId": "75e235ad-ac77-44b8-88a2-7699248a969c",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "action",
+                                                "height": 48,
+                                                "iconCls": "fas fa-user-lock",
+                                                "id": "btnAccess",
+                                                "itemId": "btnAccess",
+                                                "text": "Ingresar",
+                                                "ui": "action",
+                                                "width": 150
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "iconCls": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string",
+                                                "width": "auto",
+                                                "height": "auto"
+                                            },
+                                            "name": "MyButton",
+                                            "designerId": "58327f29-cb25-4f7d-8984-21b0a714d5d7",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnAccessTap",
+                                                        "implHandler": [
+                                                            "appLocal.doLogin();"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnAccessTap",
+                                                    "designerId": "ac33c471-e279-4a08-9be3-cd9921cf9217"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contAction",
+                        "itemId": "contAction",
+                        "layout": "form",
+                        "width": "25%"
+                    },
+                    "configAlternates": {
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "width": "auto"
+                    },
+                    "name": "MyContainer5",
+                    "designerId": "ee321a7b-44e3-48a6-b2cd-42152c70c0e4"
+                }
+            ]
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "data": [
+                    "{year: new Date().getFullYear()}"
+                ],
+                "height": 200,
+                "id": "contBottom",
+                "itemId": "contBottom"
+            },
+            "configAlternates": {
+                "height": "auto",
+                "id": "string",
+                "itemId": "string",
+                "data": "object"
+            },
+            "name": "MyContainer2",
+            "designerId": "d6d73b55-7c3c-48f3-a907-af67c971afea",
+            "cn": [
+                {
+                    "type": "Ext.XTemplate",
+                    "reference": {
+                        "name": "tpl",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "tpl",
+                        "implHandler": [
+                            "<div style=\"text-align: center; padding: 15px;\">",
+                            "    <div style=\"margin-bottom: 10px; font-weight: bold; color: #003366;\">",
+                            "        Utility Trailers de Mexico &copy; {year}",
+                            "    </div>",
+                            "    <div style=\"display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;\">",
+                            "        <a href=\"https://wa.me/525539336340?text=Hola,%20solicito%20una%20consulta\" ",
+                            "           target=\"_blank\" style=\"text-decoration: none; color: #003366; display: flex; align-items: center;\">",
+                            "            <i class=\"fab fa-whatsapp\" style=\"font-size: 18px; color: #25D366; margin-right: 8px;\"></i>",
+                            "            <span style=\"font-weight: 500;\">55 3933 6340</span>",
+                            "        </a>",
+                            "        <a href=\"tel:8008845489\" style=\"text-decoration: none; color: #003366; display: flex; align-items: center;\">",
+                            "            <i class=\"fas fa-phone\" style=\"font-size: 18px; color: #007bff; margin-right: 8px;\"></i>",
+                            "            <span style=\"font-weight: 500;\">800 884 5489</span>",
+                            "        </a>",
+                            "    </div>",
+                            "</div>",
+                            ""
+                        ]
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "implHandler": "code"
+                    },
+                    "name": "tpl",
+                    "designerId": "329f915d-c34f-4208-ae62-d4e4daad243b"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('resize');",
+                    "console.log(element);",
+                    "",
+                    "console.log('info');",
+                    "console.log(info);",
+                    "",
+                    "let contLogin = Ext.getCmp('contLogin');",
+                    "let contHeader = Ext.getCmp('contHeader');",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "",
+                    "",
+                    "        contLogin.setLayout('vbox');",
+                    "        contHeader.setHeight(100);",
+                    "",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        contLogin.setLayout('hbox');",
+                    "        contHeader.setHeight(212);",
+                    "    }",
+                    "",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "1070686b-8ec3-4a94-9399-725715e47f4b"
+        }
+    ]
+}

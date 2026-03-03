@@ -1,0 +1,61 @@
+{
+    "name": "basicAccess",
+    "settings": {
+        "cmd": {
+            "license": "",
+            "cmdVersion": "",
+            "frameworkVersion": ""
+        },
+        "urlPrefixTemplate": "http://localhost:{port}/{path}",
+        "urlPrefix": "http://localhost:57645/",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Desktop (Auto Expand)",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            },
+            "viewportOrientation": "landscape"
+        },
+        "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/basicAccess",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": false,
+        "generateArchitectVersion": true,
+        "installStatus": "Not Installed"
+    },
+    "xdsVersion": "4.2.7",
+    "xdsBuild": 430,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "modern71",
+    "viewOrderMap": {
+        "view": [
+            "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+            "b777bc78-ac1b-4c89-beec-997c780710ac",
+            "8c7f70fa-6861-490f-b55e-d26dd1e5d660"
+        ],
+        "store": [],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "4d44c115-55df-489b-a4ca-dcbf0a9a0c45",
+            "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
+            "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
+            "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
+            "e5346b91-c26f-4b84-9545-73fcb3f44295",
+            "b7a3c48f-a5ae-411c-8be7-ef00ba2be72b",
+            "f84ca2c2-bffc-498b-82cf-2f0ea4c8b317",
+            "652c08b7-f8d3-4c7c-b2da-3012370441b0",
+            "be10d7cb-03dc-4076-9745-7c095015d320",
+            "a5449007-881d-4a2a-a9ab-d2488318b8cc",
+            "a0a13186-5bb3-41da-926a-b2781277cdf0"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

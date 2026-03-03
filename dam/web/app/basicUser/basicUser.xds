@@ -1,0 +1,69 @@
+{
+    "name": "basicUser",
+    "settings": {
+        "cmd": {
+            "license": "",
+            "cmdVersion": "",
+            "frameworkVersion": ""
+        },
+        "urlPrefixTemplate": "http://localhost:{port}/{path}",
+        "urlPrefix": "http://localhost:57645/",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Microsoft Surface",
+                "builtIn": true,
+                "height": 1366,
+                "width": 768
+            },
+            "viewportOrientation": "landscape"
+        },
+        "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/basicUser",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "installStatus": "Not Installed"
+    },
+    "xdsVersion": "4.2.7",
+    "xdsBuild": 430,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "modern71",
+    "viewOrderMap": {
+        "view": [
+            "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+            "b777bc78-ac1b-4c89-beec-997c780710ac",
+            "8c7f70fa-6861-490f-b55e-d26dd1e5d660"
+        ],
+        "store": [
+            "ae45e663-3d56-4643-8552-cdfcd2441d45",
+            "e357d80f-d529-4dc5-8c48-fcbb23b3006d"
+        ],
+        "controller": [],
+        "model": [
+            "d9f33824-1800-4c05-8a34-d78a97d44e5a",
+            "6ca5275b-d680-4520-b3a6-f7cc03c2ed88"
+        ],
+        "resource": [
+            "4ceb396e-d5d2-43c4-b9e9-cc86abb6ed8d",
+            "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
+            "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
+            "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
+            "e5346b91-c26f-4b84-9545-73fcb3f44295",
+            "6abf863a-5f9d-4da5-aa0a-1fe3d3506aac",
+            "1a4830a5-c8dd-4983-80ee-7e50d88836a5",
+            "277d3b65-38e0-4a7a-b708-aa0ea39599bb",
+            "3569fec5-7434-497f-8d03-8ba40a54dbab",
+            "a5449007-881d-4a2a-a9ab-d2488318b8cc",
+            "47d04085-020e-412d-b41a-61b2f460ab9c",
+            "c83f5619-e093-4e4b-a6a9-dd2d6f4f861a",
+            "e3404b33-09f2-4c68-8c30-79fc51ac14b6"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

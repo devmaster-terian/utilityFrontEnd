@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_kmn8gucf",
+        "includeInBundle": true,
+        "url": "../../../../framework/plugins/iziToast-master/dist/js/iziToast.min.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js2",
+    "designerId": "277d3b65-38e0-4a7a-b708-aa0ea39599bb"
+}

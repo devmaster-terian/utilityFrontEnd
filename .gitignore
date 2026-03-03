@@ -1,0 +1,25 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mac / Windows
+.DS_Store
+Thumbs.db
+
+# Sencha Architect
+archive/
+build/
+*.bak
+*~
+
+# Node
+node_modules/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo

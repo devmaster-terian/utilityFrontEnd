@@ -1,0 +1,83 @@
+.x-treelist-item-icon {
+    font-size: 18px !important;
+    width: 24px !important;
+    line-height: 24px !important;
+}
+
+/* Correccion de FontAwesome */
+/* ==========================================================================
+   CORRECCIÓN DE ICONOS DE VENTANA (DIALOG TOOLS) PARA FONT AWESOME LOCAL
+   ========================================================================== */
+
+/* 1. Forzamos a las herramientas del Dialog a usar TU fuente local */
+.x-dialog .x-tool .x-icon-el {
+    /* Ajustado para Font Awesome 7.1.0 */
+    font-family: "Font Awesome 7 Free", sans-serif !important;
+    font-weight: 900 !important; 
+    
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-rendering: auto !important;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1 !important;
+    font-size: 16px !important;
+}
+
+/* Unicode de FA 7.1.0 para herramientas de Dialog */
+.x-dialog .x-tool-close .x-icon-el::before { content: "\f00d" !important; }
+.x-dialog .x-tool-maximize .x-icon-el::before { content: "\f065" !important; }
+.x-dialog .x-tool-restore .x-icon-el::before { content: "\f066" !important; }
+
+/* 2. Asignamos los códigos Unicode correctos de Font Awesome 7.1 */
+
+/* Icono de Cerrar (X) -> fa-xmark */
+.x-dialog .x-tool-close .x-icon-el::before {
+    content: "\f00d" !important; 
+}
+
+/* Icono de Maximizar -> fa-expand */
+.x-dialog .x-tool-maximize .x-icon-el::before {
+    content: "\f065" !important; 
+}
+
+/* Icono de Restaurar (aparece al estar maximizado) -> fa-compress */
+.x-dialog .x-tool-restore .x-icon-el::before {
+    content: "\f066" !important;
+}
+
+/* Opcional: Ajustar el tamaño y color si se ven muy pequeños o apagados */
+.x-dialog .x-tool .x-icon-el {
+    font-size: 16px !important;
+    color: #555 !important; /* Un gris neutro, ajusta a tu gusto */
+}
+.x-dialog .x-tool:hover .x-icon-el {
+    color: #000 !important; /* Color al pasar el mouse */
+}
+
+
+/* 1. Apuntamos al icono de la flecha (x-arrow-trigger) */
+.x-arrow-trigger .x-icon-el::before,
+.x-expand-trigger .x-icon-el::before {
+    /* Forzamos tu fuente local */
+    font-family: "Font Awesome 7 Free", sans-serif !important;
+    font-weight: 900 !important;
+    
+    /* Código Unicode para fa-chevron-down (flecha abajo) */
+    content: "\f078" !important; 
+    
+    /* Ajustes visuales */
+    font-size: 14px !important;
+    color: #666 !important; /* Un gris elegante */
+    
+    /* Asegurar que no tenga estilos raros heredados */
+    font-style: normal !important;
+    text-align: center !important;
+}
+
+/* 2. Centrado vertical perfecto del trigger */
+.x-field-trigger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 30px !important; /* Área de toque cómoda para el S20+ */
+}

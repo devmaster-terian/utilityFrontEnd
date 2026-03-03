@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_9lsdhkfw",
+        "includeInBundle": true,
+        "url": "../../../../framework/recursosJS/jsTerian.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js1",
+    "designerId": "1a4830a5-c8dd-4983-80ee-7e50d88836a5"
+}

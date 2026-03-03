@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_uixszxw3",
+        "includeInBundle": true,
+        "url": "../configSystem.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js",
+    "designerId": "e5346b91-c26f-4b84-9545-73fcb3f44295"
+}

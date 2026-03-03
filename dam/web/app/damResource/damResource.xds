@@ -1,0 +1,63 @@
+{
+    "name": "damResource",
+    "settings": {
+        "cmd": {
+            "license": "",
+            "cmdVersion": "",
+            "frameworkVersion": ""
+        },
+        "urlPrefixTemplate": "http://localhost:{port}/{path}",
+        "urlPrefix": "http://localhost:57645/",
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Microsoft Surface",
+                "builtIn": true,
+                "height": 1366,
+                "width": 768
+            },
+            "viewportOrientation": "landscape"
+        },
+        "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/damResource",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": false,
+        "generateArchitectVersion": true,
+        "installStatus": "Not Installed"
+    },
+    "xdsVersion": "4.2.7",
+    "xdsBuild": 430,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "modern71",
+    "viewOrderMap": {
+        "view": [
+            "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+            "b777bc78-ac1b-4c89-beec-997c780710ac",
+            "8c7f70fa-6861-490f-b55e-d26dd1e5d660"
+        ],
+        "store": [
+            "1a9a85aa-4418-408b-aa05-5281861cdad2"
+        ],
+        "controller": [],
+        "model": [
+            "ba3f0199-97cf-4371-b48c-6b4610c24ba3"
+        ],
+        "resource": [
+            "9c2c5695-c318-493c-8762-05c0d56759ae",
+            "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
+            "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
+            "c83f5619-e093-4e4b-a6a9-dd2d6f4f861a",
+            "1b24ba4e-76e4-4a85-bcb8-5d27419d3e22",
+            "a5449007-881d-4a2a-a9ab-d2488318b8cc",
+            "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
+            "e5346b91-c26f-4b84-9545-73fcb3f44295",
+            "1a4830a5-c8dd-4983-80ee-7e50d88836a5"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

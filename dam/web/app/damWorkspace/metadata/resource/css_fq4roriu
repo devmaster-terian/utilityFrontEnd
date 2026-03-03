@@ -1,0 +1,18 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_fq4roriu",
+        "url": "../../../../framework/resourcesCSS/custom-fixes.css"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "url": "uri"
+    },
+    "name": "css1",
+    "designerId": "a08cb081-9afe-476f-b7f9-ffd5c2807f0e"
+}
