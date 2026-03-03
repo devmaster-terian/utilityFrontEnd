@@ -1,0 +1,20 @@
+{
+    "type": "libraryresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Library",
+        "libraryRequires": [
+            "font-awesome"
+        ]
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "libraryRequires": "typedarray"
+    },
+    "name": "Library",
+    "designerId": "bffaa4a9-ee55-4148-b56a-f1f90fb8b216"
+}

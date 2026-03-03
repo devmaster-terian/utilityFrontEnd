@@ -1,0 +1,660 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "modelUser",
+            "modelRole",
+            "modelNode"
+        ],
+        "name": "damCollection",
+        "stores": [
+            "storeUser",
+            "storeRole",
+            "storeNode"
+        ],
+        "views": [
+            "contMain"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "appLocal = this.getApplication();",
+                    "",
+                    "// Variables globales",
+                    "// Estado global del árbol",
+                    "appLocal.treeNav = {",
+                    "    stack  : [\"c-1\"],",
+                    "    current: \"c-1\"",
+                    "};",
+                    "",
+                    "// Estado global del “form seleccionado” por nivel",
+                    "appLocal.treeState = {",
+                    "    selectedByNodeId: {}   // { \"c-1\": {...}, \"c-12\": {...} }",
+                    "};",
+                    "",
+                    "appLocal.nodeCache = {};",
+                    "",
+                    "// Carga inicial",
+                    "appLocal.loadTreeChildren('storeNode', \"c-1\", { pushHistory: false });"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "a4efe309-81d5-4446-85f1-6ca1407c959a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "payload",
+                    "isCreate"
+                ],
+                "fn": "saveNode",
+                "implHandler": [
+                    "var contMain = Ext.getCmp('contMain');",
+                    "var form = Ext.getCmp('formNode');",
+                    "",
+                    "if (!form) { Ext.toast('No se encontró el formulario.'); return; }",
+                    "",
+                    "var isCreate = !!form.isCreate;",
+                    "var payload  = contMain.buildPayload(form);",
+                    "",
+                    "console.log(isCreate ? '[CREATE] payload' : '[UPDATE] payload', payload);",
+                    "",
+                    "// En update: obtener el id desde el record del form",
+                    "var rec    = form.nodeRecord || null;",
+                    "var dataRec = rec ? (rec.getData ? rec.getData() : rec) : null;",
+                    "var nodeId  = dataRec ? (dataRec.node_id || dataRec.id_node || dataRec.id || dataRec._id) : null;",
+                    "",
+                    "// Validación (reusa tu validateCreatePayload)",
+                    "var err = contMain.validateCreatePayload(payload);",
+                    "if (!isCreate && !nodeId) err = 'No se encontró el ID del nodo a actualizar.';",
+                    "",
+                    "if (err) {",
+                    "    Ext.toast(err);",
+                    "    return;",
+                    "}",
+                    "",
+                    "// URL y método",
+                    "var method = isCreate ? 'POST' : 'PUT';",
+                    "var url    = isCreate ? jsTerian.makeUrl('/tree/node/create') : jsTerian.makeUrl('/tree/node/update', nodeId);",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    method,",
+                    "    url,",
+                    "    JSON.stringify(payload),",
+                    "",
+                    "    function success(resp){",
+                    "        var msg;",
+                    "        try { msg = Ext.decode(resp.responseText); }",
+                    "        catch(e){ msg = { success:true, message:'Success', data:{} }; }",
+                    "",
+                    "        // Display: preferir lo que el usuario capturó",
+                    "        var d = payload.data || {};",
+                    "        var display =",
+                    "            d.name || d.code || d.tab_code ||",
+                    "            ((dataRec && (dataRec.name || dataRec.code || dataRec.tab_code || dataRec.text)) ? (dataRec.name || dataRec.code || dataRec.tab_code || dataRec.text) : ('ID ' + (nodeId || '—')));",
+                    "",
+                    "        var text = (msg && msg.message) ? (msg.message + ': ' + display) : ((isCreate ? 'Nodo creado: ' : 'Nodo actualizado: ') + display);",
+                    "",
+                    "        jsTerian.toastAlert(text, 'success');",
+                    "",
+                    "        // Recargar árbol/store",
+                    "        appLocal.closeNodeTabAndReloadParent({ parentId: payload.parent_id });",
+                    "    },",
+                    "",
+                    "    function failure(response){",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}",
+                    "",
+                    "        var actionTxt = isCreate ? 'crear' : 'actualizar';",
+                    "        var html = Ext.htmlEncode(parsed.message || ('No se pudo ' + actionTxt + ' el nodo.'));",
+                    "        if (parsed.error) html += '<br/><p>Error, no se pudo registrar los cambios</p>';",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "saveNode",
+            "designerId": "d89ff0e9-7144-40db-bedc-32f2fb1dafeb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "id_user"
+                ],
+                "fn": "deleteUser",
+                "implHandler": [
+                    "// Url de la solicitud",
+                    "var url = jsTerian.makeUrl('user/delete',id_user);",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    'DELETE',",
+                    "    url,",
+                    "    null,",
+                    "",
+                    "    // Función Success",
+                    "    function(response) {",
+                    "",
+                    "        // Intenta obtener el mensaje, en caso contrario lo asigna",
+                    "        var msg = {};",
+                    "        try { msg = Ext.decode(response.responseText); } catch(e){}",
+                    "",
+                    "        // Mostrar mensaje del backend directamente",
+                    "        var text = msg && msg.message ? msg.message : 'Usuario eliminado';",
+                    "        jsTerian.toastAlert(text, 'success');",
+                    "",
+                    "        jsTerian.reloadStore('storeUser');",
+                    "    },",
+                    "",
+                    "    // Función Failure",
+                    "    function(response) {",
+                    "",
+                    "        // Intenta obtener el error",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}",
+                    "",
+                    "        // Crea el mensaje de error y lanza la alerta",
+                    "        let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated user');",
+                    "        if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "deleteUser",
+            "designerId": "f3247834-c007-4cb5-94de-6a3eee8bf167"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "storeName",
+                    "nodeId",
+                    "opts"
+                ],
+                "fn": "loadTreeChildren",
+                "implHandler": [
+                    "opts = opts || {};",
+                    "var pushHistory = !!opts.pushHistory;",
+                    "",
+                    "appLocal.treeNav = appLocal.treeNav || { stack: [\"c-1\"], current: \"c-1\" };",
+                    "",
+                    "nodeId = nodeId || \"c-1\";",
+                    "",
+                    "console.log('[TREE] loadTreeChildren called', {",
+                    "    nodeId: nodeId,",
+                    "    pushHistory: pushHistory,",
+                    "    stackBefore: appLocal.treeNav.stack.slice()",
+                    "});",
+                    "",
+                    "if (pushHistory) {",
+                    "    const last = appLocal.treeNav.stack[appLocal.treeNav.stack.length - 1];",
+                    "    if (last !== nodeId) {",
+                    "        appLocal.treeNav.stack.push(nodeId);",
+                    "    }",
+                    "}",
+                    "",
+                    "appLocal.treeNav.current = nodeId;",
+                    "",
+                    "console.log('[TREE] stackAfter', appLocal.treeNav.stack.slice());",
+                    "",
+                    "// Cargar store",
+                    "var store = Ext.getStore(storeName);",
+                    "if (!store) {",
+                    "    console.warn('[TREE] store not found:', storeName);",
+                    "    return;",
+                    "}",
+                    "",
+                    "store.onLoad(store, nodeId);",
+                    "/*",
+                    "",
+                    "console.log('[TREE] loadTreeChildren called', {",
+                    "  nodeId: nodeId,",
+                    "  pushHistory: pushHistory,",
+                    "  stackBefore: appLocal.treeNav.stack.map(x => x.nodeId || x) // por si es string o frame",
+                    "});",
+                    "",
+                    "var store = Ext.getStore(storeName);",
+                    "if (!store) {",
+                    "    console.warn(\"Store not found:\", storeName);",
+                    "    return;",
+                    "}",
+                    "",
+                    "appLocal.treeNav = appLocal.treeNav || { stack: [{ nodeId: \"c-1\" }], current: \"c-1\" };",
+                    "",
+                    "//if (!nodeId) nodeId = \"c-1\";",
+                    "",
+                    "if (pushHistory) {",
+                    "    const last = appLocal.treeNav.stack[appLocal.treeNav.stack.length - 1];",
+                    "        if (!last || last.nodeId !== nodeId) {",
+                    "            appLocal.treeNav.stack.push({ nodeId: nodeId, selectedId: null, selectedData: null });",
+                    "        }",
+                    "}",
+                    "",
+                    "console.log('[TREE] stackAfter', appLocal.treeNav.stack.map(x => x.nodeId || x));",
+                    "",
+                    "appLocal.treeNav.current = nodeId;",
+                    "",
+                    "store.onLoad(store, nodeId);",
+                    "//appLocal.loadTreeChildren(storeName, nodeId, { pushHistory: false });",
+                    "*/"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "loadTreeChildren",
+            "designerId": "b715b4ec-9e97-4629-b358-92e8284544a0"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "storeName",
+                    "showFormFn"
+                ],
+                "fn": "goBackTree",
+                "implHandler": [
+                    "appLocal.treeNav = appLocal.treeNav || { stack: [\"c-1\"], current: \"c-1\" };",
+                    "",
+                    "console.log('[TREE] goBackTree BEFORE', {",
+                    "        stack: appLocal.treeNav.stack.slice(),",
+                    "        current: appLocal.treeNav.current",
+                    "    });",
+                    "",
+                    "if (appLocal.treeNav.stack.length <= 1) {",
+                    "    jsTerian.toastAlert(\"Ya estás en el inicio\", \"info\");",
+                    "    return;",
+                    "}",
+                    "",
+                    "// Quita el actual",
+                    "appLocal.treeNav.stack.pop();",
+                    "",
+                    "// Prev",
+                    "const prevNodeId = appLocal.treeNav.stack[appLocal.treeNav.stack.length - 1] || \"c-1\";",
+                    "appLocal.treeNav.current = prevNodeId;",
+                    "",
+                    "console.log('[TREE] goBackTree prevNodeId', prevNodeId);",
+                    "// Carga el nivel anterior (NO pushHistory)",
+                    "appLocal.loadTreeChildren(storeName, prevNodeId, { pushHistory: false });"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "goBackTree",
+            "designerId": "d85ab901-0128-4e5d-a0cd-0f0b33ddab2e"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "nodeData"
+                ],
+                "fn": "saveTreeSelection",
+                "implHandler": [
+                    "console.log('[TREE] saveTreeSelection ENTER', nodeData);",
+                    "",
+                    "    // Asegurar estructuras (por si no existen)",
+                    "    if (!appLocal.treeNav) {",
+                    "        console.warn('[TREE] treeNav missing, creating default');",
+                    "        appLocal.treeNav = { stack: [\"c-1\"], current: \"c-1\" };",
+                    "    }",
+                    "    if (!appLocal.treeState) {",
+                    "        console.warn('[TREE] treeState missing, creating default');",
+                    "        appLocal.treeState = { selectedByNodeId: {} };",
+                    "    }",
+                    "    if (!appLocal.treeState.selectedByNodeId) {",
+                    "        console.warn('[TREE] selectedByNodeId missing, creating');",
+                    "        appLocal.treeState.selectedByNodeId = {};",
+                    "    }",
+                    "",
+                    "    const currentNodeId = appLocal.treeNav.stack[appLocal.treeNav.stack.length - 1] || \"c-1\";",
+                    "    appLocal.treeState.selectedByNodeId[currentNodeId] = nodeData;",
+                    "",
+                    "    console.log('[TREE] saveTreeSelection OK', {",
+                    "        currentNodeId,",
+                    "        savedKeys: Object.keys(appLocal.treeState.selectedByNodeId),",
+                    "        saved: appLocal.treeState.selectedByNodeId[currentNodeId]",
+                    "    });"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "saveTreeSelection",
+            "designerId": "272becc1-f62d-489a-b03f-1203a921fcc6"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "getCurrentNodeId",
+                "implHandler": [
+                    "// Obtiene el id del nodo",
+                    "appLocal.treeNav = appLocal.treeNav || { stack: [\"c-1\"], current: \"c-1\" };",
+                    "return appLocal.treeNav.stack[appLocal.treeNav.stack.length - 1] || \"c-1\";"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getCurrentNodeId",
+            "designerId": "f65babbf-2b8d-4924-88a8-18947fa81f85"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "nodeId"
+                ],
+                "fn": "getNodeNameById",
+                "implHandler": [
+                    "// Funcion que regresa el nombre del root",
+                    "if (nodeId === 'c-1') return 'UTILITY';",
+                    "",
+                    "//  Obtiene nodeCache",
+                    "var rec = this.nodeCache && this.nodeCache[nodeId];",
+                    "",
+                    "if (!rec && this.treeState && this.treeState.selectedByNodeId) {",
+                    "    rec = this.treeState.selectedByNodeId[nodeId];",
+                    "}",
+                    "",
+                    "var data = rec ? (rec.getData ? rec.getData() : rec) : null;",
+                    "",
+                    "return (data && (data.name || data.title || data.text)) ? (data.name || data.title || data.text) : nodeId;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getNodeNameById",
+            "designerId": "1b29c290-1a8d-4122-a321-a6bc4e0fde59"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "currentNode"
+                ],
+                "fn": "getCreateOptions",
+                "implHandler": [
+                    "// Obtiene el id del nodo",
+                    "const currentId = appLocal.getCurrentNodeId();",
+                    "const prefix = currentId.split('-')[0];",
+                    "",
+                    "// Root, solo permite crear colecciones",
+                    "if (currentId === 'c-1') return ['collection'];",
+                    "",
+                    "// Si es resource solo permite crear tabs",
+                    "if (prefix === 'r') return ['tab'];",
+                    "",
+                    "// Si el padre no es coleccion o recurso, no se puede crear nada",
+                    "if (prefix !== 'c') return [];",
+                    "",
+                    "// Calcular la profundidad del arreglo",
+                    "// level = cuántas colecciones hay debajo de root",
+                    "let level = 0;",
+                    "",
+                    "let curId = currentId;",
+                    "let hops  = 0;",
+                    "const maxHops = 10;",
+                    "",
+                    "while (curId && curId !== 'c-1' && hops < maxHops) {",
+                    "",
+                    "    // Contar el numero de colecciones reales",
+                    "    if ((curId || '').split('-')[0] === 'c') level++;",
+                    "",
+                    "    // Reconstruir el padre para saber quien es",
+                    "    const rec = appLocal.nodeCache && appLocal.nodeCache[curId];",
+                    "    const d   = rec ? (rec.getData ? rec.getData() : rec) : null;",
+                    "",
+                    "    // Si no hay parent_id en cache, regresa error",
+                    "    if (!d || !(d.parent_id || d.parentId)) {",
+                    "        console.warn('[getCreateOptions] cache incompleto para', curId, d);",
+                    "        break;",
+                    "    }",
+                    "",
+                    "    curId = d.parent_id || d.parentId;",
+                    "    hops++;",
+                    "}",
+                    "",
+                    "console.log('[getCreateOptions]', { currentId, level, hops });",
+                    "",
+                    "// Regla: collection -> colletion -> resource -> tab",
+                    "if (level >= 2) return ['resource'];",
+                    "",
+                    "return ['collection', 'resource'];"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getCreateOptions",
+            "designerId": "d4d789e6-1edc-424f-be38-5169c1e56e4d"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "opts"
+                ],
+                "fn": "getCurrentBreadcrumb",
+                "implHandler": [
+                    "// Regresa la estructura del nodo",
+                    "opts = opts || {};",
+                    "var sep = opts.sep || ' / ';",
+                    "",
+                    "var nav = this.treeNav || {};",
+                    "var stack = nav.stack || [];",
+                    "var current = nav.current;",
+                    "",
+                    "// Asegura que el current esté al final del stack",
+                    "var ids = stack.slice();",
+                    "if (current && ids[ids.length - 1] !== current) {",
+                    "    ",
+                    "    // si current ya existe en stack, recorta hasta él",
+                    "    var ix = ids.indexOf(current);",
+                    "    if (ix >= 0) ids = ids.slice(0, ix + 1);",
+                    "    else ids.push(current);",
+                    "}",
+                    "",
+                    "// Mapea a nombres",
+                    "var parts = ids.map(function(id){",
+                    "    return appLocal.getNodeNameById(id);",
+                    "});",
+                    "",
+                    "return parts.join(sep);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getCurrentBreadcrumb",
+            "designerId": "3e507471-c439-4771-9be2-48be0df7ca9c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "opts"
+                ],
+                "fn": "closeNodeTabAndReloadParent",
+                "implHandler": [
+                    "opts = opts || {};",
+                    "",
+                    "var contNode    = Ext.getCmp('contNode');",
+                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "var contMain    = Ext.getCmp('contMain');",
+                    "",
+                    "// Cerrar la tab / volver a la vista del árbol",
+                    "if (contNode) contNode.setActiveItem(0);",
+                    "if (toolbarMain) toolbarMain.show();",
+                    "",
+                    "// Determinar parentId",
+                    "var form = Ext.getCmp('formNode');",
+                    "",
+                    "var parentId = opts.parentId || (form ? form.parentId : null);",
+                    "",
+                    "// Si es EDIT y tu record tiene parent_id, úsalo",
+                    "if (!parentId && form && form.nodeRecord) {",
+                    "    var d = form.nodeRecord.getData ? form.nodeRecord.getData() : form.nodeRecord;",
+                    "    parentId = d ? (d.parent_id || d.parentId) : null;",
+                    "}",
+                    "",
+                    "if (!parentId) {",
+                    "    parentId = (typeof appLocal !== 'undefined' && appLocal.getCurrentNodeId) ? appLocal.getCurrentNodeId() : 'c-1';",
+                    "}",
+                    "",
+                    "//  Recargar store",
+                    "var store = Ext.getStore('storeNode');",
+                    "if (!store) {",
+                    "    console.warn('No se encontró storeTreeNav');",
+                    "    return;",
+                    "}",
+                    "",
+                    "var url = jsTerian.getUrl('tree/children', parentId);",
+                    "",
+                    "var proxy = store.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "jsTerian.addAuthorizationHeader(store);",
+                    "",
+                    "store.load({",
+                    "    callback: function(records, operation, success) {",
+                    "",
+                    "        if (!success) {",
+                    "            jsTerian.toastAlert(\"Error al cargar\", \"error\");",
+                    "            store.removeAll();",
+                    "            return;",
+                    "        }",
+                    "",
+                    "        // Si se regresa al inicio se vacía el formView",
+                    "        if (parentId === 'c-1'){",
+                    "            if (contMain) contMain.cleanFormView();",
+                    "            return;",
+                    "        }",
+                    "",
+                    "        // Rellenar info del padre si está cacheado (tal cual tu lógica)",
+                    "        const ctx = appLocal.nodeCache && appLocal.nodeCache[parentId];",
+                    "",
+                    "        if (ctx) {",
+                    "            if (contMain) contMain.fillForm(ctx);",
+                    "        } else {",
+                    "            if (contMain) contMain.cleanFormView();",
+                    "        }",
+                    "    }",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "closeNodeTabAndReloadParent",
+            "designerId": "fa124cea-5caa-4d93-bf65-e03398394049"
+        }
+    ]
+}

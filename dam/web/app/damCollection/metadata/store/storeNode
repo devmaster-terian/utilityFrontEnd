@@ -1,0 +1,122 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "storeNode",
+        "model": "modelNode",
+        "storeId": "storeNode"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyStore",
+    "designerId": "02ae5cbe-b3b0-4b26-adb3-9a4ee8e02c96",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy2",
+            "designerId": "56a3608f-c128-47f9-8759-76e76aceae8d",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "children"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader2",
+                    "designerId": "d5b7be2c-e977-40d3-a367-ea7fb30dc509"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "store",
+                    "nodeId"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "// Obtener el nodo",
+                    "nodeId = nodeId || \"c-1\";",
+                    "",
+                    "// Obtener la ventana para usar sus funciones",
+                    "var contMain = Ext.getCmp('contMain');",
+                    "",
+                    "// Armar el url, pasando el id del nodo",
+                    "var url = jsTerian.getUrl('tree/children', nodeId);",
+                    "",
+                    "const proxy = store.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Añadir el header con la auth",
+                    "jsTerian.addAuthorizationHeader(store);",
+                    "",
+                    "// Evento para cargar el store",
+                    "store.load({",
+                    "    callback: function(records, operation, success) {",
+                    "",
+                    "        // Lanza error en caso de que la solicitud falle",
+                    "        if (!success) {",
+                    "            jsTerian.toastAlert(\"Error al cargar\", \"error\");",
+                    "            store.removeAll();",
+                    "            return;",
+                    "        }",
+                    "",
+                    "        // Si se regresa al inicio se vacía el formView",
+                    "        if (nodeId === 'c-1'){",
+                    "            contMain.cleanFormView();",
+                    "            return;",
+                    "        }",
+                    "",
+                    "        // Sino es root, se guarda el último nodo en el cache",
+                    "        const ctx = appLocal.nodeCache && appLocal.nodeCache[nodeId];",
+                    "",
+                    "        // Si existe un nodo seleccionado, llenar la información",
+                    "        if (ctx) {",
+                    "            //  Obtener la ventana para usar la función de llenado",
+                    "            contMain.fillForm(ctx);",
+                    "        } else {",
+                    "            // Si no hay cache, deja el form como esté o límpialo",
+                    "            contMain.cleanFormView();",
+                    "        }",
+                    "    }",
+                    "",
+                    "});"
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "1b7d3dc1-fbef-4e70-bc02-97267f5f8e29"
+        }
+    ]
+}

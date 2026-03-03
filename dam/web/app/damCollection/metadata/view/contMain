@@ -1,0 +1,1976 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "fullscreen": true,
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "hbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "mixins": "object",
+        "fullscreen": "boolean",
+        "layout": "string"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "contPanel",
+                "itemId": "contPanel",
+                "layout": "hbox",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer2",
+            "designerId": "45fb7982-6b9d-456c-b29f-b187c9aa4f11",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contNode",
+                        "itemId": "contNode",
+                        "layout": "card",
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyContainer3",
+                    "designerId": "c8245e9e-42c2-4afb-861d-6e04fd6f6497",
+                    "cn": [
+                        {
+                            "type": "Ext.Toolbar",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": "top",
+                                "id": "toolbarMain",
+                                "itemId": "toolbarMain"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyToolbar",
+                            "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "confirm",
+                                        "iconCls": "fas fa-plus",
+                                        "id": "btnCreate",
+                                        "itemId": "btnCreate",
+                                        "text": "Agregar",
+                                        "ui": "confirm"
+                                    },
+                                    "configAlternates": {
+                                        "itemId": "string",
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnCreateTap",
+                                                "implHandler": [
+                                                    "/*",
+                                                    "// Buscas el contenedor padre",
+                                                    "var contUser    = Ext.getCmp('contUser'); // Asegúrate de tener reference='contResource'",
+                                                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                                                    "",
+                                                    "// Cambias a la vista del formulario (que es el item 1)",
+                                                    "// La animación 'slide' hará que parezca que entras a una nueva página",
+                                                    "contUser.setActiveItem(1);",
+                                                    "toolbarMain.hide();",
+                                                    "*/",
+                                                    "var form = Ext.getCmp(\"formRecord\");",
+                                                    "//form.isCreate = true;",
+                                                    "",
+                                                    "this.showForm('create', null);"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnCreateTap",
+                                            "designerId": "4a2df9c0-3254-4653-9d05-6fa860fa817d"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "decline",
+                                        "iconCls": "fas fa-trash",
+                                        "id": "btnDelete",
+                                        "itemId": "btnDelete",
+                                        "text": "Eliminar",
+                                        "ui": "decline"
+                                    },
+                                    "configAlternates": {
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton2",
+                                    "designerId": "5c507b47-a624-4bc1-b56d-545be13cf970",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|params": [
+                                                    "button",
+                                                    "e"
+                                                ],
+                                                "fn": "handler",
+                                                "implHandler": [
+                                                    ""
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|params": "typedarray",
+                                                "fn": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "handler",
+                                            "designerId": "2fd5c927-a7a0-4e91-8b38-497c2dd2b2a6"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "action",
+                                        "iconCls": "fas fa-backward",
+                                        "id": "btnGoBack",
+                                        "itemId": "btnGoBack",
+                                        "text": "Regresar",
+                                        "ui": "action"
+                                    },
+                                    "configAlternates": {
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "ui": "string"
+                                    },
+                                    "name": "MyButton5",
+                                    "designerId": "e896dc26-83bd-406d-9e3d-2482bafe823c",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnGoBackTap",
+                                                "implHandler": [
+                                                    "appLocal.goBackTree('storeNode');",
+                                                    "console.log('treeState:', appLocal.treeState);",
+                                                    "console.log('treeNav:', appLocal.treeNav);"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnGoBackTap",
+                                            "designerId": "e5815b2a-1014-460a-92ed-c6a2a3575822"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MySpacer",
+                                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "contListUser",
+                                "itemId": "contListUser",
+                                "scrollable": true
+                            },
+                            "configAlternates": {
+                                "id": "string",
+                                "itemId": "string",
+                                "scrollable": "auto"
+                            },
+                            "name": "MyContainer",
+                            "designerId": "cc59ed63-ec4f-4553-a0c4-7a78cc91d01e",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "formView",
+                                        "itemId": "formView",
+                                        "layout": "hbox",
+                                        "margin": "5 5 8 5"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "layout": "string",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MyContainer4",
+                                    "designerId": "663836ea-c7c3-4c1f-ad56-b2370d46b47a",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftType",
+                                                "itemId": "ftType",
+                                                "label": "Tipo",
+                                                "labelWidth": 70,
+                                                "layout|flex": 1,
+                                                "margin": 5
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "labelWidth": "auto",
+                                                "layout|flex": "number",
+                                                "margin": "auto"
+                                            },
+                                            "name": "MyTextField6",
+                                            "designerId": "0d753519-dd69-4e9f-b9c6-a06fd1671937"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftName",
+                                                "itemId": "ftName",
+                                                "label": "Nombre",
+                                                "labelWidth": 70,
+                                                "layout|flex": 2,
+                                                "margin": 5
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "labelWidth": "auto",
+                                                "layout|flex": "number",
+                                                "margin": "auto"
+                                            },
+                                            "name": "MyTextField7",
+                                            "designerId": "cdb42b89-0d8d-44f7-a334-b4235988e59a"
+                                        },
+                                        {
+                                            "type": "Ext.field.ComboBox",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "editable": false,
+                                                "id": "cboIsActive",
+                                                "itemId": "cboIsActive",
+                                                "label": "Estado",
+                                                "labelWidth": 70,
+                                                "layout|flex": 1,
+                                                "margin": 5,
+                                                "store": [
+                                                    "{",
+                                                    "    fields: ['text','value'],",
+                                                    "    data: [",
+                                                    "      { text: 'Activo',   value: true   },",
+                                                    "      { text: 'Inactivo', value: false  }",
+                                                    "    ]",
+                                                    "}"
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "labelWidth": "auto",
+                                                "layout|flex": "number",
+                                                "margin": "auto",
+                                                "store": "object",
+                                                "editable": "boolean"
+                                            },
+                                            "name": "MyComboBox1",
+                                            "designerId": "76ecfa92-19db-45a6-a1ad-b3807d188a4e"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "html": "<div class=\"resource-row header-style\">     <div class=\"col-code\">CÓDIGO</div>     <div class=\"col-desc\">DESCRIPCIÓN</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
+                                        "id": "contHeaderUser",
+                                        "itemId": "contHeaderUser"
+                                    },
+                                    "configAlternates": {
+                                        "html": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer1",
+                                    "designerId": "4a30f364-50f2-4ba3-b981-edf264738e90"
+                                },
+                                {
+                                    "type": "Ext.dataview.DataView",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "emptyText": "Este elemento no tiene hijos asignados",
+                                        "id": "dataViewUser",
+                                        "itemId": "dataViewUser",
+                                        "store": "storeNode"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "store": "store",
+                                        "emptyText": "string"
+                                    },
+                                    "name": "MyDataView",
+                                    "designerId": "4c461bb6-7a1d-42ee-a892-f8f2158b9661",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.XTemplate",
+                                            "reference": {
+                                                "name": "itemTpl",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": "itemTpl",
+                                                "implHandler": [
+                                                    "<div class=\"resource-row {[values.is_active ? '' : 'user-inactive']}\">",
+                                                    "",
+                                                    "    <div class=\"col-desc\">",
+                                                    "        <div class=\"main-text\">",
+                                                    "            <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                    "            <span class=\"text-bold\">{text}</span>",
+                                                    "",
+                                                    "            <tpl if=\"values.has_children\">",
+                                                    "                <span class=\"role-badge\" style=\"margin-left:8px;\">Tiene hijos</span>",
+                                                    "            </tpl>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"sub-text\">",
+                                                    "            <tpl if=\"values.node_type === 'tab'\">",
+                                                    "                {[values.short_description || '—']}",
+                                                    "                <tpl if=\"values.sort_order\">",
+                                                    "                    <br><span class=\"role-badge\">Posición: {sort_order}</span>",
+                                                    "                </tpl>",
+                                                    "                <tpl if=\"values.id_asset_type\">",
+                                                    "                    <span class=\"role-badge\">Tipo Carpeta: {asset_type_name}</span>",
+                                                    "                </tpl>",
+                                                    "            </tpl>",
+                                                    "",
+                                                    "            <tpl if=\"values.node_type === 'resource'\">",
+                                                    "                {[values.description || '—']}",
+                                                    "            </tpl>",
+                                                    "",
+                                                    "            <tpl if=\"values.node_type === 'collection'\">",
+                                                    "                {[values.description || '—']}",
+                                                    "            </tpl>",
+                                                    "        </div>",
+                                                    "    </div>",
+                                                    "    ",
+                                                    "    <div class=\"col-code\">",
+                                                    "        <div class=\"text-bold\">#{node_type}</div>",
+                                                    "        <div class=\"role-badge\">Padre: {[values.parent_name || values.parent_id || '—']}</div>",
+                                                    "",
+                                                    "        <tpl if=\"values.node_type === 'resource'\">",
+                                                    "            <div class=\"role-badge\">Code: {[values.code || '—']}</div>",
+                                                    "        </tpl>",
+                                                    "",
+                                                    "        <tpl if=\"values.node_type === 'tab'\">",
+                                                    "            <div class=\"role-badge\">Tab: {[values.tab_code || '—']}</div>",
+                                                    "        </tpl>",
+                                                    "",
+                                                    "        <tpl if=\"values.node_type === 'collection'\">",
+                                                    "            <div class=\"role-badge\">Id: {[values.id_collection || '—']}</div>",
+                                                    "        </tpl>",
+                                                    "    </div>",
+                                                    "",
+                                                    "    <div class=\"col-actions\">",
+                                                    "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
+                                                    "            <i class=\"x-fa fas fa-eye\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"action-btn edit\" data-action=\"edit\" title=\"Editar Usuario\">",
+                                                    "            <i class=\"x-fa fas fa-pen\"></i>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"action-btn delete\" data-action=\"delete\" title=\"Desactivar/Borrar\">",
+                                                    "            <i class=\"x-fa fas fa-trash\"></i>",
+                                                    "        </div>",
+                                                    "    </div>",
+                                                    "</div>"
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|displayName": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "itemTpl",
+                                            "designerId": "a0bebdcd-8217-417f-8ed7-fd00ebd20e06"
+                                        },
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onDataViewUserChildtap",
+                                                "implHandler": [
+                                                    "// 1. Detectar si el toque fue en un botón de acción",
+                                                    "    // Buscamos la clase '.action-btn' en el elemento tocado o sus padres",
+                                                    "    var btn = location.event.getTarget('.action-btn');",
+                                                    "",
+                                                    "    if (btn) {",
+                                                    "        // 2. Extraer la acción y el registro",
+                                                    "        var action = btn.getAttribute('data-action');",
+                                                    "        //var record = location.record.data;",
+                                                    "        //const data = record.getData ? record.getData() : record;",
+                                                    "        var record = location.record;",
+                                                    "        var data   = record ? (record.getData ? record.getData() : record) : null;",
+                                                    "",
+                                                    "",
+                                                    "        // Detenemos la propagación para que no seleccione la fila al tocar el botón",
+                                                    "        location.event.stopEvent();",
+                                                    "",
+                                                    "        // 3. Switch Maestro de Acciones",
+                                                    "        switch (action) {",
+                                                    "            case 'view':",
+                                                    "                // Obtener el record",
+                                                    "                //const data = record.getData ? record.getData() : record;",
+                                                    "                const canNavigate = (data.node_type === 'collection' || data.node_type === 'resource'); //&& data.has_children;",
+                                                    "",
+                                                    "                // Sino se puede navergar lanzar una alerta",
+                                                    "                if (!canNavigate) {",
+                                                    "",
+                                                    "                    Ext.toast({",
+                                                    "                        timeout: 2500,",
+                                                    "                        cls: 'toast-clean',",
+                                                    "                        message: `",
+                                                    "                            <div style=\"",
+                                                    "                            background:#FFF3CD;",
+                                                    "                            color:#856404;",
+                                                    "                            padding:10px 12px;",
+                                                    "                            border-radius:14px;",
+                                                    "                            font-weight:600;",
+                                                    "                            \">",
+                                                    "                            ⚠️ Esta pestaña no tiene contenido navegable",
+                                                    "                            </div>",
+                                                    "                            `",
+                                                    "                    });",
+                                                    "                    return;",
+                                                    "                }",
+                                                    "",
+                                                    "                // Guardar el record en el formView",
+                                                    "                var form = Ext.getCmp(\"formView\");",
+                                                    "                form.nodeRecord = record;",
+                                                    "",
+                                                    "                // Lanzar la función para pintar la información",
+                                                    "                this.showFormView(record);",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'edit':",
+                                                    "                console.warn('Tap: view');",
+                                                    "                //var data = record.getData ? record.getData() : record;",
+                                                    "",
+                                                    "                // Mostrar form en modo EDIT (porque estás viendo info del nodo)",
+                                                    "                this.showForm('edit', record);",
+                                                    "",
+                                                    "                // Si en edit también quieres navegar (sin importar has_children), déjalo así:",
+                                                    "                if (data.node_type === 'collection' || data.node_type === 'resource') {",
+                                                    "                    var nodeId = data.id || data.node_id || data._id;",
+                                                    "                    if (nodeId) {",
+                                                    "                        //appLocal.loadTreeChildren('storeNode', nodeId, { pushHistory: true });",
+                                                    "                    }",
+                                                    "                }",
+                                                    "                break;",
+                                                    "",
+                                                    "            case 'delete':",
+                                                    "                Ext.Msg.show({",
+                                                    "                    title: 'Eliminar Registro',",
+                                                    "                    message: '¿Realmente deseas eliminar este registro? Esta acción no se puede deshacer.',",
+                                                    "                    width: 300, // Opcional",
+                                                    "                    closable: false,",
+                                                    "                    icon: Ext.Msg.QUESTION,",
+                                                    "                    buttons: [",
+                                                    "                        {",
+                                                    "                            text: 'No',",
+                                                    "                            itemId: 'no'",
+                                                    "                        },",
+                                                    "                        {",
+                                                    "                            text: 'Sí, borrar',",
+                                                    "                            itemId: 'yes',",
+                                                    "                            ui: 'action-decline' // En Modern, esto suele poner el botón en rojo",
+                                                    "                        }",
+                                                    "                    ],",
+                                                    "                    fn: function (buttonId) {",
+                                                    "                        if (buttonId === 'yes') {",
+                                                    "",
+                                                    "                            var idUser = record.id_user;",
+                                                    "                            appLocal.deleteUser(idUser);",
+                                                    "",
+                                                    "                            console.log('Registro eliminado');",
+                                                    "                        }",
+                                                    "                    }",
+                                                    "                });",
+                                                    "                break;",
+                                                    "",
+                                                    "            default:",
+                                                    "                console.log('Evento no definido');",
+                                                    "        }",
+                                                    "    }"
+                                                ],
+                                                "name": "childtap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onDataViewUserChildtap",
+                                            "designerId": "4cf44224-a443-4e25-98a3-debcd3df726a"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "formNode",
+                                "isCreate": true,
+                                "itemId": "formNode"
+                            },
+                            "configAlternates": {
+                                "title": "string",
+                                "isCreate": "boolean",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyFormPanel",
+                            "designerId": "7120c5d1-8548-4029-8e74-7b780d912288",
+                            "customConfigs": [
+                                {
+                                    "group": "(Custom Properties)",
+                                    "name": "isCreate",
+                                    "type": "string"
+                                }
+                            ],
+                            "cn": [
+                                {
+                                    "type": "Ext.form.FieldSet",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "<b>Contexto</b>"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyFieldSet",
+                                    "designerId": "70cae343-4548-4d1c-b92a-f659591529a4",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "editable": false,
+                                                "id": "ftParentName",
+                                                "itemId": "ftParentName",
+                                                "label": "Padre",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "editable": "boolean"
+                                            },
+                                            "name": "MyTextField9",
+                                            "designerId": "7895468a-60e6-479b-9e42-fbc59b97619b"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "editable": false,
+                                                "id": "ftParentId",
+                                                "itemId": "ftParentId",
+                                                "label": "Padre Id",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "editable": "boolean"
+                                            },
+                                            "name": "MyTextField13",
+                                            "designerId": "fa7b6a55-d98f-4476-b9f3-3d080ca4ddcb"
+                                        },
+                                        {
+                                            "type": "Ext.field.Select",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "cboNodeType",
+                                                "itemId": "cboNodeType",
+                                                "label": "Tipo Nodo",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "displayField": "datafield",
+                                                "editable": "boolean",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "store": "object",
+                                                "valueField": "datafield"
+                                            },
+                                            "name": "MySelectField",
+                                            "designerId": "7e28ae8d-2af4-419e-8f81-cdbce316828c",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onCboNodeTypeChange",
+                                                        "implHandler": [
+                                                            "var contMain =  Ext.getCmp('contMain');",
+                                                            "var form = Ext.getCmp('formNode');",
+                                                            "this.configureNodeForm(form, newValue, 'create', { parentId: form.parentId });",
+                                                            "this.clearNodeForm(form, { keepType: true, keepActive: true });"
+                                                        ],
+                                                        "name": "change"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onCboNodeTypeChange",
+                                                    "designerId": "1777088a-ff12-4515-b2bb-bb6b59b7a2a6"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.FieldSet",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "fsCollection",
+                                        "itemId": "fsCollection",
+                                        "title": "<b>Datos Generales - Colección</b>"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyFieldSet1",
+                                    "designerId": "f10e56b8-a1a6-4bd5-8da1-bdd5ed50b010",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftColName",
+                                                "itemId": "ftColName",
+                                                "label": "Nombre",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "margin": "auto"
+                                            },
+                                            "name": "MyTextField",
+                                            "designerId": "75b1fd2f-3a01-4f76-b91f-f91ccc532bad"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftColDesc",
+                                                "itemId": "ftColDesc",
+                                                "label": "Descripcion",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "id": "string",
+                                                "inputType": "string",
+                                                "itemId": "string",
+                                                "label": "string",
+                                                "margin": "auto"
+                                            },
+                                            "name": "MyTextField1",
+                                            "designerId": "96e43bbb-b9bf-4761-9c16-2429db2f2a24"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.FieldSet",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "fsResource",
+                                        "itemId": "fsResource",
+                                        "title": "<b>Datos Generales - Recurso</b>"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyFieldSet2",
+                                    "designerId": "a9bfaf64-e1db-4e7e-b425-f007b12c70a3",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftResCode",
+                                                "itemId": "ftResCode",
+                                                "label": "Code Resource",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField3",
+                                            "designerId": "fb28e7c7-0172-46b6-879d-b232c0ebdf48"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftResDesc",
+                                                "itemId": "ftResDesc",
+                                                "label": "Desc Corta",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField2",
+                                            "designerId": "e35b76c1-5809-4cf4-80e3-daaf8ebd0b09"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.FieldSet",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "fsTab",
+                                        "itemId": "fsTab",
+                                        "title": "<b>Datos Generales  - Pestaña</b>"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyFieldSet3",
+                                    "designerId": "2c572938-944a-494b-9930-1c74e689be7c",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftTabName",
+                                                "itemId": "ftTabName",
+                                                "label": "Nombre",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField10",
+                                            "designerId": "6074705d-53ce-4858-8975-ebb0c6c09c1f"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftTabCode",
+                                                "itemId": "ftTabCode",
+                                                "label": "Código",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField4",
+                                            "designerId": "dc7fa868-cba7-4d2a-bfc1-46680ba540ab"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftTabShortDesc",
+                                                "itemId": "ftTabShortDesc",
+                                                "label": "Desc Corta",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField11",
+                                            "designerId": "098c2464-d7e7-4f5f-9e75-8c41b07b70db"
+                                        },
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "ftTabSortOrder",
+                                                "itemId": "ftTabSortOrder",
+                                                "label": "Orden",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField8",
+                                            "designerId": "9c2e2d8d-dcfc-4fe1-a1db-ba34e9a65324"
+                                        },
+                                        {
+                                            "type": "Ext.field.Select",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "cboTabAssetType",
+                                                "itemId": "cboTabAssetType",
+                                                "label": "Tipo Archivo",
+                                                "margin": 8,
+                                                "store": [
+                                                    "{",
+                                                    "    fields: ['text','value'],",
+                                                    "    data: [",
+                                                    "      { text: 'Imágenes',   value: 'IMAGE'   },",
+                                                    "      { text: 'Videos', value: 'VIDEO'  },",
+                                                    "      { text: 'Documentos',   value: 'DOC'   },",
+                                                    "      { text: 'Otros', value: 'ANY'  }",
+                                                    "    ]",
+                                                    "}"
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "store": "object"
+                                            },
+                                            "name": "MySelectField1",
+                                            "designerId": "7a5b16a4-20d3-46ba-82d3-fc5e6e6ed2d5"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.form.FieldSet",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "title": "<b>Estado</b>"
+                                    },
+                                    "configAlternates": {
+                                        "title": "string"
+                                    },
+                                    "name": "MyFieldSet4",
+                                    "designerId": "8e39684a-f73d-402b-9a6b-a1e810a8a015",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": "cboAdmIsActive",
+                                                "itemId": "cboAdmIsActive",
+                                                "label": "Estado",
+                                                "margin": 8
+                                            },
+                                            "configAlternates": {
+                                                "label": "string",
+                                                "margin": "auto",
+                                                "id": "string",
+                                                "itemId": "string"
+                                            },
+                                            "name": "MyTextField5",
+                                            "designerId": "30ba0cc9-d262-4022-a1dd-dd29ec2f4a4d"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Toolbar",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "docked": "top",
+                                        "itemId": "mytoolbar1"
+                                    },
+                                    "configAlternates": {
+                                        "docked": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyToolbar1",
+                                    "designerId": "735aab8a-fe40-4a3d-bf9f-44cfaa2a6874",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "confirm",
+                                                "id": "btnConfirm",
+                                                "itemId": "btnConfirm",
+                                                "text": "Confirmar",
+                                                "ui": "confirm"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton3",
+                                            "designerId": "e48bb92c-889d-409d-bc96-b50bfa63437d",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnConfirmTap",
+                                                        "implHandler": [
+                                                            "var form = Ext.getCmp('formNode');",
+                                                            "",
+                                                            "var payload = this.buildPayload(form);",
+                                                            "",
+                                                            "var err = this.validateCreatePayload(payload);",
+                                                            "if (err) {",
+                                                            "    Ext.toast(err);",
+                                                            "    return;",
+                                                            "}",
+                                                            "",
+                                                            "appLocal.saveNode();",
+                                                            "",
+                                                            "return;"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnConfirmTap",
+                                                    "designerId": "4d324283-1c53-4d72-9c50-a80d7a1185f6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.Spacer",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "name": "MySpacer1",
+                                            "designerId": "b0648872-49eb-46fa-9b32-02f417dd3266"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "decline",
+                                                "id": "btnCancel",
+                                                "itemId": "btnCancel",
+                                                "text": "Cancelar",
+                                                "ui": "decline"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton4",
+                                            "designerId": "355980be-3499-40fe-aa98-b19074caf8da",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnCancelTap",
+                                                        "implHandler": [
+                                                            "var contNode    = Ext.getCmp('contNode');",
+                                                            "var toolbarMain = Ext.getCmp('toolbarMain');",
+                                                            "",
+                                                            "contNode.setActiveItem(0);",
+                                                            "toolbarMain.show();",
+                                                            "",
+                                                            "//this.cleanForm();"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnCancelTap",
+                                                    "designerId": "e9fa8669-1fff-437f-8f0e-a5439f3cc298"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainBeforeShow",
+                "implHandler": [
+                    "jsTerian.loadStore('storeUser');",
+                    "jsTerian.loadStore('storeRole');"
+                ],
+                "name": "beforeshow"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainBeforeShow",
+            "designerId": "679799e3-69ad-437c-a9ad-12a6220ab572"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "buildPayload",
+                "implHandler": [
+                    "// Obtener los valores del contexto ",
+                    "var nodeType = (jsTerian.readElementValue('cboNodeType') || '').trim(); ",
+                    "",
+                    "if (!nodeType) {",
+                    "    nodeType = (jsTerian.readElementValue('hfNodeTypeSelected') || '').trim(); ",
+                    "} ",
+                    "// Nodo actual ",
+                    "var parentId = (jsTerian.readElementValue('ftParentId') || '').trim();",
+                    "if (!parentId) parentId = appLocal.getCurrentNodeId(); ",
+                    "",
+                    "var data = {}; ",
+                    "",
+                    "if (nodeType === 'collection') { ",
+                    "    data.name = (jsTerian.readElementValue('ftColName') || '').trim(); ",
+                    "    var desc = (jsTerian.readElementValue('ftColDesc') || '').trim();",
+                    "    data.description = desc ? desc : null; ",
+                    "} ",
+                    "",
+                    "if (nodeType === 'resource') { ",
+                    "    data.code = (jsTerian.readElementValue('ftResCode') || '').trim();",
+                    "    data.description = (jsTerian.readElementValue('ftResDesc') || '').trim(); ",
+                    "}",
+                    "",
+                    "if (nodeType === 'tab') { ",
+                    "    data.name = (jsTerian.readElementValue('ftTabName') || '').trim();",
+                    "    data.tab_code = (jsTerian.readElementValue('ftTabCode') || '').trim(); ",
+                    "    var shortDesc = (jsTerian.readElementValue('ftTabShortDesc') || '').trim(); ",
+                    "    data.short_description = shortDesc ? shortDesc : null; ",
+                    "    var sortOrderRaw = jsTerian.readElementValue('ftTabSortOrder');",
+                    "    var sortOrder = parseInt(sortOrderRaw, 10); data.sort_order = isNaN(sortOrder) ? 1 : sortOrder; ",
+                    "    data.asset_type_code = (jsTerian.readElementValue('cboTabAssetType') || '').trim(); ",
+                    "} ",
+                    "",
+                    "return { ",
+                    "    node_type: nodeType,",
+                    "    parent_id: parentId, ",
+                    "    data: data",
+                    "};"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "buildPayload",
+            "designerId": "5b952bf0-222b-47fa-8c20-eda66349ac87"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "payload"
+                ],
+                "fn": "validateCreatePayload",
+                "implHandler": [
+                    "// Funcion test: sirve para validar que el payload venga completo",
+                    "var t = payload.node_type;",
+                    "var d = payload.data || {};",
+                    "",
+                    "if (t === 'collection' && !d.name) return 'Falta nombre de colección';",
+                    "if (t === 'resource' && (!d.code || !d.description)) return 'Falta code o descripción del recurso';",
+                    "if (t === 'tab' && (!d.name || !d.tab_code || !d.asset_type_code)) return 'Falta name/tab_code/asset_type_code';",
+                    "if (!payload.parent_id) return 'No se detectó el nodo padre';",
+                    "",
+                    "return null;"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "validateCreatePayload",
+            "designerId": "d55beb1a-79a3-4732-8099-2cfa11afd5f4"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "form",
+                    "nodeType",
+                    "mode",
+                    "ctx"
+                ],
+                "fn": "configureNodeForm",
+                "implHandler": [
+                    "const fsCollection = form.down('#fsCollection');",
+                    "const fsResource   = form.down('#fsResource');",
+                    "const fsTab        = form.down('#fsTab');",
+                    "const cboNodeType  = form.down('#cboNodeType');",
+                    "",
+                    "// Modo",
+                    "form.isCreate = (mode === 'create');",
+                    "",
+                    "// Tipo visible: en create se puede elegir; en edit solo se muestra (disabled)",
+                    "if (cboNodeType) {",
+                    "    cboNodeType.setHidden(false);",
+                    "    cboNodeType.setDisabled(mode !== 'create');",
+                    "    cboNodeType.setValue(nodeType);",
+                    "}",
+                    "",
+                    "// Mostrar solo la sección correspondiente",
+                    "if (fsCollection) fsCollection.setHidden(nodeType !== 'collection');",
+                    "if (fsResource)   fsResource.setHidden(nodeType !== 'resource');",
+                    "if (fsTab)        fsTab.setHidden(nodeType !== 'tab');",
+                    "",
+                    "// Nombre del padre)",
+                    "if (ctx && ctx.parent_name) {",
+                    "    const ft = form.down('#ftParentName');",
+                    "    if (ft) ft.setValue(ctx.parent_name);",
+                    "}",
+                    "",
+                    "// Limpiar secciones",
+                    "const resetGroup = function(group) {",
+                    "    if (!group) return;",
+                    "    group.items.each(function(f){",
+                    "        if (f && f.reset) f.reset();",
+                    "    });",
+                    "};",
+                    "",
+                    "if (nodeType !== 'collection') resetGroup(fsCollection);",
+                    "if (nodeType !== 'resource')   resetGroup(fsResource);",
+                    "if (nodeType !== 'tab')        resetGroup(fsTab);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "configureNodeForm",
+            "designerId": "f435a0e6-b969-454a-9584-c3799b3e58c9"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "mode",
+                    "record"
+                ],
+                "fn": "showForm",
+                "implHandler": [
+                    "// Referencia a la ventana",
+                    "var me = this;",
+                    "",
+                    "// Obtener componentes",
+                    "var contNode    = Ext.getCmp('contNode');",
+                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "var form        = Ext.getCmp('formNode');",
+                    "",
+                    "// Cambiar la vista",
+                    "contNode.setActiveItem(1);",
+                    "toolbarMain.hide();",
+                    "",
+                    "// Normalizar record",
+                    "var data = record ? (record.getData ? record.getData() : record) : null;",
+                    "",
+                    "// Guardar estado en el form",
+                    "form.isCreate  = (mode === 'create');",
+                    "form.nodeRecord = data || null;",
+                    "",
+                    "// Contexto, nodo actual del arbol (padre)",
+                    "var parentId = appLocal.getCurrentNodeId();",
+                    "form.parentId = parentId;",
+                    "",
+                    "// Mostrar el padre",
+                    "form.down('#ftParentId').setValue(parentId);",
+                    "var ftParent = form.down('#ftParentName');",
+                    "if (ftParent) {",
+                    "    ftParent.setValue(appLocal.getCurrentBreadcrumb({ sep: ' / ' }));",
+                    "}",
+                    "",
+                    "// Editar registro",
+                    "if (mode === 'edit' && data) {",
+                    "    var nodeType = data.node_type;",
+                    "    ",
+                    "    var cboType = form.down('#cboNodeType');",
+                    "    if (cboType) {",
+                    "        // Store mínimo para que el combo pueda mostrar el texto en EDIT",
+                    "        cboType.setStore({",
+                    "            fields: ['text', 'value'],",
+                    "            data: [{",
+                    "                text : (nodeType === 'collection' ? 'Colección'",
+                    "                      : nodeType === 'resource'   ? 'Recurso'",
+                    "                      : 'Pestaña'),",
+                    "                value: nodeType",
+                    "            }]",
+                    "        });",
+                    "",
+                    "        // Asegura que se vea y que NO se pueda cambiar",
+                    "        cboType.setHidden(false);",
+                    "        cboType.setDisabled(true);",
+                    "",
+                    "        // Setea el value (ya con store, sí mostrará el display)",
+                    "        cboType.setValue(nodeType);",
+                    "    }",
+                    "",
+                    "    // Configurar form y deja visible el tipo de nodo (bloqueado)",
+                    "    this.configureNodeForm(form, nodeType, 'edit', {",
+                    "        parent_name: appLocal.getCurrentBreadcrumb({ sep: ' / ' })",
+                    "    });",
+                    "",
+                    "    // Llenar campos del record",
+                    "    this.fillNodeForm(form, data);",
+                    "",
+                    "    return;",
+                    "}",
+                    "",
+                    "// Crear registro",
+                    "",
+                    "// Obtener los tipos permitidos usando al padre actual",
+                    "var allowed = appLocal.getCreateOptions(parentId);",
+                    "if (!allowed || allowed.length === 0) {",
+                    "    console.log('Aquí no puedes crear hijos');",
+                    "    return;",
+                    "}",
+                    "",
+                    "// Cargar las opciones en el select",
+                    "var cboType = form.down('#cboNodeType');",
+                    "if (cboType) {",
+                    "    cboType.setHidden(false);",
+                    "    cboType.setDisabled(false);",
+                    "",
+                    "    // Cargar store",
+                    "    cboType.setStore({",
+                    "        fields: ['text', 'value'],",
+                    "        data: allowed.map(function(v){",
+                    "            if (typeof v === 'string') {",
+                    "                return {",
+                    "                    text: (v === 'collection' ? 'Colección' : v === 'resource' ? 'Recurso' : 'Pestaña'),",
+                    "                    value: v",
+                    "                };",
+                    "            }",
+                    "            return v;",
+                    "        })",
+                    "    });",
+                    "",
+                    "    // Seleccionar el primero por default, suspender eventos para no hacer un ciclo",
+                    "    cboType.suspendEvents(false);",
+                    "    cboType.setValue(allowed[0].value || allowed[0]);",
+                    "    cboType.resumeEvents();",
+                    "",
+                    "    // Listener change: cambia la seccion visible y limpia los campos",
+                    "    if (!cboType._hasNodeTypeListener) {",
+                    "        cboType.on('change', function(field, newVal) {",
+                    "",
+                    "            me.configureNodeForm(form, newVal, 'create', {",
+                    "                parent_name: appLocal.getCurrentBreadcrumb({ sep: ' / ' })",
+                    "            });",
+                    "            me.clearNodeForm({ keepType: true, keepActive: true });",
+                    "        });",
+                    "",
+                    "        cboType._hasNodeTypeListener = true;",
+                    "    }",
+                    "}",
+                    "",
+                    "// Tipo inicial",
+                    "var nodeType = cboType ? cboType.getValue() : (allowed[0].value || allowed[0]);",
+                    "",
+                    "// Configurar form y limpiar campos",
+                    "me.configureNodeForm(form, nodeType, 'create', {",
+                    "    parent_name: appLocal.getCurrentBreadcrumb({ sep: ' / ' })",
+                    "});",
+                    "",
+                    "me.clearNodeForm({ keepType: true, keepActive: true });"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "designer|params": "typedarray"
+            },
+            "name": "showForm",
+            "designerId": "8baa90d4-bc16-45de-8d38-97e296d32bf8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showDataView",
+                "implHandler": [
+                    "var contUser    = Ext.getCmp('contUser');",
+                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "",
+                    "contUser.setActiveItem(0);",
+                    "toolbarMain.show();"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "showDataView",
+            "designerId": "9b5daa93-699f-4f27-af06-5119517d6d8c"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "cleanForm",
+                "implHandler": [
+                    "try {",
+                    "    // Proceso para mapear los datos",
+                    "    const mapping = {",
+                    "        cboNodeType   : '',",
+                    "        ftColName     : '',",
+                    "        ftColDesc     : '',",
+                    "        ftResCode     : '',",
+                    "        ftResDesc     : '',",
+                    "        ftTabName     : '',",
+                    "        ftTabCode     : '',",
+                    "        ftTabShortDesc: '',",
+                    "        ftTabSortOrder   : '',",
+                    "        cboTabAssetType  : '',",
+                    "        cboAdmIsActive: '',",
+                    "    };",
+                    "    Ext.Object.each(mapping, function(field, value){",
+                    "        jsTerian.assignElementValue(field, value);",
+                    "    });",
+                    "",
+                    "    // Punto para cargar el store",
+                    "}",
+                    "finally {",
+                    "    //var form = Ext.getCmp(\"formUser\");",
+                    "    //form.isCreate = true;",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "cleanForm",
+            "designerId": "8a23f7bd-0172-4f39-9cdb-7bddb5926cc9"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "record"
+                ],
+                "fn": "showFormView",
+                "implHandler": [
+                    "// Obtener el record",
+                    "const data = record.getData ? record.getData() : record;",
+                    "",
+                    "// Cache del nodo abierto",
+                    "appLocal.nodeCache = appLocal.nodeCache || {};",
+                    "var nodeId = data.id || data.node_id || data._id;",
+                    "appLocal.nodeCache[nodeId] = data;",
+                    "",
+                    "// Llenar el form con el nodo seleccionado",
+                    "this.fillForm(data);",
+                    "",
+                    "// Navegar",
+                    "if (data.node_type === 'collection' || data.node_type === 'resource') {",
+                    "    appLocal.loadTreeChildren('storeNode', data.id, { pushHistory: true });",
+                    "}"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "showFormView",
+            "designerId": "56ac9491-9d2a-47c3-9dd4-c2e1f18499bf"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "cleanFormView",
+                "implHandler": [
+                    "jsTerian.assignElementValue('ftType', '');",
+                    "jsTerian.assignElementValue('ftName', '');",
+                    "jsTerian.assignElementValue('cboIsActive', true);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "cleanFormView",
+            "designerId": "ab84440f-56d0-4968-b293-1ec76ed60cdb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "data"
+                ],
+                "fn": "fillForm",
+                "implHandler": [
+                    "const mapping = {",
+                    "    ftType     : data.node_type,",
+                    "    ftName     : data.name ? data.name : data.description,",
+                    "    cboIsActive: data.is_active,",
+                    "};",
+                    "",
+                    "Ext.Object.each(mapping, function(field, value){",
+                    "    jsTerian.assignElementValue(field, value);",
+                    "});"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "fillForm",
+            "designerId": "bc41e0dd-9fb6-4605-9a92-fddfb0c83ed1"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "form",
+                    "data"
+                ],
+                "fn": "fillNodeForm",
+                "implHandler": [
+                    "if (!data) return;",
+                    "",
+                    "// Limpiar",
+                    "var trim = function(v){",
+                    "    return (v === null || v === undefined) ? '' : String(v).trim();",
+                    "};",
+                    "",
+                    "// Tipo y estado",
+                    "var nodeType = trim(data.node_type); // 'collection' | 'resource' | 'tab'",
+                    "",
+                    "// Muestra el tipo en el combo",
+                    "try { jsTerian.assignElementValue('cboNodeType', nodeType); } catch(e){}",
+                    "",
+                    "// Activo/inactivo",
+                    "if (data.is_active !== undefined) {",
+                    "    try { jsTerian.assignElementValue('cboAdmIsActive', !!data.is_active); } catch(e){}",
+                    "    try { jsTerian.assignElementValue('cboIsActive', !!data.is_active); } catch(e){}",
+                    "}",
+                    "",
+                    "// Padre",
+                    "if (data.parent_id || data.parentId) {",
+                    "    try { jsTerian.assignElementValue('ftParentId', trim(data.parent_id || data.parentId)); } catch(e){}",
+                    "}",
+                    "",
+                    "// Collection",
+                    "if (nodeType === 'collection') {",
+                    "    // Algunos backends usan name/description, otros name/short_description",
+                    "    jsTerian.assignElementValue('ftColName', trim(data.name));",
+                    "    jsTerian.assignElementValue('ftColDesc', trim(data.description) || trim(data.short_description) || '');",
+                    "    return;",
+                    "}",
+                    "",
+                    "// Rresource",
+                    "if (nodeType === 'resource') {",
+                    "    // Puede venir como code/description o code/name dependiendo tu API",
+                    "    jsTerian.assignElementValue('ftResCode', trim(data.code));",
+                    "    jsTerian.assignElementValue('ftResDesc', trim(data.description) || trim(data.name) || '');",
+                    "    return;",
+                    "}",
+                    "",
+                    "// Tab",
+                    "if (nodeType === 'tab') {",
+                    "    jsTerian.assignElementValue('ftTabName', trim(data.name));",
+                    "    jsTerian.assignElementValue('ftTabCode', trim(data.tab_code));",
+                    "    jsTerian.assignElementValue('ftTabShortDesc', trim(data.short_description));",
+                    "",
+                    "    // sort_order default 1",
+                    "    var sort = data.sort_order;",
+                    "    if (sort === null || sort === undefined || sort === '') sort = 1;",
+                    "    jsTerian.assignElementValue('ftTabSortOrder', sort);",
+                    "",
+                    "    // asset_type_code (combo)",
+                    "    jsTerian.assignElementValue('cboTabAssetType', trim(data.asset_type_code));",
+                    "    return;",
+                    "}",
+                    "",
+                    "// debug",
+                    "//console.warn('[fillNodeForm] node_type desconocido:', nodeType, data);"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "fillNodeForm",
+            "designerId": "99966ef4-68e7-4672-bce2-fc1864c8ce2a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "opts"
+                ],
+                "fn": "clearNodeForm",
+                "implHandler": [
+                    "opts = opts || {};",
+                    "const keepType   = (opts.keepType !== false);",
+                    "const keepActive = (opts.keepActive !== false);",
+                    "",
+                    "try {",
+                    "    const mapping = {",
+                    "        // Collection",
+                    "        ftColName: '',",
+                    "        ftColDesc: '',",
+                    "",
+                    "        // Resource",
+                    "        ftResCode: '',",
+                    "        ftResDesc: '',",
+                    "",
+                    "        // Tab",
+                    "        ftTabName      : '',",
+                    "        ftTabCode      : '',",
+                    "        ftTabShortDesc : '',",
+                    "        ftTabSortOrder : 1,",
+                    "        cboTabAssetType: null,",
+                    "",
+                    "        // Estado",
+                    "        cboAdmIsActive: keepActive ? true : null",
+                    "    };",
+                    "",
+                    "    if (!keepType) {",
+                    "        mapping.cboNodeType = null;",
+                    "    }",
+                    "",
+                    "    Ext.Object.each(mapping, function(field, value) {",
+                    "        try {",
+                    "            jsTerian.assignElementValue(field, value);",
+                    "        } catch (e) {}",
+                    "    });",
+                    "}",
+                    "finally {",
+                    "    console.log('[FORM] clearNodeForm', { keepType, keepActive });",
+                    "}",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "clearNodeForm",
+            "designerId": "c83a9c39-96a0-4398-bcda-6256294247b6"
+        }
+    ]
+}
