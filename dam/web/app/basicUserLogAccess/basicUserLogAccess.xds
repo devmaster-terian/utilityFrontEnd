@@ -17,7 +17,7 @@
             },
             "viewportOrientation": "landscape"
         },
-        "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/basicTemplate",
+        "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/basicUserLogAccess",
         "spacesToIndent": 4,
         "sdkPath": "",
         "lineEnding": "CRLF",
@@ -38,22 +38,27 @@
             "b777bc78-ac1b-4c89-beec-997c780710ac",
             "8c7f70fa-6861-490f-b55e-d26dd1e5d660"
         ],
-        "store": [],
+        "store": [
+            "c38c19d0-dd69-453c-be21-eb8b8f362630"
+        ],
         "controller": [],
-        "model": [],
+        "model": [
+            "e07c1d7e-d1d4-4fda-81dd-ba24c20f9a25"
+        ],
         "resource": [
             "03001bc7-59b4-49f7-b409-6b7e349a1b62",
             "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
             "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
-            "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
-            "e5346b91-c26f-4b84-9545-73fcb3f44295",
-            "1a4830a5-c8dd-4983-80ee-7e50d88836a5",
-            "66b5ef63-68b6-4cd0-9183-2eb8880be640",
-            "466f0a2c-1e05-4ae9-9ba8-5f050c97179d",
-            "7e41565a-d70b-4c85-aa83-b7ff68ede296",
             "c83f5619-e093-4e4b-a6a9-dd2d6f4f861a",
+            "7e41565a-d70b-4c85-aa83-b7ff68ede296",
             "a5449007-881d-4a2a-a9ab-d2488318b8cc",
-            "47d04085-020e-412d-b41a-61b2f460ab9c"
+            "47d04085-020e-412d-b41a-61b2f460ab9c",
+            "3d37d13d-0002-4ffa-8a42-9810925e7f32",
+            "466f0a2c-1e05-4ae9-9ba8-5f050c97179d",
+            "e5346b91-c26f-4b84-9545-73fcb3f44295",
+            "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
+            "1a4830a5-c8dd-4983-80ee-7e50d88836a5",
+            "66b5ef63-68b6-4cd0-9183-2eb8880be640"
         ],
         "app": [
             "application"

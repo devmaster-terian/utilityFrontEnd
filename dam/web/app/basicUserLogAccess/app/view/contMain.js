@@ -25,7 +25,11 @@ Ext.define('basicUserLogAccess.view.contMain', {
         'Ext.Toolbar',
         'Ext.Button',
         'Ext.Spacer',
-        'Ext.form.Panel'
+        'Ext.dataview.DataView',
+        'Ext.XTemplate',
+        'Ext.form.Panel',
+        'Ext.form.FieldSet',
+        'Ext.field.Date'
     ],
 
     config: {
@@ -37,50 +41,185 @@ Ext.define('basicUserLogAccess.view.contMain', {
     },
     id: 'contMain',
     itemId: 'contMain',
+    layout: 'vbox',
     defaultListenerScope: true,
 
-    items: [
-        {
-            xtype: 'toolbar',
-            id: 'toolbarMain',
-            itemId: 'toolbarMain',
-            docked: 'top',
-            items: [
-                {
-                    xtype: 'button',
-                    itemId: 'mybutton',
-                    iconCls: 'fas fa-download',
-                    text: 'MyButton',
-                    listeners: {
-                        tap: 'onMybuttonTap'
-                    }
-                },
-                {
-                    xtype: 'spacer'
-                },
-                {
-                    xtype: 'button',
-                    text: 'MyButton2'
-                }
-            ]
-        },
-        {
-            xtype: 'container'
-        },
-        {
-            xtype: 'formpanel',
-            title: 'My Form'
-        }
-    ],
     listeners: {
         resize: 'onContMainResize'
     },
-
-    onMybuttonTap: function(button, e, eOpts) {
-        Ext.Msg.alert(releaseActiva(), 'El mensaje que quieres mostrar', function() {
-            console.log('El usuario cerró la alerta');
-        });
-    },
+    items: [
+        {
+            xtype: 'container',
+            flex: 1,
+            id: 'contLogAccess',
+            itemId: 'contLogAccess',
+            layout: 'card',
+            items: [
+                {
+                    xtype: 'container',
+                    id: 'contViewLog',
+                    itemId: 'contViewLog',
+                    items: [
+                        {
+                            xtype: 'toolbar',
+                            id: 'toolbarViewLog',
+                            itemId: 'toolbarViewLog',
+                            docked: 'bottom',
+                            items: [
+                                {
+                                    xtype: 'button',
+                                    id: 'btnFilter',
+                                    itemId: 'btnFilter',
+                                    ui: 'action',
+                                    iconCls: 'fas fa-filter',
+                                    listeners: {
+                                        tap: 'onBtnFilterTap'
+                                    }
+                                },
+                                {
+                                    xtype: 'spacer'
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'btnRefresh',
+                                    itemId: 'mybutton2',
+                                    ui: 'action',
+                                    iconCls: 'fas fa-arrows-rotate',
+                                    listeners: {
+                                        tap: 'onBtnRefreshTap'
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'container',
+                            id: 'contLogHeader',
+                            itemId: 'contLogHeader',
+                            html: '<div class="resource-row header-style"> <div class="col-prospect-name">USUARIO</div> <div class="col-prospect-data">ACCESO</div> </div>'
+                        },
+                        {
+                            xtype: 'dataview',
+                            id: 'dataviewLog',
+                            itemId: 'dataviewLog',
+                            itemTpl: [
+                                '<div class="resource-row {[values.is_active ? \'\' : \'asset-inactive\']}">',
+                                '   <div class="col-prospect-name">',
+                                '        <div class="role-badge">{user_name}</div>',
+                                '        <div class="col-badge">{user_email}</div>',
+                                '    </div>',
+                                '    ',
+                                '    <div class="col-prospect-data">',
+                                '        <div class="role-badge">{access_date}</div>',
+                                '        <div class="col-badge">{access_time}</div>',
+                                '    </div>',
+                                '</div>'
+                            ],
+                            store: 'jsonStoreLogAccess'
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    id: 'contFilter',
+                    itemId: 'contFilter',
+                    items: [
+                        {
+                            xtype: 'toolbar',
+                            id: 'toolbarFilter',
+                            itemId: 'toolbarFilter',
+                            docked: 'bottom',
+                            items: [
+                                {
+                                    xtype: 'button',
+                                    id: 'btnConfirmFilter',
+                                    itemId: 'btnConfirmFilter',
+                                    ui: 'confirm',
+                                    iconCls: 'fas fa-check-circle',
+                                    listeners: {
+                                        tap: 'onBtnConfirmFilterTap'
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'formpanel',
+                            id: 'formFilter',
+                            itemId: 'formFilter',
+                            items: [
+                                {
+                                    xtype: 'fieldset',
+                                    hidden: true,
+                                    id: 'fieldsetUserFilter',
+                                    itemId: 'fieldsetUserFilter',
+                                    title: 'Filtrar por Usuario',
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            id: 'tfUserStart',
+                                            itemId: 'tfUserStart',
+                                            label: 'Desde'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            id: 'tfUserEnd',
+                                            itemId: 'tfUserEnd',
+                                            label: 'Hasta'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldset',
+                                    id: 'fieldsetDateFilter',
+                                    itemId: 'fieldsetDateFilter',
+                                    title: 'Filtrar por Fecha',
+                                    items: [
+                                        {
+                                            xtype: 'datefield',
+                                            id: 'dfDateStart',
+                                            itemId: 'dfDateStart',
+                                            label: 'Desde',
+                                            picker: {
+                                                xtype: 'datepicker',
+                                                doneButton: {
+                                                    iconCls: 'fas fa-check',
+                                                    ui: 'confirm',
+                                                    text: 'Confirmar'
+                                                },
+                                                cancelButton: {
+                                                    iconCls: 'fas fa-cancel',
+                                                    ui: 'decline',
+                                                    text: 'Cancelar'
+                                                }
+                                            }
+                                        },
+                                        {
+                                            xtype: 'datefield',
+                                            id: 'dfDateEnd',
+                                            itemId: 'dfDateEnd',
+                                            label: 'Hasta',
+                                            picker: {
+                                                xtype: 'datepicker',
+                                                doneButton: {
+                                                    iconCls: 'fas fa-check',
+                                                    ui: 'confirm',
+                                                    text: 'Confirmar'
+                                                },
+                                                cancelButton: {
+                                                    iconCls: 'fas fa-cancel',
+                                                    ui: 'decline',
+                                                    text: 'Cancelar'
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
 
     onContMainResize: function(element, info, eOpts) {
         console.log('>>>resizswse');
@@ -93,21 +232,34 @@ Ext.define('basicUserLogAccess.view.contMain', {
         let width = info;
 
         // 1. Log para depurar
-            console.log('El ancho actual es:', width);
+        console.log('El ancho actual es:', width);
 
-            // 2. Lógica condicional
-            // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado
-            var currentLayout = this.getLayout().type;
+        // 2. Lógica condicional
+        // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado
+        var currentLayout = this.getLayout().type;
 
-            if (width < 1000 /*&& currentLayout !== 'vbox'*/) {
-                console.log('-> Cambiando a Modo Móvil');
-                this.setLayout('hbox');
-            }
-            else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {
-                console.log('-> Cambiando a Modo Escritorio');
-                this.setLayout('vbox');
-            }
+        if (width < 1000 /*&& currentLayout !== 'vbox'*/) {
+            console.log('-> Cambiando a Modo Móvil');
+            this.setLayout('hbox');
+        }
+        else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {
+            console.log('-> Cambiando a Modo Escritorio');
+            this.setLayout('vbox');
+        }
 
+    },
+
+    onBtnFilterTap: function(button, e, eOpts) {
+        Ext.getCmp('contLogAccess').setActiveItem(1);
+    },
+
+    onBtnRefreshTap: function(button, e, eOpts) {
+
+    },
+
+    onBtnConfirmFilterTap: function(button, e, eOpts) {
+        Ext.getCmp('contLogAccess').setActiveItem(0);
+        jsTerian.loadStore('jsonStoreLogAccess');
     }
 
 });

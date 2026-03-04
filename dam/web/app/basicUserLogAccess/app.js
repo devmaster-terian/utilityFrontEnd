@@ -20,6 +20,12 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
+    models: [
+        'modelLogAccess'
+    ],
+    stores: [
+        'jsonStoreLogAccess'
+    ],
     views: [
         'contMain'
     ],
@@ -27,6 +33,23 @@ Ext.application({
 
     launch: function() {
         Ext.create('basicUserLogAccess.view.contMain', {fullscreen: true});
+        // Definición manual de meses y días en español
+        Ext.Date.monthNames = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
+        Ext.Date.dayNames = [
+            "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"
+        ];
+
+        // Opcional: Definir el formato de fecha por defecto para que coincida (Día/Mes/Año)
+        Ext.Date.defaultFormat = 'd/m/Y';
+
+        Ext.getCmp('dfDateStart').setValue(new Date());
+        Ext.getCmp('dfDateEnd').setValue(new Date());
+
+        jsTerian.loadStore('jsonStoreLogAccess');
     }
 
 });

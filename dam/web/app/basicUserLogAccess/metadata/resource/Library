@@ -7,7 +7,11 @@
     "codeClass": null,
     "userConfig": {
         "basePath": "../../../../framework/extjs-7.1-modern/build/",
-        "designer|userClassName": "Library"
+        "designer|userClassName": "Library",
+        "libraryRequires": [
+            "calendar",
+            "fontawesome"
+        ]
     },
     "configAlternates": {
         "designer|userClassName": "string",

@@ -6,15 +6,61 @@
     },
     "codeClass": null,
     "userConfig": {
+        "models": [
+            "modelLogAccess"
+        ],
         "name": "basicUserLogAccess",
+        "stores": [
+            "jsonStoreLogAccess"
+        ],
         "views": [
             "contMain"
         ]
     },
     "configAlternates": {
         "name": "string",
-        "views": "typedarray"
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
     },
     "name": "Application",
-    "designerId": "application"
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "// Definición manual de meses y días en español",
+                    "Ext.Date.monthNames = [",
+                    "    \"Enero\", \"Febrero\", \"Marzo\", \"Abril\", \"Mayo\", \"Junio\",",
+                    "    \"Julio\", \"Agosto\", \"Septiembre\", \"Octubre\", \"Noviembre\", \"Diciembre\"",
+                    "];",
+                    "",
+                    "Ext.Date.dayNames = [",
+                    "    \"Domingo\", \"Lunes\", \"Martes\", \"Miércoles\", \"Jueves\", \"Viernes\", \"Sábado\"",
+                    "];",
+                    "",
+                    "// Opcional: Definir el formato de fecha por defecto para que coincida (Día/Mes/Año)",
+                    "Ext.Date.defaultFormat = 'd/m/Y';",
+                    "",
+                    "Ext.getCmp('dfDateStart').setValue(new Date());",
+                    "Ext.getCmp('dfDateEnd').setValue(new Date());",
+                    "",
+                    "jsTerian.loadStore('jsonStoreLogAccess');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "9ac2e9b6-aa49-47b0-bb31-b5faacb4a352"
+        }
+    ]
 }

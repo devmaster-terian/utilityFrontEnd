@@ -1,0 +1,151 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "jsonStoreLogAccess",
+        "model": "modelLogAccess",
+        "storeId": "jsonStoreLogAccess"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyJsonStore",
+    "designerId": "c38c19d0-dd69-453c-be21-eb8b8f362630",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "ajaxProxyLogAccess"
+            },
+            "configAlternates": {
+                "designer|displayName": "string"
+            },
+            "name": "MyAjaxProxy",
+            "designerId": "2b9644db-3cb2-401a-ae75-58a21b0770b3",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "jsonReaderLogAccess",
+                        "rootProperty": "logs"
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader",
+                    "designerId": "cb3d7a4c-65f7-4465-86d0-a5f30c6d63ae"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "jsonstore"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "console.log('onLoad...');",
+                    "",
+                    "",
+                    "var dtStart = Ext.getCmp('dfDateStart').getValue();",
+                    "var dtEnd   = Ext.getCmp('dfDateEnd').getValue();",
+                    "",
+                    "dtStart = Ext.Date.format(dtStart, 'Y-m-d');",
+                    "dtEnd   = Ext.Date.format(dtEnd, 'Y-m-d');",
+                    "",
+                    "console.log('dtStart:',dtStart);",
+                    "console.log('dtEnd:',dtEnd);",
+                    "",
+                    "",
+                    "var endPoint = 'user/access-logs?' + 'start_date=' + dtStart + '&end_date=' + dtEnd;",
+                    "var url = jsTerian.getUrl(endPoint);",
+                    "",
+                    "console.log('url: ',url);",
+                    "",
+                    "// Obtén el proxy del store",
+                    "const proxy = jsonstore.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Obtener la pageSize y definir el currentPage en la primer página",
+                    "var pageSize = jsonstore.pageSize || 10;",
+                    "jsonstore.currentPage = 1;",
+                    "",
+                    "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
+                    "const params = {};",
+                    "params.id_user = 25;",
+                    "params.per_page = pageSize;",
+                    "",
+                    "",
+                    "// Asigna los parámetros al proxy",
+                    "proxy.setExtraParams(params);",
+                    "",
+                    "// Agrega el encabezado de autorización",
+                    "jsTerian.addAuthorizationHeader(jsonstore);",
+                    "",
+                    "jsonstore.load({",
+                    "    callback: function(records, operation, success) {",
+                    "        if (success) {",
+                    "            if (records.length === 0) {",
+                    "                console.info('No hay registros');",
+                    "            }",
+                    "        } else {",
+                    "            const response = operation.getError().response;",
+                    "            const status = response.status;",
+                    "",
+                    "            if (status >= 500) {",
+                    "                let msg = \"Error en el servidor (\" + status + \")\";",
+                    "",
+                    "                try {",
+                    "                    const json = Ext.decode(response.responseText);",
+                    "                    if (json.error) {",
+                    "                        msg = json.error;",
+                    "                    }",
+                    "                } catch (e) {",
+                    "                    console.warn('No se pudo parsear el error');",
+                    "                }",
+                    "",
+                    "                jsTerian.toastAlert(msg, 'error');",
+                    "            }",
+                    "",
+                    "            jsonstore.removeAll();",
+                    "        }",
+                    "    }",
+                    "});",
+                    ""
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "e2f4497b-6f3e-4e0e-b6c6-884481490bd3"
+        }
+    ]
+}

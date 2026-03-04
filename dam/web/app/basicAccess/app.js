@@ -89,18 +89,18 @@ Ext.application({
                 jsTerian.saveDataSS('access_token',access_token);
 
                 // Datos generales de la sesion
-                jsTerian.saveDataObjSS('TMP_SESSION', 'full_name', jsonData.user.full_name);
-                jsTerian.saveDataObjSS('TMP_SESSION', 'email', jsonData.user.email);
-                jsTerian.saveDataObjSS('TMP_SESSION', 'id_user', jsonData.user.id_user);
-                jsTerian.saveDataObjSS('TMP_SESSION', 'role', jsonData.user.role);
+                jsTerian.saveDataObjSS('TMP_SESSION', 'full_name' , jsonData.user.full_name);
+                jsTerian.saveDataObjSS('TMP_SESSION', 'email'     , jsonData.user.email);
+                jsTerian.saveDataObjSS('TMP_SESSION', 'id_user'   , jsonData.user.id_user);
+                jsTerian.saveDataObjSS('TMP_SESSION', 'role'      , jsonData.user.role);
                 Ext.Viewport.unmask();
 
-                    var objMessage = {
-                        type: 'confirm',
-                        title: 'Usuario Valido',
-                        message: 'Bienvenido ' + jsonData.user.full_name
-                    };
-                    jsDam.toast(objMessage);
+                var objMessage = {
+                    type: 'confirm',
+                    title: 'Usuario Valido',
+                    message: 'Bienvenido ' + jsonData.user.full_name
+                };
+                jsDam.toast(objMessage);
 
                 window.open('../damWorkspace/index.html','_self','toolbar=no');
             }

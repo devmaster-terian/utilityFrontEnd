@@ -1,0 +1,169 @@
+/* Forzar el uso de FontAwesome 7 en los botones del calendario */
+.x-datepanel .x-header .x-tool .x-icon-el {
+    font-family: "Font Awesome 7 Free" !important; /* Ajusta según el nombre de tu fuente */
+    font-weight: 900; 
+}
+
+/* Si las flechas siguen sin aparecer, puedes asignar los iconos directamente */
+.x-datepanel-tool-prevmonth .x-icon-el:before { content: "\f104"; } /* angle-left */
+.x-datepanel-tool-nextmonth .x-icon-el:before { content: "\f105"; } /* angle-right */
+
+/* CLASE BASE PARA FILAS Y CABECERA */
+.resource-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* ESTILO ESPECIAL SOLO PARA LA CABECERA */
+.header-style {
+    background-color: #f5f5f5; /* Gris claro */
+    font-weight: bold;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ddd; /* Borde más grueso abajo del título */
+}
+
+.col-badge {
+    font-size: 10px;      /* Tamaño Letra */
+
+}
+
+.col-code {
+    width: 30px;      /* Ancho fijo */
+    min-width: 30px;
+}
+
+.col-name {
+    min-width: 200px;
+    flex: 1;          /* Ocupa todo el espacio sobrante */
+    padding: 0 15px;
+}
+
+
+.col-prospect-name {
+    min-width: 170px;
+    /*flex: 1;    */
+    padding: 0 5px;
+}
+
+.col-prospect-data {
+    min-width: 170px;
+    flex: 1;          /* Ocupa todo el espacio sobrante */
+    padding: 0 15px;
+    text-align: left;
+}
+
+.col-asset-name {
+    min-width: 280px;
+    flex: 1;          /* Ocupa todo el espacio sobrante */
+    padding: 0 15px;
+}
+
+.col-asset-data {
+    width: 80px;      /* Ancho fijo */
+    flex: 1;          /* Ocupa todo el espacio sobrante */
+    min-width: 70px;
+}
+
+
+.col-type {
+    width: 80px;      /* Ancho fijo */
+    min-width: 80px;
+}
+
+/* COLUMNA 3: ACCIONES */
+/* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
+.col-actions {
+    min-width: 90px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px; /* Espacio entre bolitas */
+}
+
+/* Estilo base del botón redondo */
+.action-btn {
+    width: 32px;  /* Un poco más pequeños para que quepan bien en móvil */
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: #f4f6f8;
+    color: #555;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+/* --- COLORES ESPECÍFICOS AL PASAR EL MOUSE (HOVER) --- */
+
+/* Ver - Azul */
+.action-btn.view:hover {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+/* Descargar - Verde Oscuro */
+.action-btn.download:hover {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+/* Email - Gris/Amarillo */
+.action-btn.email:hover {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+/* WhatsApp - Verde Oficial */
+.action-btn.whatsapp:hover {
+    background-color: #dcf8c6;
+    color: #128c7e;
+}
+
+/* Adjuntar - Gris Azulado */
+.action-btn.attach:hover {
+    background-color: #eceff1;
+    color: #607d8b;
+}
+
+/* Botón View (Azul Oscuro / Pizarra) */
+.action-btn[data-action="view"] {
+    background-color: #2c3e50; /* Tono oscuro, sobrio y nada brillante */
+    color: #ffffff; /* Cambia el color del ícono a blanco para que resalte */
+    border-color: #2c3e50; /* Mantiene el borde del mismo color oscuro */
+}
+
+/* Efecto al presionar/tocar el botón View */
+.action-btn[data-action="view"]:active {
+    background-color: #1a252f; /* Un tono aún más oscuro para el efecto de presión */
+    border-color: #1a252f;
+}
+
+/* Botón Check (Verde) */
+.action-btn[data-action="check"] {
+    background-color: #28a745; /* Tono verde agradable a la vista */
+    color: #ffffff; /* Cambia el color del ícono a blanco */
+    border-color: #28a745; /* Por si tu botón original tiene algún borde */
+}
+
+/* Botón Basura (Rojo) */
+.action-btn[data-action="delete"] {
+    background-color: #dc3545; /* Tono rojo de alerta */
+    color: #ffffff; /* Cambia el color del ícono a blanco */
+    border-color: #dc3545;
+}
+
+/* Opcional: Un pequeño efecto al presionar/tocar el botón */
+.action-btn[data-action="check"]:active {
+    background-color: #218838;
+}
+
+.action-btn[data-action="delete"]:active {
+    background-color: #c82333;
+}
