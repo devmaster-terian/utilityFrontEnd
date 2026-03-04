@@ -1,0 +1,125 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "storeConfig",
+        "model": "modelConfig",
+        "storeId": "storeConfig"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyStore",
+    "designerId": "75580829-6a34-47f0-a74c-e2837c0d8086",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "name": "MyAjaxProxy2",
+            "designerId": "f72cba2b-bd23-4e23-a140-8340dad05fb0",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "rootProperty": "configurations"
+                    },
+                    "configAlternates": {
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader2",
+                    "designerId": "dc9c6dbc-9998-450f-8256-62808138e853"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "store"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "// Petición para traer los projectos",
+                    "var url = jsTerian.getUrl('configuration/read');",
+                    "",
+                    "// Obtén el proxy del store",
+                    "const proxy = store.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Obtener la pageSize y definir el currentPage en la primer página",
+                    "var pageSize = store.pageSize || 10;",
+                    "store.currentPage = 1;",
+                    "",
+                    "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
+                    "const params = {};",
+                    "params.per_page = pageSize;",
+                    "",
+                    "// Asigna los parámetros al proxy",
+                    "proxy.setExtraParams(params);",
+                    "",
+                    "// Agrega el encabezado de autorización",
+                    "jsTerian.addAuthorizationHeader(store);",
+                    "",
+                    "store.load({",
+                    "    callback: function(records, operation, success) {",
+                    "        if (success) {",
+                    "            if (records.length === 0) {",
+                    "                console.info('No hay configuraciones');",
+                    "            }",
+                    "        } else {",
+                    "            const response = operation.getError().response;",
+                    "            const status = response.status;",
+                    "",
+                    "            if (status >= 500) {",
+                    "                let msg = \"Error en el servidor (\" + status + \")\";",
+                    "",
+                    "                try {",
+                    "                    const json = Ext.decode(response.responseText);",
+                    "                    if (json.error) {",
+                    "                        msg = json.error;",
+                    "                    }",
+                    "                } catch (e) {",
+                    "                    console.warn('No se pudo parsear el error');",
+                    "                }",
+                    "",
+                    "                jsTerian.toastAlert(msg, 'error');",
+                    "            }",
+                    "",
+                    "            store.removeAll();",
+                    "        }",
+                    "    }",
+                    "});"
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "39411fe3-b197-42df-a882-c9db8ada67d1"
+        }
+    ]
+}

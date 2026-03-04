@@ -1,0 +1,361 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "modelUser",
+            "modelRole",
+            "modelConfig",
+            "modelParam"
+        ],
+        "name": "basicConfig",
+        "stores": [
+            "storeUser",
+            "storeRole",
+            "storeConfig",
+            "storeParam"
+        ],
+        "views": [
+            "contMain"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "appLocal = this.getApplication();",
+                    "",
+                    "// Carga de stores",
+                    "jsTerian.loadStore('storeConfig');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "a4efe309-81d5-4446-85f1-6ca1407c959a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "payload",
+                    "isCreate"
+                ],
+                "fn": "saveConfig",
+                "implHandler": [
+                    "var form = Ext.getCmp(\"formConfig\");",
+                    "var isCreate = form.isCreate;",
+                    "",
+                    "// Normaliza payload (no tocar estructura general)",
+                    "payload = payload || {};",
+                    "",
+                    "// CREATE no mandes id_user",
+                    "if (isCreate) {",
+                    "    if (\"id_configuration\" in payload) delete payload.id_configuration;",
+                    "} else {",
+                    "    // UPDATE, id_configuration es obligatorio",
+                    "    if (!payload.id_configuration) {",
+                    "        jsTerian.toastAlert(\"No se puede actualizar: falta id_configuration.\", \"error\");",
+                    "        return;",
+                    "    }",
+                    "}",
+                    "",
+                    "// Crear la URL dependiendo del tipo de solicitud",
+                    "var method = isCreate ? 'POST' : 'PUT';",
+                    "var url    = isCreate ? jsTerian.makeUrl('configuration/create') : jsTerian.makeUrl('configuration/update', payload.id_configuration);",
+                    "",
+                    "console.log(payload);",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    method,",
+                    "    url,",
+                    "    JSON.stringify(payload),",
+                    "",
+                    "    function success(resp){",
+                    "        var msg;",
+                    "        try { msg = Ext.decode(resp.responseText); }",
+                    "        catch(e){ msg = { success:true, message:'Success', data:{} }; }",
+                    "",
+                    "        var d = msg.data || {};",
+                    "        var display = d.full_name || ('ID ' + (d.id_user || '—'));",
+                    "",
+                    "        var text;",
+                    "        if (msg && msg.message){",
+                    "            text = msg.message + ': ' + display;",
+                    "        }",
+                    "",
+                    "        jsTerian.toastAlert(text, 'success');",
+                    "",
+                    "        // Recargar el store",
+                    "        jsTerian.reloadStore('storeConfig');",
+                    "",
+                    "        // Regresar a la vista con el grid",
+                    "        if (msg && msg.success) {",
+                    "            var contConfig = Ext.getCmp('contConfig');",
+                    "            var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "            if (contConfig) contConfig.setActiveItem(0);",
+                    "            if (toolbarMain) toolbarMain.show();",
+                    "        }",
+                    "",
+                    "        var contMain = Ext.getCmp('contMain');",
+                    "        contMain.cleanConfigForm();",
+                    "    },",
+                    "",
+                    "    function failure(response){",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}",
+                    "",
+                    "        let html = Ext.htmlEncode(parsed.message || 'Error, no se pudo registrar los cambios');",
+                    "        if (parsed.error) html += '<br/><p>Error, no se pudo registrar los cambios</p>';",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "saveConfig",
+            "designerId": "d89ff0e9-7144-40db-bedc-32f2fb1dafeb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "idConfig"
+                ],
+                "fn": "deleteConfig",
+                "implHandler": [
+                    "// Url de la solicitud",
+                    "var url = jsTerian.makeUrl('configuration/delete',idConfig);",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    'DELETE',",
+                    "    url,",
+                    "    null,",
+                    "",
+                    "    // Función Success",
+                    "    function(response) {",
+                    "",
+                    "        // Intenta obtener el mensaje, en caso contrario lo asigna",
+                    "        var msg = {};",
+                    "        try { msg = Ext.decode(response.responseText); } catch(e){}",
+                    "",
+                    "        // Mostrar mensaje del backend directamente",
+                    "        var text = msg && msg.message ? msg.message : 'Configuración eliminada';",
+                    "        jsTerian.toastAlert(text, 'success');",
+                    "",
+                    "        jsTerian.reloadStore('storeConfig');",
+                    "    },",
+                    "",
+                    "    // Función Failure",
+                    "    function(response) {",
+                    "",
+                    "        // Intenta obtener el error",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}",
+                    "",
+                    "        // Crea el mensaje de error y lanza la alerta",
+                    "        let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated config');",
+                    "        if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "deleteConfig",
+            "designerId": "f3247834-c007-4cb5-94de-6a3eee8bf167"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "payload",
+                    "isCreate"
+                ],
+                "fn": "saveParam",
+                "implHandler": [
+                    "var form = Ext.getCmp(\"formParam\");",
+                    "var isCreate = form.isCreate;",
+                    "",
+                    "// Normaliza payload (no tocar estructura general)",
+                    "payload = payload || {};",
+                    "",
+                    "// CREATE no mandes id_user",
+                    "if (isCreate) {",
+                    "    if (\"id_parameter\" in payload) delete payload.id_parameter;",
+                    "} else {",
+                    "    // UPDATE, id_configuration es obligatorio",
+                    "    if (!payload.id_parameter) {",
+                    "        jsTerian.toastAlert(\"No se puede actualizar: falta id_parameter.\", \"error\");",
+                    "        return;",
+                    "    }",
+                    "}",
+                    "",
+                    "// Crear la URL dependiendo del tipo de solicitud",
+                    "var method = isCreate ? 'POST' : 'PUT';",
+                    "var url    = isCreate ? jsTerian.makeUrl('parameter/create') : jsTerian.makeUrl('parameter/update', payload.id_parameter);",
+                    "",
+                    "console.log(payload);",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    method,",
+                    "    url,",
+                    "    JSON.stringify(payload),",
+                    "",
+                    "    function success(resp){",
+                    "        var msg;",
+                    "        try { msg = Ext.decode(resp.responseText); }",
+                    "        catch(e){ msg = { success:true, message:'Success', data:{} }; }",
+                    "",
+                    "        var d = msg.data || {};",
+                    "        var display = d.full_name || ('ID ' + (d.id_user || '—'));",
+                    "",
+                    "        var text;",
+                    "        if (msg && msg.message){",
+                    "            text = msg.message + ': ' + display;",
+                    "        }",
+                    "",
+                    "        jsTerian.toastAlert(text, 'success');",
+                    "",
+                    "        // Recargar el store",
+                    "        jsTerian.reloadStore('storeParam');",
+                    "",
+                    "        // Regresar a la vista con el grid",
+                    "        if (msg && msg.success) {",
+                    "            var contConfig = Ext.getCmp('contConfig');",
+                    "            var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "            if (contConfig) contConfig.setActiveItem(0);",
+                    "            if (toolbarMain) toolbarMain.show();",
+                    "        }",
+                    "",
+                    "        var contMain = Ext.getCmp('contMain');",
+                    "        contMain.cleanConfigParam();",
+                    "    },",
+                    "",
+                    "    function failure(response){",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}",
+                    "",
+                    "        let html = Ext.htmlEncode(parsed.message || 'Error, no se pudo registrar los cambios');",
+                    "        if (parsed.error) html += '<br/><p>Error, no se pudo registrar los cambios</p>';",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "saveParam",
+            "designerId": "3a45dd23-47c7-477a-a0b3-6c8ce197a1fd"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "idParam"
+                ],
+                "fn": "deleteParam",
+                "implHandler": [
+                    "// Url de la solicitud",
+                    "var url = jsTerian.makeUrl('parameter/delete',idParam);",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    'DELETE',",
+                    "    url,",
+                    "    null,",
+                    "",
+                    "    // Función Success",
+                    "    function(response) {",
+                    "",
+                    "        // Intenta obtener el mensaje, en caso contrario lo asigna",
+                    "        var msg = {};",
+                    "        try { msg = Ext.decode(response.responseText); } catch(e){}",
+                    "",
+                    "        // Mostrar mensaje del backend directamente",
+                    "        var text = msg && msg.message ? msg.message : 'Parámetro eliminado';",
+                    "        jsTerian.toastAlert(text, 'success');",
+                    "",
+                    "        jsTerian.reloadStore('storeParam');",
+                    "    },",
+                    "",
+                    "    // Función Failure",
+                    "    function(response) {",
+                    "",
+                    "        // Intenta obtener el error",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}",
+                    "",
+                    "        // Crea el mensaje de error y lanza la alerta",
+                    "        let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated config');",
+                    "        if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "deleteParam",
+            "designerId": "318a2ea3-d5db-4ef5-a5c2-2e3bcaec53e1"
+        }
+    ]
+}
