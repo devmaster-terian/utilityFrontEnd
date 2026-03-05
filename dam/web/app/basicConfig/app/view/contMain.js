@@ -24,6 +24,7 @@ Ext.define('basicConfig.view.contMain', {
         'basicConfig.view.contMainViewModel',
         'Ext.Toolbar',
         'Ext.Button',
+        'Ext.SegmentedButton',
         'Ext.Spacer',
         'Ext.dataview.DataView',
         'Ext.XTemplate',
@@ -81,15 +82,37 @@ Ext.define('basicConfig.view.contMain', {
                                     }
                                 },
                                 {
-                                    xtype: 'button',
-                                    handler: function(button, e) {
-
+                                    xtype: 'segmentedbutton',
+                                    id: 'segBtnConfig',
+                                    itemId: 'segBtnConfig',
+                                    width: 200,
+                                    defaults: {
+                                        flex: '1'
                                     },
-                                    id: 'btnDelete',
-                                    itemId: 'btnDelete',
-                                    ui: 'decline',
-                                    iconCls: 'fas fa-trash',
-                                    text: 'Eliminar'
+                                    items: [
+                                        {
+                                            xtype: 'button',
+                                            id: 'btnConfigActive',
+                                            itemId: 'btnConfigActive',
+                                            ui: 'action round',
+                                            iconCls: 'fas fa-check-circle',
+                                            pressed: true,
+                                            text: 'Activos',
+                                            value: 'false'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            id: 'btnConfigDelete',
+                                            itemId: 'btnConfigDelete',
+                                            ui: 'action round',
+                                            iconCls: 'fas fa-database',
+                                            text: 'Todos',
+                                            value: 'true'
+                                        }
+                                    ],
+                                    listeners: {
+                                        toggle: 'onSegBtnConfigToggle'
+                                    }
                                 },
                                 {
                                     xtype: 'spacer'
@@ -115,13 +138,14 @@ Ext.define('basicConfig.view.contMain', {
                                     xtype: 'container',
                                     id: 'contHeaderConfig',
                                     itemId: 'contHeaderConfig',
-                                    html: '<div class="resource-row header-style">     <div class="col-code">CÓDIGO</div>     <div class="col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
+                                    html: '<div class="resource-row header-style">         <div class="col-desc">DESCRIPCIÓN</div>    <div class="col-code">CÓDIGO</div>  <div class="col-actions">ACCIONES</div> </div>'
                                 },
                                 {
                                     xtype: 'dataview',
                                     id: 'dataViewConfig',
                                     itemId: 'dataViewConfig',
                                     itemTpl: [
+                                        '<!--',
                                         '<div class="resource-row {[values.is_active ? \'\' : \'config-inactive\']}"',
                                         '     style="{[',
                                         '            values.is_active',
@@ -129,7 +153,6 @@ Ext.define('basicConfig.view.contMain', {
                                         '            : \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #d9534f; background:rgba(217,83,79,0.06); opacity:0.75;\'',
                                         '            ]}">',
                                         '',
-                                        '    <!-- CÓDIGO (angosto) -->',
                                         '    <div class="col-code" style="flex:0 0 88px;">',
                                         '        <div class="text-bold"',
                                         '             style="{[values.is_active ? \'color:#1f7a3a; font-size:14px; line-height:18px;\' : \'color:#d9534f; font-size:14px; line-height:18px;\']}">',
@@ -140,7 +163,6 @@ Ext.define('basicConfig.view.contMain', {
                                         '        </div>',
                                         '    </div>',
                                         '',
-                                        '    <!-- DESCRIPCIÓN (que se estire y ocupe TODO) -->',
                                         '    <div class="col-desc" style="flex:1 1 auto; min-width:0;">',
                                         '        <div class="main-text" style="font-size:30px; line-height:20px; font-weight:600;">',
                                         '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"',
@@ -160,7 +182,6 @@ Ext.define('basicConfig.view.contMain', {
                                         '        </div>',
                                         '    </div>',
                                         '',
-                                        '    <!-- ACCIONES (fijo y compacto para no robar ancho) -->',
                                         '    <div class="col-actions" style="flex:0 0 180px; display:flex; justify-content:flex-end; gap:14px;">',
                                         '        <div class="action-btn view" data-action="view" title="Ver Detalles"',
                                         '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
@@ -177,6 +198,60 @@ Ext.define('basicConfig.view.contMain', {
                                         '            <i class="x-fa {[values.is_active ? \'fas fa-ban\' : \'fas fa-check\']}" style="font-size:26px;"></i>',
                                         '        </div>',
                                         '    </div>',
+                                        '</div>',
+                                        '-->',
+                                        '',
+                                        '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
+                                        '',
+                                        '  <div class="col-desc">',
+                                        '    <div class="main-text text-bold">',
+                                        '      <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
+                                        '      <strong>{name}</strong>',
+                                        '        <tpl if="values.deleted_at && values.deleted_by">',
+                                        '            <span> (Eliminado)</span>',
+                                        '        <tpl elseif="!values.is_active">',
+                                        '            <span> (Inactivo)</span>',
+                                        '        <tpl else>',
+                                        '            <span> (Activo)</span>',
+                                        '        </tpl>',
+                                        '    </div>',
+                                        '    <div class="sub-text">{description}</div>',
+                                        '  </div>',
+                                        '',
+                                        '  <div class="col-code">',
+                                        '    <div class="text-bold"><b>{cod_configuration}</b></div>',
+                                        '    <div class="role-badge">Id: {id_configuration}</div>',
+                                        '  </div>',
+                                        '',
+                                        '  <div class="col-actions">',
+                                        '    <div class="action-btn view" data-action="view" title="Ver Detalles">',
+                                        '      <i class="x-fa fas fa-eye"></i>',
+                                        '    </div>',
+                                        '',
+                                        '    <!-- Si está borrado lógico: mostrar restaurar -->',
+                                        '    <tpl if="values.deleted_at && values.deleted_by">',
+                                        '      <div class="action-btn restore" data-action="restore" title="Restaurar">',
+                                        '        <i class="x-fa fas fa-undo"></i>',
+                                        '      </div>',
+                                        '    <tpl else>',
+                                        '      <!-- Si NO está borrado lógico: mostrar desactivar/activar -->',
+                                        '      <tpl if="values.is_active">',
+                                        '        <div class="action-btn deactivate" data-action="deactivate" title="Desactivar">',
+                                        '          <i class="x-fa fas fa-ban"></i>',
+                                        '        </div>',
+                                        '      <tpl else>',
+                                        '        <div class="action-btn activate" data-action="activate" title="Activar">',
+                                        '          <i class="x-fa fas fa-check"></i>',
+                                        '        </div>',
+                                        '      </tpl>',
+                                        '',
+                                        '      <!-- Botón de borrado lógico (solo si NO está borrado lógico) -->',
+                                        '      <div class="action-btn delete" data-action="delete" title="Borrar (lógico)">',
+                                        '        <i class="x-fa fas fa-trash"></i>',
+                                        '      </div>',
+                                        '    </tpl>',
+                                        '  </div>',
+                                        '',
                                         '</div>'
                                     ],
                                     store: 'storeConfig',
@@ -266,6 +341,39 @@ Ext.define('basicConfig.view.contMain', {
                                             }
                                         },
                                         {
+                                            xtype: 'segmentedbutton',
+                                            id: 'segBtnParam',
+                                            itemId: 'segBtnParam',
+                                            width: 200,
+                                            defaults: {
+                                                flex: '1'
+                                            },
+                                            items: [
+                                                {
+                                                    xtype: 'button',
+                                                    id: 'btnParamActive',
+                                                    itemId: 'btnParamActive',
+                                                    ui: 'action round',
+                                                    iconCls: 'fas fa-check-circle',
+                                                    pressed: true,
+                                                    text: 'Activos',
+                                                    value: 'false'
+                                                },
+                                                {
+                                                    xtype: 'button',
+                                                    id: 'btnParamDelete',
+                                                    itemId: 'btnParamDelete',
+                                                    ui: 'action round',
+                                                    iconCls: 'fas fa-database',
+                                                    text: 'Todos',
+                                                    value: 'true'
+                                                }
+                                            ],
+                                            listeners: {
+                                                toggle: 'onSegBtnParamToggle'
+                                            }
+                                        },
+                                        {
                                             xtype: 'spacer'
                                         },
                                         {
@@ -290,21 +398,75 @@ Ext.define('basicConfig.view.contMain', {
                                             xtype: 'container',
                                             id: 'contHeaderParam',
                                             itemId: 'contHeaderParam',
-                                            html: '<div class="resource-row header-style">     <div class="col-code">CÓDIGO</div>     <div class="col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
+                                            html: '<div class="resource-row header-style">         <div class="col-desc">DESCRIPCIÓN</div>    <div class="col-code">CÓDIGO</div>  <div class="col-actions">ACCIONES</div> </div>'
                                         },
                                         {
                                             xtype: 'dataview',
                                             id: 'dataViewParam',
                                             itemId: 'dataViewParam',
                                             itemTpl: [
-                                                '<div class="resource-row {[values.is_active ? \'\' : \'config-inactive\']}"',
+                                                '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
+                                                '    ',
+                                                '    <div class="col-desc">',
+                                                '        <div class="main-text text-bold">',
+                                                '            <span class=" status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
+                                                '            <strong>{description}</strong>',
+                                                '            <tpl if="values.deleted_at && values.deleted_by">',
+                                                '                <span> (Eliminado)</span>',
+                                                '            <tpl elseif="!values.is_active">',
+                                                '                <span> (Inactivo)</span>',
+                                                '            <tpl else>',
+                                                '                <span> (Activo)</span>',
+                                                '            </tpl>',
+                                                '        </div>',
+                                                '        <div class="sub-text">',
+                                                '            {value}',
+                                                '        </div>',
+                                                '    </div>',
+                                                '    <div class="col-code">',
+                                                '        <div class="text-bold"><b>{cod_parameter}</b></div>',
+                                                '        <div class="role-badge">Id: {id_conf_parameter}</div>',
+                                                '    </div>',
+                                                '    ',
+                                                '',
+                                                '    <div class="col-actions">',
+                                                '    <div class="action-btn view" data-action="view" title="Ver Detalles">',
+                                                '      <i class="x-fa fas fa-eye"></i>',
+                                                '    </div>',
+                                                '',
+                                                '    <!-- Si está borrado lógico: mostrar restaurar -->',
+                                                '    <tpl if="values.deleted_at && values.deleted_by">',
+                                                '      <div class="action-btn restore" data-action="restore" title="Restaurar">',
+                                                '        <i class="x-fa fas fa-undo"></i>',
+                                                '      </div>',
+                                                '    <tpl else>',
+                                                '      <!-- Si NO está borrado lógico: mostrar desactivar/activar -->',
+                                                '      <tpl if="values.is_active">',
+                                                '        <div class="action-btn deactivate" data-action="deactivate" title="Desactivar">',
+                                                '          <i class="x-fa fas fa-ban"></i>',
+                                                '        </div>',
+                                                '      <tpl else>',
+                                                '        <div class="action-btn activate" data-action="activate" title="Activar">',
+                                                '          <i class="x-fa fas fa-check"></i>',
+                                                '        </div>',
+                                                '      </tpl>',
+                                                '',
+                                                '      <!-- Botón de borrado lógico (solo si NO está borrado lógico) -->',
+                                                '      <div class="action-btn delete" data-action="delete" title="Borrar (lógico)">',
+                                                '        <i class="x-fa fas fa-trash"></i>',
+                                                '      </div>',
+                                                '    </tpl>',
+                                                '  </div>',
+                                                '',
+                                                '</div>',
+                                                '',
+                                                '<!--<div class="resource-row {[values.is_active ? \'\' : \'config-inactive\']}"',
                                                 '     style="{[',
                                                 '            values.is_active',
                                                 '            ? \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #28a745; background:rgba(40,167,69,0.06);\'',
                                                 '            : \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #d9534f; background:rgba(217,83,79,0.06); opacity:0.75;\'',
                                                 '            ]}">',
                                                 '',
-                                                '    <!-- CÓDIGO (angosto) -->',
                                                 '    <div class="col-code" style="flex:0 0 88px;">',
                                                 '        <div class="text-bold"',
                                                 '             style="{[values.is_active ? \'color:#1f7a3a; font-size:14px; line-height:18px;\' : \'color:#d9534f; font-size:14px; line-height:18px;\']}">',
@@ -315,7 +477,6 @@ Ext.define('basicConfig.view.contMain', {
                                                 '        </div>',
                                                 '    </div>',
                                                 '',
-                                                '    <!-- DESCRIPCIÓN (que se estire y ocupe TODO) -->',
                                                 '    <div class="col-desc" style="flex:1 1 auto; min-width:0;">',
                                                 '        <div class="main-text" style="font-size:30px; line-height:20px; font-weight:600;">',
                                                 '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"',
@@ -335,7 +496,6 @@ Ext.define('basicConfig.view.contMain', {
                                                 '        </div>',
                                                 '    </div>',
                                                 '',
-                                                '    <!-- ACCIONES (fijo y compacto para no robar ancho) -->',
                                                 '    <div class="col-actions" style="flex:0 0 180px; display:flex; justify-content:flex-end; gap:14px;">',
                                                 '        <div class="action-btn view" data-action="view" title="Ver Detalles"',
                                                 '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
@@ -352,7 +512,8 @@ Ext.define('basicConfig.view.contMain', {
                                                 '            <i class="x-fa {[values.is_active ? \'fas fa-ban\' : \'fas fa-check\']}" style="font-size:26px;"></i>',
                                                 '        </div>',
                                                 '    </div>',
-                                                '</div>'
+                                                '</div>',
+                                                '-->'
                                             ],
                                             store: 'storeParam',
                                             listeners: {
@@ -499,6 +660,29 @@ Ext.define('basicConfig.view.contMain', {
         this.showForm();
     },
 
+    onSegBtnConfigToggle: function(segmentedbutton, button, isPressed, eOpts) {
+        if (!isPressed) return;
+
+        const includeDeleted = (button.getItemId && button.getItemId() === 'btnConfigDelete') || (button.itemId === 'btnConfigDelete');
+
+            console.log('includeDeleted:', includeDeleted);
+
+        // Obtener el store
+        const storeConfig = Ext.getStore('storeConfig');
+
+        // Set extra param
+        const proxy = storeConfig.getProxy();
+        proxy.setExtraParam('include_deleted', includeDeleted ? 'true' : 'false');
+
+        // Regresar a página 1 cuando hay paging
+        //if (storeConfig.currentPage) {
+           // storeConfig.currentPage = 1;
+        //}
+
+        // Recargar
+        storeConfig.load();
+    },
+
     onBtnLoadTap: function(button, e, eOpts) {
         Ext.getStore('storeUser').load();
     },
@@ -539,26 +723,95 @@ Ext.define('basicConfig.view.contMain', {
                     this.downloadFile(record);
                     break;
 
-                case 'email':
-                    console.warn('Tap: email');
-                    this.sendByEmail(record);
-                    break;
+                case 'activate':
+                    Ext.Msg.show({
+                            title: 'Activar  Registro',
+                            message: '¿Deseas activar  este registro?',
+                            width: 300,
+                            closable: false,
+                            icon: Ext.Msg.QUESTION,
+                            buttons: [
+                                { text: 'No', itemId: 'no' },
+                                { text: 'Sí, activar', itemId: 'yes', ui: 'action-decline' }
+                            ],
+                            fn: function (buttonId) {
+                                if (buttonId === 'yes') {
 
-                case 'whatsapp':
-                    console.warn('Tap: whatsapp');
-                    this.sendToWhatsApp(record);
-                    break;
+                                    var payload = {
+                                        id_configuration : record.id_configuration,
+                                        is_active        : true
+                                    };
 
-                case 'attach':
-                    console.warn('Tap: attach');
-                    this.copyLinkToClipboard(record);
+                                    appLocal.saveConfig(payload, false);
+
+                                    console.log('Registro desactivado');
+                                }
+                            }
+                        });
+                        break;
+
+                case 'deactivate':
+                    Ext.Msg.show({
+                            title: 'Desactivar Registro',
+                            message: '¿Deseas desactivar este registro?',
+                            width: 300,
+                            closable: false,
+                            icon: Ext.Msg.QUESTION,
+                            buttons: [
+                                { text: 'No', itemId: 'no' },
+                                { text: 'Sí, desactivar', itemId: 'yes', ui: 'action-decline' }
+                            ],
+                            fn: function (buttonId) {
+                                if (buttonId === 'yes') {
+
+                                    var payload = {
+                                        id_configuration : record.id_configuration,
+                                        is_active        : false
+                                    };
+
+                                    appLocal.saveConfig(payload, false);
+
+                                    console.log('Registro desactivado');
+                                }
+                            }
+                        });
+                        break;
+
+                case 'restore':
+                    Ext.Msg.show({
+                        title: 'Restaurar Registro',
+                        message: '¿Realmente deseas restaurar este registro? Esta acción podría provocar algún error.',
+                        width: 300, // Opcional
+                        closable: false,
+                        icon: Ext.Msg.QUESTION,
+                        buttons: [
+                            {
+                                text: 'No',
+                                itemId: 'no'
+                            },
+                            {
+                                text: 'Sí, restaurar',
+                                itemId: 'yes',
+                                ui: 'action-decline'
+                            }
+                        ],
+                        fn: function (buttonId) {
+                            if (buttonId === 'yes') {
+
+                                var idConfig = record.id_configuration;
+                                appLocal.restoreConfig(idConfig);
+
+                                console.log('Registro restaurado');
+                            }
+                        }
+                    });
                     break;
 
                 case 'delete':
                     Ext.Msg.show({
                         title: 'Eliminar Registro',
                         message: '¿Realmente deseas eliminar este registro? Esta acción no se puede deshacer.',
-                        width: 300, // Opcional
+                        width: 300,
                         closable: false,
                         icon: Ext.Msg.QUESTION,
                         buttons: [
@@ -569,7 +822,7 @@ Ext.define('basicConfig.view.contMain', {
                             {
                                 text: 'Sí, borrar',
                                 itemId: 'yes',
-                                ui: 'action-decline' // En Modern, esto suele poner el botón en rojo
+                                ui: 'action-decline'
                             }
                         ],
                         fn: function (buttonId) {
@@ -614,6 +867,29 @@ Ext.define('basicConfig.view.contMain', {
         form.isCreate = true;
 
         this.showFormParam();
+    },
+
+    onSegBtnParamToggle: function(segmentedbutton, button, isPressed, eOpts) {
+        if (!isPressed) return;
+
+        const includeDeleted = (button.getItemId && button.getItemId() === 'btnParamDelete') || (button.itemId === 'btnParamDelete');
+
+            console.log('includeDeleted:', includeDeleted);
+
+        // Obtener el store
+        const storeConfig = Ext.getStore('storeParam');
+
+        // Set extra param
+        const proxy = storeConfig.getProxy();
+        proxy.setExtraParam('include_deleted', includeDeleted ? 'true' : 'false');
+
+        // Regresar a página 1 cuando hay paging
+        //if (storeConfig.currentPage) {
+           // storeConfig.currentPage = 1;
+        //}
+
+        // Recargar
+        storeConfig.load();
     },
 
     onBtnCancelTap: function(button, e, eOpts) {
@@ -662,26 +938,95 @@ Ext.define('basicConfig.view.contMain', {
                     this.downloadFile(record);
                     break;
 
-                case 'email':
-                    console.warn('Tap: email');
-                    this.sendByEmail(record);
-                    break;
+                case 'activate':
+                    Ext.Msg.show({
+                            title: 'Activar  Registro',
+                            message: '¿Deseas activar  este registro?',
+                            width: 300,
+                            closable: false,
+                            icon: Ext.Msg.QUESTION,
+                            buttons: [
+                                { text: 'No', itemId: 'no' },
+                                { text: 'Sí, activar', itemId: 'yes', ui: 'action-decline' }
+                            ],
+                            fn: function (buttonId) {
+                                if (buttonId === 'yes') {
 
-                case 'whatsapp':
-                    console.warn('Tap: whatsapp');
-                    this.sendToWhatsApp(record);
-                    break;
+                                    var payload = {
+                                        id_conf_parameter : record.id_conf_parameter,
+                                        is_active         : true
+                                    };
 
-                case 'attach':
-                    console.warn('Tap: attach');
-                    this.copyLinkToClipboard(record);
+                                    appLocal.saveParam(payload, false);
+
+                                    console.log('Registro desactivado');
+                                }
+                            }
+                        });
+                        break;
+
+                case 'deactivate':
+                    Ext.Msg.show({
+                            title: 'Desactivar Registro',
+                            message: '¿Deseas desactivar este registro?',
+                            width: 300,
+                            closable: false,
+                            icon: Ext.Msg.QUESTION,
+                            buttons: [
+                                { text: 'No', itemId: 'no' },
+                                { text: 'Sí, desactivar', itemId: 'yes', ui: 'action-decline' }
+                            ],
+                            fn: function (buttonId) {
+                                if (buttonId === 'yes') {
+
+                                    var payload = {
+                                        id_conf_parameter : record.id_conf_parameter,
+                                        is_active         : false
+                                    };
+
+                                    appLocal.saveParam(payload, false);
+
+                                    console.log('Registro desactivado');
+                                }
+                            }
+                        });
+                        break;
+
+                case 'restore':
+                    Ext.Msg.show({
+                        title: 'Restaurar Registro',
+                        message: '¿Realmente deseas restaurar este registro? Esta acción podría provocar algún error.',
+                        width: 300, // Opcional
+                        closable: false,
+                        icon: Ext.Msg.QUESTION,
+                        buttons: [
+                            {
+                                text: 'No',
+                                itemId: 'no'
+                            },
+                            {
+                                text: 'Sí, restaurar',
+                                itemId: 'yes',
+                                ui: 'action-decline'
+                            }
+                        ],
+                        fn: function (buttonId) {
+                            if (buttonId === 'yes') {
+
+                                var idParam = record.id_conf_parameter;
+                                appLocal.restoreParam(idParam);
+
+                                console.log('Registro restaurado');
+                            }
+                        }
+                    });
                     break;
 
                 case 'delete':
                     Ext.Msg.show({
                         title: 'Eliminar Registro',
                         message: '¿Realmente deseas eliminar este registro? Esta acción no se puede deshacer.',
-                        width: 300, // Opcional
+                        width: 300,
                         closable: false,
                         icon: Ext.Msg.QUESTION,
                         buttons: [
@@ -692,13 +1037,13 @@ Ext.define('basicConfig.view.contMain', {
                             {
                                 text: 'Sí, borrar',
                                 itemId: 'yes',
-                                ui: 'action-decline' // En Modern, esto suele poner el botón en rojo
+                                ui: 'action-decline'
                             }
                         ],
                         fn: function (buttonId) {
                             if (buttonId === 'yes') {
 
-                                var idParam = record.id_parameter;
+                                var idParam = record.id_conf_parameter;
                                 appLocal.deleteParam(idParam);
 
                                 console.log('Registro eliminado');
@@ -723,13 +1068,15 @@ Ext.define('basicConfig.view.contMain', {
     },
 
     onBtnCancelTap1: function(button, e, eOpts) {
-        var contConfig  = Ext.getCmp('contConfig');
-        var toolbarMain = Ext.getCmp('toolbarMain');
+        var contConfig     = Ext.getCmp('contConfig');
+        var toolbarMain    = Ext.getCmp('toolbarMain');
+        var btnCreateParam = Ext.getCmp('btnCreateParam');
 
         contConfig.setActiveItem(1);
-        toolbarMain.show();
+        btnCreateParam.show();
+        //toolbarMain.show();
 
-        //this.cleanConfigForm();
+        this.cleanParamForm();
     },
 
     onContMainBeforeShow: function(component, eOpts) {
@@ -789,16 +1136,18 @@ Ext.define('basicConfig.view.contMain', {
     },
 
     buildParamPayload: function() {
+        // Form Config
+        var form = Ext.getCmp('formConfig');
+        var configRecord = form.configRecord;
+
+        // Form Param
         var form = Ext.getCmp('formParam');
         var record = form.paramRecord;
         var isCreate = form.isCreate;
 
         var id_conf_parameter = record ? record.id_conf_parameter : null;
 
-        // OJO: id_configuration normalmente viene “fijo” porque estás editando parámetros dentro de una configuración.
-        // Puedes leerlo del form o del record.
-        // Si tu form lo tiene guardado: form.id_configuration
-        var id_configuration = (record && record.id_configuration) ? record.id_configuration : form.id_configuration;
+        var id_configuration = (configRecord && configRecord.id_configuration) ? configRecord.id_configuration : configRecord.id_configuration;
 
         const payload = {
           id_conf_parameter: id_conf_parameter,
@@ -833,11 +1182,6 @@ Ext.define('basicConfig.view.contMain', {
           payload.description = String(payload.description).trim();
         }
 
-        // (Opcional) Si para CFG_APP quieres asegurar que la ruta empiece con "/"
-        if (payload.value && payload.value[0] !== '/') {
-          payload.value = '/' + payload.value;
-        }
-
         // Create / Update
         if (isCreate) {
           delete payload.id_conf_parameter;
@@ -848,7 +1192,7 @@ Ext.define('basicConfig.view.contMain', {
             return null;
           }
 
-          // si description viene vacía, no la mandes (para no sobreescribir con vacío)
+          // Si description viene vacía, no se manda
           if (payload.description === '') delete payload.description;
         }
 
@@ -885,8 +1229,10 @@ Ext.define('basicConfig.view.contMain', {
     },
 
     showForm: function() {
-        var contConfig  = Ext.getCmp('contConfig');
-        var toolbarMain = Ext.getCmp('toolbarMain');
+        var contConfig     = Ext.getCmp('contConfig');
+        var toolbarMain    = Ext.getCmp('toolbarMain');
+        var segmentBtn     = Ext.getCmp('segBtnParam');
+        var btnCreateParam = Ext.getCmp('btnCreateParam');
 
         contConfig.setActiveItem(1);
         toolbarMain.hide();
@@ -898,8 +1244,12 @@ Ext.define('basicConfig.view.contMain', {
 
         if (isCreate) {
             console.log('create');
+            segmentBtn.hide();
+            btnCreateParam.hide();
         } else {
             console.log('update');
+            btnCreateParam.show();
+            segmentBtn.show();
 
             // Cargar el store
             jsTerian.loadStore('storeParam',record.id_configuration);
@@ -910,11 +1260,14 @@ Ext.define('basicConfig.view.contMain', {
     },
 
     showFormParam: function() {
-        var contConfig  = Ext.getCmp('contConfig');
-        var toolbarMain = Ext.getCmp('toolbarMain');
+        var contConfig     = Ext.getCmp('contConfig');
+        var toolbarMain    = Ext.getCmp('toolbarMain');
+        var segmentBtn     = Ext.getCmp('segBtnParam');
+        var btnCreateParam = Ext.getCmp('btnCreateParam');
 
         contConfig.setActiveItem(2);
         toolbarMain.hide();
+        btnCreateParam.show();
 
         // Obtener el form y la propiedad isCreate
         var form     = Ext.getCmp("formParam");
@@ -923,6 +1276,7 @@ Ext.define('basicConfig.view.contMain', {
 
         if (isCreate) {
             console.log('create');
+            segmentBtn.hide();
         } else {
             console.log('update');
 
@@ -963,27 +1317,35 @@ Ext.define('basicConfig.view.contMain', {
             var form = Ext.getCmp("formConfig");
             form.isCreate = true;
             form.configRecord = null;
+
+            // Volver a mostar la segmentación de botones
+            var segmentBtn = Ext.getCmp('segBtnConfig');
+            segmentBtn.show();
         }
     },
 
     cleanParamForm: function() {
         try {
             const mapping = {
-              ftParamCode   : '',
-              ftParamDesc   : '',
-              ftParamValue  : '',
-              cboParamActive: true
+                ftParamCode   : '',
+                ftParamDesc   : '',
+                ftParamValue  : '',
+                cboParamActive: true
             };
 
             Ext.Object.each(mapping, function (field, value) {
-              jsTerian.assignElementValue(field, value);
+                jsTerian.assignElementValue(field, value);
             });
 
-          } finally {
-            var form = Ext.getCmp("formParameter");
+        } finally {
+            var form = Ext.getCmp("formParam");
             form.isCreate = true;
             form.paramRecord = null;
-          }
+
+            // Volver a mostar la segmentación de botones
+            var segmentBtn = Ext.getCmp('segBtnParam');
+            segmentBtn.show();
+        }
     }
 
 });

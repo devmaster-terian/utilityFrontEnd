@@ -47,7 +47,13 @@ Ext.application({
 
     saveConfig: function(payload, isCreate) {
         var form = Ext.getCmp("formConfig");
-        var isCreate = form.isCreate;
+
+        // Si isCreate viene explícito (true/false), úsalo; si no, usa el del form
+        if (typeof isCreate === 'undefined' || isCreate === null) {
+            isCreate = !!form.isCreate;
+        } else {
+            isCreate = !!isCreate;
+        }
 
         // Normaliza payload (no tocar estructura general)
         payload = payload || {};
@@ -155,19 +161,63 @@ Ext.application({
         );
     },
 
+    restoreConfig: function(idConfig) {
+        // Url de la solicitud
+        var url = jsTerian.makeUrl('configuration/restore',idConfig);
+
+        jsTerian.makeRequest(
+            'PUT',
+            url,
+            null,
+
+            // Función Success
+            function(response) {
+
+                // Intenta obtener el mensaje, en caso contrario lo asigna
+                var msg = {};
+                try { msg = Ext.decode(response.responseText); } catch(e){}
+
+                // Mostrar mensaje del backend directamente
+                var text = msg && msg.message ? msg.message : 'Configuración restaurada';
+                jsTerian.toastAlert(text, 'success');
+
+                jsTerian.reloadStore('storeConfig');
+            },
+
+            // Función Failure
+            function(response) {
+
+                // Intenta obtener el error
+                var parsed = {};
+                try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}
+
+                // Crea el mensaje de error y lanza la alerta
+                let html = Ext.htmlEncode(parsed.message || 'Failed to restore config');
+                if (parsed.error) html += '<br/><p>' + 'Error, no se pudo restaurar el registro' + '</p>';
+
+                jsTerian.toastAlert(html, 'error', parsed.error);
+            }
+        );
+    },
+
     saveParam: function(payload, isCreate) {
         var form = Ext.getCmp("formParam");
-        var isCreate = form.isCreate;
 
+        // Si isCreate viene explícito (true/false), úsalo; si no, usa el del form
+        if (typeof isCreate === 'undefined' || isCreate === null) {
+            isCreate = !!form.isCreate;
+        } else {
+            isCreate = !!isCreate;
+        }
         // Normaliza payload (no tocar estructura general)
         payload = payload || {};
 
         // CREATE no mandes id_user
         if (isCreate) {
-            if ("id_parameter" in payload) delete payload.id_parameter;
+            if ("id_conf_parameter" in payload) delete payload.id_conf_parameter;
         } else {
             // UPDATE, id_configuration es obligatorio
-            if (!payload.id_parameter) {
+            if (!payload.id_conf_parameter) {
                 jsTerian.toastAlert("No se puede actualizar: falta id_parameter.", "error");
                 return;
             }
@@ -175,7 +225,7 @@ Ext.application({
 
         // Crear la URL dependiendo del tipo de solicitud
         var method = isCreate ? 'POST' : 'PUT';
-        var url    = isCreate ? jsTerian.makeUrl('parameter/create') : jsTerian.makeUrl('parameter/update', payload.id_parameter);
+        var url    = isCreate ? jsTerian.makeUrl('parameter/create') : jsTerian.makeUrl('parameter/update', payload.id_conf_parameter);
 
         console.log(payload);
 
@@ -206,12 +256,12 @@ Ext.application({
                 if (msg && msg.success) {
                     var contConfig = Ext.getCmp('contConfig');
                     var toolbarMain = Ext.getCmp('toolbarMain');
-                    if (contConfig) contConfig.setActiveItem(0);
-                    if (toolbarMain) toolbarMain.show();
+                    if (contConfig) contConfig.setActiveItem(1);
+                    //if (toolbarMain) toolbarMain.show();
                 }
 
                 var contMain = Ext.getCmp('contMain');
-                contMain.cleanConfigParam();
+                contMain.cleanParamForm();
             },
 
             function failure(response){
@@ -259,6 +309,45 @@ Ext.application({
                 // Crea el mensaje de error y lanza la alerta
                 let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated config');
                 if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';
+
+                jsTerian.toastAlert(html, 'error', parsed.error);
+            }
+        );
+    },
+
+    restoreParam: function(idParam) {
+        // Url de la solicitud
+        var url = jsTerian.makeUrl('parameter/restore',idParam);
+
+        jsTerian.makeRequest(
+            'PUT',
+            url,
+            null,
+
+            // Función Success
+            function(response) {
+
+                // Intenta obtener el mensaje, en caso contrario lo asigna
+                var msg = {};
+                try { msg = Ext.decode(response.responseText); } catch(e){}
+
+                // Mostrar mensaje del backend directamente
+                var text = msg && msg.message ? msg.message : 'Parámetro restaurado';
+                jsTerian.toastAlert(text, 'success');
+
+                jsTerian.reloadStore('storeParam');
+            },
+
+            // Función Failure
+            function(response) {
+
+                // Intenta obtener el error
+                var parsed = {};
+                try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}
+
+                // Crea el mensaje de error y lanza la alerta
+                let html = Ext.htmlEncode(parsed.message || 'Failed to restored config');
+                if (parsed.error) html += '<br/><p>' + 'Error, no se pudo restaurar el registro' + '</p>';
 
                 jsTerian.toastAlert(html, 'error', parsed.error);
             }
