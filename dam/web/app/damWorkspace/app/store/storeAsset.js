@@ -107,10 +107,7 @@ Ext.define('damWorkspace.store.storeAsset', {
                         });
                     });
 
-                    // Si necesitas que los cambios se "guarden" localmente sin marcar el record como sucio (opcional)
-                    // record.commit();
 
-                    //}
 
                 } else {
                     console.warn('No hubo exito para Tab: ',idTabActive);
