@@ -116,15 +116,6 @@ Ext.define('basicConfig.view.contMain', {
                                 },
                                 {
                                     xtype: 'spacer'
-                                },
-                                {
-                                    xtype: 'button',
-                                    id: 'btnLoad',
-                                    itemId: 'btnLoad',
-                                    text: 'MyButton1',
-                                    listeners: {
-                                        tap: 'onBtnLoadTap'
-                                    }
                                 }
                             ]
                         },
@@ -138,118 +129,54 @@ Ext.define('basicConfig.view.contMain', {
                                     xtype: 'container',
                                     id: 'contHeaderConfig',
                                     itemId: 'contHeaderConfig',
-                                    html: '<div class="resource-row header-style">         <div class="col-desc">DESCRIPCIÓN</div>    <div class="col-code">CÓDIGO</div>  <div class="col-actions">ACCIONES</div> </div>'
+                                    html: '<div class="resource-row header-style">     <div class="conf-col-code">CÓDIGO</div>     <div class="conf-col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
                                 },
                                 {
                                     xtype: 'dataview',
                                     id: 'dataViewConfig',
                                     itemId: 'dataViewConfig',
                                     itemTpl: [
-                                        '<!--',
-                                        '<div class="resource-row {[values.is_active ? \'\' : \'config-inactive\']}"',
-                                        '     style="{[',
-                                        '            values.is_active',
-                                        '            ? \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #28a745; background:rgba(40,167,69,0.06);\'',
-                                        '            : \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #d9534f; background:rgba(217,83,79,0.06); opacity:0.75;\'',
-                                        '            ]}">',
-                                        '',
-                                        '    <div class="col-code" style="flex:0 0 88px;">',
-                                        '        <div class="text-bold"',
-                                        '             style="{[values.is_active ? \'color:#1f7a3a; font-size:14px; line-height:18px;\' : \'color:#d9534f; font-size:14px; line-height:18px;\']}">',
-                                        '            {cod_configuration}',
-                                        '        </div>',
-                                        '        <div class="role-badge" style="margin-top:10px; font-size:20px;">',
-                                        '            Id: {id_configuration}',
-                                        '        </div>',
-                                        '    </div>',
-                                        '',
-                                        '    <div class="col-desc" style="flex:1 1 auto; min-width:0;">',
-                                        '        <div class="main-text" style="font-size:30px; line-height:20px; font-weight:600;">',
-                                        '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"',
-                                        '                  style="{[values.is_active ? \'background:#28a745;\' : \'background:#d9534f;\']}"></span>',
-                                        '            {name}',
-                                        '            <span style="{[',
-                                        '                         values.is_active',
-                                        '                         ? \'margin-left:10px; color:#1f7a3a; font-weight:700; font-size:12px;\'',
-                                        '                         : \'margin-left:10px; color:#d9534f; font-weight:700; font-size:12px;\'',
-                                        '                         ]}">',
-                                        '                {[values.is_active ? \'ACTIVO\' : \'INACTIVO\']}',
-                                        '            </span>',
-                                        '        </div>',
-                                        '',
-                                        '        <div class="sub-text" style="margin-top:10px; font-size:24px; line-height:20px;">',
-                                        '            <i class="x-fa fas fa-align-left tiny-icon"></i> {description}',
-                                        '        </div>',
-                                        '    </div>',
-                                        '',
-                                        '    <div class="col-actions" style="flex:0 0 180px; display:flex; justify-content:flex-end; gap:14px;">',
-                                        '        <div class="action-btn view" data-action="view" title="Ver Detalles"',
-                                        '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
-                                        '            <i class="x-fa fas fa-eye" style="font-size:26px;"></i>',
-                                        '        </div>',
-                                        '',
-                                        '        <div class="action-btn edit" data-action="edit" title="Editar Configuración"',
-                                        '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
-                                        '            <i class="x-fa fas fa-pen" style="font-size:26px;"></i>',
-                                        '        </div>',
-                                        '',
-                                        '        <div class="action-btn delete" data-action="delete" title="{[values.is_active ? \'Desactivar\' : \'Activar\']}"',
-                                        '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
-                                        '            <i class="x-fa {[values.is_active ? \'fas fa-ban\' : \'fas fa-check\']}" style="font-size:26px;"></i>',
-                                        '        </div>',
-                                        '    </div>',
-                                        '</div>',
-                                        '-->',
-                                        '',
                                         '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
                                         '',
-                                        '  <div class="col-desc">',
-                                        '    <div class="main-text text-bold">',
-                                        '      <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
-                                        '      <strong>{name}</strong>',
-                                        '        <tpl if="values.deleted_at && values.deleted_by">',
-                                        '            <span> (Eliminado)</span>',
-                                        '        <tpl elseif="!values.is_active">',
-                                        '            <span> (Inactivo)</span>',
-                                        '        <tpl else>',
-                                        '            <span> (Activo)</span>',
-                                        '        </tpl>',
-                                        '    </div>',
-                                        '    <div class="sub-text">{description}</div>',
-                                        '  </div>',
-                                        '',
-                                        '  <div class="col-code">',
+                                        '  <!-- COLUMNA 1: CÓDIGO -->',
+                                        '  <div class="conf-col-code">',
                                         '    <div class="text-bold"><b>{cod_configuration}</b></div>',
                                         '    <div class="role-badge">Id: {id_configuration}</div>',
                                         '  </div>',
                                         '',
+                                        '  <!-- COLUMNA 2: DESCRIPCIÓN -->',
+                                        '  <div class="conf-col-desc">',
+                                        '    <div class="main-text text-bold">',
+                                        '      <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
+                                        '      <strong>{name}</strong>',
+                                        '      <tpl if="!values.is_active">',
+                                        '        <span> (Inactivo)</span>',
+                                        '      <tpl else>',
+                                        '        <span> (Activo)</span>',
+                                        '      </tpl>',
+                                        '    </div>',
+                                        '    <div class="sub-text">{description}</div>',
+                                        '  </div>',
+                                        '',
+                                        '  <!-- COLUMNA 3: ACCIONES -->',
                                         '  <div class="col-actions">',
                                         '    <div class="action-btn view" data-action="view" title="Ver Detalles">',
-                                        '      <i class="x-fa fas fa-eye"></i>',
+                                        '      <i class="x-fa fas fa-plus"></i>',
                                         '    </div>',
                                         '',
-                                        '    <!-- Si está borrado lógico: mostrar restaurar -->',
-                                        '    <tpl if="values.deleted_at && values.deleted_by">',
-                                        '      <div class="action-btn restore" data-action="restore" title="Restaurar">',
-                                        '        <i class="x-fa fas fa-undo"></i>',
+                                        '    <tpl if="values.is_active">',
+                                        '      <div class="action-btn deactivate" data-action="deactivate" title="Desactivar">',
+                                        '        <i class="x-fa fas fa-ban"></i>',
                                         '      </div>',
                                         '    <tpl else>',
-                                        '      <!-- Si NO está borrado lógico: mostrar desactivar/activar -->',
-                                        '      <tpl if="values.is_active">',
-                                        '        <div class="action-btn deactivate" data-action="deactivate" title="Desactivar">',
-                                        '          <i class="x-fa fas fa-ban"></i>',
-                                        '        </div>',
-                                        '      <tpl else>',
-                                        '        <div class="action-btn activate" data-action="activate" title="Activar">',
-                                        '          <i class="x-fa fas fa-check"></i>',
-                                        '        </div>',
-                                        '      </tpl>',
-                                        '',
-                                        '      <!-- Botón de borrado lógico (solo si NO está borrado lógico) -->',
-                                        '      <div class="action-btn delete" data-action="delete" title="Borrar (lógico)">',
-                                        '        <i class="x-fa fas fa-trash"></i>',
+                                        '      <div class="action-btn activate" data-action="activate" title="Activar">',
+                                        '        <i class="x-fa fas fa-check"></i>',
                                         '      </div>',
                                         '    </tpl>',
+                                        '',
+                                        '    <div class="action-btn delete" data-action="delete" title="Eliminar">',
+                                        '      <i class="x-fa fas fa-trash"></i>',
+                                        '    </div>',
                                         '  </div>',
                                         '',
                                         '</div>'
@@ -266,7 +193,6 @@ Ext.define('basicConfig.view.contMain', {
                             isCreate: true,
                             id: 'formConfig',
                             itemId: 'formConfig',
-                            title: 'Configuración',
                             items: [
                                 {
                                     xtype: 'textfield',
@@ -324,6 +250,7 @@ Ext.define('basicConfig.view.contMain', {
                                             id: 'btnConfirm',
                                             itemId: 'btnConfirm',
                                             ui: 'confirm',
+                                            iconCls: 'fas fa-check',
                                             text: 'Confirmar',
                                             listeners: {
                                                 tap: 'onBtnConfirmTap'
@@ -381,6 +308,7 @@ Ext.define('basicConfig.view.contMain', {
                                             id: 'btnCancel',
                                             itemId: 'btnCancel',
                                             ui: 'decline',
+                                            iconCls: 'fas fa-ban',
                                             text: 'Cancelar',
                                             listeners: {
                                                 tap: 'onBtnCancelTap'
@@ -398,7 +326,7 @@ Ext.define('basicConfig.view.contMain', {
                                             xtype: 'container',
                                             id: 'contHeaderParam',
                                             itemId: 'contHeaderParam',
-                                            html: '<div class="resource-row header-style">         <div class="col-desc">DESCRIPCIÓN</div>    <div class="col-code">CÓDIGO</div>  <div class="col-actions">ACCIONES</div> </div>'
+                                            html: '<div class="resource-row header-style">     <div class="conf-col-code">CÓDIGO</div>     <div class="conf-col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
                                         },
                                         {
                                             xtype: 'dataview',
@@ -406,14 +334,17 @@ Ext.define('basicConfig.view.contMain', {
                                             itemId: 'dataViewParam',
                                             itemTpl: [
                                                 '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
-                                                '    ',
-                                                '    <div class="col-desc">',
+                                                '',
+                                                '    <div class="conf-col-code">',
+                                                '        <div class="text-bold"><b>{cod_parameter}</b></div>',
+                                                '        <div class="role-badge">Id: {id_conf_parameter}</div>',
+                                                '    </div>',
+                                                '',
+                                                '    <div class="conf-col-desc">',
                                                 '        <div class="main-text text-bold">',
-                                                '            <span class=" status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
+                                                '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
                                                 '            <strong>{description}</strong>',
-                                                '            <tpl if="values.deleted_at && values.deleted_by">',
-                                                '                <span> (Eliminado)</span>',
-                                                '            <tpl elseif="!values.is_active">',
+                                                '            <tpl if="!values.is_active">',
                                                 '                <span> (Inactivo)</span>',
                                                 '            <tpl else>',
                                                 '                <span> (Activo)</span>',
@@ -423,97 +354,28 @@ Ext.define('basicConfig.view.contMain', {
                                                 '            {value}',
                                                 '        </div>',
                                                 '    </div>',
-                                                '    <div class="col-code">',
-                                                '        <div class="text-bold"><b>{cod_parameter}</b></div>',
-                                                '        <div class="role-badge">Id: {id_conf_parameter}</div>',
-                                                '    </div>',
-                                                '    ',
                                                 '',
                                                 '    <div class="col-actions">',
-                                                '    <div class="action-btn view" data-action="view" title="Ver Detalles">',
-                                                '      <i class="x-fa fas fa-eye"></i>',
-                                                '    </div>',
-                                                '',
-                                                '    <!-- Si está borrado lógico: mostrar restaurar -->',
-                                                '    <tpl if="values.deleted_at && values.deleted_by">',
-                                                '      <div class="action-btn restore" data-action="restore" title="Restaurar">',
-                                                '        <i class="x-fa fas fa-undo"></i>',
-                                                '      </div>',
-                                                '    <tpl else>',
-                                                '      <!-- Si NO está borrado lógico: mostrar desactivar/activar -->',
-                                                '      <tpl if="values.is_active">',
-                                                '        <div class="action-btn deactivate" data-action="deactivate" title="Desactivar">',
-                                                '          <i class="x-fa fas fa-ban"></i>',
+                                                '        <div class="action-btn view" data-action="view" title="Ver Detalles">',
+                                                '            <i class="x-fa fas fa-eye"></i>',
                                                 '        </div>',
-                                                '      <tpl else>',
-                                                '        <div class="action-btn activate" data-action="activate" title="Activar">',
-                                                '          <i class="x-fa fas fa-check"></i>',
-                                                '        </div>',
-                                                '      </tpl>',
                                                 '',
-                                                '      <!-- Botón de borrado lógico (solo si NO está borrado lógico) -->',
-                                                '      <div class="action-btn delete" data-action="delete" title="Borrar (lógico)">',
-                                                '        <i class="x-fa fas fa-trash"></i>',
-                                                '      </div>',
-                                                '    </tpl>',
-                                                '  </div>',
+                                                '        <tpl if="values.is_active">',
+                                                '            <div class="action-btn deactivate" data-action="deactivate" title="Desactivar">',
+                                                '                <i class="x-fa fas fa-ban"></i>',
+                                                '            </div>',
+                                                '        <tpl else>',
+                                                '            <div class="action-btn activate" data-action="activate" title="Activar">',
+                                                '                <i class="x-fa fas fa-check"></i>',
+                                                '            </div>',
+                                                '        </tpl>',
                                                 '',
-                                                '</div>',
-                                                '',
-                                                '<!--<div class="resource-row {[values.is_active ? \'\' : \'config-inactive\']}"',
-                                                '     style="{[',
-                                                '            values.is_active',
-                                                '            ? \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #28a745; background:rgba(40,167,69,0.06);\'',
-                                                '            : \'display:flex; align-items:center; gap:10px; padding:20px 14px; border-left:4px solid #d9534f; background:rgba(217,83,79,0.06); opacity:0.75;\'',
-                                                '            ]}">',
-                                                '',
-                                                '    <div class="col-code" style="flex:0 0 88px;">',
-                                                '        <div class="text-bold"',
-                                                '             style="{[values.is_active ? \'color:#1f7a3a; font-size:14px; line-height:18px;\' : \'color:#d9534f; font-size:14px; line-height:18px;\']}">',
-                                                '            {cod_parameter}',
-                                                '        </div>',
-                                                '        <div class="role-badge" style="margin-top:10px; font-size:20px;">',
-                                                '            Id: {id_parameter}',
+                                                '        <div class="action-btn delete" data-action="delete" title="Eliminar">',
+                                                '            <i class="x-fa fas fa-trash"></i>',
                                                 '        </div>',
                                                 '    </div>',
                                                 '',
-                                                '    <div class="col-desc" style="flex:1 1 auto; min-width:0;">',
-                                                '        <div class="main-text" style="font-size:30px; line-height:20px; font-weight:600;">',
-                                                '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"',
-                                                '                  style="{[values.is_active ? \'background:#28a745;\' : \'background:#d9534f;\']}"></span>',
-                                                '            {description}',
-                                                '            <span style="{[',
-                                                '                         values.is_active',
-                                                '                         ? \'margin-left:10px; color:#1f7a3a; font-weight:700; font-size:12px;\'',
-                                                '                         : \'margin-left:10px; color:#d9534f; font-weight:700; font-size:12px;\'',
-                                                '                         ]}">',
-                                                '                {[values.is_active ? \'ACTIVO\' : \'INACTIVO\']}',
-                                                '            </span>',
-                                                '        </div>',
-                                                '',
-                                                '        <div class="sub-text" style="margin-top:10px; font-size:24px; line-height:20px;">',
-                                                '            <i class="x-fa fas fa-align-left tiny-icon"></i> {value}',
-                                                '        </div>',
-                                                '    </div>',
-                                                '',
-                                                '    <div class="col-actions" style="flex:0 0 180px; display:flex; justify-content:flex-end; gap:14px;">',
-                                                '        <div class="action-btn view" data-action="view" title="Ver Detalles"',
-                                                '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
-                                                '            <i class="x-fa fas fa-eye" style="font-size:26px;"></i>',
-                                                '        </div>',
-                                                '',
-                                                '        <div class="action-btn edit" data-action="edit" title="Editar Configuración"',
-                                                '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
-                                                '            <i class="x-fa fas fa-pen" style="font-size:26px;"></i>',
-                                                '        </div>',
-                                                '',
-                                                '        <div class="action-btn delete" data-action="delete" title="{[values.is_active ? \'Desactivar\' : \'Activar\']}"',
-                                                '             style="width:52px; height:52px; border-radius:26px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.06);">',
-                                                '            <i class="x-fa {[values.is_active ? \'fas fa-ban\' : \'fas fa-check\']}" style="font-size:26px;"></i>',
-                                                '        </div>',
-                                                '    </div>',
-                                                '</div>',
-                                                '-->'
+                                                '</div>'
                                             ],
                                             store: 'storeParam',
                                             listeners: {
@@ -529,7 +391,6 @@ Ext.define('basicConfig.view.contMain', {
                             isCreate: true,
                             id: 'formParam',
                             itemId: 'formParam',
-                            title: 'Parámetros',
                             items: [
                                 {
                                     xtype: 'textfield',
@@ -587,6 +448,7 @@ Ext.define('basicConfig.view.contMain', {
                                             id: 'btnConfirm1',
                                             itemId: 'btnConfirm',
                                             ui: 'confirm',
+                                            iconCls: 'fas fa-check',
                                             text: 'Confirmar',
                                             listeners: {
                                                 tap: 'onBtnConfirmTap1'
@@ -600,6 +462,7 @@ Ext.define('basicConfig.view.contMain', {
                                             id: 'btnCancel1',
                                             itemId: 'btnCancel',
                                             ui: 'decline',
+                                            iconCls: 'fas fa-ban',
                                             text: 'Cancelar',
                                             listeners: {
                                                 tap: 'onBtnCancelTap1'
@@ -665,14 +528,12 @@ Ext.define('basicConfig.view.contMain', {
 
         const includeDeleted = (button.getItemId && button.getItemId() === 'btnConfigDelete') || (button.itemId === 'btnConfigDelete');
 
-            console.log('includeDeleted:', includeDeleted);
-
         // Obtener el store
         const storeConfig = Ext.getStore('storeConfig');
 
         // Set extra param
         const proxy = storeConfig.getProxy();
-        proxy.setExtraParam('include_deleted', includeDeleted ? 'true' : 'false');
+        proxy.setExtraParam('show_inactive', includeDeleted ? 'true' : 'false');
 
         // Regresar a página 1 cuando hay paging
         //if (storeConfig.currentPage) {
@@ -680,11 +541,8 @@ Ext.define('basicConfig.view.contMain', {
         //}
 
         // Recargar
+        storeConfig.currentPage = 1;
         storeConfig.load();
-    },
-
-    onBtnLoadTap: function(button, e, eOpts) {
-        Ext.getStore('storeUser').load();
     },
 
     onDataViewConfigChildtap: function(dataview, location, eOpts) {
@@ -881,7 +739,7 @@ Ext.define('basicConfig.view.contMain', {
 
         // Set extra param
         const proxy = storeConfig.getProxy();
-        proxy.setExtraParam('include_deleted', includeDeleted ? 'true' : 'false');
+        proxy.setExtraParam('show_inactive', includeDeleted ? 'true' : 'false');
 
         // Regresar a página 1 cuando hay paging
         //if (storeConfig.currentPage) {
@@ -889,6 +747,7 @@ Ext.define('basicConfig.view.contMain', {
         //}
 
         // Recargar
+        storeConfig.currentPage = 1;
         storeConfig.load();
     },
 
