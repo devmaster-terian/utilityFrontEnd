@@ -56,6 +56,13 @@ Ext.define('damCollection.store.storeNode', {
         const proxy = store.getProxy();
         proxy.url = url;
 
+        // Define los parámetros
+        const params = {};
+        params.include_data = true;
+
+        // Asigna los parámetros al proxy
+        proxy.setExtraParams(params);
+
         // Añadir el header con la auth
         jsTerian.addAuthorizationHeader(store);
 

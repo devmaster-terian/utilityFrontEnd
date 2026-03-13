@@ -732,7 +732,7 @@ Ext.define('basicConfig.view.contMain', {
 
         const includeDeleted = (button.getItemId && button.getItemId() === 'btnParamDelete') || (button.itemId === 'btnParamDelete');
 
-            console.log('includeDeleted:', includeDeleted);
+        console.log('includeDeleted:', includeDeleted);
 
         // Obtener el store
         const storeConfig = Ext.getStore('storeParam');
@@ -743,7 +743,7 @@ Ext.define('basicConfig.view.contMain', {
 
         // Regresar a página 1 cuando hay paging
         //if (storeConfig.currentPage) {
-           // storeConfig.currentPage = 1;
+        // storeConfig.currentPage = 1;
         //}
 
         // Recargar

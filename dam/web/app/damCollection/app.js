@@ -57,66 +57,84 @@ Ext.application({
         appLocal.loadTreeChildren('storeNode', "c-1", { pushHistory: false });
     },
 
-    saveNode: function(payload, isCreate) {
+    saveNode: function() {
         var contMain = Ext.getCmp('contMain');
         var form = Ext.getCmp('formNode');
 
-        if (!form) { Ext.toast('No se encontró el formulario.'); return; }
-
-        var isCreate = !!form.isCreate;
-        var payload  = contMain.buildPayload(form);
-
-        console.log(isCreate ? '[CREATE] payload' : '[UPDATE] payload', payload);
-
-        // En update: obtener el id desde el record del form
-        var rec    = form.nodeRecord || null;
-        var dataRec = rec ? (rec.getData ? rec.getData() : rec) : null;
-        var nodeId  = dataRec ? (dataRec.node_id || dataRec.id_node || dataRec.id || dataRec._id) : null;
-
-        // Validación (reusa tu validateCreatePayload)
-        var err = contMain.validateCreatePayload(payload);
-        if (!isCreate && !nodeId) err = 'No se encontró el ID del nodo a actualizar.';
-
-        if (err) {
-            Ext.toast(err);
+        if (!form) {
+            Ext.toast('No se encontró el formulario.');
             return;
         }
 
-        // URL y método
+        var isCreate = !!form.isCreate;
+
+        var result = contMain.buildPayload();
+        if (!result || !result.ok) {
+            Ext.toast((result && result.error) ? result.error : 'No se pudo construir el payload.');
+            return;
+        }
+
+        var payload = result.payload;
+
+        console.log(isCreate ? '[CREATE] payload' : '[UPDATE] payload', payload);
+
+        var rec = form.nodeRecord || null;
+        var dataRec = rec ? (rec.getData ? rec.getData() : rec) : null;
+        var nodeId = dataRec ? (dataRec.node_id || dataRec.id_node || dataRec.id || dataRec._id) : null;
+
+        if (!isCreate && !nodeId) {
+            Ext.toast('No se encontró el ID del nodo a actualizar.');
+            return;
+        }
+
         var method = isCreate ? 'POST' : 'PUT';
-        var url    = isCreate ? jsTerian.makeUrl('/tree/node/create') : jsTerian.makeUrl('/tree/node/update', nodeId);
+        var url = isCreate ? jsTerian.makeUrl('/tree/node/create')
+        : jsTerian.makeUrl('/tree/node/update', nodeId);
 
         jsTerian.makeRequest(
             method,
             url,
             JSON.stringify(payload),
 
-            function success(resp){
+            function success(resp) {
                 var msg;
-                try { msg = Ext.decode(resp.responseText); }
-                catch(e){ msg = { success:true, message:'Success', data:{} }; }
+                try {
+                    msg = Ext.decode(resp.responseText);
+                } catch(e) {
+                    msg = { success: true, message: 'Success', data: {} };
+                }
 
-                // Display: preferir lo que el usuario capturó
                 var d = payload.data || {};
                 var display =
                     d.name || d.code || d.tab_code ||
-                    ((dataRec && (dataRec.name || dataRec.code || dataRec.tab_code || dataRec.text)) ? (dataRec.name || dataRec.code || dataRec.tab_code || dataRec.text) : ('ID ' + (nodeId || '—')));
+                    ((dataRec && (dataRec.name || dataRec.code || dataRec.tab_code || dataRec.text)) ? (dataRec.name || dataRec.code || dataRec.tab_code || dataRec.text)
+                     : ('ID ' + (nodeId || '—')));
 
-                var text = (msg && msg.message) ? (msg.message + ': ' + display) : ((isCreate ? 'Nodo creado: ' : 'Nodo actualizado: ') + display);
+                var text = (msg && msg.message) ? (msg.message + ': ' + display)
+                : ((isCreate ? 'Nodo creado: ' : 'Nodo actualizado: ') + display);
 
                 jsTerian.toastAlert(text, 'success');
 
-                // Recargar árbol/store
-                appLocal.closeNodeTabAndReloadParent({ parentId: payload.parent_id });
+                appLocal.closeNodeTabAndReloadParent({
+                    parentId: payload.parent_id || form.parentId
+                });
+
+                contMain.clearNodeForm();
+
             },
 
-            function failure(response){
+            function failure(response) {
                 var parsed = {};
-                try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}
+                try {
+                    parsed = Ext.decode(response.responseText || '{}');
+                } catch(e) {}
 
                 var actionTxt = isCreate ? 'crear' : 'actualizar';
                 var html = Ext.htmlEncode(parsed.message || ('No se pudo ' + actionTxt + ' el nodo.'));
-                if (parsed.error) html += '<br/><p>Error, no se pudo registrar los cambios</p>';
+
+                if (parsed.error) {
+                    html += '<br/><p>Error, no se pudo registrar los cambios</p>';
+                }
 
                 jsTerian.toastAlert(html, 'error', parsed.error);
             }
@@ -303,38 +321,31 @@ Ext.application({
         return (data && (data.name || data.title || data.text)) ? (data.name || data.title || data.text) : nodeId;
     },
 
-    getCreateOptions: function(currentNode) {
-        // Obtiene el id del nodo
+    getCreateOptions: function() {
         const currentId = appLocal.getCurrentNodeId();
         const prefix = currentId.split('-')[0];
 
-        // Root, solo permite crear colecciones
+        // Root: solo permite crear colecciones
         if (currentId === 'c-1') return ['collection'];
 
-        // Si es resource solo permite crear tabs
+        // Si es resource solo permite tabs
         if (prefix === 'r') return ['tab'];
 
-        // Si el padre no es coleccion o recurso, no se puede crear nada
+        // Si el padre no es colección, no se puede crear
         if (prefix !== 'c') return [];
 
-        // Calcular la profundidad del arreglo
-        // level = cuántas colecciones hay debajo de root
         let level = 0;
-
         let curId = currentId;
         let hops  = 0;
         const maxHops = 10;
 
         while (curId && curId !== 'c-1' && hops < maxHops) {
 
-            // Contar el numero de colecciones reales
             if ((curId || '').split('-')[0] === 'c') level++;
 
-            // Reconstruir el padre para saber quien es
             const rec = appLocal.nodeCache && appLocal.nodeCache[curId];
             const d   = rec ? (rec.getData ? rec.getData() : rec) : null;
 
-            // Si no hay parent_id en cache, regresa error
             if (!d || !(d.parent_id || d.parentId)) {
                 console.warn('[getCreateOptions] cache incompleto para', curId, d);
                 break;
@@ -346,7 +357,7 @@ Ext.application({
 
         console.log('[getCreateOptions]', { currentId, level, hops });
 
-        // Regla: collection -> colletion -> resource -> tab
+        // regla collection -> collection -> resource -> tab
         if (level >= 2) return ['resource'];
 
         return ['collection', 'resource'];
@@ -444,6 +455,20 @@ Ext.application({
                 }
             }
         });
+    },
+
+    getNodeTypeById: function(nodeId) {
+        if (nodeId === 'c-1') return 'collection';
+
+        var rec = this.nodeCache && this.nodeCache[nodeId];
+
+        if (!rec && this.treeState && this.treeState.selectedByNodeId) {
+            rec = this.treeState.selectedByNodeId[nodeId];
+        }
+
+        var data = rec ? (rec.getData ? rec.getData() : rec) : null;
+
+        return data ? data.node_type : null;
     }
 
 });
