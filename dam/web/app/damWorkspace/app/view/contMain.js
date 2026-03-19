@@ -57,7 +57,7 @@ Ext.define('damWorkspace.view.contMain', {
                     xtype: 'button',
                     id: 'btnMenu',
                     itemId: 'btnMenu',
-                    ui: 'action',
+                    ui: 'plain',
                     iconCls: 'fa fa-bars',
                     text: '',
                     listeners: {
@@ -71,6 +71,15 @@ Ext.define('damWorkspace.view.contMain', {
                     iconCls: 'fa-bas fa-home',
                     listeners: {
                         tap: 'onBtnHomeTap'
+                    }
+                },
+                {
+                    xtype: 'button',
+                    id: 'btnBackView',
+                    itemId: 'btnBackView',
+                    iconCls: 'fas fa-angles-left',
+                    listeners: {
+                        tap: 'onBtnBackViewTap'
                     }
                 },
                 {
@@ -118,6 +127,15 @@ Ext.define('damWorkspace.view.contMain', {
             layout: 'hbox',
             items: [
                 {
+                    xtype: 'container',
+                    flex: 1,
+                    cls: 'panel-degradado',
+                    id: 'contWorkspace',
+                    itemId: 'contWorkspace',
+                    scrollable: true,
+                    layout: 'fit'
+                },
+                {
                     xtype: 'panel',
                     reference: 'panelMenu',
                     floated: true,
@@ -138,6 +156,7 @@ Ext.define('damWorkspace.view.contMain', {
                     items: [
                         {
                             xtype: 'treelist',
+                            flex: 1,
                             id: 'menuTree',
                             itemId: 'menuTree',
                             style: {
@@ -146,7 +165,7 @@ Ext.define('damWorkspace.view.contMain', {
                                 border: 'none',
                                 'box-shadow': 'none'
                             },
-                            store: 'storeTree2',
+                            store: 'storeTreeMenu',
                             listeners: {
                                 itemclick: 'onMenuTreeItemClick'
                             }
@@ -194,15 +213,6 @@ Ext.define('damWorkspace.view.contMain', {
                             ]
                         }
                     ]
-                },
-                {
-                    xtype: 'container',
-                    flex: 1,
-                    cls: 'panel-degradado',
-                    id: 'contWorkspace',
-                    itemId: 'contWorkspace',
-                    scrollable: true,
-                    layout: 'fit'
                 }
             ]
         }
@@ -228,10 +238,90 @@ Ext.define('damWorkspace.view.contMain', {
     },
 
     onBtnHomeTap: function(button, e, eOpts) {
+        /*
         var contWorkspace = Ext.getCmp('contWorkspace');
         contWorkspace.removeAll(true, true);
         contWorkspace.addCls('workspace-bg');
         contWorkspace.setHtml('');
+        */
+
+        Ext.getCmp('contMain').buildFeaturedView();
+    },
+
+    onBtnBackViewTap: function(button, e, eOpts) {
+        var lastView = jsDam.backView();
+        console.log('lastView');
+        console.log(lastView);
+
+        if(!lastView){
+            Ext.getCmp('contMain').buildFeaturedView();
+            return;
+        }
+
+        var node = Ext.create('Ext.data.Model', {
+            id: lastView.resource,
+            text: lastView.text,
+            name: lastView.text
+        });
+
+
+        if(lastView.action){
+            console.log('Accion definida-->',lastView.action);
+
+
+
+
+            var titulo = lastView.text;
+
+            var objCurrentView = {
+                'resource' : lastView.resource,
+                'text'     : lastView.text,
+                'action'   : lastView.action,
+                'appUrl'   : lastView.appUrl
+            };
+
+            //jsDam.setCurrentView(objCurrentView);
+
+            var contWorkspace = Ext.getCmp('contWorkspace');
+            contWorkspace.setHtml('');
+            this.openIframeApp(appUrl, node);
+
+
+
+
+
+            return;
+        }
+
+        var nodeId = node.getId ? node.getId() : node.get('id');   // "c-17", "r-1", etc.
+        var prefix = String(nodeId || '').split('-')[0];
+
+        if (prefix === 'r') {
+            console.warn('tipo 3');
+
+            var objCurrentView = {
+                'resource' : lastView.resource,
+                'text'     : lastView.text,
+                'action'   : lastView.action,
+                'appUrl'   : lastView.appUrl
+            };
+
+            //jsDam.setCurrentView(objCurrentView);
+
+            var idResource = String(nodeId).split('-')[1];
+
+            this.openResourceTabs(idResource, node);
+
+            console.warn('appLocal.deviceMode: ', appLocal.deviceMode);
+
+            if(appLocal.deviceMode == 'mobile'){
+                var btnMenu = Ext.getCmp('btnMenu');
+                //btnMenu.fireEvent('tap',btnMenu);
+            }
+
+
+            return;
+        }
     },
 
     onBtnSearchTap: function(button, e, eOpts) {
@@ -272,7 +362,7 @@ Ext.define('damWorkspace.view.contMain', {
         var node = info.node;
         if (!node) return;
 
-        console.log(node);
+        console.log('node>>>',node);
 
         var nodeId = node.getId ? node.getId() : node.get('id');   // "c-17", "r-1", etc.
         var prefix = String(nodeId || '').split('-')[0];
@@ -292,15 +382,32 @@ Ext.define('damWorkspace.view.contMain', {
                 console.log('Expandir');
             }
             return;
-
         }
 
         if (action === 'open_app' && appUrl) {
             console.warn('tipo 2');
 
+
+            var titulo = node.get('text');
+
+            var objCurrentView = {
+                'resource' : nodeId,
+                'text'     : titulo,
+                'action'   : node.get('action'),
+                'appUrl'   : appUrl
+            };
+
+            jsDam.setCurrentView(objCurrentView);
+
             var contWorkspace = Ext.getCmp('contWorkspace');
             contWorkspace.setHtml('');
             this.openIframeApp(appUrl, node);
+
+            if(appLocal.deviceMode == 'mobile'){
+                var btnMenu = Ext.getCmp('btnMenu');
+                btnMenu.fireEvent('tap',btnMenu);
+            }
+
             return;
         }
 
@@ -393,6 +500,9 @@ Ext.define('damWorkspace.view.contMain', {
     },
 
     openResourceTabs: function(idResource, node) {
+
+        //idResource = String(idResource).split('-')[1];
+
         var me  = this;
         var url = jsTerian.getUrl('tree/resource/' + encodeURIComponent(idResource) + '/tabs');
 
@@ -410,6 +520,19 @@ Ext.define('damWorkspace.view.contMain', {
 
                 // Aquí creas/actualizas tu TabPanel en el contenedor de la derecha
                 me.buildTabPanelFromTabs(tabs, node);
+
+                var titulo = node.get('text');
+
+                var objCurrentView = {
+                    'resource':node.get('id'),
+                    'text':node.get('text'),
+                    'action':node.get('action'),
+                    'appUrl':node.get('appUrl')
+                };
+
+                console.log('node-->',node);
+                console.log('objCurrentView:',objCurrentView);
+                jsDam.setCurrentView(objCurrentView);
 
             },
 
@@ -480,8 +603,8 @@ Ext.define('damWorkspace.view.contMain', {
                         text: 'Subir',
                         ui: 'action',
                         handler: function() {
-                            jsDam.toast({ type:'success', title:'Éxito', message: 'Éxito' });
-                            return;
+                            //jsDam.toast({ type:'success', title:'Éxito', message: 'Éxito' });
+                            //return;
                             var form = dlg.down('#uploadForm');
 
                             var values = form.getValues ? form.getValues() : {};
@@ -675,6 +798,7 @@ Ext.define('damWorkspace.view.contMain', {
             return;
         }
 
+
         // Función para renderizar el tab
         function renderTabContent(selectedTabId) {
             var def = tabDefs.find(function(x){ return String(x.id) === String(selectedTabId); }) || tabDefs[0];
@@ -749,19 +873,14 @@ Ext.define('damWorkspace.view.contMain', {
                                 prospectActive = true;
                             }
 
-                            //Ext.Viewport.unmask();
-
-                            console.log('prospectActive:', prospectActive);
                             return prospectActive;
                         },
                         allowDelete: function (){
                             var role = jsTerian.saveDataObjSS('TMP_SESSION', 'role');
-                            console.info('role:',role);
                             return true;
                         },
 
                         canView: function (ext) {
-                            console.log('can view (tpl fn)');
 
                             if (!ext) return false;
 
@@ -778,17 +897,10 @@ Ext.define('damWorkspace.view.contMain', {
                     }
                 ],
 
-                //items: [
-                //  {
-                //    html: htmlHeader
-                //  }
-                //],
 
                 store: storeIdUnique,
 
                 canView: function(ext) {
-                    console.log('can view');
-
                     if (!ext) return false;
 
                     var e = String(ext).toLowerCase().replace('.', '');
@@ -826,15 +938,10 @@ Ext.define('damWorkspace.view.contMain', {
 
                     var endPoint   = 'prospect/' + idProspect + '/assets';
                     var listAssets = [pRecord.data.id_asset];
-
                     var url = jsTerian.getUrl(endPoint);
-
                     var jsonData = JSON.stringify({
                         'asset_ids': listAssets
                     });
-
-                    console.info('url:', url);
-                    console.info('jsonData:', jsonData);
 
                     jsTerian.makeRequest('POST', url, jsonData, fnSuccess, fnFailure, true);
                 },
@@ -868,7 +975,6 @@ Ext.define('damWorkspace.view.contMain', {
                                 return;
                             }
 
-                            console.warn('Tap: view Placeholder');
                             var objConfig = { title: record.data.text };
                             var url = jsTerian.makeUrl('asset/download', record.data.id_asset);
 
@@ -880,13 +986,8 @@ Ext.define('damWorkspace.view.contMain', {
                         var action = btn.getAttribute('data-action');
                         location.event.stopEvent();
 
-                        console.log('action >>> ', action);
-                        console.log('record', record);
-
                         switch (action) {
                             case 'view':
-                                console.warn('Tap: view');
-
                                 if (!this.canView(record.data.file_extension)) {
                                     var mensajeAlerta = 'El tipo de archivo ' + record.data.file_extension +
                                         ' no permite previsualización directa.</br>Descargue el archivo';
@@ -902,7 +1003,6 @@ Ext.define('damWorkspace.view.contMain', {
                                 break;
 
                             case 'download':
-                                console.warn('Tap: download');
                                 var urlDl = jsTerian.makeUrl('asset/download', record.data.id_asset);
                                 appLocal.downloadFileFromUrl(
                                     urlDl + '?download=true',
@@ -911,30 +1011,20 @@ Ext.define('damWorkspace.view.contMain', {
                                 break;
 
                             case 'email':
-                                console.warn('Tap: email');
                                 this.sendByEmail(record);
                                 break;
 
                             case 'whatsapp':
-                                console.warn('Tap: whatsapp');
                                 Ext.Viewport.unmask();
-
-                                console.info('Ahi va');
-
                                 jsTerian.sendToWhatsApp(record);
                                 break;
 
                             case 'attach':
-                                console.warn('Tap: attach');
                                 this.attachAssetProspect(record);
                                 Ext.Viewport.unmask();
                                 break;
 
                             case 'delete':
-                                console.warn('Tap: delete');
-
-                                console.warn('>delete-record:',record);
-
                                 Ext.Msg.show({
                                     title: 'Eliminar Archivo',
                                     message: '¿Desea eliminar el Archivo ' + record.data.original_filename + '?',
@@ -986,8 +1076,6 @@ Ext.define('damWorkspace.view.contMain', {
             jsTerian.loadStore(storeIdUnique);
         }
 
-        console.info('tabDefs:',tabDefs);
-
         // Store para el combo
         var tabsStore = Ext.create('Ext.data.Store', {
             fields: ['id', 'text'],
@@ -1019,6 +1107,7 @@ Ext.define('damWorkspace.view.contMain', {
                             '</div>'
                         },
                         '->',
+                        /*
                         // Boton para agregar archivos
                         {
                             xtype: 'button',
@@ -1049,6 +1138,7 @@ Ext.define('damWorkspace.view.contMain', {
 
                             }
                         },
+                        */
                         // Boton para agregar archivos
                         {
                             xtype: 'button',
@@ -1073,8 +1163,8 @@ Ext.define('damWorkspace.view.contMain', {
                                 var root = btn.up('container');
                                 var sel  = root.down('#tabSelect');
 
-                                jsDam.toast({ type:'success', title:'Éxito', message: 'Éxito' });
-                                return;
+                                //jsDam.toast({ type:'success', title:'Éxito', message: 'Éxito' });
+                                //return;
 
                                 var tabId = sel ? sel.getValue() : null;
 
@@ -1124,6 +1214,9 @@ Ext.define('damWorkspace.view.contMain', {
                             },
                             listeners: {
                                 change: function(field, newVal){
+
+                                    console.log('newVal:',newVal);
+
                                     var v = newVal;
                                     if (v && v.get) v = v.get('id');
                                     if (v && typeof v === 'object' && v.id !== null) v = v.id;
@@ -1333,6 +1426,188 @@ Ext.define('damWorkspace.view.contMain', {
         };
 
         jsDam.confirmDelete(objConfig,confirmDeleteUser);
+
+    },
+
+    buildFeaturedView: function() {
+        // ============================================================================
+        // PARTE 1: LA VISTA (Generación del Contenedor)
+        // ============================================================================
+        function createFeaturedContainer() {
+            return {
+                xtype: 'container',
+                itemId: 'contFeature',
+                layout: 'fit', // Para que el DataView ocupe todo el espacio disponible
+                items: [
+                    {
+                        xtype: 'dataview',
+                        itemId: 'dataViewFeatured',
+                        width: '100%',
+
+
+                        store: 'storeFeatured',
+
+                        cls: 'featured-grid-view',
+                        inline: false,
+                        scrollable: 'vertical',
+
+                        style: {
+                            'background-color': '#1b2a4e',
+                            border: '0px solid red',
+                            boxSizing: 'border-box',
+
+                        },
+                        itemTpl: /*[
+                            // Usamos dos url() separadas por coma. La segunda es tu imagen por defecto.
+                            '<div class="featured-btn" style="background-image: url(\'{thumbnail_url}\'), url(\'featured_collection_ph.png\');">',
+                            '<div class="featured-overlay"></div>',
+                            '<div class="featured-title">{title}</div>',
+                            '</div>'
+                        ],*/
+                        new Ext.XTemplate(
+                            '<div class="featured-btn" style="background-image: url(\'{[this.getBackgroundImage(values)]}\');">',
+                            '<div class="featured-overlay"></div>',
+                            '<div class="featured-title">{title}</div>',
+                            '</div>',
+                            {
+                                getBackgroundImage: function(values) {
+                                    return values.thumbnail_url ? jsTerian.makeUrl(values.thumbnail_url) : 'featured_collection_ph.png';
+                                }
+                            }
+                        ),
+
+                        listeners: {
+                        // CORRECCIÓN 1: Quitamos las comillas para referenciar la función local
+                        childtap: onFeaturedItemTap
+                        }
+                    }
+                ]
+            };
+        }
+
+        // ============================================================================
+        // PARTE 2: EL CONTROLADOR (Lógica del Clic)
+        // ============================================================================
+        function onFeaturedItemTap(dataview, location, eOpts) {
+            // 1. Extraemos el registro (record) de la base de datos
+            var record = location.record;
+
+            // 2. Validamos de seguridad
+            if (record) {
+                // 3. Extraemos los campos exactos de ese registro
+                var idArchivo = record.get('id');
+                var titulo = record.get('title');
+                var tipo = record.get('type');
+                var url = record.get('thumbnail_url');
+                var target_node_id = record.data.target.node_id;
+
+                console.log(record.data);
+
+
+                console.log('Botón Destacado Tocado ->', titulo, tipo);
+
+                // 4. Lógica de negocio según el tipo de archivo
+                if (tipo === 'pdf' || tipo === 'image' || tipo === 'video') {
+                    Ext.toast('Abriendo: ' + titulo);
+                    // Si estás dentro del mismo scope o pasaste el "me", puedes llamar a tu visor:
+                    // previewFileFromURL(url, { title: titulo }, record);
+                } else {
+                    //Ext.Msg.alert('Aviso', 'Seleccionaste la categoría: ' + titulo + '</br>target_node_id: ' + target_node_id);
+
+
+                    var idResource = String(target_node_id).split('-')[1];
+                    //var idResource = target_node_id;
+
+                    // Creamos un Record de ExtJS temporal para satisfacer a openResourceTabs
+                    var node = Ext.create('Ext.data.Model', {
+                        id: target_node_id,
+                        text: titulo,
+                        name: titulo // Le paso ambos por si acaso tu función usa 'name' en algún otro lado
+                    });
+
+
+
+
+                    contMain = Ext.getCmp('contMain');
+                    contMain.openResourceTabs(idResource, node);
+
+
+
+                }
+            }
+        }
+
+        // ============================================================================
+        // PARTE 3: LA LLAMADA AL SERVIDOR Y RENDERIZADO (El "Init")
+        // ============================================================================
+        var fnSuccess = function(pResponse) {
+            console.log('Success: Datos de destacados obtenidos');
+
+            var msg;
+            try {
+                msg = Ext.decode(pResponse.responseText);
+            }
+            catch(e){
+                // Cambiamos 'data' por 'items' para que coincida con tu backend
+                msg = { success:true, message:'Error de parseo', items:[] };
+            }
+
+            console.log('msg: ', msg);
+
+            var contWorkspace = Ext.getCmp('contWorkspace');
+            if (!contWorkspace) {
+                console.warn('No existe contWorkspace');
+                return;
+            }
+
+            // 1. Limpiar la ventana
+            contWorkspace.removeAll(true, true);
+            contWorkspace.setHtml('');
+            //contWorkspace.removeCls('workspace-bg');
+            //contWorkspace.addCls('workspace-base');
+
+            // 2. Inyectar el contenedor
+            contWorkspace.add(createFeaturedContainer());
+
+            //Ext.getCmp('contFeature').addCls('workspace-bg');
+
+            // 3. OBTENER O CREAR EL STORE
+            var st = Ext.getStore('storeFeatured');
+
+            // Si Sencha Architect aún no lo instanció globalmente, lo creamos nosotros usando su nombre de clase
+            if (!st) {
+                console.log("Instanciando storeFeatured por primera vez...");
+                st = Ext.create('damWorkspace.store.storeFeatured');
+            }
+
+            // 4. INYECTAR LOS DATOS (¡Usando msg.items!)
+            if (st && msg.items) {
+                st.setData(msg.items);
+                console.log("¡Datos inyectados exitosamente!", st.getCount() + " registros cargados.");
+            } else {
+                console.error("Fallo al inyectar datos: msg.items está vacío o indefinido.");
+            }
+        };
+
+        var fnFailure = function(pResponse) {
+            console.log('Failure: Falló el EndPoint de destacados');
+        };
+
+        var endPoint = 'tree/featured';
+
+        // CORRECCIÓN 3 (Opcional pero recomendada):
+        // Para peticiones GET, es mejor pasar las variables en la URL
+        var url = jsTerian.getUrl(endPoint) + '?featured=true';
+        var jsonData = null;
+
+        console.info('---buildFeaturedView---');
+        console.info('url:', url);
+
+        // Ejecutamos la petición
+        jsTerian.makeRequest('GET', url, jsonData, fnSuccess, fnFailure, true);
+    },
+
+    renderTabContent: function(selectedTabId) {
 
     }
 

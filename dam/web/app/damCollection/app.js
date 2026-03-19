@@ -141,9 +141,12 @@ Ext.application({
         );
     },
 
-    deleteUser: function(id_user) {
+    deleteNode: function(id_node) {
         // Url de la solicitud
-        var url = jsTerian.makeUrl('user/delete',id_user);
+        var url = jsTerian.makeUrl('tree/node/delete',id_node);
+
+        // Parametro para forzar la eliminación
+        url = url + '?force=true';
 
         jsTerian.makeRequest(
             'DELETE',
@@ -158,10 +161,10 @@ Ext.application({
                 try { msg = Ext.decode(response.responseText); } catch(e){}
 
                 // Mostrar mensaje del backend directamente
-                var text = msg && msg.message ? msg.message : 'Usuario eliminado';
+                var text = msg && msg.message ? msg.message : 'Node eliminado';
                 jsTerian.toastAlert(text, 'success');
 
-                jsTerian.reloadStore('storeUser');
+                jsTerian.reloadStore('storeNode');
             },
 
             // Función Failure
@@ -172,7 +175,7 @@ Ext.application({
                 try { parsed = Ext.decode(response.responseText || '{}'); } catch(e){}
 
                 // Crea el mensaje de error y lanza la alerta
-                let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated user');
+                let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated node');
                 if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';
 
                 jsTerian.toastAlert(html, 'error', parsed.error);

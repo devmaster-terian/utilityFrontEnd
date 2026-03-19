@@ -496,7 +496,7 @@ const jsTerian = {
             url: url,
             method: 'POST',
             success: function (response) {
-                waitMsgBox.hide()
+                waitMsgBox.hide();
                 var jsonData = Ext.decode(response.responseText);
                 console.info(jsonData);
                 if (successCallback && typeof successCallback === 'function') {
@@ -504,7 +504,7 @@ const jsTerian = {
                 }
             },
             failure: function (response) {
-                waitMsgBox.hide()
+                waitMsgBox.hide();
                 var jsonData = Ext.decode(response.responseText);
                 console.info(jsonData);
                 if (failureCallback && typeof failureCallback === 'function') {
@@ -1134,7 +1134,7 @@ const jsTerian = {
     loadStore: function (storeName, param) {
         var store = Ext.getStore(storeName);
         if (param !== null && param !== undefined && param !== '') {
-            store.onLoad(store, param);
+            store.onLoad(store, param)
         } else {
             store.onLoad(store);
         }
@@ -1165,7 +1165,7 @@ const jsTerian = {
             store.removeAll();
         } else {
             msg = 'No existe el store: ' + storeName;
-            this.toastAlert(msg, 'error');
+            this.toastAlert(msg, 'error')
         }
     },
 
@@ -1178,10 +1178,10 @@ const jsTerian = {
         }
 
         if (text !== null && text !== undefined && text !== '') {
-            button.setText(text);
+            button.setText(text)
         }
         if (icon !== null && icon !== undefined && icon !== '') {
-            button.setIconCls(icon);
+            button.setIconCls(icon)
         }
     },
 

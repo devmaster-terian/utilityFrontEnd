@@ -117,16 +117,6 @@ Ext.define('damCollection.view.contMain', {
                                     listeners: {
                                         tap: 'onBtnInfoTap'
                                     }
-                                },
-                                {
-                                    xtype: 'button',
-                                    id: 'btnInfo1',
-                                    itemId: 'btnInfo1',
-                                    ui: 'round',
-                                    iconCls: 'x-fa fa-cog',
-                                    listeners: {
-                                        tap: 'onBtnInfoTap1'
-                                    }
                                 }
                             ]
                         },
@@ -648,7 +638,10 @@ Ext.define('damCollection.view.contMain', {
                                                             itemId: 'btnUploadImage',
                                                             ui: 'action',
                                                             margin: 4,
-                                                            text: 'Subir Imagen'
+                                                            text: 'Subir Imagen',
+                                                            listeners: {
+                                                                tap: 'onBtnUploadImageTap'
+                                                            }
                                                         },
                                                         {
                                                             xtype: 'button',
@@ -930,10 +923,6 @@ Ext.define('damCollection.view.contMain', {
         );
     },
 
-    onBtnInfoTap1: function(button, e, eOpts) {
-        this.navigateToView('contNode', 'formNode1');
-    },
-
     onDataViewUserChildtap: function(dataview, location, eOpts) {
         // 1. Detectar si el toque fue en un botón de acción
             // Buscamos la clase '.action-btn' en el elemento tocado o sus padres
@@ -995,6 +984,27 @@ Ext.define('damCollection.view.contMain', {
                         break;
 
                     case 'delete':
+                        // Obtener el formulario
+                        var contMain = Ext.getCmp('contMain');
+                        var form = Ext.getCmp('formNode');
+
+                        if (!form) {
+                            Ext.toast('No se encontró el formulario.');
+                            return;
+                        }
+
+                        // Obtener el record del node
+                        var rec = form.nodeRecord || null;
+
+                        var dataRec = rec ? (rec.getData ? rec.getData() : rec) : null;
+                        var nodeId  = data.id ? data.id : null;
+                        var text    = data.text ? data.text : null;
+
+                        if (!nodeId) {
+                            Ext.toast('No se encontró el ID del nodo a eliminar.');
+                            return;
+                        }
+
                         Ext.Msg.show({
                             title: 'Eliminar Registro',
                             message: '¿Realmente deseas eliminar este registro? Esta acción no se puede deshacer.',
@@ -1009,14 +1019,13 @@ Ext.define('damCollection.view.contMain', {
                                 {
                                     text: 'Sí, borrar',
                                     itemId: 'yes',
-                                    ui: 'action-decline' // En Modern, esto suele poner el botón en rojo
+                                    ui: 'action-decline'
                                 }
                             ],
                             fn: function (buttonId) {
                                 if (buttonId === 'yes') {
 
-                                    var idUser = record.id_user;
-                                    appLocal.deleteUser(idUser);
+                                    appLocal.deleteNode(nodeId);
 
                                     console.log('Registro eliminado');
                                 }
@@ -1063,6 +1072,41 @@ Ext.define('damCollection.view.contMain', {
         this.clearNodeForm(form, { keepType: true, keepActive: true });
     },
 
+    onBtnUploadImageTap: function(button, e, eOpts) {
+        var form = Ext.getCmp('formNode');
+
+        if (!form) {
+            return {
+                ok: false,
+                payload: null,
+                error: 'No se encontró el formulario.'
+            };
+        }
+
+        var isCreate = !!form.isCreate;
+        var isEdit   = !isCreate;
+
+        var nodeType = (jsTerian.readElementValue('cboNodeType') || '').trim();
+        var parentId = (jsTerian.readElementValue('ftParentId') || '').trim();
+
+        var nodeRecord = form.nodeRecord || null;
+        var dataRec = nodeRecord ? (nodeRecord.getData ? nodeRecord.getData() : nodeRecord) : null;
+        var nodeId = dataRec ? (dataRec.node_id || dataRec.id_node || dataRec.id || dataRec._id) : null;
+        var nodeText = dataRec.text ? dataRec.text : null;
+
+        console.log(nodeType);
+        console.log(parentId);
+        console.log(dataRec);
+        console.log(nodeId);
+
+        this.showImageUploadDialog({
+            nodeId: nodeId,
+            nodeText: nodeText || '',
+            nodeType: nodeType,
+
+        });
+    },
+
     onCboNodeTypeChange1: function(selectfield, newValue, oldValue, eOpts) {
         var contMain =  Ext.getCmp('contMain');
         var form = Ext.getCmp('formNode');
@@ -1107,7 +1151,7 @@ Ext.define('damCollection.view.contMain', {
         }
 
         if (data.preview_url) {
-            return jsTerian.makeUrl(data.preview_url);
+            return jsTerian.makeUrl(data.thumbnail_url);
         }
 
         return '';
@@ -1278,6 +1322,10 @@ Ext.define('damCollection.view.contMain', {
         const fsTab        = form.down('#ctTab');
         const cboNodeType  = form.down('#cboNodeType');
 
+        // Auditoría
+        const lblCreatedAt = form.down('#lblCreatedAt');
+        const lblUpdatedAt = form.down('#lblUpdatedAt');
+
         const raw = record && record.getData ? record.getData() : (record || {});
         const detail = raw.data || raw;
 
@@ -1331,14 +1379,14 @@ Ext.define('damCollection.view.contMain', {
             walk(group);
         };
 
-        // 1. Contexto
+        // Contexto
         if (ctx) {
             jsTerian.assignElementValue('ftParentName', ctx.parent_name);
             jsTerian.assignElementValue('ftParentId', ctx.parent_id);
             //jsTerian.assignElementValue('ftParentType', ctx.parent_type);
         }
 
-        // 2. Tipo de nodo
+        // Tipo de nodo
         if (cboNodeType) {
             const allowedTypes = (ctx && ctx.allowed_types) ? ctx.allowed_types : [];
 
@@ -1366,7 +1414,16 @@ Ext.define('damCollection.view.contMain', {
         const btnRemoveImage = form.down('#btnRemoveImage');
 
         if (ctImageSection) {
-            ctImageSection.setHidden(!(nodeType === 'collection' || nodeType === 'resource'));
+            const canShowImageSection = !form.isCreate && (nodeType === 'collection' || nodeType === 'resource');
+            ctImageSection.setHidden(!canShowImageSection);
+        }
+
+        setHiddenIfExists(lblCreatedAt, form.isCreate);
+        setHiddenIfExists(lblUpdatedAt, form.isCreate);
+
+        if (form.isCreate) {
+            jsTerian.assignElementValue('lblCreatedAt', '');
+            jsTerian.assignElementValue('lblUpdatedAt', '');
         }
 
         // Rellenar formulario en modo edit
@@ -1817,6 +1874,249 @@ Ext.define('damCollection.view.contMain', {
         hours = hours ? hours : 12;
 
         return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ' ' + ampm;
+    },
+
+    showImageUploadDialog: function(cfg) {
+        cfg = cfg || {};
+
+        var nodeIdRaw = cfg.nodeId || null;
+        var nodeText  = cfg.nodeText || '';
+        var onSuccess = cfg.onSuccess || null;
+
+        if (!nodeIdRaw) {
+            Ext.Msg.alert('Error', 'No se recibió el identificador del nodo.');
+            return;
+        }
+
+        var nodeType = null;
+        var numericId = null;
+
+        if (/^c-\d+$/.test(nodeIdRaw)) {
+            nodeType = 'collection';
+            numericId = String(nodeIdRaw).replace(/^c-/, '');
+        } else if (/^r-\d+$/.test(nodeIdRaw)) {
+            nodeType = 'resource';
+            numericId = String(nodeIdRaw).replace(/^r-/, '');
+        } else {
+            Ext.Msg.alert('Error', 'El identificador del nodo no es válido.');
+            return;
+        }
+
+        var typeLabel = nodeType === 'collection' ? 'colección' : 'recurso';
+
+        var dlg = Ext.create('Ext.Dialog', {
+            title: 'Subir imagen',
+            modal: true,
+            centered: true,
+            closable: true,
+            closeAction: 'destroy',
+            width: 500,
+            layout: 'fit',
+
+            items: [{
+                xtype: 'formpanel',
+                itemId: 'uploadForm',
+                padding: 14,
+                scrollable: true,
+                items: [
+                    {
+                        xtype: 'component',
+                        html:
+                        '<div style="font-size:14px;font-weight:600;margin-bottom:6px;">' +
+                        'Subir / reemplazar imagen de ' + typeLabel +
+                        (nodeText ? (' — ' + Ext.String.htmlEncode(nodeText)) : '') +
+                        '</div>' +
+                        '<div style="font-size:12px;color:#666;">' +
+                        'Si ya existe una imagen, será reemplazada.' +
+                        '</div>',
+                        margin: '0 0 14 0'
+                    },
+                    {
+                        xtype: 'filefield',
+                        itemId: 'uploadFile',
+                        name: 'file',
+                        label: 'Imagen',
+                        required: true,
+                        accept: 'image/*',
+                        buttonText: 'Elegir...'
+                    }
+                ]
+            }],
+
+            buttons: [
+                {
+                    text: 'Subir',
+                    ui: 'action',
+                    handler: function() {
+                        var form = dlg.down('#uploadForm');
+                        var fileField = form.down('#uploadFile');
+
+                        var fileInput =
+                            fileField && fileField.fileInputEl && fileField.fileInputEl.dom ? fileField.fileInputEl.dom
+                        : null;
+
+                        if (!fileInput && fileField && fileField.el && fileField.el.dom) {
+                            fileInput = fileField.el.dom.querySelector('input[type=file]');
+                        }
+
+                        var fileObj = fileInput && fileInput.files && fileInput.files[0];
+
+                        if (!fileObj) {
+                            Ext.Msg.alert('Faltan datos', 'Debes seleccionar una imagen.');
+                            return;
+                        }
+
+                        var fd = new FormData();
+                        fd.append('file', fileObj);
+
+                        var endpoint = null;
+
+                        if (nodeType === 'collection') {
+                            endpoint = 'collections/' + numericId;
+                        } else if (nodeType === 'resource') {
+                            endpoint = 'resources/' + numericId;
+                        }
+
+                        if (!endpoint) {
+                            Ext.Msg.alert('Error', 'No se pudo resolver el endpoint de carga.');
+                            return;
+                        }
+
+                        var url = jsTerian.makeUrl('tree',endpoint,'image');
+                        var token = jsTerian.getDataSS('access_token');
+
+                        Ext.Ajax.request({
+                            url: url,
+                            method: 'POST',
+                            rawData: fd,
+                            disableCaching: true,
+                            headers: {
+                                'Authorization': 'Bearer ' + token,
+                                'Content-Type': null
+                            },
+
+                            success: function(response) {
+                                var jsonData;
+                                try {
+                                    jsonData = Ext.decode(response.responseText);
+                                } catch (e) {
+                                    jsonData = null;
+                                }
+                                console.log(msg);
+                                console.log(jsonData.success);
+                                console.log(jsonData.message);
+
+                                if (!jsonData || jsonData.success !== true) {
+                                    jsDam.toast({
+                                        type: 'error',
+                                        title: 'Error',
+                                        message: (jsonData && jsonData.message) ? jsonData.message
+                                        : 'La respuesta del servidor no fue válida.'
+                                    });
+                                    return;
+                                }
+
+                                var msg = jsonData.message || 'Imagen subida correctamente.';
+
+                                /*
+                                jsDam.toast({
+                                    type: 'success',
+                                    title: 'Éxito',
+                                    message: msg
+                                });
+                                */
+
+                                Ext.toast('Imagen cargada');
+
+                                Ext.defer(function() {
+                                    var form = Ext.getCmp('formNode');
+                                    var imgPreview = form ? form.down('#imgPreview') : null;
+                                    var ctImageEmpty = form ? form.down('#ctImageEmpty') : null;
+
+                                    var previewUrl = null;
+
+                                    if (nodeType === 'collection') {
+                                        previewUrl = jsTerian.makeUrl('tree/collection/image/' + numericId);
+                                    } else if (nodeType === 'resource') {
+                                        previewUrl = jsTerian.makeUrl('tree/resource/image/' + numericId);
+                                    }
+
+                                    if (previewUrl && imgPreview) {
+                                        previewUrl += '?_dc=' + new Date().getTime();
+                                        imgPreview.setSrc(previewUrl);
+                                        imgPreview.setHidden(false);
+                                    }
+
+                                    if (ctImageEmpty) {
+                                        ctImageEmpty.setHidden(true);
+                                    }
+
+                                    if (dlg && !dlg.destroyed) {
+                                        dlg.close();
+                                    }
+
+                                    if (typeof onSuccess === 'function') {
+                                        try {
+                                            onSuccess(jsonData);
+                                        } catch (e) {
+                                            console.error(e);
+                                        }
+                                    }
+                                }, 80);
+
+                                Ext.defer(function() {
+                                    if (dlg && !dlg.destroyed) {
+                                        dlg.close();
+                                    }
+                                }, 60);
+
+                                Ext.defer(function() {
+                                    try {
+                                        console.log('si funciono');
+                                    } catch (e) {
+                                        console.error(e);
+                                    }
+
+                                    if (typeof onSuccess === 'function') {
+                                        try {
+                                            onSuccess(jsonData);
+                                        } catch (e) {
+                                            console.error(e);
+                                        }
+                                    }
+                                }, 120);
+                            },
+                            failure: function(response) {
+                                var jsonData;
+                                try {
+                                    jsonData = Ext.decode(response.responseText);
+                                } catch (e) {
+                                    jsonData = null;
+                                }
+
+                                var msg = (jsonData && jsonData.message) ? jsonData.message
+                                : ('Error al subir imagen (HTTP ' + response.status + ').');
+
+                                jsDam.toast({
+                                    type: 'error',
+                                    title: 'Error',
+                                    message: msg
+                                });
+                            }
+                        });
+                    },
+
+                },
+                {
+                    text: 'Cancelar',
+                    handler: function() {
+                        dlg.close();
+                    }
+                }
+            ]
+        });
+
+        dlg.show();
     }
 
 });
