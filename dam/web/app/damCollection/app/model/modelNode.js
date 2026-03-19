@@ -62,19 +62,10 @@ Ext.define('damCollection.model.modelNode', {
             name: 'id_resource'
         },
         {
-            name: 'field33'
-        },
-        {
             name: 'code'
         },
         {
-            name: 'field35'
-        },
-        {
             name: 'id_resource_tab'
-        },
-        {
-            name: 'field37'
         },
         {
             name: 'tab_code'
@@ -93,6 +84,12 @@ Ext.define('damCollection.model.modelNode', {
         },
         {
             name: 'app_url'
+        },
+        {
+            name: 'preview_url'
+        },
+        {
+            name: 'thumbnail_url'
         }
     ]
 

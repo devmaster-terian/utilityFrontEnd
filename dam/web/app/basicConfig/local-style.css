@@ -39,6 +39,32 @@
     gap: 6px; /* Espacio entre bolitas */
 }
 
+/* COLUMNA 1: CONFIG CÓDIGO */
+.conf-col-code {
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
+    overflow: hidden;
+}
+
+/* COLUMNA 2: CONFIG DESCRIPCIÓN */
+.conf-col-desc {
+    width: 100%;
+    min-width: 0;
+    max-width: calc(100% - 320px);
+    padding: 0 15px;
+    overflow: hidden;
+}
+
+.conf-col-code .text-bold,
+.conf-col-code .role-badge,
+.conf-col-desc .main-text,
+.conf-col-desc .sub-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 /* Estilo base del botón redondo */
 .action-btn {
     width: 32px;  /* Un poco más pequeños para que quepan bien en móvil */

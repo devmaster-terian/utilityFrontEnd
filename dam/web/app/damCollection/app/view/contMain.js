@@ -29,6 +29,8 @@ Ext.define('damCollection.view.contMain', {
         'Ext.dataview.DataView',
         'Ext.XTemplate',
         'Ext.form.Panel',
+        'Ext.field.Display',
+        'Ext.Img',
         'Ext.form.FieldSet'
     ],
 
@@ -105,13 +107,23 @@ Ext.define('damCollection.view.contMain', {
                                 },
                                 {
                                     xtype: 'spacer'
+                                },
+                                {
+                                    xtype: 'button',
+                                    id: 'btnInfo',
+                                    itemId: 'btnInfo',
+                                    ui: 'round',
+                                    iconCls: 'x-fa fas fa-question-circle',
+                                    listeners: {
+                                        tap: 'onBtnInfoTap'
+                                    }
                                 }
                             ]
                         },
                         {
                             xtype: 'container',
-                            id: 'contListUser',
-                            itemId: 'contListUser',
+                            id: 'contListCol',
+                            itemId: 'contListCol',
                             scrollable: true,
                             items: [
                                 {
@@ -169,72 +181,127 @@ Ext.define('damCollection.view.contMain', {
                                 },
                                 {
                                     xtype: 'container',
-                                    id: 'contHeaderUser',
-                                    itemId: 'contHeaderUser',
-                                    html: '<div class="resource-row header-style">     <div class="col-code">CÓDIGO</div>     <div class="col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
+                                    id: 'contHeaderCol',
+                                    itemId: 'contHeaderCol',
+                                    html: '<div class="resource-row header-style">     <div class="tree-col-code">CÓDIGO / ORIGEN</div>     <div class="tree-col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
                                 },
                                 {
                                     xtype: 'dataview',
-                                    id: 'dataViewUser',
-                                    itemId: 'dataViewUser',
+                                    id: 'dataViewCol',
+                                    itemId: 'dataViewCol',
                                     emptyText: 'Este elemento no tiene hijos asignados',
                                     itemTpl: [
                                         '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
                                         '',
-                                        '    <div class="col-desc">',
+                                        '    <div class="tree-col-code">',
+                                        '',
+                                        '        <div class="main-text text-bold">',
+                                        '            <tpl if="values.node_type === \'collection\'">',
+                                        '                <span class="role-badge">',
+                                        '                    <i class="x-fa fas fa-folder"></i> Colección',
+                                        '                </span>',
+                                        '            </tpl>',
+                                        '',
+                                        '            <tpl if="values.node_type === \'resource\'">',
+                                        '                <span class="role-badge">',
+                                        '                    <i class="x-fa fas fa-folder-minus"></i> Recurso',
+                                        '                </span>',
+                                        '            </tpl>',
+                                        '',
+                                        '            <tpl if="values.node_type === \'tab\'">',
+                                        '                <span class="role-badge">',
+                                        '                    <i class="x-fa fas fa-folder-open"></i> Pestaña',
+                                        '                </span>',
+                                        '            </tpl>',
+                                        '        </div>',
+                                        '',
+                                        '        <!-- CODIGO -->',
+                                        '        <tpl if="values.node_type === \'collection\'">',
+                                        '            <div class="text-bold">Código: COL-{[values.id_collection || \'—\']}</div>',
+                                        '        </tpl>',
+                                        '',
+                                        '        <tpl if="values.node_type === \'resource\'">',
+                                        '            <div class="text-bold">Código: {[values.code || \'—\']}</div>',
+                                        '        </tpl>',
+                                        '',
+                                        '        <tpl if="values.node_type === \'tab\'">',
+                                        '            <div class="text-bold">Código: {[values.tab_code || \'—\']}</div>',
+                                        '        </tpl>',
+                                        '',
+                                        '        <!-- ORIGEN -->',
+                                        '        <div class="role-badge">',
+                                        '            <i class="x-fa fas fa-sitemap"></i>',
+                                        '            Origen: {[values.parent_name || \'—\']}',
+                                        '        </div>',
+                                        '    </div>',
+                                        '',
+                                        '    <div class="tree-col-desc">',
+                                        '',
+                                        '        <!-- NOMBRE -->',
                                         '        <div class="main-text">',
                                         '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
                                         '            <span class="text-bold">{text}</span>',
                                         '',
                                         '            <tpl if="values.has_children">',
-                                        '                <span class="role-badge" style="margin-left:8px;">Tiene hijos</span>',
+                                        '                <span class="role-badge" style="margin-left:8px;">',
+                                        '                    <i class="x-fa fas fa-level-down-alt"></i> Tiene hijos',
+                                        '                </span>',
                                         '            </tpl>',
                                         '        </div>',
                                         '',
+                                        '        <!-- REGLA -->',
                                         '        <div class="sub-text">',
+                                        '            <tpl if="values.node_type === \'collection\'">',
+                                        '                <span class="role-badge">',
+                                        '                    <i class="x-fa fas fa-plus-circle"></i>',
+                                        '                    Puede contener: Colección, Recurso',
+                                        '                </span>',
+                                        '            </tpl>',
+                                        '',
+                                        '            <tpl if="values.node_type === \'resource\'">',
+                                        '                <span class="role-badge">',
+                                        '                    <i class="x-fa fas fa-plus-circle"></i>',
+                                        '                    Puede contener: Pestañas',
+                                        '                </span>',
+                                        '            </tpl>',
+                                        '',
                                         '            <tpl if="values.node_type === \'tab\'">',
-                                        '                {[values.short_description || \'—\']}',
-                                        '                <tpl if="values.sort_order">',
-                                        '                    <br><span class="role-badge">Posición: {sort_order}</span>',
-                                        '                </tpl>',
-                                        '                <tpl if="values.id_asset_type">',
-                                        '                    <span class="role-badge">Tipo Carpeta: {asset_type_name}</span>',
-                                        '                </tpl>',
+                                        '                <span class="role-badge">',
+                                        '                    <i class="x-fa fas fa-ban"></i>',
+                                        '                    Sin hijos',
+                                        '                </span>',
+                                        '            </tpl>',
+                                        '        </div>',
+                                        '',
+                                        '        <!-- DETALLE SECUNDARIO -->',
+                                        '        <div class="sub-text">',
+                                        '            <tpl if="values.node_type === \'collection\'">',
+                                        '                {[values.description || \'—\']}',
                                         '            </tpl>',
                                         '',
                                         '            <tpl if="values.node_type === \'resource\'">',
                                         '                {[values.description || \'—\']}',
                                         '            </tpl>',
                                         '',
-                                        '            <tpl if="values.node_type === \'collection\'">',
-                                        '                {[values.description || \'—\']}',
+                                        '            <tpl if="values.node_type === \'tab\'">',
+                                        '                {[values.short_description || \'—\']}',
+                                        '                <tpl if="values.asset_type_name">',
+                                        '                    <span class="role-badge">Tipo: {asset_type_name}</span>',
+                                        '                </tpl>',
+                                        '                <tpl if="values.sort_order || values.sort_order === 0">',
+                                        '                    <span class="role-badge">Posición: {sort_order}</span>',
+                                        '                </tpl>',
                                         '            </tpl>',
                                         '        </div>',
-                                        '    </div>',
-                                        '    ',
-                                        '    <div class="col-code">',
-                                        '        <div class="text-bold">#{node_type}</div>',
-                                        '        <div class="role-badge">Padre: {[values.parent_name || values.parent_id || \'—\']}</div>',
                                         '',
-                                        '        <tpl if="values.node_type === \'resource\'">',
-                                        '            <div class="role-badge">Code: {[values.code || \'—\']}</div>',
-                                        '        </tpl>',
-                                        '',
-                                        '        <tpl if="values.node_type === \'tab\'">',
-                                        '            <div class="role-badge">Tab: {[values.tab_code || \'—\']}</div>',
-                                        '        </tpl>',
-                                        '',
-                                        '        <tpl if="values.node_type === \'collection\'">',
-                                        '            <div class="role-badge">Id: {[values.id_collection || \'—\']}</div>',
-                                        '        </tpl>',
                                         '    </div>',
                                         '',
                                         '    <div class="col-actions">',
                                         '        <div class="action-btn view" data-action="view" title="Ver Detalles">',
-                                        '            <i class="x-fa fas fa-eye"></i>',
+                                        '            <i class="x-fa fas fa-plus"></i>',
                                         '        </div>',
                                         '',
-                                        '        <div class="action-btn edit" data-action="edit" title="Editar Usuario">',
+                                        '        <div class="action-btn edit" data-action="edit" title="Editar">',
                                         '            <i class="x-fa fas fa-pen"></i>',
                                         '        </div>',
                                         '',
@@ -252,10 +319,352 @@ Ext.define('damCollection.view.contMain', {
                             ]
                         },
                         {
+                            xtype: 'container',
+                            id: 'contFormCol',
+                            itemId: 'contFormCol',
+                            items: [
+                                {
+                                    xtype: 'formpanel',
+                                    isCreate: true,
+                                    id: 'formNode',
+                                    itemId: 'formNode',
+                                    items: [
+                                        {
+                                            xtype: 'toolbar',
+                                            itemId: 'mytoolbar1',
+                                            docked: 'top',
+                                            items: [
+                                                {
+                                                    xtype: 'button',
+                                                    id: 'btnConfirm',
+                                                    itemId: 'btnConfirm',
+                                                    ui: 'confirm',
+                                                    iconCls: 'fas fa-check',
+                                                    text: 'Confirmar',
+                                                    listeners: {
+                                                        tap: 'onBtnConfirmTap'
+                                                    }
+                                                },
+                                                {
+                                                    xtype: 'spacer'
+                                                },
+                                                {
+                                                    xtype: 'button',
+                                                    id: 'btnCancel',
+                                                    itemId: 'btnCancel',
+                                                    ui: 'decline',
+                                                    iconCls: 'fas fa-ban',
+                                                    text: 'Cancelar',
+                                                    listeners: {
+                                                        tap: 'onBtnCancelTap'
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'contHeader',
+                                            itemId: 'contHeader',
+                                            padding: 10,
+                                            items: [
+                                                {
+                                                    xtype: 'component',
+                                                    id: 'lblFormTitle',
+                                                    itemId: 'lblFormTitle',
+                                                    style: 'font-size:18px;font-weight:bold;margin-bottom:4px;',
+                                                    html: 'Crear elemento'
+                                                },
+                                                {
+                                                    xtype: 'component',
+                                                    id: 'lblFormSubtitle',
+                                                    itemId: 'lblFormSubtitle',
+                                                    style: 'color:#666;font-size:13px;line-height:18px;',
+                                                    html: 'Completa la información del elemento'
+                                                },
+                                                {
+                                                    xtype: 'component',
+                                                    id: 'lblFormNodeId',
+                                                    itemId: 'lblFormNodeId',
+                                                    style: 'color:#666;font-size:13px;line-height:18px;',
+                                                    html: 'Completa la información del elemento'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'ctContext',
+                                            itemId: 'ctContext',
+                                            items: [
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'ftParentName',
+                                                    itemId: 'ftParentName',
+                                                    margin: '2 8 2 8',
+                                                    label: 'Padre'
+                                                },
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'ftParentId',
+                                                    itemId: 'ftParentId',
+                                                    margin: '2 8 2 8',
+                                                    label: 'Padre Id'
+                                                },
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'lblCreatedAt',
+                                                    itemId: 'lblCreatedAt',
+                                                    margin: '2 8 2 8',
+                                                    label: 'Creación'
+                                                },
+                                                {
+                                                    xtype: 'displayfield',
+                                                    id: 'lblUpdatedAt',
+                                                    itemId: 'lblUpdatedAt',
+                                                    margin: '2 8 2 8',
+                                                    label: 'Actualización'
+                                                },
+                                                {
+                                                    xtype: 'selectfield',
+                                                    id: 'cboNodeType',
+                                                    itemId: 'cboNodeType',
+                                                    margin: '2 8 2 8',
+                                                    label: 'Tipo Nodo',
+                                                    listeners: {
+                                                        change: 'onCboNodeTypeChange'
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'ctCollection',
+                                            itemId: 'ctCollection',
+                                            items: [
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftColName',
+                                                    itemId: 'ftColName',
+                                                    margin: 8,
+                                                    label: 'Nombre'
+                                                },
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftColDesc',
+                                                    itemId: 'ftColDesc',
+                                                    margin: 8,
+                                                    label: 'Descripcion'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'ctResource',
+                                            itemId: 'ctResource',
+                                            items: [
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftResCode',
+                                                    itemId: 'ftResCode',
+                                                    margin: 8,
+                                                    label: 'Code Resource'
+                                                },
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftResDesc',
+                                                    itemId: 'ftResDesc',
+                                                    margin: 8,
+                                                    label: 'Desc Corta'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'ctTab',
+                                            itemId: 'ctTab',
+                                            items: [
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftTabName',
+                                                    itemId: 'ftTabName',
+                                                    margin: 8,
+                                                    label: 'Nombre'
+                                                },
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftTabCode',
+                                                    itemId: 'ftTabCode',
+                                                    margin: 8,
+                                                    label: 'Código'
+                                                },
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftTabShortDesc',
+                                                    itemId: 'ftTabShortDesc',
+                                                    margin: 8,
+                                                    label: 'Desc Corta'
+                                                },
+                                                {
+                                                    xtype: 'textfield',
+                                                    id: 'ftTabSortOrder',
+                                                    itemId: 'ftTabSortOrder',
+                                                    margin: 8,
+                                                    label: 'Orden'
+                                                },
+                                                {
+                                                    xtype: 'selectfield',
+                                                    id: 'cboTabAssetType',
+                                                    itemId: 'cboTabAssetType',
+                                                    margin: 8,
+                                                    label: 'Tipo Archivo',
+                                                    store: {
+                                                        fields: [
+                                                            'text',
+                                                            'value'
+                                                        ],
+                                                        data: [
+                                                            {
+                                                                text: 'Imágenes',
+                                                                value: 'IMAGE'
+                                                            },
+                                                            {
+                                                                text: 'Videos',
+                                                                value: 'VIDEO'
+                                                            },
+                                                            {
+                                                                text: 'Documentos',
+                                                                value: 'DOC'
+                                                            },
+                                                            {
+                                                                text: 'Otros',
+                                                                value: 'ANY'
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'ctState',
+                                            itemId: 'ctState',
+                                            items: [
+                                                {
+                                                    xtype: 'combobox',
+                                                    id: 'cboAdmIsActive',
+                                                    itemId: 'cboAdmIsActive',
+                                                    margin: 8,
+                                                    label: 'Estado',
+                                                    editable: false,
+                                                    store: {
+                                                        fields: [
+                                                            'text',
+                                                            'value'
+                                                        ],
+                                                        data: [
+                                                            {
+                                                                text: 'Activo',
+                                                                value: true
+                                                            },
+                                                            {
+                                                                text: 'Inactivo',
+                                                                value: false
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    xtype: 'combobox',
+                                                    id: 'cboIsFeatured',
+                                                    itemId: 'cboIsFeatured',
+                                                    margin: 8,
+                                                    label: 'Destacado',
+                                                    value: false,
+                                                    editable: false,
+                                                    store: {
+                                                        fields: [
+                                                            'text',
+                                                            'value'
+                                                        ],
+                                                        data: [
+                                                            {
+                                                                text: 'Activo',
+                                                                value: true
+                                                            },
+                                                            {
+                                                                text: 'Inactivo',
+                                                                value: false
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'container',
+                                            id: 'ctImageSection',
+                                            itemId: 'ctImageSection',
+                                            items: [
+                                                {
+                                                    xtype: 'component',
+                                                    hidden: true,
+                                                    id: 'lblImageTitle',
+                                                    itemId: 'lblImageTitle',
+                                                    html: 'Vista previa'
+                                                },
+                                                {
+                                                    xtype: 'component',
+                                                    id: 'ctImageEmpty',
+                                                    itemId: 'ctImageEmpty',
+                                                    html: '<div style="padding:16px;text-align:center;color:#777;border:1px dashed #ccc;border-radius:10px;background:#fafafa;">Sin imagen disponible</div>',
+                                                    margin: 8
+                                                },
+                                                {
+                                                    xtype: 'image',
+                                                    height: 180,
+                                                    hidden: true,
+                                                    id: 'imgPreview',
+                                                    itemId: 'imgPreview',
+                                                    src: '\'\''
+                                                },
+                                                {
+                                                    xtype: 'container',
+                                                    margin: '12 8 12 8',
+                                                    defaults: 'margin: \'0 8 0 0\'',
+                                                    layout: 'hbox',
+                                                    items: [
+                                                        {
+                                                            xtype: 'button',
+                                                            id: 'btnUploadImage',
+                                                            itemId: 'btnUploadImage',
+                                                            ui: 'action',
+                                                            margin: 4,
+                                                            text: 'Subir Imagen',
+                                                            listeners: {
+                                                                tap: 'onBtnUploadImageTap'
+                                                            }
+                                                        },
+                                                        {
+                                                            xtype: 'button',
+                                                            hidden: true,
+                                                            id: 'btnRemoveImage',
+                                                            itemId: 'btnRemoveImage',
+                                                            ui: 'decline',
+                                                            margin: 4,
+                                                            text: 'Quitar imagen'
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             xtype: 'formpanel',
                             isCreate: true,
-                            id: 'formNode',
-                            itemId: 'formNode',
+                            id: 'formNode1',
+                            itemId: 'formNode1',
                             items: [
                                 {
                                     xtype: 'fieldset',
@@ -263,7 +672,7 @@ Ext.define('damCollection.view.contMain', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftParentName',
+                                            id: 'ftParentName1',
                                             itemId: 'ftParentName',
                                             margin: 8,
                                             label: 'Padre',
@@ -271,7 +680,7 @@ Ext.define('damCollection.view.contMain', {
                                         },
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftParentId',
+                                            id: 'ftParentId1',
                                             itemId: 'ftParentId',
                                             margin: 8,
                                             label: 'Padre Id',
@@ -279,32 +688,32 @@ Ext.define('damCollection.view.contMain', {
                                         },
                                         {
                                             xtype: 'selectfield',
-                                            id: 'cboNodeType',
+                                            id: 'cboNodeType1',
                                             itemId: 'cboNodeType',
                                             margin: 8,
                                             label: 'Tipo Nodo',
                                             listeners: {
-                                                change: 'onCboNodeTypeChange'
+                                                change: 'onCboNodeTypeChange1'
                                             }
                                         }
                                     ]
                                 },
                                 {
                                     xtype: 'fieldset',
-                                    id: 'fsCollection',
+                                    id: 'fsCollection1',
                                     itemId: 'fsCollection',
                                     title: '<b>Datos Generales - Colección</b>',
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftColName',
+                                            id: 'ftColName1',
                                             itemId: 'ftColName',
                                             margin: 8,
                                             label: 'Nombre'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftColDesc',
+                                            id: 'ftColDesc1',
                                             itemId: 'ftColDesc',
                                             margin: 8,
                                             label: 'Descripcion'
@@ -313,20 +722,20 @@ Ext.define('damCollection.view.contMain', {
                                 },
                                 {
                                     xtype: 'fieldset',
-                                    id: 'fsResource',
+                                    id: 'fsResource1',
                                     itemId: 'fsResource',
                                     title: '<b>Datos Generales - Recurso</b>',
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftResCode',
+                                            id: 'ftResCode1',
                                             itemId: 'ftResCode',
                                             margin: 8,
                                             label: 'Code Resource'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftResDesc',
+                                            id: 'ftResDesc1',
                                             itemId: 'ftResDesc',
                                             margin: 8,
                                             label: 'Desc Corta'
@@ -335,41 +744,41 @@ Ext.define('damCollection.view.contMain', {
                                 },
                                 {
                                     xtype: 'fieldset',
-                                    id: 'fsTab',
+                                    id: 'fsTab1',
                                     itemId: 'fsTab',
                                     title: '<b>Datos Generales  - Pestaña</b>',
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftTabName',
+                                            id: 'ftTabName1',
                                             itemId: 'ftTabName',
                                             margin: 8,
                                             label: 'Nombre'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftTabCode',
+                                            id: 'ftTabCode1',
                                             itemId: 'ftTabCode',
                                             margin: 8,
                                             label: 'Código'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftTabShortDesc',
+                                            id: 'ftTabShortDesc1',
                                             itemId: 'ftTabShortDesc',
                                             margin: 8,
                                             label: 'Desc Corta'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            id: 'ftTabSortOrder',
+                                            id: 'ftTabSortOrder1',
                                             itemId: 'ftTabSortOrder',
                                             margin: 8,
                                             label: 'Orden'
                                         },
                                         {
                                             xtype: 'selectfield',
-                                            id: 'cboTabAssetType',
+                                            id: 'cboTabAssetType1',
                                             itemId: 'cboTabAssetType',
                                             margin: 8,
                                             label: 'Tipo Archivo',
@@ -406,7 +815,7 @@ Ext.define('damCollection.view.contMain', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            id: 'cboAdmIsActive',
+                                            id: 'cboAdmIsActive1',
                                             itemId: 'cboAdmIsActive',
                                             margin: 8,
                                             label: 'Estado'
@@ -420,12 +829,12 @@ Ext.define('damCollection.view.contMain', {
                                     items: [
                                         {
                                             xtype: 'button',
-                                            id: 'btnConfirm',
+                                            id: 'btnConfirm1',
                                             itemId: 'btnConfirm',
                                             ui: 'confirm',
                                             text: 'Confirmar',
                                             listeners: {
-                                                tap: 'onBtnConfirmTap'
+                                                tap: 'onBtnConfirmTap1'
                                             }
                                         },
                                         {
@@ -433,12 +842,12 @@ Ext.define('damCollection.view.contMain', {
                                         },
                                         {
                                             xtype: 'button',
-                                            id: 'btnCancel',
+                                            id: 'btnCancel1',
                                             itemId: 'btnCancel',
                                             ui: 'decline',
                                             text: 'Cancelar',
                                             listeners: {
-                                                tap: 'onBtnCancelTap'
+                                                tap: 'onBtnCancelTap1'
                                             }
                                         }
                                     ]
@@ -502,6 +911,18 @@ Ext.define('damCollection.view.contMain', {
         console.log('treeNav:', appLocal.treeNav);
     },
 
+    onBtnInfoTap: function(button, e, eOpts) {
+        Ext.Msg.alert(
+            'Cómo organizar el menú',
+            [
+                '• Una <b>Colección</b> puede contener otra <b>Colección</b> o un <b>Recurso</b>.',
+                '• Dentro de un <b>Recurso</b> solo se pueden crear <b>Pestañas</b>.',
+                '• Una <b>Pestaña</b> ya no puede contener más elementos.',
+                '• Revisa el texto <b>"Puede contener"</b> en cada fila para saber qué puedes crear ahí.'
+            ].join('<br><br>')
+        );
+    },
+
     onDataViewUserChildtap: function(dataview, location, eOpts) {
         // 1. Detectar si el toque fue en un botón de acción
             // Buscamos la clase '.action-btn' en el elemento tocado o sus padres
@@ -552,26 +973,38 @@ Ext.define('damCollection.view.contMain', {
                         form.nodeRecord = record;
 
                         // Lanzar la función para pintar la información
+                        //this.navigateToView('');
                         this.showFormView(record);
                         break;
 
                     case 'edit':
-                        console.warn('Tap: view');
-                        //var data = record.getData ? record.getData() : record;
-
-                        // Mostrar form en modo EDIT (porque estás viendo info del nodo)
+                        console.warn('Tap: edit', record);
                         this.showForm('edit', record);
 
-                        // Si en edit también quieres navegar (sin importar has_children), déjalo así:
-                        if (data.node_type === 'collection' || data.node_type === 'resource') {
-                            var nodeId = data.id || data.node_id || data._id;
-                            if (nodeId) {
-                                //appLocal.loadTreeChildren('storeNode', nodeId, { pushHistory: true });
-                            }
-                        }
                         break;
 
                     case 'delete':
+                        // Obtener el formulario
+                        var contMain = Ext.getCmp('contMain');
+                        var form = Ext.getCmp('formNode');
+
+                        if (!form) {
+                            Ext.toast('No se encontró el formulario.');
+                            return;
+                        }
+
+                        // Obtener el record del node
+                        var rec = form.nodeRecord || null;
+
+                        var dataRec = rec ? (rec.getData ? rec.getData() : rec) : null;
+                        var nodeId  = data.id ? data.id : null;
+                        var text    = data.text ? data.text : null;
+
+                        if (!nodeId) {
+                            Ext.toast('No se encontró el ID del nodo a eliminar.');
+                            return;
+                        }
+
                         Ext.Msg.show({
                             title: 'Eliminar Registro',
                             message: '¿Realmente deseas eliminar este registro? Esta acción no se puede deshacer.',
@@ -586,14 +1019,13 @@ Ext.define('damCollection.view.contMain', {
                                 {
                                     text: 'Sí, borrar',
                                     itemId: 'yes',
-                                    ui: 'action-decline' // En Modern, esto suele poner el botón en rojo
+                                    ui: 'action-decline'
                                 }
                             ],
                             fn: function (buttonId) {
                                 if (buttonId === 'yes') {
 
-                                    var idUser = record.id_user;
-                                    appLocal.deleteUser(idUser);
+                                    appLocal.deleteNode(nodeId);
 
                                     console.log('Registro eliminado');
                                 }
@@ -607,6 +1039,32 @@ Ext.define('damCollection.view.contMain', {
             }
     },
 
+    onBtnConfirmTap: function(button, e, eOpts) {
+        var result = this.buildPayload();
+
+        if (!result.ok) {
+            Ext.Msg.alert('Validación', result.error);
+            return;
+        }
+
+        var payload = result.payload;
+        console.log(result);
+
+        appLocal.saveNode(payload);
+
+        return;
+    },
+
+    onBtnCancelTap: function(button, e, eOpts) {
+        var contNode    = Ext.getCmp('contNode');
+        var toolbarMain = Ext.getCmp('toolbarMain');
+
+        contNode.setActiveItem(0);
+        toolbarMain.show();
+
+        this.clearNodeForm();
+    },
+
     onCboNodeTypeChange: function(selectfield, newValue, oldValue, eOpts) {
         var contMain =  Ext.getCmp('contMain');
         var form = Ext.getCmp('formNode');
@@ -614,7 +1072,49 @@ Ext.define('damCollection.view.contMain', {
         this.clearNodeForm(form, { keepType: true, keepActive: true });
     },
 
-    onBtnConfirmTap: function(button, e, eOpts) {
+    onBtnUploadImageTap: function(button, e, eOpts) {
+        var form = Ext.getCmp('formNode');
+
+        if (!form) {
+            return {
+                ok: false,
+                payload: null,
+                error: 'No se encontró el formulario.'
+            };
+        }
+
+        var isCreate = !!form.isCreate;
+        var isEdit   = !isCreate;
+
+        var nodeType = (jsTerian.readElementValue('cboNodeType') || '').trim();
+        var parentId = (jsTerian.readElementValue('ftParentId') || '').trim();
+
+        var nodeRecord = form.nodeRecord || null;
+        var dataRec = nodeRecord ? (nodeRecord.getData ? nodeRecord.getData() : nodeRecord) : null;
+        var nodeId = dataRec ? (dataRec.node_id || dataRec.id_node || dataRec.id || dataRec._id) : null;
+        var nodeText = dataRec.text ? dataRec.text : null;
+
+        console.log(nodeType);
+        console.log(parentId);
+        console.log(dataRec);
+        console.log(nodeId);
+
+        this.showImageUploadDialog({
+            nodeId: nodeId,
+            nodeText: nodeText || '',
+            nodeType: nodeType,
+
+        });
+    },
+
+    onCboNodeTypeChange1: function(selectfield, newValue, oldValue, eOpts) {
+        var contMain =  Ext.getCmp('contMain');
+        var form = Ext.getCmp('formNode');
+        this.configureNodeForm(form, newValue, 'create', { parentId: form.parentId });
+        this.clearNodeForm(form, { keepType: true, keepActive: true });
+    },
+
+    onBtnConfirmTap1: function(button, e, eOpts) {
         var form = Ext.getCmp('formNode');
 
         var payload = this.buildPayload(form);
@@ -630,7 +1130,7 @@ Ext.define('damCollection.view.contMain', {
         return;
     },
 
-    onBtnCancelTap: function(button, e, eOpts) {
+    onBtnCancelTap1: function(button, e, eOpts) {
         var contNode    = Ext.getCmp('contNode');
         var toolbarMain = Ext.getCmp('toolbarMain');
 
@@ -645,98 +1145,347 @@ Ext.define('damCollection.view.contMain', {
         jsTerian.loadStore('storeRole');
     },
 
-    buildPayload: function() {
-        // Obtener los valores del contexto
-        var nodeType = (jsTerian.readElementValue('cboNodeType') || '').trim();
-
-        if (!nodeType) {
-            nodeType = (jsTerian.readElementValue('hfNodeTypeSelected') || '').trim();
+    resolveNodeImageUrl: function(data) {
+        if (!data) {
+            return '';
         }
-        // Nodo actual
+
+        if (data.preview_url) {
+            return jsTerian.makeUrl(data.thumbnail_url);
+        }
+
+        return '';
+    },
+
+    loadImagePreviewFromRecord: function(form, data) {
+        var img = form.down('#imgPreview');
+        var empty = form.down('#ctImageEmpty');
+
+        if (!img || !empty) return;
+
+        var nodeType = data && data.node_type ? data.node_type : null;
+        var canShowImage = (nodeType === 'collection' || nodeType === 'resource');
+
+        if (!canShowImage) {
+            img.setSrc('');
+            img.setHidden(true);
+            empty.setHidden(true);
+            return;
+        }
+
+        var imageSrc = this.resolveNodeImageUrl(data);
+        console.log('makeUrl', imageSrc);
+
+        if (imageSrc) {
+            img.setSrc(imageSrc);
+            img.setHidden(false);
+            empty.setHidden(true);
+        } else {
+            img.setSrc('');
+            img.setHidden(true);
+            empty.setHidden(false);
+
+            if (empty.setHtml) {
+                empty.setHtml(
+                    '<div style="' +
+                        'padding:16px;' +
+                        'text-align:center;' +
+                        'color:#777;' +
+                        'border:1px dashed #ccc;' +
+                        'border-radius:10px;' +
+                        'background:#fafafa;' +
+                        'margin-top:8px;' +
+                    '">' +
+                    'Sin imagen disponible' +
+                    '</div>'
+                );
+            }
+        }
+    },
+
+    buildPayload: function() {
+        var form = Ext.getCmp('formNode');
+
+        if (!form) {
+            return {
+                ok: false,
+                payload: null,
+                error: 'No se encontró el formulario.'
+            };
+        }
+
+        var isCreate = !!form.isCreate;
+        var isEdit   = !isCreate;
+
+        var nodeType = (jsTerian.readElementValue('cboNodeType') || '').trim();
         var parentId = (jsTerian.readElementValue('ftParentId') || '').trim();
-        if (!parentId) parentId = appLocal.getCurrentNodeId();
+
+        if (!parentId) {
+            parentId = appLocal.getCurrentNodeId();
+        }
+
+        var nodeRecord = form.nodeRecord || null;
+        var dataRec = nodeRecord ? (nodeRecord.getData ? nodeRecord.getData() : nodeRecord) : null;
+        var nodeId = dataRec ? (dataRec.node_id || dataRec.id_node || dataRec.id || dataRec._id) : null;
 
         var data = {};
+        var error = null;
 
-        if (nodeType === 'collection') {
-            data.name = (jsTerian.readElementValue('ftColName') || '').trim();
-            var desc = (jsTerian.readElementValue('ftColDesc') || '').trim();
-            data.description = desc ? desc : null;
+        if (!nodeType) {
+            error = 'No se detectó el tipo de nodo';
         }
 
-        if (nodeType === 'resource') {
-            data.code = (jsTerian.readElementValue('ftResCode') || '').trim();
-            data.description = (jsTerian.readElementValue('ftResDesc') || '').trim();
+        if (!error && isCreate && !parentId) {
+            error = 'No se detectó el nodo padre';
         }
 
-        if (nodeType === 'tab') {
-            data.name = (jsTerian.readElementValue('ftTabName') || '').trim();
-            data.tab_code = (jsTerian.readElementValue('ftTabCode') || '').trim();
-            var shortDesc = (jsTerian.readElementValue('ftTabShortDesc') || '').trim();
-            data.short_description = shortDesc ? shortDesc : null;
-            var sortOrderRaw = jsTerian.readElementValue('ftTabSortOrder');
-            var sortOrder = parseInt(sortOrderRaw, 10); data.sort_order = isNaN(sortOrder) ? 1 : sortOrder;
-            data.asset_type_code = (jsTerian.readElementValue('cboTabAssetType') || '').trim();
+        if (!error && isEdit && !nodeId) {
+            error = 'No se detectó el nodo a editar';
+        }
+
+        if (!error && nodeType === 'collection') {
+            data.name        = jsTerian.readElementValue('ftColName');
+            data.description = jsTerian.readElementValue('ftColDesc');
+            data.is_active   = jsTerian.readElementValue('cboAdmIsActive');
+            data.is_featured = jsTerian.readElementValue('cboIsFeatured');
+
+            if (!data.name) {
+                error = 'Falta nombre de colección';
+            }
+        }
+
+        if (!error && nodeType === 'resource') {
+            data.code        = jsTerian.readElementValue('ftResCode');
+            data.description = jsTerian.readElementValue('ftResDesc');
+            data.is_active   = jsTerian.readElementValue('cboAdmIsActive');
+            data.is_featured = jsTerian.readElementValue('cboIsFeatured');
+
+            if (!data.code) {
+                error = 'Falta código del recurso';
+            } else if (!data.description) {
+                error = 'Falta descripción del recurso';
+            }
+        }
+
+        if (!error && nodeType === 'tab') {
+            data.name              = jsTerian.readElementValue('ftTabName');
+            data.tab_code          = jsTerian.readElementValue('ftTabCode');
+            data.short_description = jsTerian.readElementValue('ftTabShortDesc');
+            data.sort_order        = jsTerian.readElementValue('ftTabSortOrder');
+            data.asset_type_code   = jsTerian.readElementValue('cboTabAssetType');
+            data.is_active         = jsTerian.readElementValue('cboAdmIsActive');
+
+            if (!data.name) {
+                error = 'Falta nombre de pestaña';
+            } else if (!data.tab_code) {
+                error = 'Falta código de pestaña';
+            } else if (!data.asset_type_code) {
+                error = 'Falta tipo de asset';
+            }
+        }
+
+        if (!error && ['collection', 'resource', 'tab'].indexOf(nodeType) === -1) {
+            error = 'Tipo de nodo no válido';
+        }
+
+        if (error) {
+            return {
+                ok: false,
+                payload: null,
+                error: error
+            };
+        }
+
+        var payload = {
+            node_type: nodeType,
+            data: data
+        };
+
+        if (isCreate) {
+            payload.parent_id = parentId;
+        }
+
+        if (isEdit) {
+            payload.node_id = nodeId;
         }
 
         return {
-            node_type: nodeType,
-            parent_id: parentId,
-            data: data
+            ok: true,
+            payload: payload,
+            error: null
         };
     },
 
-    validateCreatePayload: function(payload) {
-        // Funcion test: sirve para validar que el payload venga completo
-        var t = payload.node_type;
-        var d = payload.data || {};
-
-        if (t === 'collection' && !d.name) return 'Falta nombre de colección';
-        if (t === 'resource' && (!d.code || !d.description)) return 'Falta code o descripción del recurso';
-        if (t === 'tab' && (!d.name || !d.tab_code || !d.asset_type_code)) return 'Falta name/tab_code/asset_type_code';
-        if (!payload.parent_id) return 'No se detectó el nodo padre';
-
-        return null;
-    },
-
-    configureNodeForm: function(form, nodeType, mode, ctx) {
-        const fsCollection = form.down('#fsCollection');
-        const fsResource   = form.down('#fsResource');
-        const fsTab        = form.down('#fsTab');
+    configureNodeForm: function(form, nodeType, mode, ctx, record) {
+        const fsCollection = form.down('#ctCollection');
+        const fsResource   = form.down('#ctResource');
+        const fsTab        = form.down('#ctTab');
         const cboNodeType  = form.down('#cboNodeType');
 
-        // Modo
+        // Auditoría
+        const lblCreatedAt = form.down('#lblCreatedAt');
+        const lblUpdatedAt = form.down('#lblUpdatedAt');
+
+        const raw = record && record.getData ? record.getData() : (record || {});
+        const detail = raw.data || raw;
+
         form.isCreate = (mode === 'create');
 
-        // Tipo visible: en create se puede elegir; en edit solo se muestra (disabled)
+        nodeType = nodeType || raw.node_type || detail.node_type || null;
+
+        const typeLabelMap = {
+            collection: 'colección',
+            resource: 'recurso',
+            tab: 'pestaña'
+        };
+
+        const setHiddenIfExists = function(cmp, hidden) {
+            if (cmp && cmp.setHidden) {
+                cmp.setHidden(hidden);
+            }
+        };
+
+        const buildTypeListText = function(types) {
+            const labels = (types || []).map(function(type) {
+                return typeLabelMap[type] || type;
+            });
+
+            if (labels.length === 0) return 'elemento';
+            if (labels.length === 1) return labels[0];
+            if (labels.length === 2) return labels[0] + ' o ' + labels[1];
+
+            return labels.slice(0, -1).join(', ') + ' o ' + labels[labels.length - 1];
+        };
+
+        const resetGroup = function(group) {
+            if (!group) return;
+
+            const walk = function(container) {
+                if (!container || !container.getItems) return;
+
+                container.getItems().each(function(item) {
+                    if (item.getItems) {
+                        walk(item);
+                    }
+
+                    if (item.reset) {
+                        item.reset();
+                    } else if (item.setValue && item.isFormField) {
+                        item.setValue(null);
+                    }
+                });
+            };
+
+            walk(group);
+        };
+
+        // Contexto
+        if (ctx) {
+            jsTerian.assignElementValue('ftParentName', ctx.parent_name);
+            jsTerian.assignElementValue('ftParentId', ctx.parent_id);
+            //jsTerian.assignElementValue('ftParentType', ctx.parent_type);
+        }
+
+        // Tipo de nodo
         if (cboNodeType) {
-            cboNodeType.setHidden(false);
+            const allowedTypes = (ctx && ctx.allowed_types) ? ctx.allowed_types : [];
+
+            //cboNodeType.setHidden(mode !== 'create');
             cboNodeType.setDisabled(mode !== 'create');
             cboNodeType.setValue(nodeType);
         }
 
-        // Mostrar solo la sección correspondiente
-        if (fsCollection) fsCollection.setHidden(nodeType !== 'collection');
-        if (fsResource)   fsResource.setHidden(nodeType !== 'resource');
-        if (fsTab)        fsTab.setHidden(nodeType !== 'tab');
+        // Mostrar solo sección necesaria
+        setHiddenIfExists(fsCollection, nodeType !== 'collection');
+        setHiddenIfExists(fsResource,   nodeType !== 'resource');
+        setHiddenIfExists(fsTab,        nodeType !== 'tab');
 
-        // Nombre del padre)
-        if (ctx && ctx.parent_name) {
-            const ft = form.down('#ftParentName');
-            if (ft) ft.setValue(ctx.parent_name);
-        }
-
-        // Limpiar secciones
-        const resetGroup = function(group) {
-            if (!group) return;
-            group.items.each(function(f){
-                if (f && f.reset) f.reset();
-            });
-        };
-
+        // Limpiar secciones no activas
         if (nodeType !== 'collection') resetGroup(fsCollection);
         if (nodeType !== 'resource')   resetGroup(fsResource);
         if (nodeType !== 'tab')        resetGroup(fsTab);
+
+        // Bloque imagen
+        const ctImageSection = form.down('#ctImageSection');
+        const lblImageTitle  = form.down('#lblImageTitle');
+        const ctImageEmpty   = form.down('#ctImageEmpty');
+        const imgPreview     = form.down('#imgPreview');
+        const btnUploadImage = form.down('#btnUploadImage');
+        const btnRemoveImage = form.down('#btnRemoveImage');
+
+        if (ctImageSection) {
+            const canShowImageSection = !form.isCreate && (nodeType === 'collection' || nodeType === 'resource');
+            ctImageSection.setHidden(!canShowImageSection);
+        }
+
+        setHiddenIfExists(lblCreatedAt, form.isCreate);
+        setHiddenIfExists(lblUpdatedAt, form.isCreate);
+
+        if (form.isCreate) {
+            jsTerian.assignElementValue('lblCreatedAt', '');
+            jsTerian.assignElementValue('lblUpdatedAt', '');
+        }
+
+        // Rellenar formulario en modo edit
+        if (mode !== 'create') {
+            if (nodeType === 'collection') {
+                jsTerian.assignElementValue('ftColName', detail.name);
+                jsTerian.assignElementValue('ftColDesc', detail.description);
+                jsTerian.assignElementValue('cboAdmIsActive', !!detail.is_active);
+                jsTerian.assignElementValue('cboIsFeatured', !!detail.is_featured);
+                jsTerian.assignElementValue('lblCreatedAt', this.formatUtcToReadable(detail.created_at));
+                jsTerian.assignElementValue('lblUpdatedAt', this.formatUtcToReadable(detail.updated_at));
+            }
+
+            if (nodeType === 'resource') {
+                jsTerian.assignElementValue('ftResCode', detail.code);
+                jsTerian.assignElementValue('ftResDesc', detail.description);
+                jsTerian.assignElementValue('cboAdmIsActive', !!detail.is_active);
+                jsTerian.assignElementValue('cboIsFeatured', !!detail.is_featured);
+                jsTerian.assignElementValue('lblCreatedAt', this.formatUtcToReadable(detail.created_at));
+                jsTerian.assignElementValue('lblUpdatedAt', this.formatUtcToReadable(detail.updated_at));
+            }
+
+            if (nodeType === 'tab') {
+                jsTerian.assignElementValue('ftTabCode', detail.tab_code);
+                jsTerian.assignElementValue('ftTabName', detail.name);
+                jsTerian.assignElementValue('ftTabShortDesc', detail.short_description);
+                jsTerian.assignElementValue('cboTabAssetType', detail.asset_type_code);
+                jsTerian.assignElementValue('ftTabSortOrder', detail.sort_order);
+                jsTerian.assignElementValue('cboAdmIsActive', !!detail.is_active);
+                jsTerian.assignElementValue('lblCreatedAt', this.formatUtcToReadable(detail.created_at));
+                jsTerian.assignElementValue('lblUpdatedAt', this.formatUtcToReadable(detail.updated_at));
+            }
+        }
+
+        // Título dinámico
+        const titleCmp = form.down('#lblFormTitle');
+        const subtitleCmp = form.down('#lblFormSubtitle');
+        const nodeId = form.down('#lblFormNodeId');
+
+        if (titleCmp) {
+            if (mode === 'create') {
+                const allowedTypes = (ctx && ctx.allowed_types) ? ctx.allowed_types : [];
+                titleCmp.setHtml('Crear ' + buildTypeListText(allowedTypes));
+            } else {
+                titleCmp.setHtml('Editar ' + (typeLabelMap[nodeType] || 'elemento'));
+            }
+        }
+
+        if (subtitleCmp) {
+            const breadcrumbText = (ctx && ctx.parent_name) ? ctx.parent_name : '';
+            subtitleCmp.setHtml(breadcrumbText);
+        }
+
+        if (nodeId) {
+            if (mode === 'create') {
+                nodeId.setHtml('');
+                nodeId.setHidden(true);
+            } else {
+                nodeId.setHtml('ID: ' + (raw.id || ''));
+                nodeId.setHidden(false);
+            }
+        }
     },
 
     showForm: function(mode, record) {
@@ -763,11 +1512,20 @@ Ext.define('damCollection.view.contMain', {
         var parentId = appLocal.getCurrentNodeId();
         form.parentId = parentId;
 
+        var breadcrumb = appLocal.getCurrentBreadcrumb({ sep: ' / ' });
+        var allowed = appLocal.getCreateOptions();
+
+        var ctx = {
+            parent_name: breadcrumb,
+            parent_id: parentId,
+            allowed_types: allowed
+        };
+
         // Mostrar el padre
-        form.down('#ftParentId').setValue(parentId);
+        form.down('#ftParentId').setValue(ctx.parent_id);
         var ftParent = form.down('#ftParentName');
         if (ftParent) {
-            ftParent.setValue(appLocal.getCurrentBreadcrumb({ sep: ' / ' }));
+            ftParent.setValue(ctx.parent_name);
         }
 
         // Editar registro
@@ -776,7 +1534,6 @@ Ext.define('damCollection.view.contMain', {
 
             var cboType = form.down('#cboNodeType');
             if (cboType) {
-                // Store mínimo para que el combo pueda mostrar el texto en EDIT
                 cboType.setStore({
                     fields: ['text', 'value'],
                     data: [{
@@ -787,30 +1544,20 @@ Ext.define('damCollection.view.contMain', {
                     }]
                 });
 
-                // Asegura que se vea y que NO se pueda cambiar
-                cboType.setHidden(false);
+                //cboType.setHidden(false);
                 cboType.setDisabled(true);
-
-                // Setea el value (ya con store, sí mostrará el display)
                 cboType.setValue(nodeType);
             }
 
-            // Configurar form y deja visible el tipo de nodo (bloqueado)
-            this.configureNodeForm(form, nodeType, 'edit', {
-                parent_name: appLocal.getCurrentBreadcrumb({ sep: ' / ' })
-            });
-
-            // Llenar campos del record
-            this.fillNodeForm(form, data);
+            this.configureNodeForm(form, nodeType, 'edit', ctx, record);
+            //this.fillNodeForm(form, data);
+            this.loadImagePreviewFromRecord(form, data);
 
             return;
         }
 
         // Crear registro
-
-        // Obtener los tipos permitidos usando al padre actual
-        var allowed = appLocal.getCreateOptions(parentId);
-        if (!allowed || allowed.length === 0) {
+        if (!ctx.allowed_types || ctx.allowed_types.length === 0) {
             console.log('Aquí no puedes crear hijos');
             return;
         }
@@ -818,36 +1565,29 @@ Ext.define('damCollection.view.contMain', {
         // Cargar las opciones en el select
         var cboType = form.down('#cboNodeType');
         if (cboType) {
-            cboType.setHidden(false);
+            //cboType.setHidden(false);
             cboType.setDisabled(false);
 
-            // Cargar store
             cboType.setStore({
                 fields: ['text', 'value'],
-                data: allowed.map(function(v){
-                    if (typeof v === 'string') {
-                        return {
-                            text: (v === 'collection' ? 'Colección' : v === 'resource' ? 'Recurso' : 'Pestaña'),
-                            value: v
-                        };
-                    }
-                    return v;
+                data: ctx.allowed_types.map(function(v){
+                    return {
+                        text: (v === 'collection' ? 'Colección'
+                              : v === 'resource'   ? 'Recurso'
+                              : 'Pestaña'),
+                        value: v
+                    };
                 })
             });
 
-            // Seleccionar el primero por default, suspender eventos para no hacer un ciclo
             cboType.suspendEvents(false);
-            cboType.setValue(allowed[0].value || allowed[0]);
+            cboType.setValue(ctx.allowed_types[0]);
             cboType.resumeEvents();
 
-            // Listener change: cambia la seccion visible y limpia los campos
             if (!cboType._hasNodeTypeListener) {
                 cboType.on('change', function(field, newVal) {
-
-                    me.configureNodeForm(form, newVal, 'create', {
-                        parent_name: appLocal.getCurrentBreadcrumb({ sep: ' / ' })
-                    });
                     me.clearNodeForm({ keepType: true, keepActive: true });
+                    me.configureNodeForm(form, newVal, 'create', ctx);
                 });
 
                 cboType._hasNodeTypeListener = true;
@@ -855,14 +1595,11 @@ Ext.define('damCollection.view.contMain', {
         }
 
         // Tipo inicial
-        var nodeType = cboType ? cboType.getValue() : (allowed[0].value || allowed[0]);
+        var nodeType = cboType ? cboType.getValue() : ctx.allowed_types[0];
 
         // Configurar form y limpiar campos
-        me.configureNodeForm(form, nodeType, 'create', {
-            parent_name: appLocal.getCurrentBreadcrumb({ sep: ' / ' })
-        });
-
-        me.clearNodeForm({ keepType: true, keepActive: true });
+        //me.clearNodeForm({ keepType: true, keepActive: true });
+        me.configureNodeForm(form, nodeType, 'create', ctx);
     },
 
     showDataView: function() {
@@ -1000,11 +1737,36 @@ Ext.define('damCollection.view.contMain', {
 
     clearNodeForm: function(opts) {
         opts = opts || {};
+
         const keepType   = (opts.keepType !== false);
         const keepActive = (opts.keepActive !== false);
+        const isCreate   = (opts.isCreate === true);
+
+        const setHiddenIfExists = function(id, hidden) {
+            try {
+                const cmp = Ext.getCmp(id);
+                if (cmp && cmp.setHidden) {
+                    cmp.setHidden(hidden);
+                }
+            } catch (e) {}
+        };
+
+        const setSrcIfExists = function(id, src) {
+            try {
+                const cmp = Ext.getCmp(id);
+                if (cmp && cmp.setSrc) {
+                    cmp.setSrc(src || '');
+                }
+            } catch (e) {}
+        };
 
         try {
             const mapping = {
+                // Contexto
+                ftParentName: '',
+                ftParentId: '',
+                //ftParentType: '',
+
                 // Collection
                 ftColName: '',
                 ftColDesc: '',
@@ -1014,18 +1776,28 @@ Ext.define('damCollection.view.contMain', {
                 ftResDesc: '',
 
                 // Tab
-                ftTabName      : '',
-                ftTabCode      : '',
-                ftTabShortDesc : '',
-                ftTabSortOrder : 1,
-                cboTabAssetType: null,
+                ftTabName: '',
+                ftTabCode: '',
+                ftTabShortDesc: '',
+                ftTabSortOrder: 1,
+                cboTabAssetType: '',
 
-                // Estado
-                cboAdmIsActive: keepActive ? true : null
+                // Estado general, si manejas uno común
+                cboAdmIsActive: '',
+                cboIsFeatured: false,
+
+                // Encabezado / labels generales
+                lblFormTitle: '',
+                lblFormSubtitle: '',
+                lblFormNodeId: '',
+
+                // Auditoría
+                lblCreatedAt: '',
+                lblUpdatedAt: ''
             };
 
             if (!keepType) {
-                mapping.cboNodeType = null;
+                mapping.cboNodeType = '';
             }
 
             Ext.Object.each(mapping, function(field, value) {
@@ -1033,11 +1805,318 @@ Ext.define('damCollection.view.contMain', {
                     jsTerian.assignElementValue(field, value);
                 } catch (e) {}
             });
+
+            // Secciones por tipo
+            setHiddenIfExists('ctCollection', true);
+            setHiddenIfExists('ctResource', true);
+            setHiddenIfExists('ctTab', true);
+
+            // Imagen
+            setHiddenIfExists('ctImageSection', true);
+            setHiddenIfExists('lblImageTitle', true);
+            setHiddenIfExists('ctImageEmpty', false);
+            setHiddenIfExists('imgPreview', true);
+            setHiddenIfExists('btnRemoveImage', true);
+
+            //jsTerian.assignElementValue('lblImageTitle', 'Vista previa');
+            jsTerian.assignElementValue('btnUploadImage', 'Subir imagen');
+            setSrcIfExists('imgPreview', '');
+
+            // ID del nodo
+            setHiddenIfExists('lblFormNodeId', true);
+
+            // Auditoría
+            // Si tienes contenedor general, mejor ocultar todo el bloque
+            //setHiddenIfExists('ctContext', true);
+
+            // Y por seguridad, también los labels individuales
+            setHiddenIfExists('lblCreatedAt', true);
+            setHiddenIfExists('lblUpdatedAt', true);
+            setHiddenIfExists('lblDeletedAt', true);
+            setHiddenIfExists('lblCreatedBy', true);
+            setHiddenIfExists('lblUpdatedBy', true);
+            setHiddenIfExists('lblDeletedBy', true);
+
+            // create/edit
+            if (!isCreate) {
+                //setHiddenIfExists('ctContext', false);
+            }
         }
         finally {
-            console.log('[FORM] clearNodeForm', { keepType, keepActive });
+            console.log('[FORM] clearNodeForm', {
+                keepType,
+                keepActive,
+                isCreate
+            });
+        }
+    },
+
+    formatUtcToReadable: function(value) {
+        if (!value) return '';
+
+        const date = new Date(value);
+
+        if (isNaN(date.getTime())) return value;
+
+        const pad = function(n) {
+            return String(n).padStart(2, '0');
+        };
+
+        const day = pad(date.getDate());
+        const month = pad(date.getMonth() + 1);
+        const year = date.getFullYear();
+
+        let hours = date.getHours();
+        const minutes = pad(date.getMinutes());
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+
+        return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ' ' + ampm;
+    },
+
+    showImageUploadDialog: function(cfg) {
+        cfg = cfg || {};
+
+        var nodeIdRaw = cfg.nodeId || null;
+        var nodeText  = cfg.nodeText || '';
+        var onSuccess = cfg.onSuccess || null;
+
+        if (!nodeIdRaw) {
+            Ext.Msg.alert('Error', 'No se recibió el identificador del nodo.');
+            return;
         }
 
+        var nodeType = null;
+        var numericId = null;
+
+        if (/^c-\d+$/.test(nodeIdRaw)) {
+            nodeType = 'collection';
+            numericId = String(nodeIdRaw).replace(/^c-/, '');
+        } else if (/^r-\d+$/.test(nodeIdRaw)) {
+            nodeType = 'resource';
+            numericId = String(nodeIdRaw).replace(/^r-/, '');
+        } else {
+            Ext.Msg.alert('Error', 'El identificador del nodo no es válido.');
+            return;
+        }
+
+        var typeLabel = nodeType === 'collection' ? 'colección' : 'recurso';
+
+        var dlg = Ext.create('Ext.Dialog', {
+            title: 'Subir imagen',
+            modal: true,
+            centered: true,
+            closable: true,
+            closeAction: 'destroy',
+            width: 500,
+            layout: 'fit',
+
+            items: [{
+                xtype: 'formpanel',
+                itemId: 'uploadForm',
+                padding: 14,
+                scrollable: true,
+                items: [
+                    {
+                        xtype: 'component',
+                        html:
+                        '<div style="font-size:14px;font-weight:600;margin-bottom:6px;">' +
+                        'Subir / reemplazar imagen de ' + typeLabel +
+                        (nodeText ? (' — ' + Ext.String.htmlEncode(nodeText)) : '') +
+                        '</div>' +
+                        '<div style="font-size:12px;color:#666;">' +
+                        'Si ya existe una imagen, será reemplazada.' +
+                        '</div>',
+                        margin: '0 0 14 0'
+                    },
+                    {
+                        xtype: 'filefield',
+                        itemId: 'uploadFile',
+                        name: 'file',
+                        label: 'Imagen',
+                        required: true,
+                        accept: 'image/*',
+                        buttonText: 'Elegir...'
+                    }
+                ]
+            }],
+
+            buttons: [
+                {
+                    text: 'Subir',
+                    ui: 'action',
+                    handler: function() {
+                        var form = dlg.down('#uploadForm');
+                        var fileField = form.down('#uploadFile');
+
+                        var fileInput =
+                            fileField && fileField.fileInputEl && fileField.fileInputEl.dom ? fileField.fileInputEl.dom
+                        : null;
+
+                        if (!fileInput && fileField && fileField.el && fileField.el.dom) {
+                            fileInput = fileField.el.dom.querySelector('input[type=file]');
+                        }
+
+                        var fileObj = fileInput && fileInput.files && fileInput.files[0];
+
+                        if (!fileObj) {
+                            Ext.Msg.alert('Faltan datos', 'Debes seleccionar una imagen.');
+                            return;
+                        }
+
+                        var fd = new FormData();
+                        fd.append('file', fileObj);
+
+                        var endpoint = null;
+
+                        if (nodeType === 'collection') {
+                            endpoint = 'collections/' + numericId;
+                        } else if (nodeType === 'resource') {
+                            endpoint = 'resources/' + numericId;
+                        }
+
+                        if (!endpoint) {
+                            Ext.Msg.alert('Error', 'No se pudo resolver el endpoint de carga.');
+                            return;
+                        }
+
+                        var url = jsTerian.makeUrl('tree',endpoint,'image');
+                        var token = jsTerian.getDataSS('access_token');
+
+                        Ext.Ajax.request({
+                            url: url,
+                            method: 'POST',
+                            rawData: fd,
+                            disableCaching: true,
+                            headers: {
+                                'Authorization': 'Bearer ' + token,
+                                'Content-Type': null
+                            },
+
+                            success: function(response) {
+                                var jsonData;
+                                try {
+                                    jsonData = Ext.decode(response.responseText);
+                                } catch (e) {
+                                    jsonData = null;
+                                }
+                                console.log(msg);
+                                console.log(jsonData.success);
+                                console.log(jsonData.message);
+
+                                if (!jsonData || jsonData.success !== true) {
+                                    jsDam.toast({
+                                        type: 'error',
+                                        title: 'Error',
+                                        message: (jsonData && jsonData.message) ? jsonData.message
+                                        : 'La respuesta del servidor no fue válida.'
+                                    });
+                                    return;
+                                }
+
+                                var msg = jsonData.message || 'Imagen subida correctamente.';
+
+                                /*
+                                jsDam.toast({
+                                    type: 'success',
+                                    title: 'Éxito',
+                                    message: msg
+                                });
+                                */
+
+                                Ext.toast('Imagen cargada');
+
+                                Ext.defer(function() {
+                                    var form = Ext.getCmp('formNode');
+                                    var imgPreview = form ? form.down('#imgPreview') : null;
+                                    var ctImageEmpty = form ? form.down('#ctImageEmpty') : null;
+
+                                    var previewUrl = null;
+
+                                    if (nodeType === 'collection') {
+                                        previewUrl = jsTerian.makeUrl('tree/collection/image/' + numericId);
+                                    } else if (nodeType === 'resource') {
+                                        previewUrl = jsTerian.makeUrl('tree/resource/image/' + numericId);
+                                    }
+
+                                    if (previewUrl && imgPreview) {
+                                        previewUrl += '?_dc=' + new Date().getTime();
+                                        imgPreview.setSrc(previewUrl);
+                                        imgPreview.setHidden(false);
+                                    }
+
+                                    if (ctImageEmpty) {
+                                        ctImageEmpty.setHidden(true);
+                                    }
+
+                                    if (dlg && !dlg.destroyed) {
+                                        dlg.close();
+                                    }
+
+                                    if (typeof onSuccess === 'function') {
+                                        try {
+                                            onSuccess(jsonData);
+                                        } catch (e) {
+                                            console.error(e);
+                                        }
+                                    }
+                                }, 80);
+
+                                Ext.defer(function() {
+                                    if (dlg && !dlg.destroyed) {
+                                        dlg.close();
+                                    }
+                                }, 60);
+
+                                Ext.defer(function() {
+                                    try {
+                                        console.log('si funciono');
+                                    } catch (e) {
+                                        console.error(e);
+                                    }
+
+                                    if (typeof onSuccess === 'function') {
+                                        try {
+                                            onSuccess(jsonData);
+                                        } catch (e) {
+                                            console.error(e);
+                                        }
+                                    }
+                                }, 120);
+                            },
+                            failure: function(response) {
+                                var jsonData;
+                                try {
+                                    jsonData = Ext.decode(response.responseText);
+                                } catch (e) {
+                                    jsonData = null;
+                                }
+
+                                var msg = (jsonData && jsonData.message) ? jsonData.message
+                                : ('Error al subir imagen (HTTP ' + response.status + ').');
+
+                                jsDam.toast({
+                                    type: 'error',
+                                    title: 'Error',
+                                    message: msg
+                                });
+                            }
+                        });
+                    },
+
+                },
+                {
+                    text: 'Cancelar',
+                    handler: function() {
+                        dlg.close();
+                    }
+                }
+            ]
+        });
+
+        dlg.show();
     }
 
 });

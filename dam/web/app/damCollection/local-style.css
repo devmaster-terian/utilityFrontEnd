@@ -18,25 +18,43 @@
     border-bottom: 2px solid #ddd; /* Borde más grueso abajo del título */
 }
 
-/* COLUMNA 1: CÓDIGO */
-.col-code {
-    width: 80px;      /* Ancho fijo */
-    min-width: 80px;
+.tree-col-code {
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+    overflow: hidden;
 }
 
-/* COLUMNA 2: DESCRIPCIÓN */
-.col-desc {
-    flex: 1;          /* Ocupa todo el espacio sobrante */
+.tree-col-desc {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 350px);
     padding: 0 15px;
+    overflow: hidden;
 }
 
-/* COLUMNA 3: ACCIONES */
-/* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
 .col-actions {
-    min-width: 180px; /* Antes era 90px, ahora necesitamos más espacio */
+    width: 110px;
+    min-width: 110px;
+    max-width: 110px;
     display: flex;
     justify-content: flex-end;
-    gap: 6px; /* Espacio entre bolitas */
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.tree-col-code .main-text,
+.tree-col-code .text-bold,
+.tree-col-code .role-badge,
+.tree-col-desc .main-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tree-col-desc .sub-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Estilo base del botón redondo */

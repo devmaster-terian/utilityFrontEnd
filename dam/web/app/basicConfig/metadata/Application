@@ -167,7 +167,8 @@
                 "fn": "deleteConfig",
                 "implHandler": [
                     "// Url de la solicitud",
-                    "var url = jsTerian.makeUrl('configuration/delete',idConfig);",
+                    "var url = jsTerian.makeUrl('configuration/delete',idConfig) + '?hard=true';",
+                    "console.log(url);",
                     "",
                     "jsTerian.makeRequest(",
                     "    'DELETE',",
@@ -382,7 +383,7 @@
                 "fn": "deleteParam",
                 "implHandler": [
                     "// Url de la solicitud",
-                    "var url = jsTerian.makeUrl('parameter/delete',idParam);",
+                    "var url = jsTerian.makeUrl('parameter/delete',idParam) + '?hard=true';",
                     "",
                     "jsTerian.makeRequest(",
                     "    'DELETE',",

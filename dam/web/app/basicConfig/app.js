@@ -124,7 +124,8 @@ Ext.application({
 
     deleteConfig: function(idConfig) {
         // Url de la solicitud
-        var url = jsTerian.makeUrl('configuration/delete',idConfig);
+        var url = jsTerian.makeUrl('configuration/delete',idConfig) + '?hard=true';
+        console.log(url);
 
         jsTerian.makeRequest(
             'DELETE',
@@ -278,7 +279,7 @@ Ext.application({
 
     deleteParam: function(idParam) {
         // Url de la solicitud
-        var url = jsTerian.makeUrl('parameter/delete',idParam);
+        var url = jsTerian.makeUrl('parameter/delete',idParam) + '?hard=true';
 
         jsTerian.makeRequest(
             'DELETE',
