@@ -1,8 +1,71 @@
 const jsDam = {
+    backView: function(){
+        var listNavigation = jsTerian.getDataObjSS('UTILITY_GO', 'listNavigation');
+        var aNavigation = listNavigation ? JSON.parse(listNavigation) : [];
+        var lastView;
+
+        console.log('aNavigation');
+        console.log(aNavigation);
+
+        // Suponiendo que ya recuperaste y parseaste aNavigation...
+
+        if (aNavigation.length > 0) {
+            // 1. Sacamos y eliminamos el último
+            for(let iLoop = 1; iLoop <= 3; iLoop++){
+                lastView = aNavigation.pop();    
+            }
+
+            console.log('Despues del Pop...');
+            console.log('aNavigation..',aNavigation);
+
+            if (aNavigation.length > 0) {
+                // 2. Convertimos el arreglo (que ya no tiene el último) a JSON
+                var stringActualizado = JSON.stringify(aNavigation);
+
+                // 3. Guardamos en el storage para que el cambio sea permanente
+                jsTerian.saveDataObjSS('UTILITY_GO', 'listNavigation', stringActualizado);
+
+                console.log('Se eliminó:', lastView.text);
+            }
+            else{
+                console.log('Historial vacio');
+                lastView = null;
+            }
+
+        } else {
+            console.log('El historial ya está vacío.');
+            lastView = null;
+        }     
+
+        return lastView;
+
+    },
+    setCurrentView: function(pObjCurrentView) {
+        var listNavigation = jsTerian.getDataObjSS('UTILITY_GO', 'listNavigation');
+        console.log('listNavigation original:', listNavigation);
+
+        // 1. Si listNavigation es null o vacío, creamos un array real [], 
+        // de lo contrario, parseamos la cadena JSON que recuperamos.
+        var aNavigation = listNavigation ? JSON.parse(listNavigation) : [];
+
+        // 2. Agregamos el objeto directamente al array. 
+        // NO uses JSON.stringify aquí adentro, o tendrás un array de textos en lugar de objetos.
+        console.log('pObjCurrentView:',pObjCurrentView);
+        
+        aNavigation.push(pObjCurrentView);
+
+        console.log('Array actualizado:', aNavigation);
+
+        // 3. Para grabar, convertimos TODO el array a una cadena JSON válida.
+        // NO uses .toString(), usa JSON.stringify().
+        var stringParaGuardar = JSON.stringify(aNavigation);
+
+        jsTerian.saveDataObjSS('UTILITY_GO', 'listNavigation', stringParaGuardar);
+    },
     confirmDelete: function(pObjConfig,pFnDelete){
         var msgTitle = 'Eliminar ' + pObjConfig.recordName;
         var msgQuestion = '¿Desea eliminar el Registro de ' + pObjConfig.recordDescription + '?';
-        
+
         Ext.Viewport.mask({ xtype: 'loadmask', message: 'Eliminar registro...' });
         Ext.Msg.show({
             title: msgTitle,

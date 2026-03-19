@@ -143,6 +143,7 @@ Ext.define('damProspect.view.contMain', {
                             xtype: 'formpanel',
                             id: 'formProspect',
                             itemId: 'formProspect',
+                            innerCls: 'sap-form-background',
                             items: [
                                 {
                                     xtype: 'container',

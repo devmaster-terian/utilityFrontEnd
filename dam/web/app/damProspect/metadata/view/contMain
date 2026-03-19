@@ -104,12 +104,14 @@
                             "codeClass": null,
                             "userConfig": {
                                 "id": "formProspect",
+                                "innerCls": "sap-form-background",
                                 "itemId": "formProspect"
                             },
                             "configAlternates": {
                                 "title": "string",
                                 "id": "string",
-                                "itemId": "string"
+                                "itemId": "string",
+                                "innerCls": "string"
                             },
                             "name": "MyFormPanel",
                             "designerId": "7120c5d1-8548-4029-8e74-7b780d912288",

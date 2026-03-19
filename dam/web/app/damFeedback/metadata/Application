@@ -1,0 +1,45 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "name": "damFeedback",
+        "views": [
+            "contMain"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "let infoAviso = '<p>Estamos muy interesados en conocer tu opinión acerca de esta aplicación Utility GO.</p>' +",
+                    "                '<p>Por favor, comparte un comentario con nosotros para mejorar la experiencia y funcionalidades de ésta herramienta.</p>';",
+                    "",
+                    "Ext.getCmp('lbInfo').setHtml(infoAviso);"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "4fdd8a1c-d433-41f3-8f24-26ba4c3d507b"
+        }
+    ]
+}

@@ -1,0 +1,535 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "vbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "mixins": "object",
+        "layout": "string"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "Ext.Toolbar",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "sap-toolbar"
+                ],
+                "docked": "bottom",
+                "id": "toolbarMain",
+                "itemId": "toolbarMain"
+            },
+            "configAlternates": {
+                "docked": "string",
+                "id": "string",
+                "itemId": "string",
+                "cls": "typedarray"
+            },
+            "name": "MyToolbar",
+            "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "confirm",
+                        "iconCls": "fas fa-envelope",
+                        "id": "btnConfirm",
+                        "itemId": "btnConfirm",
+                        "minWidth": 90,
+                        "text": "Enviar",
+                        "textAlign": "left",
+                        "ui": "confirm"
+                    },
+                    "configAlternates": {
+                        "itemId": "string",
+                        "text": "string",
+                        "iconCls": "string",
+                        "designer|uiInterfaceName": "string",
+                        "id": "string",
+                        "ui": "string",
+                        "minWidth": "auto",
+                        "textAlign": "string"
+                    },
+                    "name": "MyButton",
+                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnConfirmTap",
+                                "implHandler": [
+                                    "Ext.getCmp('contMain').feedbackSend();"
+                                ],
+                                "name": "tap"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string"
+                            },
+                            "name": "onBtnConfirmTap",
+                            "designerId": "f8bf93c7-7872-4e85-893e-7a51276dea08"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|uiInterfaceName": "decline",
+                        "iconCls": "fas fa-arrows-rotate",
+                        "id": "btnReset",
+                        "itemId": "btnReset",
+                        "minWidth": 90,
+                        "text": "Reset",
+                        "textAlign": "left",
+                        "ui": "decline"
+                    },
+                    "configAlternates": {
+                        "itemId": "string",
+                        "text": "string",
+                        "iconCls": "string",
+                        "designer|uiInterfaceName": "string",
+                        "id": "string",
+                        "ui": "string",
+                        "minWidth": "auto",
+                        "textAlign": "string"
+                    },
+                    "name": "MyButton2",
+                    "designerId": "925b7028-213b-434c-9d2a-9eecf42d268a",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onBtnResetTap",
+                                "implHandler": [
+                                    "Ext.getCmp('contMain').feedbackReset();"
+                                ],
+                                "name": "tap"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string"
+                            },
+                            "name": "onBtnResetTap",
+                            "designerId": "33b082c0-f5c2-45b8-8e46-1072e92db0f9"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "name": "MySpacer",
+                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "mybutton1",
+                        "text": "MyButton1"
+                    },
+                    "configAlternates": {
+                        "itemId": "string",
+                        "text": "string"
+                    },
+                    "name": "MyButton1",
+                    "designerId": "81096d9a-8788-4149-8c40-cd0d6a05ce24",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onMybutton1Tap",
+                                "implHandler": [
+                                    "",
+                                    "Ext.Msg.alert(",
+                                    "    'Título del Aviso',",
+                                    "    'La operación se completó con éxito.',",
+                                    "    function() {",
+                                    "        console.log('El usuario cerró el mensaje');",
+                                    "    }",
+                                    ");",
+                                    "",
+                                    "",
+                                    "/*",
+                                    "Ext.Msg.prompt(",
+                                    "    'Nombre del Archivo',",
+                                    "    'Ingresa el nuevo nombre:',",
+                                    "    function(buttonId, value) {",
+                                    "        if (buttonId === 'ok' && value) {",
+                                    "            console.log('Nuevo nombre:', value);",
+                                    "        }",
+                                    "    }",
+                                    ");",
+                                    "*/"
+                                ],
+                                "name": "tap"
+                            },
+                            "configAlternates": {
+                                "fn": "string",
+                                "implHandler": "code",
+                                "name": "string"
+                            },
+                            "name": "onMybutton1Tap",
+                            "designerId": "a686838d-c619-4cc1-b765-d0400cfea479"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "contFeedback",
+                "itemId": "contFeedback",
+                "layout": "vbox",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer",
+            "designerId": "cc59ed63-ec4f-4553-a0c4-7a78cc91d01e",
+            "cn": [
+                {
+                    "type": "Ext.form.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "formFeedback",
+                        "innerCls": "sap-form-background",
+                        "itemId": "formFeedback",
+                        "layout": "vbox",
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "title": "string",
+                        "id": "string",
+                        "innerCls": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyFormPanel",
+                    "designerId": "7120c5d1-8548-4029-8e74-7b780d912288",
+                    "cn": [
+                        {
+                            "type": "Ext.Label",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "displayed": false,
+                                "html": "",
+                                "id": "lbInfo",
+                                "itemId": "lbInfo",
+                                "margin": "7 7 7 7"
+                            },
+                            "configAlternates": {
+                                "displayed": "boolean",
+                                "html": "string",
+                                "id": "string",
+                                "itemId": "string",
+                                "margin": "auto"
+                            },
+                            "name": "MyLabel",
+                            "designerId": "1e0e214b-91d5-4fc1-b0b8-7f1e581f5aca"
+                        },
+                        {
+                            "type": "Ext.form.FieldSet",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "name": "MyFieldSet",
+                            "designerId": "96f8f9a5-90a4-4cc6-a542-59c352afa53d",
+                            "cn": [
+                                {
+                                    "type": "Ext.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "tfSubject",
+                                        "itemId": "tfSubject",
+                                        "label": "Asunto",
+                                        "margin": "0 10 0 10",
+                                        "padding": "7 7 0 7"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "margin": "auto",
+                                        "padding": "auto"
+                                    },
+                                    "name": "MyTextField",
+                                    "designerId": "62e8b6cb-e89b-4321-947c-0f4a34c80280"
+                                },
+                                {
+                                    "type": "Ext.field.TextArea",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "taComment",
+                                        "itemId": "taComment",
+                                        "label": "Comentario",
+                                        "margin": "0 10 0 10",
+                                        "padding": "7 7 0 7"
+                                    },
+                                    "configAlternates": {
+                                        "label": "string",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "margin": "auto",
+                                        "padding": "auto"
+                                    },
+                                    "name": "MyTextArea",
+                                    "designerId": "2ba0a9ab-c484-4054-8077-ddb8d23a00fe"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "feedbackSend",
+                "implHandler": [
+                    "var fnSuccess = function(pResponse){",
+                    "    console.log('Success: Prospecto Asignado');",
+                    "",
+                    "    var msg;",
+                    "    try {",
+                    "        msg = Ext.decode(pResponse.responseText);",
+                    "    }",
+                    "    catch(e){",
+                    "        msg = { success:true, message:'Success', data:{} };",
+                    "    }",
+                    "",
+                    "    console.log('msg: ', msg);",
+                    "",
+                    "    // Elige el primero que esta disponible",
+                    "    var data = msg.data || {};",
+                    "",
+                    "    console.log('data:',data);",
+                    "",
+                    "    Ext.getCmp('contMain').prospectUserSave(jsTerian.getDataObjSS('TMP_SESSION','id_user'),data.id_prospect);",
+                    "",
+                    "",
+                    "",
+                    "};",
+                    "",
+                    "var fnFailure = function(pResponse){",
+                    "    console.log('Failure: Prospecto fallo el grado');",
+                    "};",
+                    "",
+                    "",
+                    "var endPoint = 'feedback/create';",
+                    "var httpVerb = 'POST';",
+                    "",
+                    "if(jsTerian.readElementValue('tfMail') === jsTerian.getDataObjSS('UTM_PROSPECT','email')){",
+                    "    var endPoint = 'prospect/update/' + jsTerian.getDataObjSS('UTM_PROSPECT','id_prospect');",
+                    "    var httpVerb = 'PUT';",
+                    "}",
+                    "",
+                    "var url = jsTerian.getUrl(endPoint);",
+                    "",
+                    "// Informacion a enviar",
+                    "var jsonData = JSON.stringify({",
+                    "    'subject' : jsTerian.readElementValue('tfSubject'),",
+                    "    'comment' : jsTerian.readElementValue('taComment')",
+                    "});",
+                    "",
+                    "console.info('prospectDave_jsonData:',jsonData);",
+                    "console.info('prospectDave_httpVerb:',httpVerb);",
+                    "console.info('prospectDave_url:',url);",
+                    "",
+                    "jsTerian.makeRequest(httpVerb,url, jsonData, fnSuccess, fnFailure, true);",
+                    ""
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "feedbackSend",
+            "designerId": "051bfd11-54ef-405d-b0c6-cbee945080af"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "feedbackReset",
+                "implHandler": [
+                    "Ext.getCmp('tfSubject').setValue('');",
+                    "Ext.getCmp('taComment').setValue('');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "feedbackReset",
+            "designerId": "4015457d-9478-48ef-895a-88eda23fe3a1"
+        }
+    ]
+}

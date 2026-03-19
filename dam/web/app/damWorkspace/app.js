@@ -22,12 +22,14 @@ Ext.Loader.setConfig({
 Ext.application({
     models: [
         'modelMenuTree',
-        'modelAsset'
+        'modelAsset',
+        'modelFeatured'
     ],
     stores: [
         'storeMenuTree',
-        'storeTree2',
-        'storeAsset'
+        'storeTreeMenu',
+        'storeAsset',
+        'storeFeatured'
     ],
     views: [
         'contMain'
@@ -55,12 +57,37 @@ Ext.application({
         btnCurrentUser.setText(usuario);
 
 
-        jsTerian.loadStore('storeTree2');
+        jsTerian.loadStore('storeTreeMenu');
 
 
         setTimeout(function() {
             Ext.getCmp('panelMenu').hide();
             },1000);
+
+        Ext.getCmp('contMain').buildFeaturedView();
+
+
+
+        window.addEventListener('beforeunload', function (e) {
+            // Aquí puedes verificar si hay procesos activos o cambios sin guardar
+            // Nota: Los navegadores modernos ya no permiten poner un mensaje personalizado.
+            //e.preventDefault();
+            e.returnValue = '';
+        });
+
+
+
+
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            // Cuando el usuario da clic en "Atrás", lo empujamos de nuevo hacia adelante
+            history.go(1);
+
+            // Opcional: Mostrar un mensaje interno de tu app
+            var msg = 'Use la aplicación para navegar.';
+
+            jsDam.toast({ type:'warning', title:'Utility GO', message: msg });
+        };
     },
 
     onDataviewAssetChildtap: function(dataview, location, eOpts) {

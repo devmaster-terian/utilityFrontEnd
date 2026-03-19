@@ -1,3 +1,114 @@
+/* ==========================================================================
+   BOTONES DESTACADOS (FEATURED DATAVIEW) - DISEÑO Y ESTRUCTURA RESPONSIVA
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. MODO MÓVIL (Por defecto - Alineación Vertical Centrada)
+   -------------------------------------------------------------------------- */
+.featured-grid-view .x-dataview-inner {
+    display: flex !important;
+    flex-direction: column !important; /* Apila las tarjetas verticalmente */
+    align-items: center !important;    /* Fuerza el centrado absoluto en la pantalla */
+    padding: 7px !important;
+    box-sizing: border-box !important;
+    background-color: transparent !important;
+}
+
+.featured-grid-view .x-dataview-item {
+    width: 100% !important;
+    max-width: 420px !important; /* Límite máximo de ancho */
+    
+    /* Separación de 7px arriba y abajo. Cero a los lados para evitar desbordes */
+    margin: 17px auto !important; 
+    padding: 15 !important;
+    flex: none !important; 
+    box-sizing: border-box !important;
+    background-color: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. MODO ESCRITORIO / TABLET (Pantallas anchas - Alineación Horizontal)
+   -------------------------------------------------------------------------- */
+@media (min-width: 600px) {
+    .featured-grid-view .x-dataview-inner {
+        flex-direction: row !important; /* Coloca las tarjetas lado a lado */
+        flex-wrap: wrap !important;     /* Permite que bajen a la siguiente línea si no caben */
+        justify-content: center !important;
+        margin: 17px auto !important; 
+    }
+    
+    .featured-grid-view .x-dataview-item {
+        /* En escritorio sí aplicamos los 7px en todas las direcciones */
+        margin: 17px auto !important; 
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. ESTILO VISUAL DE LA TARJETA (El Botón y la Imagen)
+   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   BOTONES DESTACADOS - VERSIÓN ESTILIZADA
+   ========================================================================== */
+
+.featured-btn {
+    position: relative;
+    width: 100%;
+    /* 1. Reducimos el alto (estaba en 140px) */
+    height: 140px !important; 
+    
+    /* 2. Bordes redondeados más suaves y limpios */
+    border-radius: 12px !important; 
+    
+    /* 3. Sombra con mayor profundidad y suavidad */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3) !important;
+    
+    /* 4. ELIMINAR TRIÁNGULOS: Asegura que nada se salga del borde redondeado */
+    overflow: hidden !important; 
+    border: none !important; 
+    
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 17 17 17 17 !important;
+    
+    /* Transición para el efecto de hover */
+    transition: transform 0.3s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto al presionar o pasar el mouse */
+.featured-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Capa de color (Overlay) */
+.featured-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(27, 42, 78, 0.4); /* Azul oscuro corporativo */
+    z-index: 1;
+}
+
+/* Texto del Título */
+.featured-title {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    font-size: 16px; /* Texto un poco más pequeño para el nuevo tamaño */
+    font-weight: 700;
+    text-align: center;
+    padding: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
 /* --- 1. EL GRID (El contenedor general) --- */
 /* Esto obliga al DataView a comportarse como una rejilla flexible */
 .assets-grid-view .x-dataview-inner,
@@ -300,4 +411,5 @@
 .x-treelist-item-expanded > .x-treelist-row > .x-treelist-item-expander::after {
     content: "\f078" !important; /* fa-chevron-down */
 }
+
 

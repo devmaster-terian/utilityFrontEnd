@@ -7,7 +7,7 @@
     "codeClass": null,
     "userConfig": {
         "defaultRootText": "root",
-        "designer|userClassName": "storeTree2",
+        "designer|userClassName": "storeTreeMenu",
         "root": [
             "{",
             "    id: 'root',",
@@ -15,7 +15,7 @@
             "    expanded: true",
             "}"
         ],
-        "storeId": "storeTree2"
+        "storeId": "storeTreeMenu"
     },
     "configAlternates": {
         "defaultRootText": "string",
@@ -33,6 +33,12 @@
                 "type": "object"
             },
             "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "ajaxProxyTreeMenu"
+            },
+            "configAlternates": {
+                "designer|displayName": "string"
+            },
             "name": "MyAjaxProxy1",
             "designerId": "b0131d8f-bc53-49b5-8086-9dd5894a9f70",
             "cn": [
@@ -44,10 +50,12 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "designer|displayName": "jsonReaderTreeMenu",
                         "rootProperty": "children"
                     },
                     "configAlternates": {
-                        "rootProperty": "string"
+                        "rootProperty": "string",
+                        "designer|displayName": "string"
                     },
                     "name": "MyJsonReader1",
                     "designerId": "09c26873-dab3-4017-9cd1-9658cad6c607"

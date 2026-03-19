@@ -496,7 +496,7 @@ const jsTerian = {
             url: url,
             method: 'POST',
             success: function (response) {
-                waitMsgBox.hide()
+                waitMsgBox.hide();
                 var jsonData = Ext.decode(response.responseText);
                 console.info(jsonData);
                 if (successCallback && typeof successCallback === 'function') {
@@ -504,7 +504,7 @@ const jsTerian = {
                 }
             },
             failure: function (response) {
-                waitMsgBox.hide()
+                waitMsgBox.hide();
                 var jsonData = Ext.decode(response.responseText);
                 console.info(jsonData);
                 if (failureCallback && typeof failureCallback === 'function') {
@@ -954,7 +954,7 @@ const jsTerian = {
             return;
         }
 
-        window.setTitle(title)
+        window.setTitle(title);
     },
 
     transformHTMLValue: function (text, prepareToSend) {
