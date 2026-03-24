@@ -79,14 +79,6 @@ Ext.define('damFeedback.view.contMain', {
                 },
                 {
                     xtype: 'spacer'
-                },
-                {
-                    xtype: 'button',
-                    itemId: 'mybutton1',
-                    text: 'MyButton1',
-                    listeners: {
-                        tap: 'onMybutton1Tap'
-                    }
                 }
             ]
         },
@@ -151,30 +143,6 @@ Ext.define('damFeedback.view.contMain', {
         Ext.getCmp('contMain').feedbackReset();
     },
 
-    onMybutton1Tap: function(button, e, eOpts) {
-
-        Ext.Msg.alert(
-            'Título del Aviso',
-            'La operación se completó con éxito.',
-            function() {
-                console.log('El usuario cerró el mensaje');
-            }
-        );
-
-
-        /*
-        Ext.Msg.prompt(
-            'Nombre del Archivo',
-            'Ingresa el nuevo nombre:',
-            function(buttonId, value) {
-                if (buttonId === 'ok' && value) {
-                    console.log('Nuevo nombre:', value);
-                }
-            }
-        );
-        */
-    },
-
     onContMainResize: function(element, info, eOpts) {
         console.log('>>>resizswse');
         console.log(element);
@@ -222,7 +190,13 @@ Ext.define('damFeedback.view.contMain', {
 
             console.log('data:',data);
 
-            Ext.getCmp('contMain').prospectUserSave(jsTerian.getDataObjSS('TMP_SESSION','id_user'),data.id_prospect);
+            Ext.getCmp('contMain').feedbackReset();
+                    var objMessage = {
+                        type: 'confirm',
+                        title: 'Feedback Enviado',
+                        message: 'Se ha enviado su comentario, gracias.'
+                    };
+                    jsDam.toast(objMessage);
 
 
 

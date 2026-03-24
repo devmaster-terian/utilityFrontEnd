@@ -779,15 +779,11 @@ Ext.define('damProspect.view.contMain', {
             Ext.getCmp('contMain').prospectUserSave(jsTerian.getDataObjSS('TMP_SESSION','id_user'),data.id_prospect);
             Ext.getCmp('contMain').prospectSetActive(data);
             Ext.getCmp('contMain').prospectStatus();
-
-
-
         };
 
         var fnFailure = function(pResponse){
             console.log('Failure: Prospecto fallo el grado');
         };
-
 
         var endPoint = 'prospect/create';
         var httpVerb = 'POST';
@@ -808,10 +804,6 @@ Ext.define('damProspect.view.contMain', {
             'telephone': jsTerian.readElementValue('tfTelephone'),
             'notes'    : jsTerian.readElementValue('taNote')
         });
-
-        console.info('prospectDave_jsonData:',jsonData);
-        console.info('prospectDave_httpVerb:',httpVerb);
-        console.info('prospectDave_url:',url);
 
         jsTerian.makeRequest(httpVerb,url, jsonData, fnSuccess, fnFailure, true);
 

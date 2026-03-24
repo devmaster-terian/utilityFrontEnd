@@ -97,6 +97,42 @@
             },
             "name": "field30",
             "designerId": "72d6a97f-08b7-4ca8-8da7-0bd097710496"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "mapping": "target.action",
+                "name": "target_action"
+            },
+            "configAlternates": {
+                "mapping": "string",
+                "name": "string"
+            },
+            "name": "field43",
+            "designerId": "9ce6c621-928f-41f2-93ac-c97747806d71"
+        },
+        {
+            "type": "Ext.data.field.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "mapping": "target.ap_url",
+                "name": "target_app_url"
+            },
+            "configAlternates": {
+                "mapping": "string",
+                "name": "string"
+            },
+            "name": "field44",
+            "designerId": "7f1e8540-f89f-4f48-931a-3c7ca2c4188b"
         }
     ]
 }

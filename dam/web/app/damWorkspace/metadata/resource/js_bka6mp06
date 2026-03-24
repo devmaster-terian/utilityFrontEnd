@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_bka6mp06",
+        "includeInBundle": true,
+        "url": "../../../../framework/resourcesJS/extOverride.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js6",
+    "designerId": "7f22cb66-f92b-47e1-9daf-e5006e4089ab"
+}

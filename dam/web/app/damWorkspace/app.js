@@ -23,13 +23,15 @@ Ext.application({
     models: [
         'modelMenuTree',
         'modelAsset',
-        'modelFeatured'
+        'modelFeatured',
+        'modelContent'
     ],
     stores: [
         'storeMenuTree',
         'storeTreeMenu',
         'storeAsset',
-        'storeFeatured'
+        'storeFeatured',
+        'storeContent'
     ],
     views: [
         'contMain'

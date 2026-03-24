@@ -1,33 +1,65 @@
 const jsDam = {
+    resetNavigation: function(){
+        aNavigation = [];
+        jsTerian.saveDataObjSS('APP_NAVIGATION', 'listNavigation', aNavigation);
+        jsTerian.saveDataObjSS('APP_NAVIGATION_CURRENT', 'currentView', {});
+    },
     backView: function(){
-        var listNavigation = jsTerian.getDataObjSS('UTILITY_GO', 'listNavigation');
-        var aNavigation = listNavigation ? JSON.parse(listNavigation) : [];
+        var listNavigation = jsTerian.getDataObjSS('APP_NAVIGATION', 'listNavigation');
+        var currentView    = jsTerian.getDataObjSS('APP_NAVIGATION_CURRENT', 'currentView');
+        
+        
+        //var aNavigation = listNavigation ? JSON.parse(listNavigation) : [];
+        var aNavigation = listNavigation;
+        
         var lastView;
 
+        console.warn('listNavigation');
+        console.warn(listNavigation);        
+        
         console.log('aNavigation');
         console.log(aNavigation);
 
+        console.log('currentView');
+        console.log(currentView);
+        
         // Suponiendo que ya recuperaste y parseaste aNavigation...
 
         if (aNavigation.length > 0) {
-            // 1. Sacamos y eliminamos el último
-            for(let iLoop = 1; iLoop <= 3; iLoop++){
-                lastView = aNavigation.pop();    
+            let stepBack = true;
+            
+            lastView = currentView;
+            while(stepBack){
+                
+                console.info('lastView.text: ',lastView.text,'----','currentView.text: ',currentView.text);
+                
+                if(lastView.text !== currentView.text){
+                    stepBack = false;
+                }
+                else{
+                    lastView = aNavigation.pop();
+                }
+                
+                if(!lastView){
+                    stepBack = false;
+                }
             }
-
+            
             console.log('Despues del Pop...');
             console.log('aNavigation..',aNavigation);
 
-            if (aNavigation.length > 0) {
+            if (lastView && lastView.text) {
                 // 2. Convertimos el arreglo (que ya no tiene el último) a JSON
-                var stringActualizado = JSON.stringify(aNavigation);
+                //var stringActualizado = JSON.stringify(aNavigation);
 
                 // 3. Guardamos en el storage para que el cambio sea permanente
-                jsTerian.saveDataObjSS('UTILITY_GO', 'listNavigation', stringActualizado);
+                jsTerian.saveDataObjSS('APP_NAVIGATION', 'listNavigation', aNavigation);
 
                 console.log('Se eliminó:', lastView.text);
             }
             else{
+                aNavigation = [];
+                jsTerian.saveDataObjSS('APP_NAVIGATION', 'listNavigation', aNavigation);
                 console.log('Historial vacio');
                 lastView = null;
             }
@@ -41,12 +73,17 @@ const jsDam = {
 
     },
     setCurrentView: function(pObjCurrentView) {
-        var listNavigation = jsTerian.getDataObjSS('UTILITY_GO', 'listNavigation');
+        var listNavigation = jsTerian.getDataObjSS('APP_NAVIGATION', 'listNavigation');
         console.log('listNavigation original:', listNavigation);
 
         // 1. Si listNavigation es null o vacío, creamos un array real [], 
         // de lo contrario, parseamos la cadena JSON que recuperamos.
-        var aNavigation = listNavigation ? JSON.parse(listNavigation) : [];
+        //var aNavigation = listNavigation ? JSON.parse(listNavigation) : [];
+        var aNavigation = listNavigation;
+        
+        if(aNavigation === null){
+            aNavigation = [];
+        }
 
         // 2. Agregamos el objeto directamente al array. 
         // NO uses JSON.stringify aquí adentro, o tendrás un array de textos en lugar de objetos.
@@ -58,9 +95,12 @@ const jsDam = {
 
         // 3. Para grabar, convertimos TODO el array a una cadena JSON válida.
         // NO uses .toString(), usa JSON.stringify().
-        var stringParaGuardar = JSON.stringify(aNavigation);
+        //var stringParaGuardar = JSON.stringify(aNavigation);
 
-        jsTerian.saveDataObjSS('UTILITY_GO', 'listNavigation', stringParaGuardar);
+        //jsTerian.saveDataObjSS('APP_NAVIGATION', 'listNavigation', stringParaGuardar);
+        jsTerian.saveDataObjSS('APP_NAVIGATION', 'listNavigation', aNavigation);
+        
+        jsTerian.saveDataObjSS('APP_NAVIGATION_CURRENT', 'currentView', pObjCurrentView);
     },
     confirmDelete: function(pObjConfig,pFnDelete){
         var msgTitle = 'Eliminar ' + pObjConfig.recordName;

@@ -8,7 +8,7 @@
     "userConfig": {
         "designer|userAlias": "contmain",
         "designer|userClassName": "contMainViewController",
-        "inactivityTime": 900000,
+        "inactivityTime": 9000000,
         "timer": 0
     },
     "configAlternates": {

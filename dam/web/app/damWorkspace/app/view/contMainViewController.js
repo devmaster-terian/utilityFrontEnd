@@ -18,7 +18,7 @@ Ext.define('damWorkspace.view.contMainViewController', {
     alias: 'controller.contmain',
 
     config: {
-        inactivityTime: 900000,
+        inactivityTime: 9000000,
         timer: 0
     },
 

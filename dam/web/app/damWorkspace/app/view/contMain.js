@@ -66,20 +66,20 @@ Ext.define('damWorkspace.view.contMain', {
                 },
                 {
                     xtype: 'button',
+                    id: 'btnBackView',
+                    itemId: 'btnBackView',
+                    iconCls: 'fas fa-arrow-left',
+                    listeners: {
+                        tap: 'onBtnBackViewTap'
+                    }
+                },
+                {
+                    xtype: 'button',
                     id: 'btnHome',
                     itemId: 'btnHome',
                     iconCls: 'fa-bas fa-home',
                     listeners: {
                         tap: 'onBtnHomeTap'
-                    }
-                },
-                {
-                    xtype: 'button',
-                    id: 'btnBackView',
-                    itemId: 'btnBackView',
-                    iconCls: 'fas fa-angles-left',
-                    listeners: {
-                        tap: 'onBtnBackViewTap'
                     }
                 },
                 {
@@ -187,6 +187,19 @@ Ext.define('damWorkspace.view.contMain', {
                                 {
                                     xtype: 'button',
                                     height: 32,
+                                    id: 'btnPrivacyWarn',
+                                    itemId: 'btnPrivacyWarn',
+                                    ui: 'plain',
+                                    iconCls: 'fas fa-file-contract',
+                                    text: 'Aviso de Privacidad',
+                                    textAlign: 'left',
+                                    listeners: {
+                                        tap: 'onBtnPrivacyWarnTap'
+                                    }
+                                },
+                                {
+                                    xtype: 'button',
+                                    height: 32,
                                     id: 'btnCurrentUser',
                                     itemId: 'btnCurrentUser',
                                     ui: 'plain',
@@ -237,29 +250,22 @@ Ext.define('damWorkspace.view.contMain', {
         }
     },
 
-    onBtnHomeTap: function(button, e, eOpts) {
-        /*
-        var contWorkspace = Ext.getCmp('contWorkspace');
-        contWorkspace.removeAll(true, true);
-        contWorkspace.addCls('workspace-bg');
-        contWorkspace.setHtml('');
-        */
-
-        Ext.getCmp('contMain').buildFeaturedView();
-    },
-
     onBtnBackViewTap: function(button, e, eOpts) {
         var lastView = jsDam.backView();
-        console.log('lastView');
-        console.log(lastView);
+        console.warn('lastView...',lastView);
+
 
         if(!lastView){
             Ext.getCmp('contMain').buildFeaturedView();
             return;
         }
 
+
+        jsDam.setCurrentView(lastView);
+
         var node = Ext.create('Ext.data.Model', {
             id: lastView.resource,
+            title: lastView.text,
             text: lastView.text,
             name: lastView.text
         });
@@ -267,12 +273,7 @@ Ext.define('damWorkspace.view.contMain', {
 
         if(lastView.action){
             console.log('Accion definida-->',lastView.action);
-
-
-
-
             var titulo = lastView.text;
-
             var objCurrentView = {
                 'resource' : lastView.resource,
                 'text'     : lastView.text,
@@ -285,11 +286,6 @@ Ext.define('damWorkspace.view.contMain', {
             var contWorkspace = Ext.getCmp('contWorkspace');
             contWorkspace.setHtml('');
             this.openIframeApp(appUrl, node);
-
-
-
-
-
             return;
         }
 
@@ -306,22 +302,51 @@ Ext.define('damWorkspace.view.contMain', {
                 'appUrl'   : lastView.appUrl
             };
 
-            //jsDam.setCurrentView(objCurrentView);
-
             var idResource = String(nodeId).split('-')[1];
 
             this.openResourceTabs(idResource, node);
 
-            console.warn('appLocal.deviceMode: ', appLocal.deviceMode);
-
             if(appLocal.deviceMode == 'mobile'){
                 var btnMenu = Ext.getCmp('btnMenu');
-                //btnMenu.fireEvent('tap',btnMenu);
             }
-
 
             return;
         }
+
+        if (prefix === 'c') {
+
+            var objCurrentView = {
+                'resource' : lastView.resource,
+                'text'     : lastView.text,
+                'action'   : lastView.action,
+                'appUrl'   : lastView.appUrl
+            };
+
+            const record = {
+                data:{
+                    id: nodeId,
+                    text: lastView.text,
+                    title: lastView.text,
+                }
+            };
+
+            contMain = Ext.getCmp('contMain');
+            contMain.buildContentView(record);
+
+            return;
+        }
+
+
+
+
+
+
+
+    },
+
+    onBtnHomeTap: function(button, e, eOpts) {
+        jsDam.resetNavigation();
+        Ext.getCmp('contMain').buildFeaturedView();
     },
 
     onBtnSearchTap: function(button, e, eOpts) {
@@ -432,6 +457,15 @@ Ext.define('damWorkspace.view.contMain', {
 
     },
 
+    onBtnPrivacyWarnTap: function(button, e, eOpts) {
+        Ext.getCmp('btnMenu').fireEvent('tap');
+
+        let objConfigView = {};
+        let record = {};
+        urlView = 'UTILITY_TerminosAvisoPrivacidad.pdf';
+        appLocal.previewFileFromUrl(urlView, objConfigView, record);
+    },
+
     onBtnCurrentUserTap: function(button, e, eOpts) {
 
     },
@@ -524,10 +558,10 @@ Ext.define('damWorkspace.view.contMain', {
                 var titulo = node.get('text');
 
                 var objCurrentView = {
-                    'resource':node.get('id'),
-                    'text':node.get('text'),
-                    'action':node.get('action'),
-                    'appUrl':node.get('appUrl')
+                    'resource' :node.get('id'),
+                    'text'     :node.get('text'),
+                    'action'   :node.get('action'),
+                    'appUrl'   :node.get('appUrl')
                 };
 
                 console.log('node-->',node);
@@ -1434,15 +1468,28 @@ Ext.define('damWorkspace.view.contMain', {
         // PARTE 1: LA VISTA (Generación del Contenedor)
         // ============================================================================
         function createFeaturedContainer() {
+
+            let title = 'PRINCIPAL';
+            let titleView = {
+                        xtype: 'component',
+                        padding: 10,
+                        html:
+                        '<div style="font-size:16px; font-weight:600; color: white; text-shadow: 0px 0px 4px rgba(0,0,0,0.7), 1px 1px 2px rgba(0,0,0,1);">' +
+                        Ext.util.Format.htmlEncode(title) +
+                        '</div>'
+            };
+
             return {
                 xtype: 'container',
                 itemId: 'contFeature',
-                layout: 'fit', // Para que el DataView ocupe todo el espacio disponible
+                layout: 'vbox', // Para que el DataView ocupe todo el espacio disponible
                 items: [
+                    titleView,
                     {
                         xtype: 'dataview',
                         itemId: 'dataViewFeatured',
                         width: '100%',
+                        flex: 1,
 
 
                         store: 'storeFeatured',
@@ -1457,13 +1504,7 @@ Ext.define('damWorkspace.view.contMain', {
                             boxSizing: 'border-box',
 
                         },
-                        itemTpl: /*[
-                            // Usamos dos url() separadas por coma. La segunda es tu imagen por defecto.
-                            '<div class="featured-btn" style="background-image: url(\'{thumbnail_url}\'), url(\'featured_collection_ph.png\');">',
-                            '<div class="featured-overlay"></div>',
-                            '<div class="featured-title">{title}</div>',
-                            '</div>'
-                        ],*/
+                        itemTpl:
                         new Ext.XTemplate(
                             '<div class="featured-btn" style="background-image: url(\'{[this.getBackgroundImage(values)]}\');">',
                             '<div class="featured-overlay"></div>',
@@ -1477,7 +1518,6 @@ Ext.define('damWorkspace.view.contMain', {
                         ),
 
                         listeners: {
-                        // CORRECCIÓN 1: Quitamos las comillas para referenciar la función local
                         childtap: onFeaturedItemTap
                         }
                     }
@@ -1492,14 +1532,20 @@ Ext.define('damWorkspace.view.contMain', {
             // 1. Extraemos el registro (record) de la base de datos
             var record = location.record;
 
+            console.log('record--->',record);
+
+
             // 2. Validamos de seguridad
             if (record) {
                 // 3. Extraemos los campos exactos de ese registro
-                var idArchivo = record.get('id');
-                var titulo = record.get('title');
-                var tipo = record.get('type');
-                var url = record.get('thumbnail_url');
+                var idResource      = record.get('id');
+                var titulo         = record.get('title');
+                var tipo           = record.get('type');
+                var url            = record.get('thumbnail_url');
                 var target_node_id = record.data.target.node_id;
+                var target_action  = record.data.target.action;
+                var target_app_url = record.data.target.app_url;
+                var objCurrentView = {};
 
                 console.log(record.data);
 
@@ -1514,10 +1560,6 @@ Ext.define('damWorkspace.view.contMain', {
                 } else {
                     //Ext.Msg.alert('Aviso', 'Seleccionaste la categoría: ' + titulo + '</br>target_node_id: ' + target_node_id);
 
-
-                    var idResource = String(target_node_id).split('-')[1];
-                    //var idResource = target_node_id;
-
                     // Creamos un Record de ExtJS temporal para satisfacer a openResourceTabs
                     var node = Ext.create('Ext.data.Model', {
                         id: target_node_id,
@@ -1525,14 +1567,48 @@ Ext.define('damWorkspace.view.contMain', {
                         name: titulo // Le paso ambos por si acaso tu función usa 'name' en algún otro lado
                     });
 
+                    if(target_action){
+                        console.log('Accion definida-->',target_action);
 
+                        objCurrentView = {
+                            'resource' : idResource,
+                            'text'     : titulo,
+                            'action'   : target_action,
+                            'appUrl'   : target_app_url
+                        };
+
+                        //jsDam.setCurrentView(objCurrentView);
+
+                        var contWorkspace = Ext.getCmp('contWorkspace');
+                        contWorkspace.setHtml('');
+
+                        var contMain = Ext.getCmp('contMain');
+                        contMain.openIframeApp(target_app_url, node);
+
+                        return;
+                    }
+
+
+                    idResource = String(target_node_id).split('-')[1];
+                    //var idResource = target_node_id;
+
+
+
+                    objCurrentView = {
+                        'resource' : target_node_id,
+                        'text'     : titulo,
+                        'action'   : target_action,
+                        'appUrl'   : target_app_url
+                    };
+
+                    console.log('node-->',node);
+                    console.log('objCurrentView:',objCurrentView);
+                    jsDam.setCurrentView(objCurrentView);
 
 
                     contMain = Ext.getCmp('contMain');
-                    contMain.openResourceTabs(idResource, node);
-
-
-
+                    //contMain.openResourceTabs(idResource, node);
+                    contMain.buildContentView(record);
                 }
             }
         }
@@ -1566,15 +1642,10 @@ Ext.define('damWorkspace.view.contMain', {
             //contWorkspace.removeCls('workspace-bg');
             //contWorkspace.addCls('workspace-base');
 
-            // 2. Inyectar el contenedor
             contWorkspace.add(createFeaturedContainer());
 
-            //Ext.getCmp('contFeature').addCls('workspace-bg');
-
-            // 3. OBTENER O CREAR EL STORE
             var st = Ext.getStore('storeFeatured');
 
-            // Si Sencha Architect aún no lo instanció globalmente, lo creamos nosotros usando su nombre de clase
             if (!st) {
                 console.log("Instanciando storeFeatured por primera vez...");
                 st = Ext.create('damWorkspace.store.storeFeatured');
@@ -1595,12 +1666,238 @@ Ext.define('damWorkspace.view.contMain', {
 
         var endPoint = 'tree/featured';
 
-        // CORRECCIÓN 3 (Opcional pero recomendada):
-        // Para peticiones GET, es mejor pasar las variables en la URL
         var url = jsTerian.getUrl(endPoint) + '?featured=true';
         var jsonData = null;
 
         console.info('---buildFeaturedView---');
+        console.info('url:', url);
+
+        // Ejecutamos la petición
+        jsTerian.makeRequest('GET', url, jsonData, fnSuccess, fnFailure, true);
+    },
+
+    buildContentView: function(record) {
+        function createContentContainer() {
+            console.warn('Ejecutando createContentContainer');
+            console.warn('record:',record);
+
+            let title = record.data.title;
+            let titleView = {
+                        xtype: 'component',
+                        padding: 10,
+                        html:
+                        '<div style="font-size:16px; font-weight:600; color: white; text-shadow: 0px 0px 4px rgba(0,0,0,0.7), 1px 1px 2px rgba(0,0,0,1);">' +
+                        Ext.util.Format.htmlEncode(title) +
+                        '</div>'
+            };
+
+            return {
+                xtype: 'container',
+                itemId: 'contContent',
+                layout: 'vbox', // Para que el DataView ocupe todo el espacio disponible
+                items: [
+                    titleView,
+                    {
+                        xtype: 'dataview',
+                        itemId: 'dataViewContent',
+                        width: '100%',
+                        flex : 1,
+                        store: 'storeContent',
+                        cls: 'featured-grid-view',
+                        inline: false,
+                        scrollable: 'vertical',
+
+                        style: {
+                            'background-color': '#1b2a4e',
+                            border: '0px solid red',
+                            boxSizing: 'border-box',
+
+                        },
+                        itemTpl:
+                        new Ext.XTemplate(
+                            '<div class="featured-btn" style="background-image: url(\'{[this.getBackgroundImage(values)]}\');">',
+                            '<div class="featured-overlay"></div>',
+                            '<div class="featured-title">{text}</div>',
+                            '</div>',
+                            {
+                                getBackgroundImage: function(values) {
+                                    return values.thumbnail_url ? jsTerian.makeUrl(values.thumbnail_url) : 'featured_collection_ph.png';
+                                }
+                            }
+                        ),
+
+                        listeners: {
+                        childtap: onContentItemTap
+                        }
+                    }
+                ]
+            };
+        }
+
+        function onContentItemTap(dataview, location, eOpts) {
+            // 1. Extraemos el registro (record) de la base de datos
+            var record = location.record;
+
+            console.log('record--->',record);
+
+
+            // 2. Validamos de seguridad
+            if (record) {
+                // 3. Extraemos los campos exactos de ese registro
+                var idArchivo      = record.get('id');
+                var titulo         = record.get('text');
+                var tipo           = record.get('node_type');
+                var url            = record.get('thumbnail_url');
+                var target_node_id = record.data.id;
+
+                console.log(record.data);
+
+                console.log('Botón Destacado Tocado ->', titulo, tipo);
+
+                // 4. Lógica de negocio según el tipo de archivo
+                if (tipo === 'pdf' || tipo === 'image' || tipo === 'video') {
+                    Ext.toast('Abriendo: ' + titulo);
+                    // Si estás dentro del mismo scope o pasaste el "me", puedes llamar a tu visor:
+                    // previewFileFromURL(url, { title: titulo }, record);
+                } else {
+                    //Ext.Msg.alert('Aviso', 'Seleccionaste la categoría: ' + titulo + '</br>target_node_id: ' + target_node_id);
+
+
+                    var typeResource = String(target_node_id).split('-')[0];
+                    var idResource = String(target_node_id).split('-')[1];
+                    //var idResource = target_node_id;
+
+                    // Creamos un Record de ExtJS temporal para satisfacer a openResourceTabs
+                    var node = Ext.create('Ext.data.Model', {
+                        node_id: target_node_id,
+                        id: target_node_id,
+                        text: titulo,
+                        name: titulo // Le paso ambos por si acaso tu función usa 'name' en algún otro lado
+                    });
+
+
+
+                    contMain = Ext.getCmp('contMain');
+
+
+                    console.log('idResource:',idResource);
+                    console.warn('typeResource:',typeResource);
+                    console.warn('node:',node);
+
+
+                    switch(typeResource){
+                        case 'c':
+
+                            var objCurrentView = {
+                                'resource' : idArchivo,
+                                'text'     : titulo,
+                                'action'   : '',
+                                'appUrl'   : ''
+                            };
+
+                            console.log('node-->',node);
+                            console.log('objCurrentView:',objCurrentView);
+                            jsDam.setCurrentView(objCurrentView);
+
+
+                            record.data.title = titulo;
+                            contMain.buildContentView(record);
+                            break;
+                        case 'r':
+                            contMain.openResourceTabs(idResource, node);
+                            break;
+                        default:
+                            console.log('Proceso');
+
+                    }
+
+
+
+
+
+                    var objCurrentView = {
+                        'resource' : idArchivo,
+                        'text'     : titulo,
+                        'action'   : '',
+                        'appUrl'   : ''
+                    };
+
+                    console.log('node-->',node);
+                    console.log('objCurrentView:',objCurrentView);
+                    jsDam.setCurrentView(objCurrentView);
+
+                }
+            }
+        }
+
+        var fnSuccess = function(pResponse){
+            console.log('Success: Datos de destacados obtenidos');
+
+            var msg;
+            try {
+                msg = Ext.decode(pResponse.responseText);
+            }
+            catch(e){
+                // Cambiamos 'data' por 'items' para que coincida con tu backend
+                msg = { success:true, message:'Error de parseo', items:[] };
+            }
+
+            console.log('msg: ', msg);
+
+            var contWorkspace = Ext.getCmp('contWorkspace');
+            if (!contWorkspace) {
+                console.warn('No existe contWorkspace');
+                return;
+            }
+
+
+            console.warn('Limpiar la ventana... contWorkspace');
+            // 1. Limpiar la ventana
+            contWorkspace.removeAll(true, true);
+            contWorkspace.setHtml('');
+            //contWorkspace.removeCls('workspace-bg');
+            //contWorkspace.addCls('workspace-base');
+
+            contWorkspace.add(createContentContainer());
+
+            var st = Ext.getStore('storeContent');
+
+            if (!st) {
+                console.log("Instanciando storeFeatured por primera vez...");
+                st = Ext.create('damWorkspace.store.storeFeatured');
+            }
+
+            // 4. INYECTAR LOS DATOS (¡Usando msg.items!)
+            if (st && msg.children) {
+                st.setData(msg.children);
+                console.log("¡Datos inyectados exitosamente!", st.getCount() + " registros cargados.");
+            } else {
+                console.error("Fallo al inyectar datos: msg.children está vacío o indefinido.");
+            }
+
+        };
+
+        var fnFailure = function(pResponse){
+             console.log('Failure: Falló el EndPoint de Content View');
+        };
+
+
+        var base_node_id = null;
+
+        if(record.data.target && record.data.target.node_id){
+            base_node_id = record.data.target.node_id;
+        }
+        else{
+            base_node_id = record.data.id;
+
+        }
+
+        var endPoint = 'tree/children/' + base_node_id;
+
+        var url = jsTerian.getUrl(endPoint);
+        var jsonData = null;
+
+        console.info('---buildContentView---');
         console.info('url:', url);
 
         // Ejecutamos la petición

@@ -9,14 +9,16 @@
         "models": [
             "modelMenuTree",
             "modelAsset",
-            "modelFeatured"
+            "modelFeatured",
+            "modelContent"
         ],
         "name": "damWorkspace",
         "stores": [
             "storeMenuTree",
             "storeTreeMenu",
             "storeAsset",
-            "storeFeatured"
+            "storeFeatured",
+            "storeContent"
         ],
         "views": [
             "contMain"

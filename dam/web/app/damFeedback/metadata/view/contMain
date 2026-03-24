@@ -194,68 +194,6 @@
                     "codeClass": null,
                     "name": "MySpacer",
                     "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
-                },
-                {
-                    "type": "Ext.Button",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "itemId": "mybutton1",
-                        "text": "MyButton1"
-                    },
-                    "configAlternates": {
-                        "itemId": "string",
-                        "text": "string"
-                    },
-                    "name": "MyButton1",
-                    "designerId": "81096d9a-8788-4149-8c40-cd0d6a05ce24",
-                    "cn": [
-                        {
-                            "type": "basiceventbinding",
-                            "reference": {
-                                "name": "listeners",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fn": "onMybutton1Tap",
-                                "implHandler": [
-                                    "",
-                                    "Ext.Msg.alert(",
-                                    "    'Título del Aviso',",
-                                    "    'La operación se completó con éxito.',",
-                                    "    function() {",
-                                    "        console.log('El usuario cerró el mensaje');",
-                                    "    }",
-                                    ");",
-                                    "",
-                                    "",
-                                    "/*",
-                                    "Ext.Msg.prompt(",
-                                    "    'Nombre del Archivo',",
-                                    "    'Ingresa el nuevo nombre:',",
-                                    "    function(buttonId, value) {",
-                                    "        if (buttonId === 'ok' && value) {",
-                                    "            console.log('Nuevo nombre:', value);",
-                                    "        }",
-                                    "    }",
-                                    ");",
-                                    "*/"
-                                ],
-                                "name": "tap"
-                            },
-                            "configAlternates": {
-                                "fn": "string",
-                                "implHandler": "code",
-                                "name": "string"
-                            },
-                            "name": "onMybutton1Tap",
-                            "designerId": "a686838d-c619-4cc1-b765-d0400cfea479"
-                        }
-                    ]
                 }
             ]
         },
@@ -468,7 +406,13 @@
                     "",
                     "    console.log('data:',data);",
                     "",
-                    "    Ext.getCmp('contMain').prospectUserSave(jsTerian.getDataObjSS('TMP_SESSION','id_user'),data.id_prospect);",
+                    "    Ext.getCmp('contMain').feedbackReset();",
+                    "            var objMessage = {",
+                    "                type: 'confirm',",
+                    "                title: 'Feedback Enviado',",
+                    "                message: 'Se ha enviado su comentario, gracias.'",
+                    "            };",
+                    "            jsDam.toast(objMessage);    ",
                     "",
                     "",
                     "",
