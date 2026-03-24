@@ -136,6 +136,7 @@ Ext.define('damCollection.view.contMain', {
                                         {
                                             xtype: 'textfield',
                                             flex: 1,
+                                            hidden: true,
                                             id: 'ftType',
                                             itemId: 'ftType',
                                             margin: 5,
@@ -145,6 +146,7 @@ Ext.define('damCollection.view.contMain', {
                                         {
                                             xtype: 'textfield',
                                             flex: 2,
+                                            hidden: true,
                                             id: 'ftName',
                                             itemId: 'ftName',
                                             margin: 5,
@@ -154,6 +156,7 @@ Ext.define('damCollection.view.contMain', {
                                         {
                                             xtype: 'combobox',
                                             flex: 1,
+                                            hidden: true,
                                             id: 'cboIsActive',
                                             itemId: 'cboIsActive',
                                             margin: 5,
@@ -176,6 +179,14 @@ Ext.define('damCollection.view.contMain', {
                                                     }
                                                 ]
                                             }
+                                        },
+                                        {
+                                            xtype: 'component',
+                                            id: 'lblBreadcrumb',
+                                            itemId: 'lblBreadcrumb',
+                                            style: 'font-size:12px;color:#7f7f7f;font-weight:400;text-transform:uppercase;font-family:Arial,sans-serif;',
+                                            html: 'UTILITY',
+                                            margin: '6 10 10 10'
                                         }
                                     ]
                                 },
@@ -214,25 +225,30 @@ Ext.define('damCollection.view.contMain', {
                                         '                </span>',
                                         '            </tpl>',
                                         '        </div>',
+                                        '        <tpl if="values.has_children">',
+                                        '            <span class="role-badge" style="margin-left:4px;">',
+                                        '                <i class="fas fa-level-down-alt"></i> Tiene hijos',
+                                        '            </span>',
+                                        '        </tpl>',
                                         '',
-                                        '        <!-- CODIGO -->',
+                                        '        <!-- CODIGO ',
                                         '        <tpl if="values.node_type === \'collection\'">',
-                                        '            <div class="text-bold">Código: COL-{[values.id_collection || \'—\']}</div>',
+                                        '            <div class="text-bold">Cod:COL-{[values.id_collection || \'—\']}</div>',
                                         '        </tpl>',
                                         '',
                                         '        <tpl if="values.node_type === \'resource\'">',
-                                        '            <div class="text-bold">Código: {[values.code || \'—\']}</div>',
+                                        '            <div class="text-bold">Cod:{[values.code || \'—\']}</div>',
                                         '        </tpl>',
                                         '',
                                         '        <tpl if="values.node_type === \'tab\'">',
-                                        '            <div class="text-bold">Código: {[values.tab_code || \'—\']}</div>',
-                                        '        </tpl>',
+                                        '            <div class="text-bold">Cod:{[values.tab_code || \'—\']}</div>',
+                                        '        </tpl> -->',
                                         '',
-                                        '        <!-- ORIGEN -->',
+                                        '        <!-- ORIGEN',
                                         '        <div class="role-badge">',
                                         '            <i class="x-fa fas fa-sitemap"></i>',
                                         '            Origen: {[values.parent_name || \'—\']}',
-                                        '        </div>',
+                                        '        </div> -->',
                                         '    </div>',
                                         '',
                                         '    <div class="tree-col-desc">',
@@ -241,12 +257,6 @@ Ext.define('damCollection.view.contMain', {
                                         '        <div class="main-text">',
                                         '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
                                         '            <span class="text-bold">{text}</span>',
-                                        '',
-                                        '            <tpl if="values.has_children">',
-                                        '                <span class="role-badge" style="margin-left:8px;">',
-                                        '                    <i class="x-fa fas fa-level-down-alt"></i> Tiene hijos',
-                                        '                </span>',
-                                        '            </tpl>',
                                         '        </div>',
                                         '',
                                         '        <!-- REGLA -->',
@@ -276,15 +286,14 @@ Ext.define('damCollection.view.contMain', {
                                         '        <!-- DETALLE SECUNDARIO -->',
                                         '        <div class="sub-text">',
                                         '            <tpl if="values.node_type === \'collection\'">',
-                                        '                {[values.description || \'—\']}',
+                                        '                <!--{[values.data.description || \'—\']}-->',
                                         '            </tpl>',
                                         '',
                                         '            <tpl if="values.node_type === \'resource\'">',
-                                        '                {[values.description || \'—\']}',
+                                        '                <!--{[values.data.description || \'—\']}-->',
                                         '            </tpl>',
                                         '',
                                         '            <tpl if="values.node_type === \'tab\'">',
-                                        '                {[values.short_description || \'—\']}',
                                         '                <tpl if="values.asset_type_name">',
                                         '                    <span class="role-badge">Tipo: {asset_type_name}</span>',
                                         '                </tpl>',
@@ -909,6 +918,13 @@ Ext.define('damCollection.view.contMain', {
         appLocal.goBackTree('storeNode');
         console.log('treeState:', appLocal.treeState);
         console.log('treeNav:', appLocal.treeNav);
+
+        var breadcrumbCmp = Ext.getCmp('lblBreadcrumb');
+        if (breadcrumbCmp) {
+            breadcrumbCmp.setHtml(
+                Ext.String.htmlEncode(appLocal.getCurrentBreadcrumb() || '')
+            );
+        }
     },
 
     onBtnInfoTap: function(button, e, eOpts) {
@@ -975,6 +991,7 @@ Ext.define('damCollection.view.contMain', {
                         // Lanzar la función para pintar la información
                         //this.navigateToView('');
                         this.showFormView(record);
+                        console.log('treeNav',appLocal.getCurrentBreadcrumb());
                         break;
 
                     case 'edit':
@@ -1002,6 +1019,18 @@ Ext.define('damCollection.view.contMain', {
 
                         if (!nodeId) {
                             Ext.toast('No se encontró el ID del nodo a eliminar.');
+                            return;
+                        }
+
+                        if(data.has_children){
+                            //jsDam.toast({ type:'error', title:'Error', message: 'Las colecciones del sistema no se pueden eliminar.' });
+                            Ext.toast('No se puede eliminar, tiene hijos.');
+                            return;
+                        }
+
+                        if(data.action && data.action === 'open_app'){
+                            //jsDam.toast({ type:'error', title:'Error', message: 'Las colecciones del sistema no se pueden eliminar.' });
+                            Ext.toast('Las colecciones del sistema no se pueden eliminar.');
                             return;
                         }
 
@@ -1653,6 +1682,13 @@ Ext.define('damCollection.view.contMain', {
         // Navegar
         if (data.node_type === 'collection' || data.node_type === 'resource') {
             appLocal.loadTreeChildren('storeNode', data.id, { pushHistory: true });
+        }
+
+        var breadcrumbCmp = Ext.getCmp('lblBreadcrumb');
+        if (breadcrumbCmp) {
+            breadcrumbCmp.setHtml(
+                Ext.String.htmlEncode(appLocal.getCurrentBreadcrumb() || '')
+            );
         }
     },
 
