@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_h4i3t8v0",
+        "includeInBundle": true,
+        "url": "../../../../framework/resourcesJS/extOverride.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js2",
+    "designerId": "526148f3-caf0-4c91-9a15-baa8a9abac0d"
+}

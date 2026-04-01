@@ -1,0 +1,135 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "storeCollection",
+        "model": "modelCollection",
+        "storeId": "storeCollection"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "model": "model",
+        "storeId": "string"
+    },
+    "name": "MyStore",
+    "designerId": "bb660a8e-9473-4b53-b071-827b44fdabe8",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "ajaxProxyCollection"
+            },
+            "configAlternates": {
+                "designer|displayName": "string"
+            },
+            "name": "MyAjaxProxy4",
+            "designerId": "0576053b-37b8-41b7-9237-c00665080c58",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "designer|displayName": "jsonReaderCollection",
+                        "rootProperty": "collections"
+                    },
+                    "configAlternates": {
+                        "designer|displayName": "string",
+                        "rootProperty": "string"
+                    },
+                    "name": "MyJsonReader4",
+                    "designerId": "32c4af79-27f5-4ca0-a54c-e94bce45e1e2"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "store"
+                ],
+                "fn": "onLoad",
+                "implHandler": [
+                    "// Petición para traer los projectos",
+                    "var url = jsTerian.getUrl('tree/collections/root');",
+                    "console.log(url);",
+                    "// Obtén el proxy del store",
+                    "const proxy = store.getProxy();",
+                    "proxy.url = url;",
+                    "",
+                    "// Obtener la pageSize y definir el currentPage en la primer página",
+                    "var pageSize = store.pageSize || 10;",
+                    "store.currentPage = 1;",
+                    "",
+                    "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
+                    "const params = {};",
+                    "params.per_page = pageSize;",
+                    "",
+                    "// Asigna los parámetros al proxy",
+                    "proxy.setExtraParams(params);",
+                    "",
+                    "// Agrega el encabezado de autorización",
+                    "jsTerian.addAuthorizationHeader(store);",
+                    "",
+                    "store.load({",
+                    "    callback: function(records, operation, success) {",
+                    "        if (success) {",
+                    "            console.log('collections');",
+                    "            console.log(records);",
+                    "            if (records.length === 0) {",
+                    "                console.info('No hay colleciones');",
+                    "            }",
+                    "        } else {",
+                    "            const response = operation.getError().response;",
+                    "            const status = response.status;",
+                    "",
+                    "            if (status >= 500) {",
+                    "                let msg = \"Error en el servidor (\" + status + \")\";",
+                    "",
+                    "                try {",
+                    "                    const json = Ext.decode(response.responseText);",
+                    "                    if (json.error) {",
+                    "                        msg = json.error;",
+                    "                    }",
+                    "                } catch (e) {",
+                    "                    console.warn('No se pudo parsear el error');",
+                    "                }",
+                    "",
+                    "                jsTerian.toastAlert(msg, 'error');",
+                    "            }",
+                    "",
+                    "            store.removeAll();",
+                    "        }",
+                    "    }",
+                    "});"
+                ],
+                "name": "onBeforeLoad"
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onLoad",
+            "designerId": "93b3f0af-2327-418a-adfd-99fc4970703d"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "type": "cssresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "css_fj3sjfop",
+        "url": "../../../../framework/plugins/iziToast-master/dist/css/iziToast.min.css"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "url": "uri"
+    },
+    "name": "css3",
+    "designerId": "ef626367-501a-4220-812e-4c109f9fbba3"
+}

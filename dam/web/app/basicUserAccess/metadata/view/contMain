@@ -1,0 +1,528 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "designer|userAlias": "contMain",
+        "designer|userClassName": "contMain",
+        "fullscreen": true,
+        "id": "contMain",
+        "itemId": "contMain",
+        "layout": "hbox",
+        "mixins": [
+            "['Ext.mixin.Responsive']"
+        ],
+        "responsiveConfig": [
+            "responsiveConfig: {",
+            "    'width < 800': {",
+            "        layoutMode: 'mobile' ",
+            "    },",
+            "    'width >= 800': {",
+            "        layoutMode: 'desktop'",
+            "    }",
+            "}"
+        ]
+    },
+    "configAlternates": {
+        "designer|initialView": "boolean",
+        "designer|userAlias": "string",
+        "designer|userClassName": "string",
+        "id": "string",
+        "itemId": "string",
+        "responsiveConfig": "object",
+        "mixins": "object",
+        "fullscreen": "boolean",
+        "layout": "string"
+    },
+    "name": "MyContainer",
+    "designerId": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "responsiveConfig",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "layoutMode",
+            "type": "string"
+        }
+    ],
+    "viewControllerInstanceId": "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+    "viewModelInstanceId": "b777bc78-ac1b-4c89-beec-997c780710ac",
+    "cn": [
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainResize",
+                "implHandler": [
+                    "console.log('>>>resizswse');",
+                    "console.log(element);",
+                    "",
+                    "console.log('>>>info');",
+                    "console.log(info);",
+                    "",
+                    "",
+                    "let width = info;",
+                    "",
+                    "// 1. Log para depurar",
+                    "    console.log('El ancho actual es:', width);",
+                    "",
+                    "    // 2. Lógica condicional",
+                    "    // Importante: Verifica el layout actual para no forzarlo mil veces si no ha cambiado",
+                    "    var currentLayout = this.getLayout().type;",
+                    "",
+                    "    if (width < 1000 /*&& currentLayout !== 'vbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Móvil');",
+                    "        this.setLayout('hbox');",
+                    "    }",
+                    "    else if (width >= 1000 /*&& currentLayout !== 'hbox'*/) {",
+                    "        console.log('-> Cambiando a Modo Escritorio');",
+                    "        this.setLayout('vbox');",
+                    "    }",
+                    ""
+                ],
+                "name": "resize"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainResize",
+            "designerId": "f5c3c454-11be-4b0e-b423-c64be34a72c1"
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "id": "contPanel",
+                "itemId": "contPanel",
+                "layout": "hbox",
+                "layout|flex": 1
+            },
+            "configAlternates": {
+                "id": "string",
+                "itemId": "string",
+                "layout": "string",
+                "layout|flex": "number"
+            },
+            "name": "MyContainer2",
+            "designerId": "45fb7982-6b9d-456c-b29f-b187c9aa4f11",
+            "cn": [
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contConfig",
+                        "itemId": "contConfig",
+                        "layout": "card",
+                        "layout|flex": 1
+                    },
+                    "configAlternates": {
+                        "id": "string",
+                        "itemId": "string",
+                        "layout": "string",
+                        "layout|flex": "number"
+                    },
+                    "name": "MyContainer3",
+                    "designerId": "c8245e9e-42c2-4afb-861d-6e04fd6f6497",
+                    "cn": [
+                        {
+                            "type": "Ext.Toolbar",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "docked": "top",
+                                "id": "toolbarMain",
+                                "itemId": "toolbarMain"
+                            },
+                            "configAlternates": {
+                                "docked": "string",
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyToolbar",
+                            "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|uiInterfaceName": "confirm",
+                                        "iconCls": "fas fa-plus",
+                                        "id": "btnCreate",
+                                        "itemId": "btnCreate",
+                                        "text": "Guardar",
+                                        "tooltip": "Guardar colecciones",
+                                        "ui": "confirm"
+                                    },
+                                    "configAlternates": {
+                                        "itemId": "string",
+                                        "text": "string",
+                                        "designer|uiInterfaceName": "string",
+                                        "iconCls": "string",
+                                        "id": "string",
+                                        "ui": "string",
+                                        "tooltip": "string"
+                                    },
+                                    "name": "MyButton",
+                                    "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onBtnCreateTap",
+                                                "implHandler": [
+                                                    "var userId = jsTerian.readElementValue('cboUser');",
+                                                    "",
+                                                    "if (!userId) {",
+                                                    "    //jsDam.toast({ type:'success', title:'Éxito', message: 'Éxito' });",
+                                                    "    Ext.Msg.alert('Validación', 'Debes seleccionar un usuario');",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "appLocal.saveUserCollections(userId);"
+                                                ],
+                                                "name": "tap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onBtnCreateTap",
+                                            "designerId": "4a2df9c0-3254-4653-9d05-6fa860fa817d"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MySpacer",
+                                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                                },
+                                {
+                                    "type": "Ext.field.Select",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "displayField": "label",
+                                        "id": "cboUser",
+                                        "itemId": "cboUser",
+                                        "label": "Usuario",
+                                        "margin": "0 8 0 0",
+                                        "store": "storeUser",
+                                        "valueField": "id_user"
+                                    },
+                                    "configAlternates": {
+                                        "displayField": "datafield",
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "label": "string",
+                                        "store": "store",
+                                        "valueField": "datafield",
+                                        "margin": "auto"
+                                    },
+                                    "name": "MySelectField",
+                                    "designerId": "f6bbbbfa-309c-4327-9dbf-f7e44a212b7d",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onCboUserChange",
+                                                "implHandler": [
+                                                    "if (!newValue) {",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "appLocal.getUserCollections(newValue);"
+                                                ],
+                                                "name": "change"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onCboUserChange",
+                                            "designerId": "7c3006b2-ddb0-4102-82b7-c7635a2ca64c"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.Container",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "contListConfig",
+                                "itemId": "contListConfig",
+                                "scrollable": true
+                            },
+                            "configAlternates": {
+                                "id": "string",
+                                "itemId": "string",
+                                "scrollable": "auto"
+                            },
+                            "name": "MyContainer",
+                            "designerId": "cc59ed63-ec4f-4553-a0c4-7a78cc91d01e",
+                            "cn": [
+                                {
+                                    "type": "Ext.Container",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "html": "<div class=\"resource-row header-style\">     <div class=\"conf-col-code\">CÓDIGO</div>     <div class=\"conf-col-desc\">DESCRIPCIÓN</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
+                                        "id": "contHeaderConfig",
+                                        "itemId": "contHeaderConfig"
+                                    },
+                                    "configAlternates": {
+                                        "html": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyContainer1",
+                                    "designerId": "4a30f364-50f2-4ba3-b981-edf264738e90"
+                                },
+                                {
+                                    "type": "Ext.dataview.DataView",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "id": "dataViewConfig",
+                                        "itemId": "dataViewConfig",
+                                        "store": "storeCollection"
+                                    },
+                                    "configAlternates": {
+                                        "id": "string",
+                                        "itemId": "string",
+                                        "store": "store"
+                                    },
+                                    "name": "MyDataView",
+                                    "designerId": "4c461bb6-7a1d-42ee-a892-f8f2158b9661",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.XTemplate",
+                                            "reference": {
+                                                "name": "itemTpl",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|displayName": "itemTpl",
+                                                "implHandler": [
+                                                    "<div class=\"resource-row selectable-row {[values.selected ? 'is-selected' : '']} {[values.is_active ? '' : 'user-inactive']}\">",
+                                                    "",
+                                                    "    <div class=\"tree-col-code\">",
+                                                    "        <div class=\"text-bold\">Colección</div>",
+                                                    "        <div class=\"sub-text\">Id: {id_collection}</div>",
+                                                    "    </div>",
+                                                    "",
+                                                    "    <div class=\"tree-col-desc\">",
+                                                    "        <div class=\"main-text text-bold\">",
+                                                    "            {name}",
+                                                    "        </div>",
+                                                    "        <div class=\"sub-text\">",
+                                                    "            <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                    "            <tpl if=\"values.is_active\">",
+                                                    "                Activa",
+                                                    "            <tpl else>",
+                                                    "                Inactiva",
+                                                    "            </tpl>",
+                                                    "",
+                                                    "            <tpl if=\"values.selected\">",
+                                                    "                <span class=\"selection-label\"> • Asignada</span>",
+                                                    "            <tpl else>",
+                                                    "                <span class=\"selection-label\"> • Disponible</span>",
+                                                    "            </tpl>",
+                                                    "        </div>",
+                                                    "    </div>",
+                                                    "",
+                                                    "    <div class=\"col-actions\">",
+                                                    "        <div class=\"select-pill {[values.selected ? 'selected' : 'unselected']}\">",
+                                                    "            <tpl if=\"values.selected\">",
+                                                    "                <i class=\"x-fa fas fa-check\"></i>",
+                                                    "            <tpl else>",
+                                                    "                <i class=\"x-fa far fa-circle\"></i>",
+                                                    "            </tpl>",
+                                                    "        </div>",
+                                                    "    </div>",
+                                                    "",
+                                                    "</div>"
+                                                ]
+                                            },
+                                            "configAlternates": {
+                                                "designer|displayName": "string",
+                                                "implHandler": "code"
+                                            },
+                                            "name": "itemTpl",
+                                            "designerId": "a0bebdcd-8217-417f-8ed7-fd00ebd20e06"
+                                        },
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onDataViewConfigChildtap",
+                                                "implHandler": [
+                                                    "var btn = location.event.getTarget('.action-btn');",
+                                                    "var record = location.record;",
+                                                    "",
+                                                    "if (!record) {",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "if (btn) {",
+                                                    "    var action = btn.getAttribute('data-action');",
+                                                    "    location.event.stopEvent();",
+                                                    "",
+                                                    "    switch (action) {",
+                                                    "        case 'toggle-select':",
+                                                    "            record.set('selected', !record.get('selected'));",
+                                                    "            break;",
+                                                    "",
+                                                    "        default:",
+                                                    "            console.log('Evento no definido');",
+                                                    "    }",
+                                                    "",
+                                                    "    return;",
+                                                    "}",
+                                                    "",
+                                                    "// Si se toca fuera del botón, también alterna selección",
+                                                    "record.set('selected', !record.get('selected'));"
+                                                ],
+                                                "name": "childtap"
+                                            },
+                                            "configAlternates": {
+                                                "fn": "string",
+                                                "implHandler": "code",
+                                                "name": "string"
+                                            },
+                                            "name": "onDataViewConfigChildtap",
+                                            "designerId": "4cf44224-a443-4e25-98a3-debcd3df726a"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "buildCollectionsPayload",
+                "implHandler": [
+                    "var store = Ext.getStore('storeCollection');",
+                    "var collectionIds = [];",
+                    "",
+                    "if (!store) {",
+                    "    return {",
+                    "        collection_ids: []",
+                    "    };",
+                    "}",
+                    "",
+                    "store.each(function (rec) {",
+                    "    if (rec.get('selected')) {",
+                    "        collectionIds.push(rec.get('id_collection'));",
+                    "    }",
+                    "});",
+                    "",
+                    "return {",
+                    "    collection_ids: collectionIds",
+                    "};"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "buildCollectionsPayload",
+            "designerId": "1a16f12b-0bcb-4419-a2ea-43970912a907"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContMainBeforeShow",
+                "implHandler": [
+                    "jsTerian.loadStore('storeUser');",
+                    "jsTerian.loadStore('storeRole');"
+                ],
+                "name": "beforeshow"
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code",
+                "name": "string"
+            },
+            "name": "onContMainBeforeShow",
+            "designerId": "679799e3-69ad-437c-a9ad-12a6220ab572"
+        }
+    ]
+}

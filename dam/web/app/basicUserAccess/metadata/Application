@@ -1,0 +1,164 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "modelRole",
+            "modelUser",
+            "modelCollection"
+        ],
+        "name": "basicUserAccess",
+        "stores": [
+            "storeUser",
+            "storeRole",
+            "storeCollection"
+        ],
+        "views": [
+            "contMain"
+        ]
+    },
+    "configAlternates": {
+        "name": "string",
+        "views": "typedarray",
+        "models": "typedarray",
+        "stores": "typedarray"
+    },
+    "name": "Application",
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "appLocal = this.getApplication();",
+                    "",
+                    "// Carga de stores",
+                    "jsTerian.loadStore('storeUser');",
+                    "jsTerian.loadStore('storeCollection');"
+                ]
+            },
+            "configAlternates": {
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "launch",
+            "designerId": "a4efe309-81d5-4446-85f1-6ca1407c959a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "userId"
+                ],
+                "fn": "saveUserCollections",
+                "implHandler": [
+                    "var contMain = Ext.getCmp('contMain');",
+                    "",
+                    "var payload = contMain.buildCollectionsPayload();",
+                    "var url = jsTerian.makeUrl('/user/' + userId + '/collections');",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    'PUT',",
+                    "    url,",
+                    "    payload,",
+                    "    function (response) {",
+                    "        Ext.Msg.alert('Éxito', 'Colecciones actualizadas correctamente');",
+                    "    },",
+                    "    function (response) {",
+                    "        var parsed = {};",
+                    "        try {",
+                    "            parsed = Ext.decode(response.responseText || '{}');",
+                    "        } catch (e) {}",
+                    "",
+                    "        Ext.Msg.alert(",
+                    "            'Error',",
+                    "            parsed.message || 'No se pudieron actualizar las colecciones'",
+                    "        );",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "saveUserCollections",
+            "designerId": "3d141b2b-4df3-481f-b2d8-eba87787c29a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "idUser"
+                ],
+                "fn": "getUserCollections",
+                "implHandler": [
+                    "var url = jsTerian.makeUrl('/user/' + idUser + '/collections');",
+                    "",
+                    "jsTerian.makeRequest(",
+                    "    'GET',",
+                    "    url,",
+                    "    null,",
+                    "    function(response) {",
+                    "        var msg = {};",
+                    "        try { msg = Ext.decode(response.responseText); } catch (e) {}",
+                    "",
+                    "        var assignedIds = msg.collection_ids || [];",
+                    "        var store = Ext.getStore('storeCollection');",
+                    "",
+                    "        if (!store) {",
+                    "            return;",
+                    "        }",
+                    "",
+                    "        store.each(function(record) {",
+                    "            record.set(",
+                    "                'selected',",
+                    "                assignedIds.includes(record.get('id_collection'))",
+                    "            );",
+                    "        });",
+                    "    },",
+                    "    function(response) {",
+                    "        var parsed = {};",
+                    "        try { parsed = Ext.decode(response.responseText || '{}'); } catch (e) {}",
+                    "",
+                    "        let html = Ext.htmlEncode(parsed.message || 'Failed to read user collections');",
+                    "        if (parsed.error) {",
+                    "            html += '<br/><p>Error, no se pudo obtener la información</p>';",
+                    "        }",
+                    "",
+                    "        jsTerian.toastAlert(html, 'error', parsed.error);",
+                    "    }",
+                    ");"
+                ]
+            },
+            "configAlternates": {
+                "designer|params": "typedarray",
+                "fn": "string",
+                "implHandler": "code"
+            },
+            "name": "getUserCollections",
+            "designerId": "2d20208c-32c6-414a-9fe0-f17a1a825e4d"
+        }
+    ]
+}
