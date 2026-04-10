@@ -5,47 +5,60 @@
     align-items: center;
     padding: 10px 15px;
     border-bottom: 1px solid #e0e0e0;
+    min-width: 0; /* importante en layouts flex */
 }
 
 /* ESTILO ESPECIAL SOLO PARA LA CABECERA */
 .header-style {
-    background-color: #f5f5f5; /* Gris claro */
+    background-color: #f5f5f5;
     font-weight: bold;
     color: #777;
     font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border-bottom: 2px solid #ddd; /* Borde más grueso abajo del título */
+    border-bottom: 2px solid #ddd;
 }
 
 /* COLUMNA 1: CÓDIGO */
 .col-code {
-    width: 80px;      /* Ancho fijo */
+    width: 80px;
     min-width: 80px;
+    flex-shrink: 0;
 }
 
 /* COLUMNA 2: DESCRIPCIÓN */
 .col-desc {
-    flex: 1;          /* Ocupa todo el espacio sobrante */
+    flex: 1;
+    min-width: 0; /* clave para que funcione ellipsis */
     padding: 0 15px;
+    overflow: hidden;
+}
+
+.col-desc > div {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 .text-bold {
-    font-weight: bold; /* También puedes usar font-weight: 700; */
+    font-weight: bold;
 }
 
 /* COLUMNA 3: ACCIONES */
-/* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
 .col-actions {
-    min-width: 132px; /* Antes era 90px, ahora necesitamos más espacio */
+    width: 132px;
+    min-width: 132px;
+    flex-shrink: 0; /* evita que se recorra */
     display: flex;
     justify-content: flex-end;
-    gap: 6px; /* Espacio entre bolitas */
+    gap: 6px;
 }
 
 /* Estilo base del botón redondo */
 .action-btn {
-    width: 32px;  /* Un poco más pequeños para que quepan bien en móvil */
+    width: 32px;
     height: 32px;
     border-radius: 50%;
     display: flex;
@@ -56,9 +69,38 @@
     color: #555;
     font-size: 14px;
     transition: all 0.2s;
+    flex-shrink: 0;
 }
 
+/* Truncado de textos largos */
+.col-desc .text-bold,
+.col-desc .user-email,
+.col-desc .user-phone,
+.col-desc .user-role {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
+/* Encabezado del formulario */
+.user-form-title {
+    background-color: #2c5aa0;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid #244a85;
+}
+
+.field-hint {
+    color: #5f6c7b;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.35;
+    margin: -4px 0 10px 0;
+    padding-left: 2px;
+}
 
 /* --- COLORES ESPECÍFICOS AL PASAR EL MOUSE (HOVER) --- */
 

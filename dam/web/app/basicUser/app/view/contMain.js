@@ -28,6 +28,7 @@ Ext.define('basicUser.view.contMain', {
         'Ext.dataview.DataView',
         'Ext.XTemplate',
         'Ext.form.Panel',
+        'Ext.Label',
         'Ext.field.ComboBox'
     ],
 
@@ -82,17 +83,6 @@ Ext.define('basicUser.view.contMain', {
                                     listeners: {
                                         tap: 'onBtnCreateTap'
                                     }
-                                },
-                                {
-                                    xtype: 'button',
-                                    handler: function(button, e) {
-
-                                    },
-                                    id: 'btnDelete',
-                                    itemId: 'btnDelete',
-                                    ui: 'decline',
-                                    iconCls: 'fas fa-trash',
-                                    text: 'Eliminar'
                                 },
                                 {
                                     xtype: 'spacer'
@@ -172,31 +162,79 @@ Ext.define('basicUser.view.contMain', {
                         {
                             xtype: 'formpanel',
                             isCreate: true,
+                            cls: 'user-form',
                             id: 'formUser',
                             itemId: 'formUser',
-                            title: 'Crear  Usuario',
+                            padding: 4,
                             items: [
                                 {
+                                    xtype: 'label',
+                                    cls: 'user-form-title',
+                                    id: 'lblUserTitle',
+                                    itemId: 'lblUserTitle'
+                                },
+                                {
                                     xtype: 'textfield',
+                                    validators: function(value) {
+                                        if (!value || !value.trim()) {
+                                            return 'El correo es obligatorio';
+                                        }
+
+                                        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                        return emailRegex.test(value) ? true : 'Ingresa un correo válido';
+                                    },
                                     id: 'ftUserEmail',
                                     itemId: 'ftUserEmail',
                                     margin: 8,
-                                    label: 'Email'
+                                    errorTarget: 'under',
+                                    label: 'Email',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido'
                                 },
                                 {
                                     xtype: 'textfield',
+                                    validators: function(value) {
+                                        var form = Ext.getCmp('formUser');
+                                        var isCreate = form ? form.isCreate : true;
+                                        var v = value === null ? '' : String(value).trim();
+
+                                        if (isCreate && !v) {
+                                            return 'La contraseña es obligatoria';
+                                        }
+
+                                        if (v && v.length < 6) {
+                                            return 'La contraseña debe tener al menos 6 caracteres';
+                                        }
+
+                                        return true;
+                                    },
                                     id: 'ftUserPassword',
                                     itemId: 'ftUserPassword',
                                     margin: 8,
+                                    errorTarget: 'under',
                                     label: 'Password',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido',
                                     inputType: 'password'
                                 },
                                 {
+                                    xtype: 'component',
+                                    cls: 'field-hint',
+                                    id: 'cmpPasswordHint',
+                                    itemId: 'cmpPasswordHint'
+                                },
+                                {
                                     xtype: 'combobox',
+                                    validators: function(value) {
+                                        return value ? true : 'Selecciona un rol';
+                                    },
                                     id: 'cboUserRole',
                                     itemId: 'cboUserRole',
                                     margin: 8,
+                                    errorTarget: 'under',
                                     label: 'Role',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido',
                                     editable: false,
                                     displayField: 'name',
                                     store: 'storeRole',
@@ -204,31 +242,99 @@ Ext.define('basicUser.view.contMain', {
                                 },
                                 {
                                     xtype: 'textfield',
+                                    validators: function(value) {
+                                        var v = (value || '').trim();
+
+                                        if (!v) {
+                                            return 'Este campo es obligatorio';
+                                        }
+
+                                        var regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü' -]+$/;
+
+                                        if (!regex.test(v)) {
+                                            return 'Solo se permiten letras, espacios, guiones y apóstrofes';
+                                        }
+
+                                        return true;
+                                    },
                                     id: 'ftUserFirstName',
                                     itemId: 'ftUserFirstName',
                                     margin: 8,
-                                    label: 'Nombre'
+                                    errorTarget: 'under',
+                                    label: 'Nombre',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido'
                                 },
                                 {
                                     xtype: 'textfield',
+                                    validators: function(value) {
+                                        var v = (value || '').trim();
+
+                                        if (!v) {
+                                            return 'Este campo es obligatorio';
+                                        }
+
+                                        var regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü' -]+$/;
+
+                                        if (!regex.test(v)) {
+                                            return 'Solo se permiten letras, espacios, guiones y apóstrofes';
+                                        }
+
+                                        return true;
+                                    },
                                     id: 'ftUserPLastName',
                                     itemId: 'ftUserPLastName',
                                     margin: 8,
-                                    label: 'Ape. Paterno'
+                                    errorTarget: 'under',
+                                    label: 'Ape. Paterno',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido'
                                 },
                                 {
                                     xtype: 'textfield',
+                                    validators: function(value) {
+                                        var v = (value || '').trim();
+
+                                        if (!v) {
+                                            return 'Este campo es obligatorio';
+                                        }
+
+                                        var regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü' -]+$/;
+
+                                        if (!regex.test(v)) {
+                                            return 'Solo se permiten letras, espacios, guiones y apóstrofes';
+                                        }
+
+                                        return true;
+                                    },
                                     id: 'ftUserMLastName',
                                     itemId: 'ftUserMLastName',
                                     margin: 8,
-                                    label: 'Ape. Materno'
+                                    errorTarget: 'under',
+                                    label: 'Ape. Materno',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido'
                                 },
                                 {
                                     xtype: 'textfield',
+                                    validators: function(value) {
+                                        if (!value || !value.trim()) {
+                                            return 'El teléfono es obligatorio';
+                                        }
+
+                                        if (!/^\d{10}$/.test(value.trim())) {
+                                        return 'El teléfono debe tener 10 dígitos';
+                                    }
+
+                                    return true;
+                                    },
                                     id: 'ftUserPhone',
                                     itemId: 'ftUserPhone',
                                     margin: 8,
-                                    label: 'Telefono'
+                                    errorTarget: 'under',
+                                    label: 'Telefono',
+                                    required: true,
+                                    requiredMessage: 'Campo requerido'
                                 },
                                 {
                                     xtype: 'toolbar',
@@ -378,6 +484,13 @@ Ext.define('basicUser.view.contMain', {
         var email = jsTerian.readElementValue("ftUserEmail");
         var contMain = Ext.getCmp('contMain');
 
+        var form = Ext.getCmp('formUser');
+
+        if (!form.validate()) {
+            Ext.Msg.alert('Validación', 'Revisa los campos marcados.');
+            return;
+        }
+
         var payload = contMain.buildPayload();
 
         appLocal.createUser(payload);
@@ -401,30 +514,27 @@ Ext.define('basicUser.view.contMain', {
     buildPayload: function() {
         var form = Ext.getCmp('formUser');
         var record = form.userRecord;
+        var isCreate = form.isCreate;
 
-        console.log('record-user:',record);
+        var id_user = record ? record.id_user : null;
 
-        if (record){
-            id_user = record.id_user;
-        }
-        else{
-            id_user = null;
-        }
+        let password = jsTerian.readElementValue("ftUserPassword");
+        password = password === null ? '' : String(password).trim();
 
-        // Genera un 'diccionario' para enviar los datos del user
         const payload = {
-            id_user           : id_user || null,
-            email             : jsTerian.readElementValue("ftUserEmail"),
-            password          : jsTerian.readElementValue("ftUserPassword"),
-            role_code         : jsTerian.readElementValue("cboUserRole"),
-            first_name        : jsTerian.readElementValue("ftUserFirstName"),
-            paternal_last_name: jsTerian.readElementValue("ftUserPLastName"),
-            maternal_last_name: jsTerian.readElementValue("ftUserMLastName"),
-            phone             : jsTerian.readElementValue("ftUserPhone"),
+            id_user            : id_user || null,
+            email              : jsTerian.readElementValue("ftUserEmail"),
+            role_code          : jsTerian.readElementValue("cboUserRole"),
+            first_name         : jsTerian.readElementValue("ftUserFirstName"),
+            paternal_last_name : jsTerian.readElementValue("ftUserPLastName"),
+            maternal_last_name : jsTerian.readElementValue("ftUserMLastName"),
+            phone              : jsTerian.readElementValue("ftUserPhone")
         };
 
-        if (payload.password === null || String(payload.password).trim() === '') {
-            delete payload.password;
+        if (isCreate) {
+            payload.password = password;
+        } else if (password) {
+            payload.password = password;
         }
 
         return payload;
@@ -459,23 +569,56 @@ Ext.define('basicUser.view.contMain', {
     },
 
     showForm: function() {
-        var contUser    = Ext.getCmp('contUser');
-        var toolbarMain = Ext.getCmp('toolbarMain');
+        var contUser      = Ext.getCmp('contUser');
+        var toolbarMain   = Ext.getCmp('toolbarMain');
+        var lblUserTitle  = Ext.getCmp('lblUserTitle');
+        var ftPassword    = Ext.getCmp('ftUserPassword');
+        var cmpPasswordHint = Ext.getCmp('cmpPasswordHint');
 
         // Obtener el form y la propiedad isCreate
-        var form = Ext.getCmp("formUser");
+        var form     = Ext.getCmp("formUser");
         var isCreate = form.isCreate;
-        var record = form.userRecord;
+        var record   = form.userRecord;
 
         contUser.setActiveItem(1);
         toolbarMain.hide();
 
+        if (ftPassword) {
+            ftPassword.setValue('');
+            if (ftPassword.setError) ftPassword.setError('');
+        }
+
         if (isCreate) {
             console.log('create');
-            Ext.getCmp('ftUserPassword').setHidden(false);
+
+            if (lblUserTitle) lblUserTitle.setHtml('Crear usuario');
+
+            if (ftPassword) {
+                ftPassword.setRequired(true);
+                ftPassword.setValue('');
+                if (ftPassword.setError) ftPassword.setError('');
+            }
+
+            if (cmpPasswordHint) {
+                cmpPasswordHint.setHtml('');
+            }
+
         } else {
-            Ext.getCmp('ftUserPassword').setHidden(true);
             console.log('update');
+
+            if (lblUserTitle) lblUserTitle.setHtml('Editar usuario');
+
+            if (ftPassword) {
+                ftPassword.setRequired(false);
+                ftPassword.setLabel('Contraseña');
+                ftPassword.setValue('');
+                if (ftPassword.setError) ftPassword.setError('');
+            }
+
+            if (cmpPasswordHint) {
+                cmpPasswordHint.setHtml('Si se deja este campo vacío, la contraseña actual no será modificada.');
+            }
+
             this.showUser(record);
         }
     },
@@ -490,7 +633,6 @@ Ext.define('basicUser.view.contMain', {
 
     cleanForm: function() {
         try {
-            // Proceso para mapear los datos
             const mapping = {
                 ftUserEmail    : '',
                 ftUserPassword : '',
@@ -498,15 +640,17 @@ Ext.define('basicUser.view.contMain', {
                 ftUserFirstName: '',
                 ftUserPLastName: '',
                 ftUserMLastName: '',
-                ftUserPhone    : '',
-                //ftSOCreated           : `${d.created_by} - ${dateOnly(d.created_at)}`,
-                //ftSOUpdated           : `${d.updated_by || ''} - ${dateOnly(d.updated_at)}`
+                ftUserPhone    : ''
             };
-            Ext.Object.each(mapping, function(field, value){
-                jsTerian.assignElementValue(field, value);
-            });
 
-            // Punto para cargar el store
+            Ext.Object.each(mapping, function(field, value) {
+                jsTerian.assignElementValue(field, value);
+
+                var cmp = Ext.getCmp(field);
+                if (cmp && cmp.setError) {
+                    cmp.setError('');
+                }
+            });
         }
         finally {
             var form = Ext.getCmp("formUser");

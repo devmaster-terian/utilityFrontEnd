@@ -26,6 +26,7 @@ Ext.define('basicUser.store.storeUser', {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
+            pageSize: 100,
             storeId: 'storeUser',
             autoLoad: false,
             model: 'basicUser.model.modelUser',
@@ -54,7 +55,7 @@ Ext.define('basicUser.store.storeUser', {
         proxy.url = url;
 
         // Obtener la pageSize y definir el currentPage en la primer página
-        var pageSize = jsonstore.pageSize || 10;
+        var pageSize = jsonstore.pageSize || 100;
         jsonstore.currentPage = 1;
 
         // Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber

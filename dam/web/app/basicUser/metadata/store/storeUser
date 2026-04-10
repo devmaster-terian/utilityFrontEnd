@@ -9,6 +9,7 @@
         "autoLoad": false,
         "designer|userClassName": "storeUser",
         "model": "modelUser",
+        "pageSize": 100,
         "storeId": "storeUser"
     },
     "configAlternates": {
@@ -16,7 +17,8 @@
         "designer|userClassName": "string",
         "model": "model",
         "storeId": "string",
-        "objMessage": "object"
+        "objMessage": "object",
+        "pageSize": "number"
     },
     "name": "MyJsonStore",
     "designerId": "ae45e663-3d56-4643-8552-cdfcd2441d45",
@@ -87,7 +89,7 @@
                     "proxy.url = url;",
                     "",
                     "// Obtener la pageSize y definir el currentPage en la primer página",
-                    "var pageSize = jsonstore.pageSize || 10;",
+                    "var pageSize = jsonstore.pageSize || 100;",
                     "jsonstore.currentPage = 1;",
                     "",
                     "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",
@@ -111,7 +113,7 @@
                     "",
                     "",
                     "            if(storeUser.objMessage){",
-                    "                jsDam.toast(storeUser.objMessage);    ",
+                    "                jsDam.toast(storeUser.objMessage);",
                     "            }",
                     "",
                     "        } else {",

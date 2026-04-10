@@ -99,16 +99,13 @@ Ext.application({
 
                 Ext.getCmp('formUser').reset();
 
-                var contUser    = Ext.getCmp('contUser');
+                var contMain = Ext.getCmp('contMain');
 
-                contUser.setActiveItem(0);
-                //toolbarMain.show();
+                contMain.cleanForm();
+                contMain.showDataView();
 
                 // Recargar el store
                 jsTerian.reloadStore('storeUser');
-
-
-
             },
 
             // Funcion Failure
