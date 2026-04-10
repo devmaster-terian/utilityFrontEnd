@@ -191,6 +191,13 @@ Ext.application({
         cfg = cfg || {};
         var me = this;
 
+        var token = sessionStorage.getItem('access_token');
+
+        var headers = Ext.apply({}, cfg.headers || {});
+        if (token && !headers.Authorization) {
+            headers.Authorization = 'Bearer ' + token;
+        }
+
         // Mask opcional (Modern)
         if (cfg.maskCmp && cfg.maskCmp.setMasked) {
             cfg.maskCmp.setMasked({ xtype: 'loadmask', message: cfg.maskText || 'Descargando...' });
@@ -200,7 +207,7 @@ Ext.application({
             url   : url,
             method: 'GET',
             binary: true,
-            headers: cfg.headers || undefined,
+            headers: headers,
 
             success: function (resp) {
                 if (cfg.maskCmp && cfg.maskCmp.setMasked) cfg.maskCmp.setMasked(false);

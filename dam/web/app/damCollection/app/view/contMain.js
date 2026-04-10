@@ -433,11 +433,12 @@ Ext.define('damCollection.view.contMain', {
                                                     label: 'Actualización'
                                                 },
                                                 {
-                                                    xtype: 'selectfield',
+                                                    xtype: 'combobox',
                                                     id: 'cboNodeType',
                                                     itemId: 'cboNodeType',
                                                     margin: '2 8 2 8',
                                                     label: 'Tipo Nodo',
+                                                    editable: false,
                                                     listeners: {
                                                         change: 'onCboNodeTypeChange'
                                                     }
@@ -520,11 +521,12 @@ Ext.define('damCollection.view.contMain', {
                                                     label: 'Orden'
                                                 },
                                                 {
-                                                    xtype: 'selectfield',
+                                                    xtype: 'combobox',
                                                     id: 'cboTabAssetType',
                                                     itemId: 'cboTabAssetType',
                                                     margin: 8,
                                                     label: 'Tipo Archivo',
+                                                    editable: false,
                                                     store: {
                                                         fields: [
                                                             'text',
@@ -563,6 +565,7 @@ Ext.define('damCollection.view.contMain', {
                                                     itemId: 'cboAdmIsActive',
                                                     margin: 8,
                                                     label: 'Estado',
+                                                    value: true,
                                                     editable: false,
                                                     store: {
                                                         fields: [
@@ -1087,14 +1090,57 @@ Ext.define('damCollection.view.contMain', {
     onBtnCancelTap: function(button, e, eOpts) {
         var contNode    = Ext.getCmp('contNode');
         var toolbarMain = Ext.getCmp('toolbarMain');
+        var contMain    = Ext.getCmp('contMain');
 
         contNode.setActiveItem(0);
         toolbarMain.show();
 
+        var parentId = jsTerian.readElementValue('ftParentId');
+
+        //  Recargar store
+        var store = Ext.getStore('storeNode');
+        if (!store) {
+            console.warn('No se encontró storeNode');
+            return;
+        }
+
+        var url = jsTerian.getUrl('tree/children', parentId);
+
+        var proxy = store.getProxy();
+        proxy.url = url;
+
+        jsTerian.addAuthorizationHeader(store);
+
+        store.load({
+            callback: function(records, operation, success) {
+
+                if (!success) {
+                    jsTerian.toastAlert("Error al cargar", "error");
+                    store.removeAll();
+                    return;
+                }
+
+                // Si se regresa al inicio se vacía el formView
+                if (parentId === 'c-1'){
+                    if (contMain) contMain.cleanFormView();
+                    return;
+                }
+
+                // Rellenar info del padre si está cacheado (tal cual tu lógica)
+                const ctx = appLocal.nodeCache && appLocal.nodeCache[parentId];
+
+                if (ctx) {
+                    if (contMain) contMain.fillForm(ctx);
+                } else {
+                    if (contMain) contMain.cleanFormView();
+                }
+            }
+        });
+
         this.clearNodeForm();
     },
 
-    onCboNodeTypeChange: function(selectfield, newValue, oldValue, eOpts) {
+    onCboNodeTypeChange: function(combobox, newValue, oldValue, eOpts) {
         var contMain =  Ext.getCmp('contMain');
         var form = Ext.getCmp('formNode');
         this.configureNodeForm(form, newValue, 'create', { parentId: form.parentId });
@@ -1819,7 +1865,7 @@ Ext.define('damCollection.view.contMain', {
                 cboTabAssetType: '',
 
                 // Estado general, si manejas uno común
-                cboAdmIsActive: '',
+                cboAdmIsActive: true,
                 cboIsFeatured: false,
 
                 // Encabezado / labels generales
@@ -1939,6 +1985,7 @@ Ext.define('damCollection.view.contMain', {
         }
 
         var typeLabel = nodeType === 'collection' ? 'colección' : 'recurso';
+        var isPhone = Ext.os && Ext.os.is && Ext.os.is.Phone;
 
         var dlg = Ext.create('Ext.Dialog', {
             title: 'Subir imagen',
@@ -1946,25 +1993,28 @@ Ext.define('damCollection.view.contMain', {
             centered: true,
             closable: true,
             closeAction: 'destroy',
-            width: 500,
             layout: 'fit',
+
+            width: isPhone ? '92%' : 420,
+            maxWidth: 420,
+            maxHeight: isPhone ? '85%' : 420,
 
             items: [{
                 xtype: 'formpanel',
                 itemId: 'uploadForm',
-                padding: 14,
+                padding: isPhone ? 10 : 14,
                 scrollable: true,
                 items: [
                     {
                         xtype: 'component',
                         html:
-                        '<div style="font-size:14px;font-weight:600;margin-bottom:6px;">' +
-                        'Subir / reemplazar imagen de ' + typeLabel +
-                        (nodeText ? (' — ' + Ext.String.htmlEncode(nodeText)) : '') +
-                        '</div>' +
-                        '<div style="font-size:12px;color:#666;">' +
-                        'Si ya existe una imagen, será reemplazada.' +
-                        '</div>',
+                            '<div style="font-size:14px;font-weight:600;margin-bottom:6px;">' +
+                                'Subir / reemplazar imagen de ' + typeLabel +
+                                (nodeText ? (' — ' + Ext.String.htmlEncode(nodeText)) : '') +
+                            '</div>' +
+                            '<div style="font-size:12px;color:#666;line-height:1.4;">' +
+                                'Si ya existe una imagen, será reemplazada.' +
+                            '</div>',
                         margin: '0 0 14 0'
                     },
                     {
@@ -1988,8 +2038,9 @@ Ext.define('damCollection.view.contMain', {
                         var fileField = form.down('#uploadFile');
 
                         var fileInput =
-                            fileField && fileField.fileInputEl && fileField.fileInputEl.dom ? fileField.fileInputEl.dom
-                        : null;
+                            fileField && fileField.fileInputEl && fileField.fileInputEl.dom
+                                ? fileField.fileInputEl.dom
+                                : null;
 
                         if (!fileInput && fileField && fileField.el && fileField.el.dom) {
                             fileInput = fileField.el.dom.querySelector('input[type=file]');
@@ -2018,8 +2069,13 @@ Ext.define('damCollection.view.contMain', {
                             return;
                         }
 
-                        var url = jsTerian.makeUrl('tree',endpoint,'image');
+                        var url = jsTerian.makeUrl('tree', endpoint, 'image');
                         var token = jsTerian.getDataSS('access_token');
+
+                        dlg.setMasked({
+                            xtype: 'loadmask',
+                            message: 'Subiendo imagen...'
+                        });
 
                         Ext.Ajax.request({
                             url: url,
@@ -2032,37 +2088,28 @@ Ext.define('damCollection.view.contMain', {
                             },
 
                             success: function(response) {
+                                dlg.setMasked(false);
+
                                 var jsonData;
                                 try {
                                     jsonData = Ext.decode(response.responseText);
                                 } catch (e) {
                                     jsonData = null;
                                 }
-                                console.log(msg);
-                                console.log(jsonData.success);
-                                console.log(jsonData.message);
 
                                 if (!jsonData || jsonData.success !== true) {
                                     jsDam.toast({
                                         type: 'error',
                                         title: 'Error',
                                         message: (jsonData && jsonData.message) ? jsonData.message
-                                        : 'La respuesta del servidor no fue válida.'
+                                            : 'La respuesta del servidor no fue válida.'
                                     });
                                     return;
                                 }
 
                                 var msg = jsonData.message || 'Imagen subida correctamente.';
 
-                                /*
-                                jsDam.toast({
-                                    type: 'success',
-                                    title: 'Éxito',
-                                    message: msg
-                                });
-                                */
-
-                                Ext.toast('Imagen cargada');
+                                Ext.toast(msg);
 
                                 Ext.defer(function() {
                                     var form = Ext.getCmp('formNode');
@@ -2099,30 +2146,11 @@ Ext.define('damCollection.view.contMain', {
                                         }
                                     }
                                 }, 80);
-
-                                Ext.defer(function() {
-                                    if (dlg && !dlg.destroyed) {
-                                        dlg.close();
-                                    }
-                                }, 60);
-
-                                Ext.defer(function() {
-                                    try {
-                                        console.log('si funciono');
-                                    } catch (e) {
-                                        console.error(e);
-                                    }
-
-                                    if (typeof onSuccess === 'function') {
-                                        try {
-                                            onSuccess(jsonData);
-                                        } catch (e) {
-                                            console.error(e);
-                                        }
-                                    }
-                                }, 120);
                             },
+
                             failure: function(response) {
+                                dlg.setMasked(false);
+
                                 var jsonData;
                                 try {
                                     jsonData = Ext.decode(response.responseText);
@@ -2131,7 +2159,7 @@ Ext.define('damCollection.view.contMain', {
                                 }
 
                                 var msg = (jsonData && jsonData.message) ? jsonData.message
-                                : ('Error al subir imagen (HTTP ' + response.status + ').');
+                                    : ('Error al subir imagen (HTTP ' + response.status + ').');
 
                                 jsDam.toast({
                                     type: 'error',
@@ -2140,8 +2168,7 @@ Ext.define('damCollection.view.contMain', {
                                 });
                             }
                         });
-                    },
-
+                    }
                 },
                 {
                     text: 'Cancelar',

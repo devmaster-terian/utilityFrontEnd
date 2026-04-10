@@ -409,7 +409,7 @@ Ext.application({
 
         var parentId = opts.parentId || (form ? form.parentId : null);
 
-        // Si es EDIT y tu record tiene parent_id, úsalo
+        // Si es EDIT
         if (!parentId && form && form.nodeRecord) {
             var d = form.nodeRecord.getData ? form.nodeRecord.getData() : form.nodeRecord;
             parentId = d ? (d.parent_id || d.parentId) : null;
@@ -422,7 +422,7 @@ Ext.application({
         //  Recargar store
         var store = Ext.getStore('storeNode');
         if (!store) {
-            console.warn('No se encontró storeTreeNav');
+            console.warn('No se encontró storeNode');
             return;
         }
 

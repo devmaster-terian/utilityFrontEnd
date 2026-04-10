@@ -124,15 +124,6 @@
     padding: 0 15px;
 }
 
-/* COLUMNA 3: ACCIONES */
-/* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
-.col-actions {
-    min-width: 180px; /* Antes era 90px, ahora necesitamos más espacio */
-    display: flex;
-    justify-content: flex-end;
-    gap: 6px; /* Espacio entre bolitas */
-}
-
 /* COLUMNA 1: CONFIG CÓDIGO */
 .conf-col-code {
     width: 140px;

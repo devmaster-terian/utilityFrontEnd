@@ -25,7 +25,7 @@ Ext.define('basicUserAccess.view.contMain', {
         'Ext.Toolbar',
         'Ext.Button',
         'Ext.Spacer',
-        'Ext.field.Select',
+        'Ext.field.ComboBox',
         'Ext.dataview.DataView',
         'Ext.XTemplate'
     ],
@@ -84,11 +84,12 @@ Ext.define('basicUserAccess.view.contMain', {
                                     xtype: 'spacer'
                                 },
                                 {
-                                    xtype: 'selectfield',
+                                    xtype: 'combobox',
                                     id: 'cboUser',
                                     itemId: 'cboUser',
                                     margin: '0 8 0 0',
                                     label: 'Usuario',
+                                    editable: false,
                                     displayField: 'label',
                                     store: 'storeUser',
                                     valueField: 'id_user',
@@ -207,7 +208,7 @@ Ext.define('basicUserAccess.view.contMain', {
         appLocal.saveUserCollections(userId);
     },
 
-    onCboUserChange: function(selectfield, newValue, oldValue, eOpts) {
+    onCboUserChange: function(combobox, newValue, oldValue, eOpts) {
         if (!newValue) {
             return;
         }

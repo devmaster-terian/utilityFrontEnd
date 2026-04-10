@@ -236,7 +236,7 @@
                                     "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
                                 },
                                 {
-                                    "type": "Ext.field.Select",
+                                    "type": "Ext.field.ComboBox",
                                     "reference": {
                                         "name": "items",
                                         "type": "array"
@@ -244,6 +244,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "displayField": "label",
+                                        "editable": false,
                                         "id": "cboUser",
                                         "itemId": "cboUser",
                                         "label": "Usuario",
@@ -258,9 +259,10 @@
                                         "label": "string",
                                         "store": "store",
                                         "valueField": "datafield",
-                                        "margin": "auto"
+                                        "margin": "auto",
+                                        "editable": "boolean"
                                     },
-                                    "name": "MySelectField",
+                                    "name": "MyComboBox",
                                     "designerId": "f6bbbbfa-309c-4327-9dbf-f7e44a212b7d",
                                     "cn": [
                                         {
