@@ -29,7 +29,9 @@ Ext.define('basicConfig.view.contMain', {
         'Ext.dataview.DataView',
         'Ext.XTemplate',
         'Ext.form.Panel',
-        'Ext.field.ComboBox'
+        'Ext.Label',
+        'Ext.field.ComboBox',
+        'Ext.field.TextArea'
     ],
 
     config: {
@@ -129,7 +131,7 @@ Ext.define('basicConfig.view.contMain', {
                                     xtype: 'container',
                                     id: 'contHeaderConfig',
                                     itemId: 'contHeaderConfig',
-                                    html: '<div class="resource-row header-style">     <div class="conf-col-code">CÓDIGO</div>     <div class="conf-col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
+                                    html: '<div class="resource-row header-style">     <div class="conf-col-main">CÓDIGO / DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
                                 },
                                 {
                                     xtype: 'dataview',
@@ -138,29 +140,32 @@ Ext.define('basicConfig.view.contMain', {
                                     itemTpl: [
                                         '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
                                         '',
-                                        '  <!-- COLUMNA 1: CÓDIGO -->',
-                                        '  <div class="conf-col-code">',
-                                        '    <div class="text-bold"><b>{cod_configuration}</b></div>',
-                                        '    <div class="role-badge">Id: {id_configuration}</div>',
-                                        '  </div>',
-                                        '',
-                                        '  <!-- COLUMNA 2: DESCRIPCIÓN -->',
-                                        '  <div class="conf-col-desc">',
-                                        '    <div class="main-text text-bold">',
-                                        '      <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
-                                        '      <strong>{name}</strong>',
-                                        '      <tpl if="!values.is_active">',
-                                        '        <span> (Inactivo)</span>',
-                                        '      <tpl else>',
-                                        '        <span> (Activo)</span>',
-                                        '      </tpl>',
+                                        '  <!-- COLUMNA PRINCIPAL: CÓDIGO + NOMBRE + DESCRIPCIÓN -->',
+                                        '  <div class="conf-col-main">',
+                                        '    <div class="main-text">',
+                                        '      <strong>{cod_configuration}</strong>',
+                                        '      <span class="status-inline">',
+                                        '        <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
+                                        '        <tpl if="values.is_active">',
+                                        '          Activo',
+                                        '        <tpl else>',
+                                        '          Inactivo',
+                                        '        </tpl>',
+                                        '      </span>',
                                         '    </div>',
-                                        '    <div class="sub-text">{description}</div>',
+                                        '',
+                                        '    <div class="sub-text">',
+                                        '      <strong>{name}</strong>',
+                                        '    </div>',
+                                        '',
+                                        '    <div class="sub-text secondary-text">',
+                                        '      {description}',
+                                        '    </div>',
                                         '  </div>',
                                         '',
-                                        '  <!-- COLUMNA 3: ACCIONES -->',
+                                        '  <!-- ACCIONES -->',
                                         '  <div class="col-actions">',
-                                        '    <div class="action-btn view" data-action="view" title="Ver Detalles">',
+                                        '    <div class="action-btn view" data-action="view" title="Ver detalles">',
                                         '      <i class="x-fa fas fa-plus"></i>',
                                         '    </div>',
                                         '',
@@ -195,6 +200,12 @@ Ext.define('basicConfig.view.contMain', {
                             itemId: 'formConfig',
                             items: [
                                 {
+                                    xtype: 'label',
+                                    cls: 'cfg-form-title',
+                                    id: 'lblCfgTitle',
+                                    itemId: 'lblCfgTitle'
+                                },
+                                {
                                     xtype: 'textfield',
                                     id: 'ftCfgCode',
                                     itemId: 'ftCfgCode',
@@ -208,6 +219,7 @@ Ext.define('basicConfig.view.contMain', {
                                     itemId: 'cboCfgActive',
                                     margin: 8,
                                     label: 'Estado',
+                                    value: true,
                                     editable: false,
                                     store: {
                                         fields: [
@@ -234,7 +246,7 @@ Ext.define('basicConfig.view.contMain', {
                                     label: 'Nombre'
                                 },
                                 {
-                                    xtype: 'textfield',
+                                    xtype: 'textareafield',
                                     id: 'ftCfgDesc',
                                     itemId: 'ftCfgDesc',
                                     margin: 8,
@@ -242,7 +254,8 @@ Ext.define('basicConfig.view.contMain', {
                                 },
                                 {
                                     xtype: 'toolbar',
-                                    itemId: 'mytoolbar1',
+                                    id: 'toolbarCfg',
+                                    itemId: 'toolbarCfg',
                                     docked: 'top',
                                     items: [
                                         {
@@ -257,6 +270,28 @@ Ext.define('basicConfig.view.contMain', {
                                             }
                                         },
                                         {
+                                            xtype: 'spacer'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            id: 'btnCancel',
+                                            itemId: 'btnCancel',
+                                            ui: 'decline',
+                                            iconCls: 'fas fa-ban',
+                                            text: 'Cancelar',
+                                            listeners: {
+                                                tap: 'onBtnCancelTap'
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'toolbar',
+                                    id: 'toolbarParam',
+                                    itemId: 'toolbarParam',
+                                    docked: 'top',
+                                    items: [
+                                        {
                                             xtype: 'button',
                                             id: 'btnCreateParam',
                                             itemId: 'btnCreateParam',
@@ -266,6 +301,9 @@ Ext.define('basicConfig.view.contMain', {
                                             listeners: {
                                                 tap: 'onBtnCreateTap1'
                                             }
+                                        },
+                                        {
+                                            xtype: 'spacer'
                                         },
                                         {
                                             xtype: 'segmentedbutton',
@@ -299,20 +337,6 @@ Ext.define('basicConfig.view.contMain', {
                                             listeners: {
                                                 toggle: 'onSegBtnParamToggle'
                                             }
-                                        },
-                                        {
-                                            xtype: 'spacer'
-                                        },
-                                        {
-                                            xtype: 'button',
-                                            id: 'btnCancel',
-                                            itemId: 'btnCancel',
-                                            ui: 'decline',
-                                            iconCls: 'fas fa-ban',
-                                            text: 'Cancelar',
-                                            listeners: {
-                                                tap: 'onBtnCancelTap'
-                                            }
                                         }
                                     ]
                                 },
@@ -326,7 +350,7 @@ Ext.define('basicConfig.view.contMain', {
                                             xtype: 'container',
                                             id: 'contHeaderParam',
                                             itemId: 'contHeaderParam',
-                                            html: '<div class="resource-row header-style">     <div class="conf-col-code">CÓDIGO</div>     <div class="conf-col-desc">DESCRIPCIÓN</div>     <div class="col-actions">ACCIONES</div> </div>'
+                                            html: '<div class="resource-row header-style">     <div class="conf-col-main">PARÁMETRO</div>     <div class="col-actions">ACCIONES</div> </div>'
                                         },
                                         {
                                             xtype: 'dataview',
@@ -335,28 +359,30 @@ Ext.define('basicConfig.view.contMain', {
                                             itemTpl: [
                                                 '<div class="resource-row {[values.is_active ? \'\' : \'user-inactive\']}">',
                                                 '',
-                                                '    <div class="conf-col-code">',
-                                                '        <div class="text-bold"><b>{cod_parameter}</b></div>',
-                                                '        <div class="role-badge">Id: {id_conf_parameter}</div>',
-                                                '    </div>',
-                                                '',
-                                                '    <div class="conf-col-desc">',
-                                                '        <div class="main-text text-bold">',
-                                                '            <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
-                                                '            <strong>{description}</strong>',
-                                                '            <tpl if="!values.is_active">',
-                                                '                <span> (Inactivo)</span>',
-                                                '            <tpl else>',
-                                                '                <span> (Activo)</span>',
-                                                '            </tpl>',
+                                                '    <div class="conf-col-main">',
+                                                '        <div class="main-text">',
+                                                '            <strong>{cod_parameter}</strong>',
+                                                '            <span class="status-inline">',
+                                                '                <span class="status-dot {[values.is_active ? \'active\' : \'inactive\']}"></span>',
+                                                '                <tpl if="values.is_active">',
+                                                '                    Activo',
+                                                '                <tpl else>',
+                                                '                    Inactivo',
+                                                '                </tpl>',
+                                                '            </span>',
                                                 '        </div>',
+                                                '',
                                                 '        <div class="sub-text">',
+                                                '            <strong>{description}</strong>',
+                                                '        </div>',
+                                                '',
+                                                '        <div class="sub-text secondary-text">',
                                                 '            {value}',
                                                 '        </div>',
                                                 '    </div>',
                                                 '',
                                                 '    <div class="col-actions">',
-                                                '        <div class="action-btn view" data-action="view" title="Ver Detalles">',
+                                                '        <div class="action-btn view" data-action="view" title="Ver detalles">',
                                                 '            <i class="x-fa fas fa-eye"></i>',
                                                 '        </div>',
                                                 '',
@@ -393,6 +419,12 @@ Ext.define('basicConfig.view.contMain', {
                             itemId: 'formParam',
                             items: [
                                 {
+                                    xtype: 'label',
+                                    cls: 'cfg-form-title',
+                                    id: 'lblParamTitle',
+                                    itemId: 'lblParamTitle'
+                                },
+                                {
                                     xtype: 'textfield',
                                     id: 'ftParamCode',
                                     itemId: 'ftParamCode',
@@ -406,6 +438,7 @@ Ext.define('basicConfig.view.contMain', {
                                     itemId: 'cboParamActive',
                                     margin: 8,
                                     label: 'Estado',
+                                    value: true,
                                     editable: false,
                                     store: {
                                         fields: [
@@ -432,7 +465,7 @@ Ext.define('basicConfig.view.contMain', {
                                     label: 'Valor'
                                 },
                                 {
-                                    xtype: 'textfield',
+                                    xtype: 'textareafield',
                                     id: 'ftParamDesc',
                                     itemId: 'ftParamDesc',
                                     margin: 8,
@@ -710,6 +743,16 @@ Ext.define('basicConfig.view.contMain', {
         appLocal.saveConfig(payload);
     },
 
+    onBtnCancelTap: function(button, e, eOpts) {
+        var contConfig  = Ext.getCmp('contConfig');
+        var toolbarMain = Ext.getCmp('toolbarMain');
+
+        contConfig.setActiveItem(0);
+        toolbarMain.show();
+
+        this.cleanConfigForm();
+    },
+
     onBtnCreateTap1: function(button, e, eOpts) {
         /*
         // Buscas el contenedor padre
@@ -749,16 +792,6 @@ Ext.define('basicConfig.view.contMain', {
         // Recargar
         storeConfig.currentPage = 1;
         storeConfig.load();
-    },
-
-    onBtnCancelTap: function(button, e, eOpts) {
-        var contConfig  = Ext.getCmp('contConfig');
-        var toolbarMain = Ext.getCmp('toolbarMain');
-
-        contConfig.setActiveItem(0);
-        toolbarMain.show();
-
-        this.cleanConfigForm();
     },
 
     onDataViewParamChildtap: function(dataview, location, eOpts) {
@@ -1090,8 +1123,12 @@ Ext.define('basicConfig.view.contMain', {
     showForm: function() {
         var contConfig     = Ext.getCmp('contConfig');
         var toolbarMain    = Ext.getCmp('toolbarMain');
+        var toolbarCfg     = Ext.getCmp('toolbarCfg');
+        var toolbarParam   = Ext.getCmp('toolbarParam');
         var segmentBtn     = Ext.getCmp('segBtnParam');
         var btnCreateParam = Ext.getCmp('btnCreateParam');
+        var lblCfgTitle    = Ext.getCmp('lblCfgTitle');
+        var contListParam  = Ext.getCmp('contListParam');
 
         contConfig.setActiveItem(1);
         toolbarMain.hide();
@@ -1105,10 +1142,19 @@ Ext.define('basicConfig.view.contMain', {
             console.log('create');
             segmentBtn.hide();
             btnCreateParam.hide();
+            toolbarParam.hide();
+            contListParam.hide();
+
+            if (lblCfgTitle) lblCfgTitle.setHtml('Crear configuración');
+
         } else {
             console.log('update');
             btnCreateParam.show();
             segmentBtn.show();
+            toolbarParam.show();
+            contListParam.show();
+
+            if (lblCfgTitle) lblCfgTitle.setHtml('Editar configuración');
 
             // Cargar el store
             jsTerian.loadStore('storeParam',record.id_configuration);
@@ -1123,6 +1169,7 @@ Ext.define('basicConfig.view.contMain', {
         var toolbarMain    = Ext.getCmp('toolbarMain');
         var segmentBtn     = Ext.getCmp('segBtnParam');
         var btnCreateParam = Ext.getCmp('btnCreateParam');
+        var lblParamTitle  = Ext.getCmp('lblParamTitle');
 
         contConfig.setActiveItem(2);
         toolbarMain.hide();
@@ -1136,8 +1183,13 @@ Ext.define('basicConfig.view.contMain', {
         if (isCreate) {
             console.log('create');
             segmentBtn.hide();
+
+            if (lblParamTitle) lblParamTitle.setHtml('Crear parámetro');
+
         } else {
             console.log('update');
+
+            if (lblParamTitle) lblParamTitle.setHtml('Editar parámetro');
 
             // Cargar el store
             //jsTerian.loadStore('storeParam',record.id_configuration);

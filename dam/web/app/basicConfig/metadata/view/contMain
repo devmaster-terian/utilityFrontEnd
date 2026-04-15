@@ -392,7 +392,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "html": "<div class=\"resource-row header-style\">     <div class=\"conf-col-code\">CÓDIGO</div>     <div class=\"conf-col-desc\">DESCRIPCIÓN</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
+                                        "html": "<div class=\"resource-row header-style\">     <div class=\"conf-col-main\">CÓDIGO / DESCRIPCIÓN</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
                                         "id": "contHeaderConfig",
                                         "itemId": "contHeaderConfig"
                                     },
@@ -436,29 +436,32 @@
                                                 "implHandler": [
                                                     "<div class=\"resource-row {[values.is_active ? '' : 'user-inactive']}\">",
                                                     "",
-                                                    "  <!-- COLUMNA 1: CÓDIGO -->",
-                                                    "  <div class=\"conf-col-code\">",
-                                                    "    <div class=\"text-bold\"><b>{cod_configuration}</b></div>",
-                                                    "    <div class=\"role-badge\">Id: {id_configuration}</div>",
-                                                    "  </div>",
-                                                    "",
-                                                    "  <!-- COLUMNA 2: DESCRIPCIÓN -->",
-                                                    "  <div class=\"conf-col-desc\">",
-                                                    "    <div class=\"main-text text-bold\">",
-                                                    "      <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
-                                                    "      <strong>{name}</strong>",
-                                                    "      <tpl if=\"!values.is_active\">",
-                                                    "        <span> (Inactivo)</span>",
-                                                    "      <tpl else>",
-                                                    "        <span> (Activo)</span>",
-                                                    "      </tpl>",
+                                                    "  <!-- COLUMNA PRINCIPAL: CÓDIGO + NOMBRE + DESCRIPCIÓN -->",
+                                                    "  <div class=\"conf-col-main\">",
+                                                    "    <div class=\"main-text\">",
+                                                    "      <strong>{cod_configuration}</strong>",
+                                                    "      <span class=\"status-inline\">",
+                                                    "        <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                    "        <tpl if=\"values.is_active\">",
+                                                    "          Activo",
+                                                    "        <tpl else>",
+                                                    "          Inactivo",
+                                                    "        </tpl>",
+                                                    "      </span>",
                                                     "    </div>",
-                                                    "    <div class=\"sub-text\">{description}</div>",
+                                                    "",
+                                                    "    <div class=\"sub-text\">",
+                                                    "      <strong>{name}</strong>",
+                                                    "    </div>",
+                                                    "",
+                                                    "    <div class=\"sub-text secondary-text\">",
+                                                    "      {description}",
+                                                    "    </div>",
                                                     "  </div>",
                                                     "",
-                                                    "  <!-- COLUMNA 3: ACCIONES -->",
+                                                    "  <!-- ACCIONES -->",
                                                     "  <div class=\"col-actions\">",
-                                                    "    <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
+                                                    "    <div class=\"action-btn view\" data-action=\"view\" title=\"Ver detalles\">",
                                                     "      <i class=\"x-fa fas fa-plus\"></i>",
                                                     "    </div>",
                                                     "",
@@ -694,6 +697,28 @@
                             ],
                             "cn": [
                                 {
+                                    "type": "Ext.Label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "cls": [
+                                            "cfg-form-title"
+                                        ],
+                                        "id": "lblCfgTitle",
+                                        "itemId": "lblCfgTitle"
+                                    },
+                                    "configAlternates": {
+                                        "cls": "typedarray",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyLabel",
+                                    "designerId": "353a3c66-e960-4426-9db3-1f056b55766f"
+                                },
+                                {
                                     "type": "Ext.field.Text",
                                     "reference": {
                                         "name": "items",
@@ -739,6 +764,9 @@
                                             "      { text: 'Inactivo', value: false  }",
                                             "    ]",
                                             "}"
+                                        ],
+                                        "value": [
+                                            "true"
                                         ]
                                     },
                                     "configAlternates": {
@@ -749,7 +777,8 @@
                                         "label": "string",
                                         "margin": "auto",
                                         "store": "object",
-                                        "valueField": "datafield"
+                                        "valueField": "datafield",
+                                        "value": "object"
                                     },
                                     "name": "MyComboBox",
                                     "designerId": "7e28ae8d-2af4-419e-8f81-cdbce316828c"
@@ -777,7 +806,7 @@
                                     "designerId": "e35b76c1-5809-4cf4-80e3-daaf8ebd0b09"
                                 },
                                 {
-                                    "type": "Ext.field.Text",
+                                    "type": "Ext.field.TextArea",
                                     "reference": {
                                         "name": "items",
                                         "type": "array"
@@ -795,7 +824,7 @@
                                         "id": "string",
                                         "itemId": "string"
                                     },
-                                    "name": "MyTextField3",
+                                    "name": "MyTextArea1",
                                     "designerId": "fb28e7c7-0172-46b6-879d-b232c0ebdf48"
                                 },
                                 {
@@ -807,11 +836,13 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "docked": "top",
-                                        "itemId": "mytoolbar1"
+                                        "id": "toolbarCfg",
+                                        "itemId": "toolbarCfg"
                                     },
                                     "configAlternates": {
                                         "docked": "string",
-                                        "itemId": "string"
+                                        "itemId": "string",
+                                        "id": "string"
                                     },
                                     "name": "MyToolbar1",
                                     "designerId": "735aab8a-fe40-4a3d-bf9f-44cfaa2a6874",
@@ -871,6 +902,94 @@
                                                 }
                                             ]
                                         },
+                                        {
+                                            "type": "Ext.Spacer",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "name": "MySpacer1",
+                                            "designerId": "b0648872-49eb-46fa-9b32-02f417dd3266"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "decline",
+                                                "iconCls": "fas fa-ban",
+                                                "id": "btnCancel",
+                                                "itemId": "btnCancel",
+                                                "text": "Cancelar",
+                                                "ui": "decline"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "text": "string",
+                                                "ui": "string",
+                                                "iconCls": "string"
+                                            },
+                                            "name": "MyButton4",
+                                            "designerId": "355980be-3499-40fe-aa98-b19074caf8da",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnCancelTap",
+                                                        "implHandler": [
+                                                            "var contConfig  = Ext.getCmp('contConfig');",
+                                                            "var toolbarMain = Ext.getCmp('toolbarMain');",
+                                                            "",
+                                                            "contConfig.setActiveItem(0);",
+                                                            "toolbarMain.show();",
+                                                            "",
+                                                            "this.cleanConfigForm();"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnCancelTap",
+                                                    "designerId": "e9fa8669-1fff-437f-8f0e-a5439f3cc298"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.Toolbar",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "docked": "top",
+                                        "id": "toolbarParam",
+                                        "itemId": "toolbarParam"
+                                    },
+                                    "configAlternates": {
+                                        "docked": "string",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyToolbar2",
+                                    "designerId": "1ee67648-de5b-45f6-87c3-b559323d06ff",
+                                    "cn": [
                                         {
                                             "type": "Ext.Button",
                                             "reference": {
@@ -933,6 +1052,16 @@
                                                     "designerId": "24752ecb-3971-4164-855d-30a79da3368c"
                                                 }
                                             ]
+                                        },
+                                        {
+                                            "type": "Ext.Spacer",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "name": "MySpacer2",
+                                            "designerId": "d91bce48-f0ee-4d04-9ed8-052d1657a796"
                                         },
                                         {
                                             "type": "Ext.SegmentedButton",
@@ -1059,72 +1188,6 @@
                                                     "designerId": "ed9c7d52-49ee-449d-b25f-4652adc935ee"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "type": "Ext.Spacer",
-                                            "reference": {
-                                                "name": "items",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "name": "MySpacer1",
-                                            "designerId": "b0648872-49eb-46fa-9b32-02f417dd3266"
-                                        },
-                                        {
-                                            "type": "Ext.Button",
-                                            "reference": {
-                                                "name": "items",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "designer|uiInterfaceName": "decline",
-                                                "iconCls": "fas fa-ban",
-                                                "id": "btnCancel",
-                                                "itemId": "btnCancel",
-                                                "text": "Cancelar",
-                                                "ui": "decline"
-                                            },
-                                            "configAlternates": {
-                                                "designer|uiInterfaceName": "string",
-                                                "id": "string",
-                                                "itemId": "string",
-                                                "text": "string",
-                                                "ui": "string",
-                                                "iconCls": "string"
-                                            },
-                                            "name": "MyButton4",
-                                            "designerId": "355980be-3499-40fe-aa98-b19074caf8da",
-                                            "cn": [
-                                                {
-                                                    "type": "basiceventbinding",
-                                                    "reference": {
-                                                        "name": "listeners",
-                                                        "type": "array"
-                                                    },
-                                                    "codeClass": null,
-                                                    "userConfig": {
-                                                        "fn": "onBtnCancelTap",
-                                                        "implHandler": [
-                                                            "var contConfig  = Ext.getCmp('contConfig');",
-                                                            "var toolbarMain = Ext.getCmp('toolbarMain');",
-                                                            "",
-                                                            "contConfig.setActiveItem(0);",
-                                                            "toolbarMain.show();",
-                                                            "",
-                                                            "this.cleanConfigForm();"
-                                                        ],
-                                                        "name": "tap"
-                                                    },
-                                                    "configAlternates": {
-                                                        "fn": "string",
-                                                        "implHandler": "code",
-                                                        "name": "string"
-                                                    },
-                                                    "name": "onBtnCancelTap",
-                                                    "designerId": "e9fa8669-1fff-437f-8f0e-a5439f3cc298"
-                                                }
-                                            ]
                                         }
                                     ]
                                 },
@@ -1156,7 +1219,7 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "html": "<div class=\"resource-row header-style\">     <div class=\"conf-col-code\">CÓDIGO</div>     <div class=\"conf-col-desc\">DESCRIPCIÓN</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
+                                                "html": "<div class=\"resource-row header-style\">     <div class=\"conf-col-main\">PARÁMETRO</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
                                                 "id": "contHeaderParam",
                                                 "itemId": "contHeaderParam"
                                             },
@@ -1200,28 +1263,30 @@
                                                         "implHandler": [
                                                             "<div class=\"resource-row {[values.is_active ? '' : 'user-inactive']}\">",
                                                             "",
-                                                            "    <div class=\"conf-col-code\">",
-                                                            "        <div class=\"text-bold\"><b>{cod_parameter}</b></div>",
-                                                            "        <div class=\"role-badge\">Id: {id_conf_parameter}</div>",
-                                                            "    </div>",
-                                                            "",
-                                                            "    <div class=\"conf-col-desc\">",
-                                                            "        <div class=\"main-text text-bold\">",
-                                                            "            <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
-                                                            "            <strong>{description}</strong>",
-                                                            "            <tpl if=\"!values.is_active\">",
-                                                            "                <span> (Inactivo)</span>",
-                                                            "            <tpl else>",
-                                                            "                <span> (Activo)</span>",
-                                                            "            </tpl>",
+                                                            "    <div class=\"conf-col-main\">",
+                                                            "        <div class=\"main-text\">",
+                                                            "            <strong>{cod_parameter}</strong>",
+                                                            "            <span class=\"status-inline\">",
+                                                            "                <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                            "                <tpl if=\"values.is_active\">",
+                                                            "                    Activo",
+                                                            "                <tpl else>",
+                                                            "                    Inactivo",
+                                                            "                </tpl>",
+                                                            "            </span>",
                                                             "        </div>",
+                                                            "",
                                                             "        <div class=\"sub-text\">",
+                                                            "            <strong>{description}</strong>",
+                                                            "        </div>",
+                                                            "",
+                                                            "        <div class=\"sub-text secondary-text\">",
                                                             "            {value}",
                                                             "        </div>",
                                                             "    </div>",
                                                             "",
                                                             "    <div class=\"col-actions\">",
-                                                            "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
+                                                            "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver detalles\">",
                                                             "            <i class=\"x-fa fas fa-eye\"></i>",
                                                             "        </div>",
                                                             "",
@@ -1459,6 +1524,28 @@
                             ],
                             "cn": [
                                 {
+                                    "type": "Ext.Label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "cls": [
+                                            "cfg-form-title"
+                                        ],
+                                        "id": "lblParamTitle",
+                                        "itemId": "lblParamTitle"
+                                    },
+                                    "configAlternates": {
+                                        "cls": "typedarray",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyLabel1",
+                                    "designerId": "7885d813-df37-4f80-b141-1b3724dad511"
+                                },
+                                {
                                     "type": "Ext.field.Text",
                                     "reference": {
                                         "name": "items",
@@ -1504,6 +1591,9 @@
                                             "      { text: 'Inactivo', value: false  }",
                                             "    ]",
                                             "}"
+                                        ],
+                                        "value": [
+                                            "true"
                                         ]
                                     },
                                     "configAlternates": {
@@ -1514,7 +1604,8 @@
                                         "label": "string",
                                         "margin": "auto",
                                         "store": "object",
-                                        "valueField": "datafield"
+                                        "valueField": "datafield",
+                                        "value": "object"
                                     },
                                     "name": "MyComboBox",
                                     "designerId": "f3db16cc-7e84-44d8-9798-61c3e2bc1736"
@@ -1542,7 +1633,7 @@
                                     "designerId": "772e55fb-7af3-42e0-94cd-2dd1505c3f56"
                                 },
                                 {
-                                    "type": "Ext.field.Text",
+                                    "type": "Ext.field.TextArea",
                                     "reference": {
                                         "name": "items",
                                         "type": "array"
@@ -1560,7 +1651,7 @@
                                         "id": "string",
                                         "itemId": "string"
                                     },
-                                    "name": "MyTextField3",
+                                    "name": "MyTextArea",
                                     "designerId": "c0c770b4-d41e-416c-a979-ebcce9d6b5c5"
                                 },
                                 {
@@ -1963,8 +2054,12 @@
                 "implHandler": [
                     "var contConfig     = Ext.getCmp('contConfig');",
                     "var toolbarMain    = Ext.getCmp('toolbarMain');",
+                    "var toolbarCfg     = Ext.getCmp('toolbarCfg');",
+                    "var toolbarParam   = Ext.getCmp('toolbarParam');",
                     "var segmentBtn     = Ext.getCmp('segBtnParam');",
                     "var btnCreateParam = Ext.getCmp('btnCreateParam');",
+                    "var lblCfgTitle    = Ext.getCmp('lblCfgTitle');",
+                    "var contListParam  = Ext.getCmp('contListParam');",
                     "",
                     "contConfig.setActiveItem(1);",
                     "toolbarMain.hide();",
@@ -1978,10 +2073,19 @@
                     "    console.log('create');",
                     "    segmentBtn.hide();",
                     "    btnCreateParam.hide();",
+                    "    toolbarParam.hide();",
+                    "    contListParam.hide();",
+                    "",
+                    "    if (lblCfgTitle) lblCfgTitle.setHtml('Crear configuración');",
+                    "",
                     "} else {",
                     "    console.log('update');",
                     "    btnCreateParam.show();",
                     "    segmentBtn.show();",
+                    "    toolbarParam.show();",
+                    "    contListParam.show();",
+                    "",
+                    "    if (lblCfgTitle) lblCfgTitle.setHtml('Editar configuración');",
                     "",
                     "    // Cargar el store",
                     "    jsTerian.loadStore('storeParam',record.id_configuration);",
@@ -2012,6 +2116,7 @@
                     "var toolbarMain    = Ext.getCmp('toolbarMain');",
                     "var segmentBtn     = Ext.getCmp('segBtnParam');",
                     "var btnCreateParam = Ext.getCmp('btnCreateParam');",
+                    "var lblParamTitle  = Ext.getCmp('lblParamTitle');",
                     "",
                     "contConfig.setActiveItem(2);",
                     "toolbarMain.hide();",
@@ -2025,8 +2130,13 @@
                     "if (isCreate) {",
                     "    console.log('create');",
                     "    segmentBtn.hide();",
+                    "    ",
+                    "    if (lblParamTitle) lblParamTitle.setHtml('Crear parámetro');",
+                    "    ",
                     "} else {",
                     "    console.log('update');",
+                    "    ",
+                    "    if (lblParamTitle) lblParamTitle.setHtml('Editar parámetro');",
                     "",
                     "    // Cargar el store",
                     "    //jsTerian.loadStore('storeParam',record.id_configuration);",

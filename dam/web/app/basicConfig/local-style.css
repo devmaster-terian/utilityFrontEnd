@@ -18,57 +18,76 @@
     border-bottom: 2px solid #ddd; /* Borde más grueso abajo del título */
 }
 
-/* COLUMNA 1: CÓDIGO */
-.col-code {
-    width: 80px;      /* Ancho fijo */
-    min-width: 80px;
-}
-
-/* COLUMNA 2: DESCRIPCIÓN */
-.col-desc {
-    flex: 1;          /* Ocupa todo el espacio sobrante */
-    padding: 0 15px;
-}
-
-/* COLUMNA 3: ACCIONES */
-/* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
-.col-actions {
-    min-width: 180px; /* Antes era 90px, ahora necesitamos más espacio */
+.resource-row {
     display: flex;
-    justify-content: flex-end;
-    gap: 6px; /* Espacio entre bolitas */
-}
-
-/* COLUMNA 1: CONFIG CÓDIGO */
-.conf-col-code {
-    width: 140px;
-    min-width: 140px;
-    max-width: 140px;
-    overflow: hidden;
-}
-
-/* COLUMNA 2: CONFIG DESCRIPCIÓN */
-.conf-col-desc {
-    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
     min-width: 0;
-    max-width: calc(100% - 320px);
-    padding: 0 15px;
+}
+
+/* COLUMNA PRINCIPAL */
+.conf-col-main {
+    flex: 1;
+    min-width: 0;
     overflow: hidden;
 }
 
-.conf-col-code .text-bold,
-.conf-col-code .role-badge,
-.conf-col-desc .main-text,
-.conf-col-desc .sub-text {
+.conf-col-main .main-text strong {
+    font-weight: 700;
+}
+
+.conf-col-main .main-text,
+.conf-col-main .sub-text {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* Estilo base del botón redondo */
+.conf-col-main .main-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #222;
+    margin-bottom: 2px;
+}
+
+.conf-col-main .sub-text {
+    font-size: 12px;
+    color: #444;
+}
+
+.conf-col-main .secondary-text {
+    color: #777;
+}
+
+/* ESTADO EN LÍNEA */
+.status-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #666;
+    font-weight: normal;
+}
+
+/* ACCIONES */
+.col-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
 .action-btn {
-    width: 32px;  /* Un poco más pequeños para que quepan bien en móvil */
-    height: 32px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -76,8 +95,18 @@
     cursor: pointer;
     background: #f4f6f8;
     color: #555;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.2s;
+}
+
+/* Encabezado del formulario */
+.cfg-form-title {
+    background-color: #2c5aa0;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid #244a85;
 }
 
 /* --- COLORES ESPECÍFICOS AL PASAR EL MOUSE (HOVER) --- */

@@ -86,14 +86,15 @@ Ext.application({
                 catch(e){ msg = { success:true, message:'Success', data:{} }; }
 
                 var d = msg.data || {};
-                var display = d.full_name || ('ID ' + (d.id_user || '—'));
+                var display = d.cod_configuration || ('ID ' + (d.id_configuration || '—'));
 
                 var text;
                 if (msg && msg.message){
                     text = msg.message + ': ' + display;
                 }
 
-                jsTerian.toastAlert(text, 'success');
+                // Alerta
+                jsDam.toast({ type:'success', title:'Éxito', message: text });
 
                 // Recargar el store
                 jsTerian.reloadStore('storeConfig');
@@ -141,7 +142,9 @@ Ext.application({
 
                 // Mostrar mensaje del backend directamente
                 var text = msg && msg.message ? msg.message : 'Configuración eliminada';
-                jsTerian.toastAlert(text, 'success');
+
+                // Alerta
+                jsDam.toast({ type:'success', title:'Éxito', message: text });
 
                 jsTerian.reloadStore('storeConfig');
             },
@@ -157,7 +160,8 @@ Ext.application({
                 let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated config');
                 if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';
 
-                jsTerian.toastAlert(html, 'error', parsed.error);
+                // Alerta
+                jsDam.toast({ type:'error', title:'Error', message: html });
             }
         );
     },
@@ -180,7 +184,9 @@ Ext.application({
 
                 // Mostrar mensaje del backend directamente
                 var text = msg && msg.message ? msg.message : 'Configuración restaurada';
-                jsTerian.toastAlert(text, 'success');
+
+                // Alerta
+                jsDam.toast({ type:'success', title:'Éxito', message: text });
 
                 jsTerian.reloadStore('storeConfig');
             },
@@ -196,7 +202,8 @@ Ext.application({
                 let html = Ext.htmlEncode(parsed.message || 'Failed to restore config');
                 if (parsed.error) html += '<br/><p>' + 'Error, no se pudo restaurar el registro' + '</p>';
 
-                jsTerian.toastAlert(html, 'error', parsed.error);
+                // Alerta
+                jsDam.toast({ type:'error', title:'Error', message: html });
             }
         );
     },
@@ -241,14 +248,15 @@ Ext.application({
                 catch(e){ msg = { success:true, message:'Success', data:{} }; }
 
                 var d = msg.data || {};
-                var display = d.full_name || ('ID ' + (d.id_user || '—'));
+                var display = d.cod_parameter || ('ID ' + (d.id_conf_parameter || '—'));
 
                 var text;
                 if (msg && msg.message){
                     text = msg.message + ': ' + display;
                 }
 
-                jsTerian.toastAlert(text, 'success');
+                // Alerta
+                jsDam.toast({ type:'success', title:'Éxito', message: text });
 
                 // Recargar el store
                 jsTerian.reloadStore('storeParam');
@@ -272,7 +280,8 @@ Ext.application({
                 let html = Ext.htmlEncode(parsed.message || 'Error, no se pudo registrar los cambios');
                 if (parsed.error) html += '<br/><p>Error, no se pudo registrar los cambios</p>';
 
-                jsTerian.toastAlert(html, 'error', parsed.error);
+                // Alerta
+                jsDam.toast({ type:'error', title:'Error', message: html });
             }
         );
     },
@@ -295,7 +304,9 @@ Ext.application({
 
                 // Mostrar mensaje del backend directamente
                 var text = msg && msg.message ? msg.message : 'Parámetro eliminado';
-                jsTerian.toastAlert(text, 'success');
+
+                // Alerta
+                jsDam.toast({ type:'success', title:'Éxito', message: text });
 
                 jsTerian.reloadStore('storeParam');
             },
@@ -311,7 +322,8 @@ Ext.application({
                 let html = Ext.htmlEncode(parsed.message || 'Failed to eliminated config');
                 if (parsed.error) html += '<br/><p>' + 'Error, no se pudo eliminar el registro' + '</p>';
 
-                jsTerian.toastAlert(html, 'error', parsed.error);
+                // Alerta
+                jsDam.toast({ type:'error', title:'Error', message: html });
             }
         );
     },
@@ -334,7 +346,9 @@ Ext.application({
 
                 // Mostrar mensaje del backend directamente
                 var text = msg && msg.message ? msg.message : 'Parámetro restaurado';
-                jsTerian.toastAlert(text, 'success');
+
+                // Alerta
+                jsDam.toast({ type:'success', title:'Éxito', message: text });
 
                 jsTerian.reloadStore('storeParam');
             },
@@ -350,7 +364,8 @@ Ext.application({
                 let html = Ext.htmlEncode(parsed.message || 'Failed to restored config');
                 if (parsed.error) html += '<br/><p>' + 'Error, no se pudo restaurar el registro' + '</p>';
 
-                jsTerian.toastAlert(html, 'error', parsed.error);
+                // Alerta
+                jsDam.toast({ type:'error', title:'Error', message: html });
             }
         );
     }
