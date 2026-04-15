@@ -27,16 +27,16 @@
         "generateArchitectVersion": true,
         "installStatus": "Not Installed"
     },
-    "xdsVersion": "4.2.7",
-    "xdsBuild": 430,
+    "xdsVersion": "4.3.8",
+    "xdsBuild": 4,
     "schemaVersion": 1,
     "upgradeVersion": 310000000001,
     "framework": "modern71",
     "viewOrderMap": {
         "view": [
-            "d1d33f96-461c-4804-b3bb-90a95a9540e4",
             "b777bc78-ac1b-4c89-beec-997c780710ac",
-            "8c7f70fa-6861-490f-b55e-d26dd1e5d660"
+            "8c7f70fa-6861-490f-b55e-d26dd1e5d660",
+            "d1d33f96-461c-4804-b3bb-90a95a9540e4"
         ],
         "store": [
             "110fde45-4afa-4f16-b475-4daaddfd6aec",
@@ -53,7 +53,7 @@
             "f4af68a2-5206-4edd-b8c0-d9c77022f939"
         ],
         "resource": [
-            "05fb23aa-28d2-4e59-88db-89e8a0ce1112",
+            "1c66f98a-12a2-4277-be47-f2cfd8232347",
             "916b8d47-7a6d-4510-a7e9-883351e17ffc",
             "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
             "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",

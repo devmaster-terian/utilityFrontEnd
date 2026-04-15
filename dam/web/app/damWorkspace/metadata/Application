@@ -114,9 +114,11 @@
                     "    history.go(1);",
                     "",
                     "    // Opcional: Mostrar un mensaje interno de tu app",
-                    "    var msg = 'Use la aplicación para navegar.';",
-                    "",
-                    "    jsDam.toast({ type:'warning', title:'Utility GO', message: msg });",
+                    "    //var msg = 'Paso atras.';",
+                    "    //jsDam.toast({ type:'confirm', title:'Utility GO', message: msg });",
+                    "    ",
+                    "    Ext.getCmp('btnBackView').fireEvent('tap');",
+                    "    ",
                     "};"
                 ]
             },

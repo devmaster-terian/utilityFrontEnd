@@ -215,6 +215,101 @@
                                                     "designerId": "68cdb30e-2de8-4cfe-b73d-f6cac9e394c3"
                                                 }
                                             ]
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "designer|uiInterfaceName": "action",
+                                                "iconCls": "fas fa-file-excel",
+                                                "id": "btnReport",
+                                                "itemId": "btnReport",
+                                                "margin": "7 7 0 7",
+                                                "ui": "action"
+                                            },
+                                            "configAlternates": {
+                                                "designer|uiInterfaceName": "string",
+                                                "iconCls": "string",
+                                                "id": "string",
+                                                "itemId": "string",
+                                                "margin": "auto",
+                                                "ui": "string"
+                                            },
+                                            "name": "MyButton5",
+                                            "designerId": "e6df79ac-351d-4ea7-87a0-bbd6355f17c6",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onBtnReportTap",
+                                                        "implHandler": [
+                                                            "var fnSuccess = function(pResponse){",
+                                                            "    console.log('Success: Prospecto Asignado');",
+                                                            "",
+                                                            "    var msg;",
+                                                            "    try {",
+                                                            "        msg = Ext.decode(pResponse.responseText);",
+                                                            "    }",
+                                                            "    catch(e){",
+                                                            "        msg = { success:true, message:'Success', data:{} };",
+                                                            "    }",
+                                                            "",
+                                                            "    console.log('msg: ', msg);",
+                                                            "",
+                                                            "",
+                                                            "    jsReports.generarReporteExcel(",
+                                                            "        msg,",
+                                                            "        'https://utility.com.mx/img/UTMlogo.svg',",
+                                                            "        'UTIILTY TRAILERS DE MEXICO',",
+                                                            "        'Extracto de Prospectos');",
+                                                            "",
+                                                            "",
+                                                            "    // Elige el primero que esta disponible",
+                                                            "    var data = msg.data || {};",
+                                                            "",
+                                                            "    console.log('data:',data);",
+                                                            "",
+                                                            "    //Ext.getCmp('contMain').prospectDetail(id_prospect);",
+                                                            "    //Ext.getCmp('contMain').prospectStatus();",
+                                                            "};",
+                                                            "",
+                                                            "var fnFailure = function(pResponse){",
+                                                            "    console.log('Failure: Prospecto fallo el grado');",
+                                                            "};",
+                                                            "",
+                                                            "var endPoint = 'prospect/read';",
+                                                            "var url = jsTerian.getUrl(endPoint);",
+                                                            "",
+                                                            "// Informacion a enviar",
+                                                            "var jsonData = JSON.stringify({",
+                                                            "    'data' : 'report'",
+                                                            "});",
+                                                            "",
+                                                            "console.info('jsonData:',jsonData);",
+                                                            "console.info('url:',url);",
+                                                            "",
+                                                            "jsTerian.makeRequest('GET',url, jsonData, fnSuccess, fnFailure, true);"
+                                                        ],
+                                                        "name": "tap"
+                                                    },
+                                                    "configAlternates": {
+                                                        "fn": "string",
+                                                        "implHandler": "code",
+                                                        "name": "string"
+                                                    },
+                                                    "name": "onBtnReportTap",
+                                                    "designerId": "b8cf446d-d5bf-494c-aa7d-55d82c62239b"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
@@ -664,6 +759,9 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "cls": [
+                                    "colorToolbar"
+                                ],
                                 "docked": "bottom",
                                 "id": "toolbarMain",
                                 "itemId": "toolbarMain"
@@ -671,7 +769,8 @@
                             "configAlternates": {
                                 "docked": "string",
                                 "id": "string",
-                                "itemId": "string"
+                                "itemId": "string",
+                                "cls": "typedarray"
                             },
                             "name": "MyToolbar",
                             "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
@@ -1315,6 +1414,44 @@
                             },
                             "name": "deleteProspect",
                             "designerId": "39430bcf-b0c3-40d0-9357-a25a0e7a36de"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "contProspectOptions",
+                        "itemId": "contProspectOptions"
+                    },
+                    "configAlternates": {
+                        "id": "string",
+                        "itemId": "string"
+                    },
+                    "name": "MyContainer7",
+                    "designerId": "0be3b2b0-2949-40e5-98f2-43947fb2c47f",
+                    "cn": [
+                        {
+                            "type": "Ext.form.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "id": "formOptions",
+                                "itemId": "formOptions"
+                            },
+                            "configAlternates": {
+                                "id": "string",
+                                "itemId": "string"
+                            },
+                            "name": "MyFormPanel1",
+                            "designerId": "3a0adfdb-127a-4386-9c23-a5479f039214"
                         }
                     ]
                 }

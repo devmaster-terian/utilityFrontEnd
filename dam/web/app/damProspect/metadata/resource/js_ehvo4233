@@ -1,0 +1,20 @@
+{
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "js_ehvo4233",
+        "includeInBundle": true,
+        "url": "../../../../framework/resourcesJS/jsReports.js"
+    },
+    "configAlternates": {
+        "designer|userClassName": "string",
+        "includeInBundle": "boolean",
+        "url": "uri"
+    },
+    "name": "js3",
+    "designerId": "dfa774ca-4114-441e-b4c4-240dabde3372"
+}

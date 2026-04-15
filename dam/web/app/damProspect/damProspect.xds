@@ -10,12 +10,12 @@
         "urlPrefix": "http://localhost:57645/",
         "canvasControls": {
             "viewportSize": {
-                "name": "Microsoft Surface",
+                "name": "iPhone 6 Plus",
                 "builtIn": true,
-                "height": 1366,
-                "width": 768
+                "height": 736,
+                "width": 414
             },
-            "viewportOrientation": "landscape"
+            "viewportOrientation": "portrait"
         },
         "exportPath": "C:/Developer/utilityDamStatic/frontend/webapps/dam/web/app/damProspect",
         "spacesToIndent": 4,
@@ -27,8 +27,8 @@
         "generateArchitectVersion": true,
         "installStatus": "Not Installed"
     },
-    "xdsVersion": "4.2.7",
-    "xdsBuild": 430,
+    "xdsVersion": "4.3.8",
+    "xdsBuild": 4,
     "schemaVersion": 1,
     "upgradeVersion": 310000000001,
     "framework": "modern71",
@@ -48,13 +48,16 @@
             "fa54dfb9-513f-4b94-b0ae-4e28cf073c29"
         ],
         "resource": [
-            "f655faf7-2e8c-4698-a59d-3407ab856b0c",
+            "82b09020-1fd2-4252-b8aa-9fd78d3801ca",
             "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
             "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
+            "280093a1-0871-4664-ac42-be7411394952",
+            "dd93fced-19e1-405f-9abb-f5819af60360",
             "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
             "e5346b91-c26f-4b84-9545-73fcb3f44295",
             "1a4830a5-c8dd-4983-80ee-7e50d88836a5",
             "981708a7-c79f-43da-a872-35c1f22ad2bd",
+            "dfa774ca-4114-441e-b4c4-240dabde3372",
             "46492723-11e2-4b93-bb16-444b268bfb87",
             "efb096c7-f6e8-426a-9297-2c2874921d33",
             "c83f5619-e093-4e4b-a6a9-dd2d6f4f861a",

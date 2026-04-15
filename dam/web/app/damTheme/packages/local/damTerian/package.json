@@ -1,0 +1,65 @@
+{
+    "name": "damTerian",
+    "sencha": {
+        "namespace": "Ext",
+        "type": "theme",
+        "extend": "theme-neptune",
+        "toolkit": "modern",
+        "creator": "anonymous",
+        "summary": "Short summary",
+        "detailedDescription": "Long description of package",
+        "version": "1.0.0",
+        "compatVersion": "1.0.0",
+        "format": "1",
+        "slicer": {
+            "js": [
+                {
+                    "path": "${package.dir}/sass/example/custom.js",
+                    "isWidgetManifest": true
+                }
+            ]
+        },
+        "output": "${package.dir}/build",
+        "local": true,
+        "sass": {
+            "namespace": "Ext",
+            "etc": [
+                "${package.dir}/sass/etc/all.scss",
+                "${package.dir}/sass/etc/sencha-themer-defaults.scss"
+            ],
+            "var": [
+                "${package.dir}/sass/var",
+                "${package.dir}/sass/var/sencha-themer-defaults.scss",
+                "${package.dir}/sass/var/themer-ui-variables.scss"
+            ],
+            "src": [
+                "${package.dir}/sass/src",
+                "${package.dir}/sass/src/sencha-themer-defaults.scss"
+            ],
+            "generated": {
+                "var": "sass/save.scss",
+                "src": "sass/save"
+            }
+        },
+        "classpath": [
+            "${package.dir}/src"
+        ],
+        "overrides": [
+            "${package.dir}/overrides"
+        ],
+        "example": {
+            "path": [
+                "${package.dir}/examples"
+            ]
+        },
+        "framework": "ext",
+        "requires": [
+            "font-awesome",
+            "font-ext"
+        ],
+        // WARNING! Sencha Themer relies on these settings, modifying them may break functionality in Themer.
+        "themer": {
+            "version": "1.4.6"
+        }
+    }
+}

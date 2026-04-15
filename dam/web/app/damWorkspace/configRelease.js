@@ -1,4 +1,4 @@
 function releaseActiva(){
-    var datoRetorno ='202601225.Dev';
+    var datoRetorno ='20260410.RC1';
     return datoRetorno;
 }
