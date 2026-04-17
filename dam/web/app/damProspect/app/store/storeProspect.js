@@ -52,6 +52,9 @@ Ext.define('damProspect.store.storeProspect', {
 
         console.log('url: ',url);
 
+        // Obtener el usuario logeado
+        var id_user = jsTerian.getDataObjSS('TMP_SESSION', 'id_user');
+
         // Obtén el proxy del store
         const proxy = jsonstore.getProxy();
         proxy.url = url;
@@ -62,7 +65,7 @@ Ext.define('damProspect.store.storeProspect', {
 
         // Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber
         const params = {};
-        params.id_user = 25;
+        params.id_user = id_user;
         params.per_page = pageSize;
 
 

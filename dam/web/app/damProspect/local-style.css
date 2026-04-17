@@ -4,6 +4,7 @@
     flex-direction: row;
     align-items: center;
     padding: 10px 15px;
+    min-width: 0;
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -36,28 +37,63 @@
 
 
 .col-prospect-name {
-    min-width: 150px;
-    /*flex: 1;    */
+    flex: 0.85 1 0;
+    min-width: 0;
     padding: 0 5px;
+    overflow: hidden;
 }
 
 .col-prospect-data {
-    min-width: 170px;
-    flex: 1;          /* Ocupa todo el espacio sobrante */
-    padding: 0 15px;
+    flex: 1.35 1 0;
+    min-width: 0;
+    padding: 0 8px;
     text-align: left;
+    overflow: hidden;
+}
+.col-prospect-name .text-bold,
+.col-prospect-name .role-badge,
+.col-prospect-data .text-bold,
+.col-prospect-data .role-badge {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.col-asset-name {
+    flex: 1 1 auto;
+    min-width: 0; /* clave para que funcione ellipsis */
+    overflow: hidden;
 }
 
-.col-asset-name {
-    min-width: 280px;
-    flex: 1;          /* Ocupa todo el espacio sobrante */
-    padding: 0 15px;
+.col-asset-name .role-badge {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.col-asset-name .col-badge {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .col-asset-data {
-    width: 80px;      /* Ancho fijo */
-    flex: 1;          /* Ocupa todo el espacio sobrante */
+    flex: 0 0 90px; /* ajusta según tu espacio real */
     min-width: 70px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.col-asset-data .role-badge {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
@@ -69,12 +105,14 @@
 /* COLUMNA 3: ACCIONES */
 /* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
 .col-actions {
-    min-width: 90px;
+    flex: 0 0 72px;
+    min-width: 72px;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
-    gap: 6px; /* Espacio entre bolitas */
+    gap: 4px;
+    white-space: nowrap;
 }
-
 /* Estilo base del botón redondo */
 .action-btn {
     width: 32px;  /* Un poco más pequeños para que quepan bien en móvil */
