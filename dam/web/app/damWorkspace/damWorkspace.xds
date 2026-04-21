@@ -25,7 +25,8 @@
         "cacheBust": false,
         "buildShouldOverwriteIndex": false,
         "generateArchitectVersion": true,
-        "installStatus": "Not Installed"
+        "installStatus": "Not Installed",
+        "displayfield-ExtBox1-1120-inputEl": "a new version of the framework is available"
     },
     "xdsVersion": "4.3.8",
     "xdsBuild": 4,
@@ -53,7 +54,7 @@
             "f4af68a2-5206-4edd-b8c0-d9c77022f939"
         ],
         "resource": [
-            "1c66f98a-12a2-4277-be47-f2cfd8232347",
+            "ca567711-5607-45c2-83dd-d8c19aaf80c1",
             "916b8d47-7a6d-4510-a7e9-883351e17ffc",
             "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
             "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",

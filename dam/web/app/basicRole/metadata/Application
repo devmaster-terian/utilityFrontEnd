@@ -42,8 +42,7 @@
                     "",
                     "// Carga de stores",
                     "jsTerian.loadStore('storeUser');",
-                    "jsTerian.loadStore('storeRole');",
-                    "jsTerian.loadStore('storeRoleJson');"
+                    "jsTerian.loadStore('storeRole');"
                 ]
             },
             "configAlternates": {
@@ -113,14 +112,20 @@
                     "        }",
                     "",
                     "        // Lanza la alerta con el mensaje",
-                    "        jsTerian.toastAlert(text, 'success');",
+                    "        var objMessage = {",
+                    "            type: 'success',",
+                    "            title: 'Rol Guardado',",
+                    "            message: text",
+                    "        };",
+                    "        jsDam.toast(objMessage);",
                     "",
                     "        // Recargar el store",
                     "        jsTerian.reloadStore('storeRole');",
                     "",
-                    "        var formRecord = Ext.getCmp('formRecord');",
+                    "        var contMain = Ext.getCmp('contMain');",
                     "",
-                    "        formRecord.cleanForm();        ",
+                    "        contMain.cleanForm();",
+                    "        contMain.showDataView();",
                     "",
                     "    },",
                     "",

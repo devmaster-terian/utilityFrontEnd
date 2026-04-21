@@ -27,8 +27,8 @@
         "generateArchitectVersion": true,
         "installStatus": "Not Installed"
     },
-    "xdsVersion": "4.2.7",
-    "xdsBuild": 430,
+    "xdsVersion": "4.3.8",
+    "xdsBuild": 4,
     "schemaVersion": 1,
     "upgradeVersion": 310000000001,
     "framework": "modern71",
@@ -50,7 +50,7 @@
             "62ce2296-2c06-46f9-9393-110794737f38"
         ],
         "resource": [
-            "aabc8c4e-dbbb-470f-9879-e5b3ac8aace1",
+            "fdb8d8ab-5632-4b3d-baf9-81a4716ab47c",
             "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
             "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
             "a5449007-881d-4a2a-a9ab-d2488318b8cc",

@@ -207,14 +207,14 @@
         },
         "controller": true,
         "resource": true,
-        "aabc8c4e-dbbb-470f-9879-e5b3ac8aace1": {
-            "id": "aabc8c4e-dbbb-470f-9879-e5b3ac8aace1",
+        "fdb8d8ab-5632-4b3d-baf9-81a4716ab47c": {
+            "id": "fdb8d8ab-5632-4b3d-baf9-81a4716ab47c",
             "cn": [
                 {
-                    "id": "738dc2e5-286a-4ce9-bd51-f4d3f7f758e8",
+                    "id": "13da69fa-1825-4879-bf9b-e263a72067e7",
                     "cn": [
                         {
-                            "id": "b1a12d0c-73a8-4cce-9ff1-7514711d254e"
+                            "id": "066f4c89-f22c-4e91-a4b7-c995bf457dd1"
                         }
                     ]
                 }
@@ -278,11 +278,11 @@
         ]
     },
     "canvasState": {
-        "topInstance": "d1d33f96-461c-4804-b3bb-90a95a9540e4"
+        "topInstance": null
     },
     "inspectorState": {
-        "topInstance": "d1d33f96-461c-4804-b3bb-90a95a9540e4",
-        "selectedInstance": "f6bbbbfa-309c-4327-9dbf-f7e44a212b7d"
+        "topInstance": "bb660a8e-9473-4b53-b071-827b44fdabe8",
+        "selectedInstance": "bb660a8e-9473-4b53-b071-827b44fdabe8"
     },
     "editMode": "code",
     "userSettings": {

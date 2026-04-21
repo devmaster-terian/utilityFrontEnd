@@ -8,12 +8,14 @@
     "userConfig": {
         "designer|userClassName": "storeNode",
         "model": "modelNode",
+        "pageSize": 100,
         "storeId": "storeNode"
     },
     "configAlternates": {
         "designer|userClassName": "string",
         "model": "model",
-        "storeId": "string"
+        "storeId": "string",
+        "pageSize": "number"
     },
     "name": "MyStore",
     "designerId": "02ae5cbe-b3b0-4b26-adb3-9a4ee8e02c96",

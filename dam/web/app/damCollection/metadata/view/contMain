@@ -1487,7 +1487,7 @@
                                                     "userConfig": {
                                                         "id": "ftResCode",
                                                         "itemId": "ftResCode",
-                                                        "label": "Code Resource",
+                                                        "label": "Code",
                                                         "margin": 8
                                                     },
                                                     "configAlternates": {

@@ -1,57 +1,140 @@
-/* CLASE BASE PARA FILAS Y CABECERA */
 .resource-row {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px 15px;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
     border-bottom: 1px solid #e0e0e0;
+    min-width: 0;
 }
 
-/* ESTILO ESPECIAL SOLO PARA LA CABECERA */
 .header-style {
-    background-color: #f5f5f5; /* Gris claro */
+    background-color: #f5f5f5;
     font-weight: bold;
     color: #777;
     font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border-bottom: 2px solid #ddd; /* Borde más grueso abajo del título */
+    border-bottom: 2px solid #ddd;
 }
 
-/* COLUMNA 1: CÓDIGO */
-.col-code {
-    width: 80px;      /* Ancho fijo */
-    min-width: 80px;
+.role-col-main {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
 }
 
-/* COLUMNA 2: DESCRIPCIÓN */
-.col-desc {
-    flex: 1;          /* Ocupa todo el espacio sobrante */
-    padding: 0 15px;
-}
-
-/* COLUMNA 3: ACCIONES */
-/* Ajustamos el ancho de la columna de acciones para que quepan los 5 iconos */
-.col-actions {
-    min-width: 180px; /* Antes era 90px, ahora necesitamos más espacio */
+/* Primera línea: nombre + estado */
+.main-text {
     display: flex;
-    justify-content: flex-end;
-    gap: 6px; /* Espacio entre bolitas */
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    margin-bottom: 2px;
 }
 
-/* Estilo base del botón redondo */
+.role-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.25;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status-inline {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.status-dot.active {
+    background-color: #22c55e;
+}
+
+.status-dot.inactive {
+    background-color: #ef4444;
+}
+
+/* Segunda línea */
+.role-code-line {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.role-code {
+    color: #444;
+    font-weight: 600;
+}
+
+/* Tercera línea */
+.role-desc {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Encabezado del formulario */
+.role-form-title {
+    background-color: #2c5aa0;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid #244a85;
+}
+
+/* Acciones */
+.col-actions {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-left: 8px;
+}
+
 .action-btn {
-    width: 32px;  /* Un poco más pequeños para que quepan bien en móvil */
-    height: 32px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     background: #f4f6f8;
-    color: #555;
-    font-size: 14px;
+    color: #666;
+    font-size: 13px;
     transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.action-btn:hover {
+    background: #e8ebef;
+}
+
+.user-inactive {
+    opacity: 0.72;
 }
 
 /* --- COLORES ESPECÍFICOS AL PASAR EL MOUSE (HOVER) --- */

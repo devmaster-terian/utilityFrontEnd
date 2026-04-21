@@ -23,12 +23,13 @@
         "lineEnding": "CRLF",
         "genTimestamps": false,
         "cacheBust": false,
-        "buildShouldOverwriteIndex": true,
+        "buildShouldOverwriteIndex": false,
         "generateArchitectVersion": true,
-        "installStatus": "Not Installed"
+        "installStatus": "Not Installed",
+        "displayfield-ExtBox1-1126-inputEl": "a new version of the framework is available"
     },
-    "xdsVersion": "4.2.7",
-    "xdsBuild": 430,
+    "xdsVersion": "4.3.8",
+    "xdsBuild": 4,
     "schemaVersion": 1,
     "upgradeVersion": 310000000001,
     "framework": "modern71",
@@ -48,7 +49,7 @@
             "6ca5275b-d680-4520-b3a6-f7cc03c2ed88"
         ],
         "resource": [
-            "c6996c9e-9a2d-4345-84c4-55fb7a133c38",
+            "4b867a95-e551-4d66-be16-69be48145a07",
             "bffaa4a9-ee55-4148-b56a-f1f90fb8b216",
             "7d3b15e3-f9bd-4d3a-89b2-010094b315d1",
             "a5449007-881d-4a2a-a9ab-d2488318b8cc",
@@ -57,7 +58,8 @@
             "bd3baeba-752d-48ca-9e65-e4c07bd817f3",
             "e5346b91-c26f-4b84-9545-73fcb3f44295",
             "1a4830a5-c8dd-4983-80ee-7e50d88836a5",
-            "e3404b33-09f2-4c68-8c30-79fc51ac14b6"
+            "e3404b33-09f2-4c68-8c30-79fc51ac14b6",
+            "bf9973db-301e-4831-8445-1d2a4ce4cb59"
         ],
         "app": [
             "application"

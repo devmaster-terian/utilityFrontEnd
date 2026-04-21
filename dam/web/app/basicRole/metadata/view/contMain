@@ -154,13 +154,15 @@
                             "codeClass": null,
                             "userConfig": {
                                 "docked": "top",
+                                "hidden": true,
                                 "id": "toolbarMain",
                                 "itemId": "toolbarMain"
                             },
                             "configAlternates": {
                                 "docked": "string",
                                 "id": "string",
-                                "itemId": "string"
+                                "itemId": "string",
+                                "hidden": "boolean"
                             },
                             "name": "MyToolbar",
                             "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
@@ -294,50 +296,6 @@
                                     "codeClass": null,
                                     "name": "MySpacer",
                                     "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
-                                },
-                                {
-                                    "type": "Ext.Button",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "id": "btnLoad",
-                                        "itemId": "btnLoad",
-                                        "text": "MyButton1"
-                                    },
-                                    "configAlternates": {
-                                        "id": "string",
-                                        "itemId": "string",
-                                        "text": "string"
-                                    },
-                                    "name": "MyButton1",
-                                    "designerId": "63ad25bc-61a8-406e-ac82-010389f1914e",
-                                    "cn": [
-                                        {
-                                            "type": "basiceventbinding",
-                                            "reference": {
-                                                "name": "listeners",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "fn": "onBtnLoadTap",
-                                                "implHandler": [
-                                                    "Ext.getStore('storeUser').load();"
-                                                ],
-                                                "name": "tap"
-                                            },
-                                            "configAlternates": {
-                                                "fn": "string",
-                                                "implHandler": "code",
-                                                "name": "string"
-                                            },
-                                            "name": "onBtnLoadTap",
-                                            "designerId": "beb8029d-e4d3-4b4b-9d4d-d98e1a348563"
-                                        }
-                                    ]
                                 }
                             ]
                         },
@@ -369,7 +327,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "html": "<div class=\"resource-row header-style\"><div class=\"col-code\">CÓDIGO</div><div class=\"col-code\">NOMBRE</div><div class=\"col-desc\">DESCRIPCIÓN</div><div class=\"col-actions\">ACCIONES</div></div>",
+                                        "html": "<div class=\"resource-row header-style\">     <div class=\"role-col-main\">ROL / DESCRIPCIÓN</div>     <div class=\"col-actions\">ACCIONES</div> </div>",
                                         "id": "contHeaderUser",
                                         "itemId": "contHeaderUser"
                                     },
@@ -413,45 +371,35 @@
                                                 "implHandler": [
                                                     "<div class=\"resource-row {[values.is_active ? '' : 'user-inactive']}\">",
                                                     "",
-                                                    "    <div class=\"col-code\">",
-                                                    "        <div class=\"text-bold\">#{id_role}</div>",
-                                                    "        <div class=\"role-badge\">{code}</div>",
-                                                    "    </div>",
-                                                    "",
-                                                    "    <div class=\"col-name\">",
-                                                    "        <div class=\"role-badge\">{name}</div>",
-                                                    "    </div>",
-                                                    "",
-                                                    "    <div class=\"col-desc\">",
+                                                    "    <div class=\"role-col-main\">",
                                                     "        <div class=\"main-text\">",
-                                                    "            <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                    "            <span class=\"role-name\">{name}</span>",
+                                                    "            <span class=\"status-inline\">",
+                                                    "                <span class=\"status-dot {[values.is_active ? 'active' : 'inactive']}\"></span>",
+                                                    "            </span>",
+                                                    "        </div>",
+                                                    "        ",
+                                                    "        <div class=\"role-code-line\">",
+                                                    "            Code: <span class=\"role-code\">{code}</span>",
+                                                    "        </div>",
+                                                    "",
+                                                    "        <div class=\"role-desc\" title=\"{description}\">",
                                                     "            {description}",
                                                     "        </div>",
                                                     "    </div>",
                                                     "",
                                                     "    <div class=\"col-actions\">",
-                                                    "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
+                                                    "        <div class=\"action-btn edit\" data-action=\"edit\" title=\"Editar rol\">",
+                                                    "            <i class=\"x-fa fas fa-pen\"></i>",
+                                                    "        </div>",
+                                                    "        ",
+                                                    "        <!--<div class=\"action-btn view\" data-action=\"view\" title=\"Ver detalles\">",
                                                     "            <i class=\"x-fa fas fa-eye\"></i>",
                                                     "        </div>",
                                                     "",
-                                                    "        <div class=\"action-btn edit\" data-action=\"edit\" title=\"Editar Usuario\">",
-                                                    "            <i class=\"x-fa fas fa-pen\"></i>",
-                                                    "        </div>",
-                                                    "",
-                                                    "        <!--",
-                                                    "        <div class=\"action-btn email\" data-action=\"email\" title=\"Enviar Correo\">",
-                                                    "            <i class=\"x-fa fas fa-envelope\"></i>",
-                                                    "        </div>",
-                                                    "        ",
-                                                    "",
-                                                    "        <div class=\"action-btn whatsapp\" data-action=\"whatsapp\" title=\"Contactar por WhatsApp\">",
-                                                    "            <i class=\"x-fa fab fa-whatsapp\"></i>",
-                                                    "        </div>",
-                                                    "        -->",
-                                                    "",
                                                     "        <div class=\"action-btn delete\" data-action=\"delete\" title=\"Desactivar/Borrar\">",
                                                     "            <i class=\"x-fa fas fa-ban\"></i>",
-                                                    "        </div>",
+                                                    "        </div>-->",
                                                     "    </div>",
                                                     "</div>"
                                                 ]
@@ -494,7 +442,7 @@
                                                     "                console.warn('Tap: view');",
                                                     "                var form = Ext.getCmp(\"formRecord\");",
                                                     "                form.isCreate = false;",
-                                                    "                form.userRecord = record;",
+                                                    "                form.roleRecord = record;",
                                                     "                this.showForm();",
                                                     "                break;",
                                                     "",
@@ -502,7 +450,7 @@
                                                     "                console.warn('Tap: view');",
                                                     "                var form = Ext.getCmp(\"formRecord\");",
                                                     "                form.isCreate = false;",
-                                                    "                form.userRecord = record;",
+                                                    "                form.roleRecord = record;",
                                                     "                this.showForm();",
                                                     "                break;",
                                                     "",
@@ -554,7 +502,7 @@
                                                     "                            console.log('Registro eliminado');",
                                                     "                        }",
                                                     "                    }",
-                                                    "                });                ",
+                                                    "                });",
                                                     "                break;",
                                                     "",
                                                     "            default:",
@@ -586,8 +534,7 @@
                             "userConfig": {
                                 "id": "formRecord",
                                 "isCreate": true,
-                                "itemId": "formRecord",
-                                "title": "Crear Rol"
+                                "itemId": "formRecord"
                             },
                             "configAlternates": {
                                 "title": "string",
@@ -606,6 +553,28 @@
                             ],
                             "cn": [
                                 {
+                                    "type": "Ext.Label",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "cls": [
+                                            "role-form-title"
+                                        ],
+                                        "id": "lblRoleTitle",
+                                        "itemId": "lblRoleTitle"
+                                    },
+                                    "configAlternates": {
+                                        "cls": "typedarray",
+                                        "id": "string",
+                                        "itemId": "string"
+                                    },
+                                    "name": "MyLabel",
+                                    "designerId": "b524d75b-a2b7-4f9f-8806-253977d32e30"
+                                },
+                                {
                                     "type": "Ext.field.Text",
                                     "reference": {
                                         "name": "items",
@@ -613,6 +582,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
+                                        "editable": false,
                                         "id": "ftCode",
                                         "itemId": "ftCode",
                                         "label": "Codigo",
@@ -622,7 +592,8 @@
                                         "id": "string",
                                         "itemId": "string",
                                         "label": "string",
-                                        "margin": "auto"
+                                        "margin": "auto",
+                                        "editable": "boolean"
                                     },
                                     "name": "MyTextField",
                                     "designerId": "75b1fd2f-3a01-4f76-b91f-f91ccc532bad"
@@ -650,13 +621,14 @@
                                     "designerId": "e35b76c1-5809-4cf4-80e3-daaf8ebd0b09"
                                 },
                                 {
-                                    "type": "Ext.field.Text",
+                                    "type": "Ext.field.TextArea",
                                     "reference": {
                                         "name": "items",
                                         "type": "array"
                                     },
                                     "codeClass": null,
                                     "userConfig": {
+                                        "height": 120,
                                         "id": "ftDescription",
                                         "itemId": "ftDescription",
                                         "label": "Descripcion",
@@ -666,9 +638,10 @@
                                         "label": "string",
                                         "margin": "auto",
                                         "id": "string",
-                                        "itemId": "string"
+                                        "itemId": "string",
+                                        "height": "auto"
                                     },
-                                    "name": "MyTextField3",
+                                    "name": "MyTextArea",
                                     "designerId": "fb28e7c7-0172-46b6-879d-b232c0ebdf48"
                                 },
                                 {
@@ -792,7 +765,7 @@
                                                             "var toolbarMain = Ext.getCmp('toolbarMain');",
                                                             "",
                                                             "contUser.setActiveItem(0);",
-                                                            "toolbarMain.show();",
+                                                            "//toolbarMain.show();",
                                                             "",
                                                             "this.cleanForm();"
                                                         ],
@@ -851,11 +824,13 @@
                 "implHandler": [
                     "var id_role;",
                     "var form = Ext.getCmp('formRecord');",
-                    "var record = form.dataRecord;",
+                    "var record = form.roleRecord;",
                     "",
                     "if (record){",
                     "    id_role = record.id_role;",
                     "}",
+                    "",
+                    "console.log(id_role);",
                     "",
                     "// Genera un 'diccionario' para enviar los datos del user",
                     "const payload = {",
@@ -933,24 +908,27 @@
             "userConfig": {
                 "fn": "showForm",
                 "implHandler": [
-                    "var contUser    = Ext.getCmp('contUser');",
-                    "var toolbarMain = Ext.getCmp('toolbarMain');",
+                    "var contUser     = Ext.getCmp('contUser');",
+                    "var toolbarMain  = Ext.getCmp('toolbarMain');",
+                    "var lblRoleTitle = Ext.getCmp('lblRoleTitle');",
                     "",
                     "// Obtener el form y la propiedad isCreate",
                     "var form = Ext.getCmp(\"formRecord\");",
                     "var isCreate = form.isCreate;",
-                    "var record = form.userRecord;",
+                    "var record = form.roleRecord;",
                     "",
                     "contUser.setActiveItem(1);",
                     "toolbarMain.hide();",
                     "",
                     "if (isCreate) {",
                     "    console.log('create');",
+                    "    if (lblRoleTitle) lblRoleTitle.setHtml('');",
                     "    //Ext.getCmp('ftUserPassword').setHidden(false);",
                     "} else {",
                     "    //Ext.getCmp('ftUserPassword').setHidden(true);",
                     "    console.log('update');",
                     "    this.showRecord(record);",
+                    "    if (lblRoleTitle) lblRoleTitle.setHtml('Editar Rol');",
                     "}"
                 ]
             },
@@ -975,7 +953,7 @@
                     "var toolbarMain = Ext.getCmp('toolbarMain');",
                     "",
                     "contUser.setActiveItem(0);",
-                    "toolbarMain.show();"
+                    "//toolbarMain.show();"
                 ]
             },
             "configAlternates": {

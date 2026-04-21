@@ -8,12 +8,14 @@
     "userConfig": {
         "designer|userClassName": "storeCollection",
         "model": "modelCollection",
+        "pageSize": 100,
         "storeId": "storeCollection"
     },
     "configAlternates": {
         "designer|userClassName": "string",
         "model": "model",
-        "storeId": "string"
+        "storeId": "string",
+        "pageSize": "number"
     },
     "name": "MyStore",
     "designerId": "bb660a8e-9473-4b53-b071-827b44fdabe8",
@@ -75,7 +77,7 @@
                     "proxy.url = url;",
                     "",
                     "// Obtener la pageSize y definir el currentPage en la primer página",
-                    "var pageSize = store.pageSize || 10;",
+                    "var pageSize = store.pageSize || 100;",
                     "store.currentPage = 1;",
                     "",
                     "// Define los parámetros dinámicamente searchIdCustomer searchIdStatus searchIdType searchSerial searchNumber",

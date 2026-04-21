@@ -9,13 +9,15 @@
         "autoLoad": true,
         "designer|userClassName": "storeUser",
         "model": "modelUser",
+        "pageSize": 100,
         "storeId": "storeUser"
     },
     "configAlternates": {
         "autoLoad": "boolean",
         "designer|userClassName": "string",
         "model": "model",
-        "storeId": "string"
+        "storeId": "string",
+        "pageSize": "number"
     },
     "name": "MyJsonStore",
     "designerId": "ae45e663-3d56-4643-8552-cdfcd2441d45",
