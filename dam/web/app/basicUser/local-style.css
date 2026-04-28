@@ -5,7 +5,7 @@
     align-items: center;
     padding: 10px 15px;
     border-bottom: 1px solid #e0e0e0;
-    min-width: 0; /* importante en layouts flex */
+    min-width: 0;
 }
 
 /* ESTILO ESPECIAL SOLO PARA LA CABECERA */
@@ -21,15 +21,14 @@
 
 /* COLUMNA 1: CÓDIGO */
 .col-code {
-    width: 80px;
-    min-width: 80px;
-    flex-shrink: 0;
+    flex: 0 0 80px;
+    min-width: 0;
 }
 
 /* COLUMNA 2: DESCRIPCIÓN */
 .col-desc {
-    flex: 1;
-    min-width: 0; /* clave para que funcione ellipsis */
+    flex: 1 1 auto;
+    min-width: 0;
     padding: 0 15px;
     overflow: hidden;
 }
@@ -48,9 +47,8 @@
 
 /* COLUMNA 3: ACCIONES */
 .col-actions {
-    width: 132px;
-    min-width: 132px;
-    flex-shrink: 0; /* evita que se recorra */
+    flex: 0 0 132px;
+    min-width: 0;
     display: flex;
     justify-content: flex-end;
     gap: 6px;
@@ -100,6 +98,44 @@
     line-height: 1.35;
     margin: -4px 0 10px 0;
     padding-left: 2px;
+}
+
+/* Mobile-first */
+.col-code {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.col-desc {
+    flex: 0 0 160px;
+    min-width: 0;
+    padding: 0 8px;
+    overflow: hidden;
+}
+
+.col-actions {
+    flex: 0 0 92px;
+    min-width: 92px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+    .col-code {
+        flex: 1 1 50%;
+    }
+
+    .col-desc {
+        flex: 0 0 280px;
+        padding: 0 24px;
+    }
+
+    .col-actions {
+        flex: 0 0 150px;
+        gap: 10px;
+    }
 }
 
 /* --- COLORES ESPECÍFICOS AL PASAR EL MOUSE (HOVER) --- */

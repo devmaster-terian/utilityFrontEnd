@@ -166,6 +166,16 @@
                             "designerId": "a8512247-1589-4457-a812-43d2cf2537ac",
                             "cn": [
                                 {
+                                    "type": "Ext.Spacer",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "name": "MySpacer",
+                                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
+                                },
+                                {
                                     "type": "Ext.Button",
                                     "reference": {
                                         "name": "items",
@@ -178,7 +188,9 @@
                                         "id": "btnCreate",
                                         "itemId": "btnCreate",
                                         "text": "Agregar",
-                                        "ui": "confirm"
+                                        "textAlign": "left",
+                                        "ui": "confirm",
+                                        "width": 120
                                     },
                                     "configAlternates": {
                                         "itemId": "string",
@@ -186,7 +198,9 @@
                                         "designer|uiInterfaceName": "string",
                                         "iconCls": "string",
                                         "id": "string",
-                                        "ui": "string"
+                                        "ui": "string",
+                                        "textAlign": "string",
+                                        "width": "auto"
                                     },
                                     "name": "MyButton",
                                     "designerId": "3e1c965b-aada-4de2-b339-30ce62be976f",
@@ -252,16 +266,6 @@
                                             "designerId": "4a2df9c0-3254-4653-9d05-6fa860fa817d"
                                         }
                                     ]
-                                },
-                                {
-                                    "type": "Ext.Spacer",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "name": "MySpacer",
-                                    "designerId": "408821ca-6954-4de3-bd20-12500d980cff"
                                 }
                             ]
                         },
@@ -354,9 +358,11 @@
                                                     "    ",
                                                     "",
                                                     "    <div class=\"col-actions\">",
+                                                    "        <!--",
                                                     "        <div class=\"action-btn view\" data-action=\"view\" title=\"Ver Detalles\">",
                                                     "            <i class=\"x-fa fas fa-eye\"></i>",
                                                     "        </div>",
+                                                    "        -->",
                                                     "        ",
                                                     "        <div class=\"action-btn edit\" data-action=\"edit\" title=\"Editar Usuario\">",
                                                     "            <i class=\"x-fa fas fa-pen\"></i>",
@@ -485,6 +491,7 @@
                                     "user-form"
                                 ],
                                 "id": "formUser",
+                                "innerCls": "sap-form-background",
                                 "isCreate": true,
                                 "itemId": "formUser",
                                 "padding": 4
@@ -495,7 +502,8 @@
                                 "id": "string",
                                 "itemId": "string",
                                 "cls": "typedarray",
-                                "padding": "auto"
+                                "padding": "auto",
+                                "innerCls": "string"
                             },
                             "name": "MyFormPanel",
                             "designerId": "7120c5d1-8548-4029-8e74-7b780d912288",
@@ -541,7 +549,7 @@
                                         "id": "ftUserEmail",
                                         "itemId": "ftUserEmail",
                                         "label": "Email",
-                                        "margin": 8,
+                                        "margin": "7 7 0 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido"
                                     },
@@ -602,7 +610,7 @@
                                         "inputType": "password",
                                         "itemId": "ftUserPassword",
                                         "label": "Password",
-                                        "margin": 8,
+                                        "margin": "7 7 0 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido"
                                     },
@@ -691,10 +699,11 @@
                                         "displayField": "name",
                                         "editable": false,
                                         "errorTarget": "under",
+                                        "hideTrigger": true,
                                         "id": "cboUserRole",
                                         "itemId": "cboUserRole",
                                         "label": "Role",
-                                        "margin": 8,
+                                        "margin": "7 7 0 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido",
                                         "store": "storeRole",
@@ -712,7 +721,8 @@
                                         "validators": "function",
                                         "errorTarget": "string",
                                         "required": "boolean",
-                                        "requiredMessage": "string"
+                                        "requiredMessage": "string",
+                                        "hideTrigger": "boolean"
                                     },
                                     "name": "MyComboBox",
                                     "designerId": "7e28ae8d-2af4-419e-8f81-cdbce316828c",
@@ -755,7 +765,7 @@
                                         "id": "ftUserFirstName",
                                         "itemId": "ftUserFirstName",
                                         "label": "Nombre",
-                                        "margin": 8,
+                                        "margin": "7 7 0 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido"
                                     },
@@ -822,7 +832,7 @@
                                         "id": "ftUserPLastName",
                                         "itemId": "ftUserPLastName",
                                         "label": "Ape. Paterno",
-                                        "margin": 8,
+                                        "margin": "7 7 0 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido"
                                     },
@@ -889,7 +899,7 @@
                                         "id": "ftUserMLastName",
                                         "itemId": "ftUserMLastName",
                                         "label": "Ape. Materno",
-                                        "margin": 8,
+                                        "margin": "7 7 0 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido"
                                     },
@@ -956,7 +966,7 @@
                                         "id": "ftUserPhone",
                                         "itemId": "ftUserPhone",
                                         "label": "Telefono",
-                                        "margin": 8,
+                                        "margin": "7 7 7 7",
                                         "required": true,
                                         "requiredMessage": "Campo requerido"
                                     },
@@ -1015,10 +1025,14 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "docked": "top"
+                                        "cls": [
+                                            "colorToolbar"
+                                        ],
+                                        "docked": "bottom"
                                     },
                                     "configAlternates": {
-                                        "docked": "string"
+                                        "docked": "string",
+                                        "cls": "typedarray"
                                     },
                                     "name": "MyToolbar1",
                                     "designerId": "735aab8a-fe40-4a3d-bf9f-44cfaa2a6874",
@@ -1032,17 +1046,23 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "designer|uiInterfaceName": "confirm",
+                                                "iconCls": "fas fa-check",
                                                 "id": "btnConfirm",
                                                 "itemId": "btnConfirm",
                                                 "text": "Confirmar",
-                                                "ui": "confirm"
+                                                "textAlign": "left",
+                                                "ui": "confirm",
+                                                "width": 120
                                             },
                                             "configAlternates": {
                                                 "designer|uiInterfaceName": "string",
                                                 "id": "string",
                                                 "itemId": "string",
                                                 "text": "string",
-                                                "ui": "string"
+                                                "ui": "string",
+                                                "iconCls": "string",
+                                                "textAlign": "string",
+                                                "width": "auto"
                                             },
                                             "name": "MyButton3",
                                             "designerId": "e48bb92c-889d-409d-bc96-b50bfa63437d",
@@ -1102,17 +1122,23 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "designer|uiInterfaceName": "decline",
+                                                "iconCls": "fas fa-ban",
                                                 "id": "btnCancel",
                                                 "itemId": "btnCancel",
                                                 "text": "Cancelar",
-                                                "ui": "decline"
+                                                "textAlign": "left",
+                                                "ui": "decline",
+                                                "width": 120
                                             },
                                             "configAlternates": {
                                                 "designer|uiInterfaceName": "string",
                                                 "id": "string",
                                                 "itemId": "string",
                                                 "text": "string",
-                                                "ui": "string"
+                                                "ui": "string",
+                                                "iconCls": "string",
+                                                "textAlign": "string",
+                                                "width": "auto"
                                             },
                                             "name": "MyButton4",
                                             "designerId": "355980be-3499-40fe-aa98-b19074caf8da",
